@@ -1,0 +1,6 @@
+# Adobe 屏蔽
+DOMAIN-SUFFIX,adobe.io
+# CareUEyes
+DOMAIN-SUFFIX,careueyes.com,DROP
+DOMAIN-SUFFIX,update.careueyes.com,DROP
+DOMAIN-SUFFIX,care-eyes.com,DROP
