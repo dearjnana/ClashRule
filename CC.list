@@ -1,0 +1,12 @@
+# 摧城
+# 代理域名列表
+DOMAIN-SUFFIX,poe.com
+DOMAIN-SUFFIX,linux.do
+DOMAIN-SUFFIX,rutracker.org
+
+# 机场
+DOMAIN-SUFFIX,tanzcloud.com
+DOMAIN-SUFFIX,xmrth.com
+
+#通过
+#DOMAIN,linux.do
