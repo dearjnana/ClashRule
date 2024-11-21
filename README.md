@@ -45,10 +45,14 @@ services:
     environment:
       - TZ=Asia/Shanghai # 设置时区为上海
 ```
-
+docker-compose.yml 文件拖入目录后,SSH工具 cd 到 docker-compose.yml 所在目录.
+执行
+docker-compose up -d
+容器运行后
 http://localhost:25500/sub
+上面就是本地规则转换服务地址
 
-点击`自定义配置`![转换页面](imgs/image-3.png)
+`如图设置`![转换页面](imgs/image-3.png)
   
 </details>
 
