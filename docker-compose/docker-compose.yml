@@ -1,0 +1,12 @@
+version: "3"
+services:
+  subconverter:
+    image: tindy2013/subconverter:latest
+    container_name: subconverter
+    restart: unless-stopped
+    ports:
+      - "25500:25500" # Web界面和API服务的默认端口
+    volumes:
+      - ./config:/app/config # 挂载本地配置文件到容器中
+    environment:
+      - TZ=Asia/Shanghai # 设置时区为上海
