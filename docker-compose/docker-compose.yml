@@ -1,0 +1,15 @@
+version: "3"
+services:
+  filebrowser:
+    image: filebrowser/filebrowser:latest
+    container_name: filebrowser
+    restart: unless-stopped
+    ports:
+      - "8888:80"  # 映射容器端口到主机的 8080
+    volumes:
+      - /FileData:/srv        # 将 FileData 映射为容器内的 /srv，作为文件存储目录
+      - /etc/filebrowser:/config  # 配置文件存放目录
+    environment:
+      - FB_BASEURL=/          # 基础 URL
+      - FB_NOAUTH=false       # 是否启用身份验证
+      - TZ=Asia/Shanghai      # 设置时区为上海
