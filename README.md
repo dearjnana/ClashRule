@@ -1,7 +1,7 @@
 # 介绍
 我的Clash规则
 
-参考项目
+规则参考项目
 
 https://github.com/ACL4SSR/ACL4SSR/tree/master
 
@@ -14,3 +14,11 @@ https://github.com/217heidai/adblockfilters
 4. 检查`远程配置`，如图则成功![检查远程配置](imgs/image-2.png)
 5. 根据自己偏好配置其他选项，生成订阅链接（ps: 网站支持自定义短链接后缀）
 6. 导入clash即可~~
+
+OpenClash使用方法
+配合 subconverter_规则转换
+项目地址
+https://github.com/tindy2013/subconverter
+
+(imgs/image-1.png)
+
