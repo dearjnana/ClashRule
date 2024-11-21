@@ -22,13 +22,31 @@ https://github.com/217heidai/adblockfilters
 
 <details>
 
-  <summary>OpenClash使用方法</summary>
+<summary>OpenClash使用方法</summary>
   
 配合 subconverter_规则转换
 
 项目地址
 
 https://github.com/tindy2013/subconverter
+
+docker-compose.yml
+```ini
+version: "3"
+services:
+  subconverter:
+    image: tindy2013/subconverter:latest
+    container_name: subconverter
+    restart: unless-stopped
+    ports:
+      - "25500:25500" # Web界面和API服务的默认端口
+    volumes:
+      - ./config:/app/config # 挂载本地配置文件到容器中
+    environment:
+      - TZ=Asia/Shanghai # 设置时区为上海
+```
+
+http://localhost:25500/sub
 
 点击`自定义配置`![转换页面](imgs/image-3.png)
   
