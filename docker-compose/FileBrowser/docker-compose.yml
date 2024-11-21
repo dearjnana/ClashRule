@@ -5,7 +5,7 @@ services:
     container_name: filebrowser
     restart: unless-stopped
     ports:
-      - "8888:80"  # 映射容器端口到主机的 8080
+      - "8888:80"  # 映射容器端口到主机的 8888
     volumes:
       - /FileData:/srv        # 将 FileData 映射为容器内的 /srv，作为文件存储目录
       - /etc/filebrowser:/config  # 配置文件存放目录
