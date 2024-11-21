@@ -1,0 +1,12 @@
+version: "3"
+services:
+  ddns-go:
+    image: jeessy/ddns-go:latest
+    container_name: ddns-go
+    restart: unless-stopped
+    ports:
+      - "9876:9876" # 映射端口，9876 是默认的 Web 管理界面端口
+    volumes:
+      - ./config:/app/config # 挂载本地配置文件目录
+    environment:
+      - TZ=Asia/Shanghai # 设置时区为上海
