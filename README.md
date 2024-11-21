@@ -20,5 +20,5 @@ OpenClash使用方法
 项目地址
 https://github.com/tindy2013/subconverter
 
-imgs/image-3.png
+[远程配置文件上传](imgs/image-3.png)
 
