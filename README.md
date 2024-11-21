@@ -20,5 +20,5 @@ OpenClash使用方法
 项目地址
 https://github.com/tindy2013/subconverter
 
-(imgs/image-3.png)
+imgs/image-3.png
 
