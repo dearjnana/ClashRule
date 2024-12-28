@@ -4,6 +4,9 @@ DOMAIN-SUFFIX,poe.com
 DOMAIN-SUFFIX,linux.do
 DOMAIN-SUFFIX,rutracker.org
 
+# AI镜像
+DOMAIN-SUFFIX,atlanunix.cn
+
 # 机场
 DOMAIN-SUFFIX,tanzcloud.com
 DOMAIN-SUFFIX,xmrth.com
