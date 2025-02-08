@@ -1,0 +1,110 @@
+# ======================================
+# 🎯 AI 相关服务规则 - 截至 2025.02.08
+# 本规则用于 Clash，匹配主要 AI 服务的域名并走指定国家节点
+# ======================================
+
+# ========================
+# 🌟 关键字匹配 (适用于所有包含这些关键词的域名)
+# ========================
+# 适用于 AI 相关流量的泛匹配，避免遗漏未知子域名
+DOMAIN-KEYWORD,openai        # OpenAI 相关服务
+DOMAIN-KEYWORD,gemini        # Google Gemini 相关服务
+DOMAIN-KEYWORD,anthropic     # Claude AI 相关服务
+DOMAIN-KEYWORD,Claude        # Anthropic Claude
+DOMAIN-KEYWORD,cohere        # Cohere AI 生成式 AI
+DOMAIN-KEYWORD,stability     # Stability AI 生成式 AI
+DOMAIN-KEYWORD,huggingface   # Hugging Face AI 平台
+DOMAIN-KEYWORD,replicate     # Replicate AI 模型托管
+DOMAIN-KEYWORD,scale         # Scale AI 训练数据
+DOMAIN-KEYWORD,runwayml      # Runway AI 生成视频
+DOMAIN-KEYWORD,midjourney    # Midjourney AI 生成图像
+DOMAIN-KEYWORD,luma          # Luma AI 视频生成
+
+# ========================
+# 🚀 OpenAI 生态系统 (美国)
+# ========================
+# OpenAI 是 ChatGPT、DALL·E、Whisper 等产品的提供商
+DOMAIN-SUFFIX,openai.com               # OpenAI 官网 & API
+DOMAIN-SUFFIX,openai-api.com            # OpenAI API
+DOMAIN-SUFFIX,chat.openai.com           # ChatGPT 官网
+DOMAIN-SUFFIX,oaistatic.com             # OpenAI 静态资源
+DOMAIN-SUFFIX,oaiusercontent.com        # OpenAI 用户内容存储
+DOMAIN-SUFFIX,openaiapi-site.azureedge.net # OpenAI API 内容分发
+DOMAIN-SUFFIX,deepresearch.ai           # OpenAI Deep Research (研究平台)
+DOMAIN-SUFFIX,operator.ai               # OpenAI Operator (智能代理)
+
+# ========================
+# 🤖 GitHub Copilot (AI 编程助手)
+# ========================
+# GitHub Copilot 由 OpenAI 和 GitHub 提供，辅助编程
+DOMAIN-SUFFIX,github-copilot.com       # GitHub Copilot 官网
+DOMAIN-SUFFIX,api.github-copilot.com   # GitHub Copilot API
+
+# ========================
+# 🧠 Google AI (DeepMind & Gemini)
+# ========================
+# Google 旗下 AI 产品，包括 Bard、Gemini 及 DeepMind
+DOMAIN-SUFFIX,ai.google                 # Google AI 平台
+DOMAIN-SUFFIX,deepmind.com              # DeepMind 官网
+DOMAIN-SUFFIX,bard.google.com           # Bard AI (现 Gemini)
+DOMAIN-SUFFIX,gemini.google.com         # Gemini AI (多模态)
+DOMAIN-SUFFIX,gemini.google             # Google Gemini 2.0
+DOMAIN-SUFFIX,makersuite.google.com     # Google MakerSuite (AI 研发工具)
+
+# ========================
+# 🔷 Microsoft AI (Azure AI & 认知服务)
+# ========================
+# Microsoft 提供 AI 解决方案，包括 Azure AI 和 Copilot
+DOMAIN-SUFFIX,azure.com                 # Azure AI 云计算
+DOMAIN-SUFFIX,cognitive.microsoft.com   # Microsoft 认知 AI API
+
+# ========================
+# 🏢 IBM Watson AI
+# ========================
+# IBM Watson 主要用于企业级 AI 解决方案
+DOMAIN-SUFFIX,watsonplatform.net        # IBM Watson 平台
+DOMAIN-SUFFIX,ibm.com                   # IBM AI 相关内容
+
+# ========================
+# 🛍️ Amazon AI (AWS AI 相关服务)
+# ========================
+# Amazon Web Services (AWS) 提供 AI 及机器学习 API
+DOMAIN-SUFFIX,aws.amazon.com            # AWS AI 相关
+DOMAIN-SUFFIX,amazonaws.com             # Amazon 云存储和计算
+
+# ========================
+# 🌍 欧洲 AI 服务
+# ========================
+# 欧洲 AI 研究机构和 AI 公司
+DOMAIN-SUFFIX,mistral.ai                 # Mistral AI (欧洲 AI 模型)
+DOMAIN-SUFFIX,anthropic.com              # Anthropic (Claude AI)
+DOMAIN-SUFFIX,cohere.ai                  # Cohere AI (生成式 AI 语言模型)
+
+# ========================
+# 🔥 多模态与生成式 AI (图像、视频、音频)
+# ========================
+# 生成式 AI 领域涵盖文本、图片、视频、3D、语音等
+DOMAIN-SUFFIX,luma.ai                    # Luma AI (Ray2 视频生成)
+DOMAIN-SUFFIX,midjourney.com             # Midjourney AI (生成艺术图像)
+DOMAIN-SUFFIX,cohere.ai                   # Cohere AI (自然语言处理)
+DOMAIN-SUFFIX,stability.ai                # Stability AI (Stable Diffusion 图像生成)
+DOMAIN-SUFFIX,huggingface.co              # Hugging Face (AI 模型社区)
+DOMAIN-SUFFIX,replicate.com               # Replicate (AI 模型托管)
+DOMAIN-SUFFIX,scale.com                   # Scale AI (训练数据标注)
+DOMAIN-SUFFIX,runwayml.com                # Runway ML (AI 生成视频 & 电影特效)
+
+# ========================
+# 🔍 其他 AI 相关域名 (身份认证、支付、分析)
+# ========================
+# 这些域名用于 AI 服务的身份认证、支付系统和分析
+DOMAIN-SUFFIX,perplexity.ai               # Perplexity AI (AI 驱动的搜索引擎)
+DOMAIN-SUFFIX,chatgpt.com                 # ChatGPT 相关
+DOMAIN-SUFFIX,auth0.com                   # OpenAI 认证服务
+DOMAIN-SUFFIX,client-api.arkoselabs.com   # 反机器人验证服务 (Arkose Labs)
+DOMAIN-SUFFIX,events.statsigapi.net       # 统计分析 API
+DOMAIN-SUFFIX,featuregates.org            # AI 平台相关
+DOMAIN-SUFFIX,identrust.com               # 证书服务
+DOMAIN-SUFFIX,intercom.io                 # AI 客服支持
+DOMAIN-SUFFIX,intercomcdn.com             # AI 客服支持
+DOMAIN-SUFFIX,sentry.io                   # 错误日志服务 (监控 AI API)
+DOMAIN-SUFFIX,stripe.com                  # AI 平台支付支持 (如 OpenAI API 订阅)
