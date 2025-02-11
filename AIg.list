@@ -24,7 +24,7 @@ DOMAIN-KEYWORD,luma
 # 🚀 OpenAI 生态系统 (美国)
 # ========================
 # OpenAI 是 ChatGPT、DALL·E、Whisper 等产品的提供商
-DOMAIN-SUFFIX,openai.com 
+DOMAIN-SUFFIX,openai.com
 DOMAIN-SUFFIX,openai-api.com
 DOMAIN-SUFFIX,chat.openai.com
 DOMAIN-SUFFIX,oaistatic.com
