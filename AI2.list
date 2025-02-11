@@ -31,12 +31,12 @@ DOMAIN-SUFFIX,oaistatic.com             # OpenAI 静态资源
 DOMAIN-SUFFIX,oaiusercontent.com        # OpenAI 用户内容存储
 DOMAIN-SUFFIX,openaiapi-site.azureedge.net # OpenAI API 内容分发
 DOMAIN-SUFFIX,deepresearch.ai           # OpenAI Deep Research (研究平台)
-DOMAIN-SUFFIX,operator.ai               # OpenAI Operator (智能代理)
+DOMAIN-SUFFIX,operator.ai               #  Operator (智能代理)
 
 # ========================
 # 🤖 GitHub Copilot (AI 编程助手)
 # ========================
-# GitHub Copilot 由 OpenAI 和 GitHub 提供，辅助编程
+# GitHub Copilot 由  和 GitHub 提供，辅助编程
 DOMAIN-SUFFIX,github-copilot.com       # GitHub Copilot 官网
 DOMAIN-SUFFIX,api.github-copilot.com   # GitHub Copilot API
 
@@ -100,7 +100,7 @@ DOMAIN-SUFFIX,runwayml.com                # Runway ML (AI 生成视频 & 电影�
 # 这些域名用于 AI 服务的身份认证、支付系统和分析
 DOMAIN-SUFFIX,perplexity.ai               # Perplexity AI (AI 驱动的搜索引擎)
 DOMAIN-SUFFIX,chatgpt.com                 # ChatGPT 相关
-DOMAIN-SUFFIX,auth0.com                   # OpenAI 认证服务
+DOMAIN-SUFFIX,auth0.com                   #  认证服务
 DOMAIN-SUFFIX,client-api.arkoselabs.com   # 反机器人验证服务 (Arkose Labs)
 DOMAIN-SUFFIX,events.statsigapi.net       # 统计分析 API
 DOMAIN-SUFFIX,featuregates.org            # AI 平台相关
@@ -108,4 +108,4 @@ DOMAIN-SUFFIX,identrust.com               # 证书服务
 DOMAIN-SUFFIX,intercom.io                 # AI 客服支持
 DOMAIN-SUFFIX,intercomcdn.com             # AI 客服支持
 DOMAIN-SUFFIX,sentry.io                   # 错误日志服务 (监控 AI API)
-DOMAIN-SUFFIX,stripe.com                  # AI 平台支付支持 (如 OpenAI API 订阅)
+DOMAIN-SUFFIX,stripe.com                  # AI 平台支付支持 (如  API 订阅)
