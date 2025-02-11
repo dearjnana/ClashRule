@@ -76,6 +76,7 @@ DOMAIN-SUFFIX,amazonaws.com             # Amazon 云存储和计算
 # 🌍 欧洲 AI 服务
 # ========================
 # 欧洲 AI 研究机构和 AI 公司
+DOMAIN-SUFFIX,fuclaude.com               # 始皇 fuclaude
 DOMAIN-SUFFIX,mistral.ai                 # Mistral AI (欧洲 AI 模型)
 DOMAIN-SUFFIX,anthropic.com              # Anthropic (Claude AI)
 DOMAIN-SUFFIX,cohere.ai                  # Cohere AI (生成式 AI 语言模型)
