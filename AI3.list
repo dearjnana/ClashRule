@@ -7,18 +7,18 @@
 # 🌟 关键字匹配 (适用于所有包含这些关键词的域名)
 # ========================
 # 适用于 AI 相关流量的泛匹配，避免遗漏未知子域名
-# DOMAIN-KEYWORD,openai        # OpenAI 相关服务
-DOMAIN-KEYWORD,gemini        # Google Gemini 相关服务
-DOMAIN-KEYWORD,anthropic     # Claude AI 相关服务
-DOMAIN-KEYWORD,Claude        # Anthropic Claude
-DOMAIN-KEYWORD,cohere        # Cohere AI 生成式 AI
-DOMAIN-KEYWORD,stability     # Stability AI 生成式 AI
-DOMAIN-KEYWORD,huggingface   # Hugging Face AI 平台
-DOMAIN-KEYWORD,replicate     # Replicate AI 模型托管
-DOMAIN-KEYWORD,scale         # Scale AI 训练数据
-DOMAIN-KEYWORD,runwayml      # Runway AI 生成视频
-DOMAIN-KEYWORD,midjourney    # Midjourney AI 生成图像
-DOMAIN-KEYWORD,luma          # Luma AI 视频生成
+DOMAIN-KEYWORD,openai
+DOMAIN-KEYWORD,gemini
+DOMAIN-KEYWORD,anthropic
+DOMAIN-KEYWORD,Claude
+DOMAIN-KEYWORD,cohere
+DOMAIN-KEYWORD,stability
+DOMAIN-KEYWORD,huggingface
+DOMAIN-KEYWORD,replicate
+DOMAIN-KEYWORD,scale
+DOMAIN-KEYWORD,runwayml
+DOMAIN-KEYWORD,midjourney
+DOMAIN-KEYWORD,luma
 
 # ========================
 # 🚀 OpenAI 生态系统 (美国)
