@@ -1,0 +1,111 @@
+# ======================================
+# 🎯 AI 相关服务规则 - 截至 2025.02.11
+# 本规则用于 Clash，匹配主要 AI 服务的域名并走指定国家节点
+# ======================================
+
+# ========================
+# 🌟 关键字匹配 (适用于所有包含这些关键词的域名)
+# ========================
+# 适用于 AI 相关流量的泛匹配，避免遗漏未知子域名
+DOMAIN-KEYWORD,openai
+DOMAIN-KEYWORD,gemini
+DOMAIN-KEYWORD,anthropic
+DOMAIN-KEYWORD,Claude
+DOMAIN-KEYWORD,cohere
+DOMAIN-KEYWORD,stability
+DOMAIN-KEYWORD,huggingface
+DOMAIN-KEYWORD,replicate
+DOMAIN-KEYWORD,scale
+DOMAIN-KEYWORD,runwayml
+DOMAIN-KEYWORD,midjourney
+DOMAIN-KEYWORD,luma
+
+# ========================
+# 🚀 OpenAI 生态系统 (美国)
+# ========================
+# OpenAI 是 ChatGPT、DALL·E、Whisper 等产品的提供商
+DOMAIN-SUFFIX,openai.com 
+DOMAIN-SUFFIX,openai-api.com
+DOMAIN-SUFFIX,chat.openai.com
+DOMAIN-SUFFIX,oaistatic.com
+DOMAIN-SUFFIX,oaiusercontent.com
+DOMAIN-SUFFIX,openaiapi-site.azureedge.net
+DOMAIN-SUFFIX,deepresearch.ai
+DOMAIN-SUFFIX,operator.ai
+
+# ========================
+# 🤖 GitHub Copilot (AI 编程助手)
+# ========================
+# GitHub Copilot 由  和 GitHub 提供，辅助编程
+DOMAIN-SUFFIX,github-copilot.com
+DOMAIN-SUFFIX,api.github-copilot.com
+
+# ========================
+# 🧠 Google AI (DeepMind & Gemini)
+# ========================
+# Google 旗下 AI 产品，包括 Bard、Gemini 及 DeepMind
+DOMAIN-SUFFIX,ai.google
+DOMAIN-SUFFIX,deepmind.com
+DOMAIN-SUFFIX,bard.google.com
+DOMAIN-SUFFIX,gemini.google.com
+DOMAIN-SUFFIX,gemini.google
+DOMAIN-SUFFIX,makersuite.google.com
+
+# ========================
+# 🔷 Microsoft AI (Azure AI & 认知服务)
+# ========================
+# Microsoft 提供 AI 解决方案，包括 Azure AI 和 Copilot
+DOMAIN-SUFFIX,azure.com
+DOMAIN-SUFFIX,cognitive.microsoft.com
+
+# ========================
+# 🏢 IBM Watson AI
+# ========================
+# IBM Watson 主要用于企业级 AI 解决方案
+DOMAIN-SUFFIX,watsonplatform.net
+DOMAIN-SUFFIX,ibm.com
+
+# ========================
+# 🛍️ Amazon AI (AWS AI 相关服务)
+# ========================
+# Amazon Web Services (AWS) 提供 AI 及机器学习 API
+DOMAIN-SUFFIX,aws.amazon.com
+DOMAIN-SUFFIX,amazonaws.com
+
+# ========================
+# 🌍 欧洲 AI 服务
+# ========================
+# 欧洲 AI 研究机构和 AI 公司, fuclaude.com 始皇 fuclaude
+DOMAIN-SUFFIX,fuclaude.com
+DOMAIN-SUFFIX,mistral.ai
+DOMAIN-SUFFIX,anthropic.com
+DOMAIN-SUFFIX,cohere.ai
+
+# ========================
+# 🔥 多模态与生成式 AI (图像、视频、音频)
+# ========================
+# 生成式 AI 领域涵盖文本、图片、视频、3D、语音等
+DOMAIN-SUFFIX,luma.ai
+DOMAIN-SUFFIX,midjourney.com
+DOMAIN-SUFFIX,cohere.ai
+DOMAIN-SUFFIX,stability.ai
+DOMAIN-SUFFIX,huggingface.co
+DOMAIN-SUFFIX,replicate.com
+DOMAIN-SUFFIX,scale.com
+DOMAIN-SUFFIX,runwayml.com
+
+# ========================
+# 🔍 其他 AI 相关域名 (身份认证、支付、分析)
+# ========================
+# 这些域名用于 AI 服务的身份认证、支付系统和分析
+DOMAIN-SUFFIX,perplexity.ai
+DOMAIN-SUFFIX,chatgpt.com
+DOMAIN-SUFFIX,auth0.com
+DOMAIN-SUFFIX,client-api.arkoselabs.com
+DOMAIN-SUFFIX,events.statsigapi.net
+DOMAIN-SUFFIX,featuregates.org
+DOMAIN-SUFFIX,identrust.com
+DOMAIN-SUFFIX,intercom.io
+DOMAIN-SUFFIX,intercomcdn.com
+DOMAIN-SUFFIX,sentry.io
+DOMAIN-SUFFIX,stripe.com
