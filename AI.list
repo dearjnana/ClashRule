@@ -7,7 +7,7 @@
 # 🌟 关键字匹配 (适用于所有包含这些关键词的域名)
 # ========================
 # 适用于 AI 相关流量的泛匹配，避免遗漏未知子域名
-#DOMAIN-KEYWORD,openai        # OpenAI 相关服务
+# DOMAIN-KEYWORD,openai        # OpenAI 相关服务
 DOMAIN-KEYWORD,gemini        # Google Gemini 相关服务
 DOMAIN-KEYWORD,anthropic     # Claude AI 相关服务
 DOMAIN-KEYWORD,Claude        # Anthropic Claude
