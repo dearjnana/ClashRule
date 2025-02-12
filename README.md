@@ -59,6 +59,7 @@ http://localhost:25500/sub
 `如图设置`![转换页面](imgs/image-3.png)
   
 </details>
+
 更新方法:浏览器输入
 
 https://api.github.com/repos/{用户名}/{仓库名}/commits/{分支名}
