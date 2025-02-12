@@ -60,6 +60,9 @@ http://localhost:25500/sub
   
 </details>
 
+<details>
+
+<summary>commit SHA</summary>
 使用 commit SHA 版本 URL
 
 `https://raw.githubusercontent.com/dearjnana/ClashRule/{commit SHA}/Samsung.list`
@@ -68,16 +71,15 @@ http://localhost:25500/sub
 
 `https://api.github.com/repos/{用户名}/{仓库名}/commits/{分支名}`
 
-我这个项目是输入下面
-
 https://api.github.com/repos/dearjnana/ClashRule/commits/main
 
 返回 JSON 响应，其中 "sha" 字段就是最新的 commit SHA：
 
 ![图片描述](imgs/sha-1.png)
 
-`https://api.github.com/repos/{用户名}/{仓库名}/commits/main`
+![图片描述](imgs/sha-2.png)
 
+</details>
 
 
 <!-- Trigger GitHub Pages Update -->
