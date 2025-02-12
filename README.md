@@ -60,9 +60,11 @@ http://localhost:25500/sub
   
 </details>
 更新方法:浏览器输入
-https://api.github.com/repos/{用户名}/{仓库名}/commits/{分支名}
+
+'https://api.github.com/repos/{用户名}/{仓库名}/commits/{分支名}'
 
 我这个项目是输入下面
+
 https://api.github.com/repos/dearjnana/ClashRule/commits/main
 
 <!-- Trigger GitHub Pages Update -->
