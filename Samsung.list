@@ -1,0 +1,31 @@
+# 三星应用代理规则
+
+# 应用商店及下载
+DOMAIN-SUFFIX,galaxy-store.com  # 三星应用商店
+DOMAIN-SUFFIX,apps.samsung.com   # 三星应用商店应用下载
+DOMAIN-SUFFIX,samsungapps.com   # 三星应用商店 (重复，已合并到上方)
+
+# 安全及认证
+DOMAIN-SUFFIX,sec.samsung.com      # 三星安全相关服务
+DOMAIN-SUFFIX,samsungknox.com     # 三星 Knox 安全平台
+
+# 云服务及存储
+DOMAIN-SUFFIX,samsungcloud.com     # 三星云服务
+
+# 官方网站及通用服务
+DOMAIN-SUFFIX,samsung.com         # 三星官方网站及通用服务
+DOMAIN-SUFFIX,samsungd.com         # 三星设备相关服务
+
+# 健康及支付
+DOMAIN-SUFFIX,samsunghealth.com    # 三星健康
+DOMAIN-SUFFIX,samsungpay.com       # 三星支付
+
+# 设备管理及查找
+DOMAIN-SUFFIX,findmymobile.samsung.com # 查找我的手机
+
+# 会员及其他服务
+DOMAIN-SUFFIX,samsungmembers.com   # 三星会员服务
+
+# 可选择的其他代理规则（如果你有更多的需求，添加对应的域名）
+# 例如：代理某些API或特定服务
+DOMAIN-SUFFIX,api.samsung.com      # 三星API接口
