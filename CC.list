@@ -1,6 +1,13 @@
 # 摧城
 DOMAIN-KEYWORD,missav
+DOMAIN-KEYWORD,dl-a10b-
 
 DOMAIN-SUFFIX,poe.com
 DOMAIN-SUFFIX,linux.do
 DOMAIN-SUFFIX,rutracker.org
+
+DOMAIN-SUFFIX,mypikpak.com
+DOMAIN-SUFFIX,mypikpak.net
+DOMAIN-SUFFIX,user.mypikpak.com
+DOMAIN-SUFFIX,access.mypikpak.com
+DOMAIN-SUFFIX,api-drive.mypikpak.com
