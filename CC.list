@@ -2,6 +2,11 @@
 DOMAIN-KEYWORD,missav
 DOMAIN-KEYWORD,dl-a10b-
 
+# ========================
+# 🔱 富可敌国
+# ========================
+DOMAIN-SUFFIX,mnapi.com
+
 DOMAIN-SUFFIX,poe.com
 DOMAIN-SUFFIX,linux.do
 DOMAIN-SUFFIX,rutracker.org
