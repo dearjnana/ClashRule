@@ -4,3 +4,9 @@ DOMAIN-SUFFIX,adobe.io
 DOMAIN-SUFFIX,careueyes.com,DROP
 DOMAIN-SUFFIX,update.careueyes.com,DROP
 DOMAIN-SUFFIX,care-eyes.com,DROP
+# 2025.04.09 新增观察
+DOMAIN-SUFFIX,cdn.adobe.com,DROP
+DOMAIN-SUFFIX,adobestats.io,DROP
+DOMAIN-SUFFIX,cdn.oobesaas.adobe.com,DROP
+DOMAIN-SUFFIX,adobe.com,DROP
+DOMAIN-SUFFIX,adobeccstatic.com,DROP
