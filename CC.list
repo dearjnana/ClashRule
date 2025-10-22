@@ -8,12 +8,17 @@ DOMAIN-SUFFIX,futunn.com
 DOMAIN-SUFFIX,yeka.ai
 
 # ========================
+# 不再需要外部IP
+# ========================
+# DOMAIN-SUFFIX,linux.do
+
+# ========================
 # 🔱 富可敌国
 # ========================
 DOMAIN-SUFFIX,mnapi.com
 
 DOMAIN-SUFFIX,poe.com
-DOMAIN-SUFFIX,linux.do
+
 DOMAIN-SUFFIX,rutracker.org
 DOMAIN-SUFFIX,stga.cn
 
