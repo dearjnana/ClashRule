@@ -49,12 +49,25 @@ DOMAIN-SUFFIX,api.github-copilot.com
 # 🧠 Google AI (DeepMind & Gemini)
 # ========================
 # Google 旗下 AI 产品，包括 Bard、Gemini 及 DeepMind
-DOMAIN-SUFFIX,ai.google
-DOMAIN-SUFFIX,deepmind.com
+# DOMAIN-SUFFIX,ai.google
+# DOMAIN-SUFFIX,deepmind.com
+# DOMAIN-SUFFIX,bard.google.com
+# DOMAIN-SUFFIX,gemini.google.com
+# DOMAIN-SUFFIX,gemini.google
+# DOMAIN-SUFFIX,makersuite.google.com
+DOMAIN,ai.google.dev
+DOMAIN,alkalimakersuite-pa.clients6.google.com
+DOMAIN,makersuite.google.com
 DOMAIN-SUFFIX,bard.google.com
+DOMAIN-SUFFIX,deepmind.com
+DOMAIN-SUFFIX,deepmind.google
 DOMAIN-SUFFIX,gemini.google.com
-DOMAIN-SUFFIX,gemini.google
-DOMAIN-SUFFIX,makersuite.google.com
+DOMAIN-SUFFIX,generativeai.google
+DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com
+DOMAIN-SUFFIX,apis.google.com
+DOMAIN-KEYWORD,colab
+DOMAIN-KEYWORD,developerprofiles
+DOMAIN-KEYWORD,generativelanguage
 
 # ========================
 # 🔷 Microsoft AI (Azure AI & 认知服务)
