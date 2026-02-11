@@ -2,18 +2,13 @@
 DOMAIN-KEYWORD,missav
 DOMAIN-KEYWORD,dl-a10b-
 DOMAIN-KEYWORD,mega
-# 网盘
+# 网盘（KEYWORD已覆盖所有pikpak子域名，无需再写SUFFIX）
 DOMAIN-KEYWORD,mypikpak
 DOMAIN-KEYWORD,pikpak
 
 # 🎰 金融
 DOMAIN-SUFFIX,futunn.com
 DOMAIN-SUFFIX,yeka.ai
-
-# ========================
-# 不再需要外部IP
-# ========================
-# DOMAIN-SUFFIX,linux.do
 
 # ========================
 # 🔱 富可敌国
@@ -24,34 +19,11 @@ DOMAIN-SUFFIX,rutracker.org
 DOMAIN-SUFFIX,stga.cn
 DOMAIN-SUFFIX,dmand5.com
 
-DOMAIN-SUFFIX,mypikpak.com
-DOMAIN-SUFFIX,mypikpak.net
-DOMAIN-SUFFIX,user.mypikpak.com
-DOMAIN-SUFFIX,access.mypikpak.com
-DOMAIN-SUFFIX,api-drive.mypikpak.com
-
-# Google-related rules
+# ========================
+# Google（顶级域名已覆盖所有子域名，无需再单独写）
+# ========================
 DOMAIN-SUFFIX,google.com
 DOMAIN-SUFFIX,googleusercontent.com
 DOMAIN-SUFFIX,googleapis.com
 DOMAIN-SUFFIX,googlesyndication.com
 DOMAIN-SUFFIX,gstatic.com
-DOMAIN-SUFFIX,accounts.google.com
-DOMAIN-SUFFIX,mail.google.com
-DOMAIN-SUFFIX,drive.google.com
-DOMAIN-SUFFIX,news.google.com
-DOMAIN-SUFFIX,play.google.com
-DOMAIN-SUFFIX,photos.google.com
-DOMAIN-SUFFIX,docs.google.com
-DOMAIN-SUFFIX,mail.googleusercontent.com
-DOMAIN-SUFFIX,hangouts.google.com
-
-# Google login and verification services
-DOMAIN-SUFFIX,accounts.googleusercontent.com
-DOMAIN-SUFFIX,clients6.google.com
-DOMAIN-SUFFIX,oauth2.googleapis.com
-DOMAIN-SUFFIX,authenticator.google.com
-DOMAIN-SUFFIX,adservices.google.com
-DOMAIN-SUFFIX,ssl.gstatic.com
-DOMAIN-SUFFIX,ghs.google.com
-DOMAIN-SUFFIX,verify.google.com
