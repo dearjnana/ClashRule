@@ -9,40 +9,27 @@
 DOMAIN-KEYWORD,truthsocial
 
 # ========================
-# 🌟 关键字匹配 (适用于所有包含这些关键词的域名)
+# 🌟 关键字匹配（KEYWORD会匹配域名任意位置，对应的SUFFIX无需再写）
 # ========================
-# 适用于 AI 相关流量的泛匹配，避免遗漏未知子域名
 DOMAIN-KEYWORD,openai
 DOMAIN-KEYWORD,gemini
 DOMAIN-KEYWORD,anthropic
 DOMAIN-KEYWORD,Claude
 DOMAIN-KEYWORD,cohere
-DOMAIN-KEYWORD,stability
 DOMAIN-KEYWORD,huggingface
 DOMAIN-KEYWORD,replicate
-DOMAIN-KEYWORD,scale
 DOMAIN-KEYWORD,runwayml
 DOMAIN-KEYWORD,midjourney
 DOMAIN-KEYWORD,luma
+# 注意：stability和scale作为KEYWORD太宽泛，改用SUFFIX精确匹配
+# DOMAIN-KEYWORD,stability → 可能误匹配 ustability.xxx 等
+# DOMAIN-KEYWORD,scale → 会误匹配 upscale.xxx、scaleway.com 等
 
 # ========================
 # 🚀 OpenAI 生态系统 (美国)
 # ========================
-# OpenAI 是 ChatGPT、DALL·E、Whisper 等产品的提供商
-# DOMAIN-SUFFIX,openai.com
-# DOMAIN-SUFFIX,openai-api.com
-# DOMAIN-SUFFIX,chat.openai.com
-# DOMAIN-SUFFIX,oaistatic.com
-# DOMAIN-SUFFIX,oaiusercontent.com
-# DOMAIN-SUFFIX,openaiapi-site.azureedge.net
-# DOMAIN-SUFFIX,deepresearch.ai
-# DOMAIN-SUFFIX,operator.ai
+# 以下域名不含openai关键词，KEYWORD无法覆盖，需保留
 DOMAIN,browser-intake-datadoghq.com
-DOMAIN,chat.openai.com.cdn.cloudflare.net
-DOMAIN,openai-api.arkoselabs.com
-DOMAIN,openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net
-DOMAIN,openaicomproductionae4b.blob.core.windows.net
-DOMAIN,production-openaicom-storage.azureedge.net
 DOMAIN,static.cloudflareinsights.com
 DOMAIN-SUFFIX,ai.com
 DOMAIN-SUFFIX,algolia.net
@@ -61,14 +48,10 @@ DOMAIN-SUFFIX,launchdarkly.com
 DOMAIN-SUFFIX,oaistatic.com
 DOMAIN-SUFFIX,oaiusercontent.com
 DOMAIN-SUFFIX,observeit.net
-DOMAIN-SUFFIX,openai.com
-DOMAIN-SUFFIX,openaiapi-site.azureedge.net
-DOMAIN-SUFFIX,openaicom.imgix.net
 DOMAIN-SUFFIX,segment.io
 DOMAIN-SUFFIX,sentry.io
 DOMAIN-SUFFIX,stripe.com
 DOMAIN-SUFFIX,turn.livekit.cloud
-DOMAIN-KEYWORD,openai
 IP-CIDR,24.199.123.28/32,no-resolve
 IP-CIDR,64.23.132.171/32,no-resolve
 IP-ASN,20473,no-resolve
@@ -76,28 +59,19 @@ IP-ASN,20473,no-resolve
 # ========================
 # 🤖 GitHub Copilot (AI 编程助手)
 # ========================
-# GitHub Copilot 由  和 GitHub 提供，辅助编程
 DOMAIN-SUFFIX,github-copilot.com
 DOMAIN-SUFFIX,api.github-copilot.com
 
 # ========================
 # 🧠 Google AI (DeepMind & Gemini)
 # ========================
-# Google 旗下 AI 产品，包括 Bard、Gemini 及 DeepMind
-# DOMAIN-SUFFIX,ai.google
-# DOMAIN-SUFFIX,deepmind.com
-# DOMAIN-SUFFIX,bard.google.com
-# DOMAIN-SUFFIX,gemini.google.com
-# DOMAIN-SUFFIX,gemini.google
-# DOMAIN-SUFFIX,makersuite.google.com
-# 规则来源https://github.com/blackmatrix7/ios_rule_script/issues/1600
+# gemini相关已被KEYWORD覆盖，以下保留KEYWORD无法覆盖的
 DOMAIN,ai.google.dev
 DOMAIN,alkalimakersuite-pa.clients6.google.com
 DOMAIN,makersuite.google.com
 DOMAIN-SUFFIX,bard.google.com
 DOMAIN-SUFFIX,deepmind.com
 DOMAIN-SUFFIX,deepmind.google
-DOMAIN-SUFFIX,gemini.google.com
 DOMAIN-SUFFIX,generativeai.google
 DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com
 DOMAIN-SUFFIX,apis.google.com
@@ -108,58 +82,33 @@ DOMAIN-KEYWORD,generativelanguage
 # ========================
 # 🔷 Microsoft AI (Azure AI & 认知服务)
 # ========================
-# Microsoft 提供 AI 解决方案，包括 Azure AI 和 Copilot
 DOMAIN-SUFFIX,azure.com
 DOMAIN-SUFFIX,cognitive.microsoft.com
 
 # ========================
 # 🏢 IBM Watson AI
 # ========================
-# IBM Watson 主要用于企业级 AI 解决方案
 DOMAIN-SUFFIX,watsonplatform.net
 DOMAIN-SUFFIX,ibm.com
 
 # ========================
 # 🛍️ Amazon AI (AWS AI 相关服务)
 # ========================
-# Amazon Web Services (AWS) 提供 AI 及机器学习 API
 DOMAIN-SUFFIX,aws.amazon.com
 DOMAIN-SUFFIX,amazonaws.com
 
 # ========================
 # 🌍 欧洲 AI 服务
 # ========================
-# 欧洲 AI 研究机构和 AI 公司, fuclaude.com 始皇 fuclaude
+# anthropic/cohere已被KEYWORD覆盖，以下保留KEYWORD无法覆盖的
 DOMAIN-SUFFIX,fuclaude.com
 DOMAIN-SUFFIX,mistral.ai
-DOMAIN-SUFFIX,anthropic.com
-DOMAIN-SUFFIX,cohere.ai
-
-# ========================
-# 🔥 多模态与生成式 AI (图像、视频、音频)
-# ========================
-# 生成式 AI 领域涵盖文本、图片、视频、3D、语音等
-DOMAIN-SUFFIX,luma.ai
-DOMAIN-SUFFIX,midjourney.com
-DOMAIN-SUFFIX,cohere.ai
-DOMAIN-SUFFIX,stability.ai
-DOMAIN-SUFFIX,huggingface.co
-DOMAIN-SUFFIX,replicate.com
-DOMAIN-SUFFIX,scale.com
-DOMAIN-SUFFIX,runwayml.com
-
-# ========================
-# 🔍 其他 AI 相关域名 (身份认证、支付、分析)
-# ========================
-# 这些域名用于 AI 服务的身份认证、支付系统和分析
 DOMAIN-SUFFIX,perplexity.ai
-DOMAIN-SUFFIX,chatgpt.com
-DOMAIN-SUFFIX,auth0.com
-DOMAIN-SUFFIX,client-api.arkoselabs.com
-DOMAIN-SUFFIX,events.statsigapi.net
-DOMAIN-SUFFIX,featuregates.org
-DOMAIN-SUFFIX,identrust.com
-DOMAIN-SUFFIX,intercom.io
-DOMAIN-SUFFIX,intercomcdn.com
-DOMAIN-SUFFIX,sentry.io
-DOMAIN-SUFFIX,stripe.com
+
+# ========================
+# 🔥 多模态与生成式 AI
+# ========================
+# midjourney/luma/huggingface/replicate/runwayml已被KEYWORD覆盖
+# stability和scale用SUFFIX精确匹配（避免KEYWORD误伤）
+DOMAIN-SUFFIX,stability.ai
+DOMAIN-SUFFIX,scale.com
