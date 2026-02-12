@@ -1,0 +1,18 @@
+# ========================
+# 🧠 Google AI (Gemini & DeepMind)
+# ========================
+DOMAIN,gemini.google.com
+DOMAIN,geminiapp.google.com
+DOMAIN,aistudio.google.com
+DOMAIN,ai.google.dev
+DOMAIN,makersuite.google.com
+
+DOMAIN-KEYWORD,generativelanguage
+
+DOMAIN-SUFFIX,deepmind.com
+DOMAIN-SUFFIX,deepmind.google
+DOMAIN-SUFFIX,google.com
+DOMAIN-SUFFIX,googleusercontent.com
+DOMAIN-SUFFIX,googleapis.com
+DOMAIN-SUFFIX,googlesyndication.com
+DOMAIN-SUFFIX,generativeai.google
