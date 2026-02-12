@@ -67,22 +67,22 @@ DOMAIN-SUFFIX,github-copilot.com
 #       www.google.com、googleapis.com 等子资源不含 "gemini"，走了
 #       节点选择(香港) → 同一会话两个国家 IP → Google 报"异常流量"
 # 方案：用精确域名匹配 Gemini 专属域名
-DOMAIN,gemini.google.com
-DOMAIN,geminiapp.google.com
-DOMAIN,deepmind.google.com
-DOMAIN,aistudio.google.com
-DOMAIN,ai.google.dev
-DOMAIN,alkalimakersuite-pa.clients6.google.com
-DOMAIN,makersuite.google.com
-DOMAIN-SUFFIX,bard.google.com
-DOMAIN-SUFFIX,deepmind.com
-DOMAIN-SUFFIX,deepmind.google
-DOMAIN-SUFFIX,generativeai.google
-DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com
-DOMAIN-SUFFIX,apis.google.com
-DOMAIN-KEYWORD,colab
-DOMAIN-KEYWORD,developerprofiles
-DOMAIN-KEYWORD,generativelanguage
+#DOMAIN,gemini.google.com
+#DOMAIN,geminiapp.google.com
+#DOMAIN,deepmind.google.com
+#DOMAIN,aistudio.google.com
+#DOMAIN,ai.google.dev
+#DOMAIN,alkalimakersuite-pa.clients6.google.com
+#DOMAIN,makersuite.google.com
+#DOMAIN-SUFFIX,bard.google.com
+#DOMAIN-SUFFIX,deepmind.com
+#DOMAIN-SUFFIX,deepmind.google
+#DOMAIN-SUFFIX,generativeai.google
+#DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com
+#DOMAIN-SUFFIX,apis.google.com
+#DOMAIN-KEYWORD,colab
+#DOMAIN-KEYWORD,developerprofiles
+#DOMAIN-KEYWORD,generativelanguage
 
 # ========================
 # 🔷 Microsoft AI (仅 AI 服务，不通配整个 Azure)
