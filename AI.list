@@ -1,6 +1,11 @@
 # ======================================
-# 🎯 AI 相关服务规则 - 截至 2025.02.11
-# 本规则用于 Clash，匹配主要 AI 服务的域名并走指定国家节点
+# 🎯 AI 相关服务规则 - 优化版 2025.02.12
+# 本规则用于 Clash，匹配主要 AI 服务的域名并走指定节点
+# ======================================
+# ⚠️ 核心原则：
+#   1. KEYWORD 只用于高度唯一的词（不会误匹配其他服务）
+#   2. Google/AWS/Azure 等云平台不能用 SUFFIX 通配，必须精确到 AI 子域名
+#   3. 通用第三方服务（auth0/stripe/sentry等）不应收入本规则
 # ======================================
 
 # ========================
@@ -9,63 +14,63 @@
 DOMAIN-KEYWORD,truthsocial
 
 # ========================
-# 🌟 关键字匹配（KEYWORD会匹配域名任意位置，对应的SUFFIX无需再写）
+# 🌟 关键字匹配（仅限高度唯一的 AI 品牌词）
 # ========================
 DOMAIN-KEYWORD,openai
-DOMAIN-KEYWORD,gemini
 DOMAIN-KEYWORD,anthropic
-DOMAIN-KEYWORD,Claude
+DOMAIN-KEYWORD,claude
 DOMAIN-KEYWORD,cohere
 DOMAIN-KEYWORD,huggingface
 DOMAIN-KEYWORD,replicate
 DOMAIN-KEYWORD,runwayml
 DOMAIN-KEYWORD,midjourney
 DOMAIN-KEYWORD,luma
-# 注意：stability和scale作为KEYWORD太宽泛，改用SUFFIX精确匹配
-# DOMAIN-KEYWORD,stability → 可能误匹配 ustability.xxx 等
-# DOMAIN-KEYWORD,scale → 会误匹配 upscale.xxx、scaleway.com 等
+# ❌ 已移除 DOMAIN-KEYWORD,gemini → 改为下方精确域名（避免 IP 分裂）
+# ❌ 已修复 DOMAIN-KEYWORD,Claude → 改为小写 claude（Clash KEYWORD 区分大小写）
 
 # ========================
-# 🚀 OpenAI 生态系统 (美国)
+# 🚀 OpenAI 生态系统
 # ========================
-# 以下域名不含openai关键词，KEYWORD无法覆盖，需保留
+# 以下域名不含 openai 关键词，KEYWORD 无法覆盖
 DOMAIN,browser-intake-datadoghq.com
 DOMAIN,static.cloudflareinsights.com
 DOMAIN-SUFFIX,ai.com
-DOMAIN-SUFFIX,algolia.net
-DOMAIN-SUFFIX,api.statsig.com
-DOMAIN-SUFFIX,auth0.com
 DOMAIN-SUFFIX,chatgpt.com
 DOMAIN-SUFFIX,chatgpt.livekit.cloud
 DOMAIN-SUFFIX,client-api.arkoselabs.com
 DOMAIN-SUFFIX,events.statsigapi.net
 DOMAIN-SUFFIX,featuregates.org
 DOMAIN-SUFFIX,host.livekit.cloud
-DOMAIN-SUFFIX,identrust.com
-DOMAIN-SUFFIX,intercom.io
-DOMAIN-SUFFIX,intercomcdn.com
 DOMAIN-SUFFIX,launchdarkly.com
 DOMAIN-SUFFIX,oaistatic.com
 DOMAIN-SUFFIX,oaiusercontent.com
 DOMAIN-SUFFIX,observeit.net
-DOMAIN-SUFFIX,segment.io
-DOMAIN-SUFFIX,sentry.io
-DOMAIN-SUFFIX,stripe.com
 DOMAIN-SUFFIX,turn.livekit.cloud
+DOMAIN-SUFFIX,api.statsig.com
 IP-CIDR,24.199.123.28/32,no-resolve
 IP-CIDR,64.23.132.171/32,no-resolve
 IP-ASN,20473,no-resolve
+# ❌ 已移除（通用第三方服务，被大量非 AI 网站使用，会误导流量）：
+#   auth0.com(通用认证) stripe.com(支付) sentry.io(监控) segment.io(分析)
+#   intercom.io(客服) identrust.com(CA证书) algolia.net(搜索)
 
 # ========================
-# 🤖 GitHub Copilot (AI 编程助手)
+# 🤖 GitHub Copilot
 # ========================
 DOMAIN-SUFFIX,github-copilot.com
-DOMAIN-SUFFIX,api.github-copilot.com
 
 # ========================
-# 🧠 Google AI (DeepMind & Gemini)
+# 🧠 Google AI (Gemini & DeepMind)
 # ========================
-# gemini相关已被KEYWORD覆盖，以下保留KEYWORD无法覆盖的
+# ⚠️ 关键修复：不使用 DOMAIN-KEYWORD,gemini
+# 原因：gemini.google.com 会被截住走 OpenAi(美国)，但页面加载的
+#       www.google.com、googleapis.com 等子资源不含 "gemini"，走了
+#       节点选择(香港) → 同一会话两个国家 IP → Google 报"异常流量"
+# 方案：用精确域名匹配 Gemini 专属域名
+DOMAIN,gemini.google.com
+DOMAIN,geminiapp.google.com
+DOMAIN,deepmind.google.com
+DOMAIN,aistudio.google.com
 DOMAIN,ai.google.dev
 DOMAIN,alkalimakersuite-pa.clients6.google.com
 DOMAIN,makersuite.google.com
@@ -80,27 +85,32 @@ DOMAIN-KEYWORD,developerprofiles
 DOMAIN-KEYWORD,generativelanguage
 
 # ========================
-# 🔷 Microsoft AI (Azure AI & 认知服务)
+# 🔷 Microsoft AI (仅 AI 服务，不通配整个 Azure)
 # ========================
-DOMAIN-SUFFIX,azure.com
-DOMAIN-SUFFIX,cognitive.microsoft.com
+# ❌ 已移除 DOMAIN-SUFFIX,azure.com → 会截住整个 Azure 云！
+# ❌ 已移除 DOMAIN-SUFFIX,cognitive.microsoft.com → 改为精确匹配
+DOMAIN-SUFFIX,openai.azure.com
+DOMAIN-SUFFIX,cognitiveservices.azure.com
+DOMAIN-SUFFIX,api.cognitive.microsoft.com
 
 # ========================
-# 🏢 IBM Watson AI
+# 🏢 IBM Watson AI (仅 Watson，不通配整个 ibm.com)
 # ========================
+# ❌ 已移除 DOMAIN-SUFFIX,ibm.com → 会截住 IBM 所有服务！
 DOMAIN-SUFFIX,watsonplatform.net
-DOMAIN-SUFFIX,ibm.com
 
 # ========================
-# 🛍️ Amazon AI (AWS AI 相关服务)
+# 🛍️ Amazon AI (仅 Bedrock/SageMaker，不通配整个 AWS)
 # ========================
-DOMAIN-SUFFIX,aws.amazon.com
-DOMAIN-SUFFIX,amazonaws.com
+# ❌ 已移除 DOMAIN-SUFFIX,amazonaws.com → 会截住半个互联网！
+# ❌ 已移除 DOMAIN-SUFFIX,aws.amazon.com → 会截住 AWS 控制台
+DOMAIN-SUFFIX,bedrock.amazonaws.com
+DOMAIN-SUFFIX,sagemaker.amazonaws.com
+DOMAIN-SUFFIX,bedrock-runtime.amazonaws.com
 
 # ========================
 # 🌍 欧洲 AI 服务
 # ========================
-# anthropic/cohere已被KEYWORD覆盖，以下保留KEYWORD无法覆盖的
 DOMAIN-SUFFIX,fuclaude.com
 DOMAIN-SUFFIX,mistral.ai
 DOMAIN-SUFFIX,perplexity.ai
@@ -108,7 +118,5 @@ DOMAIN-SUFFIX,perplexity.ai
 # ========================
 # 🔥 多模态与生成式 AI
 # ========================
-# midjourney/luma/huggingface/replicate/runwayml已被KEYWORD覆盖
-# stability和scale用SUFFIX精确匹配（避免KEYWORD误伤）
 DOMAIN-SUFFIX,stability.ai
 DOMAIN-SUFFIX,scale.com
