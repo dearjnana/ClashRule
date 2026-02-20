@@ -1,0 +1,224 @@
+# ============================================================
+# 🐙 GitHub + ☁️ Cloudflare + 🐳 Docker 全产品线 Clash 分流规则
+# 适用场景：将以上服务的流量走自定义高速通道
+# 更新日期：2026-02-20
+# 说明：DOMAIN-SUFFIX 已自动匹配该域名及其所有子域名，
+#       例如 DOMAIN-SUFFIX,github.com 会匹配 api.github.com、
+#       gist.github.com 等，无需额外列出子域名。
+# ============================================================
+
+# ========================
+# 🐙 GitHub（全产品线）
+# ========================
+
+# --- 核心平台 ---
+# 主站、API、Gist、Actions、Codespaces、Packages 等
+DOMAIN-SUFFIX,github.com
+# GitHub Pages 托管
+DOMAIN-SUFFIX,github.io
+# github.dev 在线编辑器（Web版VS Code）
+DOMAIN-SUFFIX,github.dev
+# 官方博客
+DOMAIN-SUFFIX,github.blog
+# 社区论坛
+DOMAIN-SUFFIX,github.community
+
+# --- 静态资源 & 内容分发 ---
+# JS/CSS/图片等静态资源
+DOMAIN-SUFFIX,githubassets.com
+# 用户上传内容、头像、Release附件、raw文件
+DOMAIN-SUFFIX,githubusercontent.com
+# Git LFS 大文件存储（托管在 AWS S3）
+DOMAIN-SUFFIX,github-cloud.s3.amazonaws.com
+
+# --- GitHub Copilot（AI编程助手） ---
+# Copilot API服务、建议推送、遥测
+DOMAIN-SUFFIX,githubcopilot.com
+
+# --- GitHub Apps & 容器 ---
+# GitHub App 回调/Webhook
+DOMAIN-SUFFIX,githubapp.com
+# GitHub Container Registry（容器镜像仓库）
+DOMAIN-SUFFIX,ghcr.io
+# GitHub 短链接
+DOMAIN-SUFFIX,gh.io
+
+# --- GitHub 子品牌 & 周边 ---
+# GitHub Next 实验室
+DOMAIN-SUFFIX,githubnext.com
+# 服务状态页面
+DOMAIN-SUFFIX,githubstatus.com
+# GitHub Enterprise Cloud 专用域
+DOMAIN-SUFFIX,ghe.com
+
+# --- npm（GitHub 旗下包管理器） ---
+DOMAIN-SUFFIX,npmjs.com
+DOMAIN-SUFFIX,npmjs.org
+DOMAIN-SUFFIX,yarnpkg.com
+
+# --- Copilot 关联服务 ---
+# Microsoft 实验/AB测试服务（Copilot依赖）
+DOMAIN-SUFFIX,exp-tas.com
+
+# --- GitHub 专用网络 IP 段 ---
+IP-CIDR,140.82.112.0/20,no-resolve
+IP-CIDR,143.55.64.0/20,no-resolve
+IP-CIDR,192.30.252.0/22,no-resolve
+IP-CIDR6,2a0a:a440::/29,no-resolve
+IP-CIDR6,2620:112:3000::/44,no-resolve
+
+# ========================
+# ☁️ Cloudflare（全产品线）
+# ========================
+
+# --- 核心平台 ---
+# 主站、控制台(dash)、API、开发者文档、博客等
+DOMAIN-SUFFIX,cloudflare.com
+# 网络基础设施
+DOMAIN-SUFFIX,cloudflare.net
+# Cloudflare TV
+DOMAIN-SUFFIX,cloudflare.tv
+
+# --- 1.1.1.1 DNS 解析服务 ---
+# DoH/DoT 服务域名（含 1dot1dot1dot1.cloudflare-dns.com）
+DOMAIN-SUFFIX,cloudflare-dns.com
+# one.one.one.one 别名
+DOMAIN-SUFFIX,one.one.one
+# DNS 基础设施
+DOMAIN-SUFFIX,every1dns.net
+
+# --- Cloudflare 子品牌产品域名 ---
+# 网页分析（Web Analytics）
+DOMAIN-SUFFIX,cloudflareinsights.com
+# 合作伙伴
+DOMAIN-SUFFIX,cloudflarepartners.com
+# 管理门户
+DOMAIN-SUFFIX,cloudflareportal.com
+# 预览环境
+DOMAIN-SUFFIX,cloudflarepreview.com
+# 域名注册
+DOMAIN-SUFFIX,cloudflareregistrar.com
+# 安全研究
+DOMAIN-SUFFIX,cloudflareresearch.com
+# DNS 解析
+DOMAIN-SUFFIX,cloudflareresolve.com
+# SSL/TLS 服务
+DOMAIN-SUFFIX,cloudflaressl.com
+# 服务状态
+DOMAIN-SUFFIX,cloudflarestatus.com
+# 对象存储相关
+DOMAIN-SUFFIX,cloudflarestorage.com
+# 流媒体（Cloudflare Stream）
+DOMAIN-SUFFIX,cloudflarestream.com
+# 客户支持
+DOMAIN-SUFFIX,cloudflaresupport.com
+# 测试域
+DOMAIN-SUFFIX,cloudflaretest.com
+# WARP VPN
+DOMAIN-SUFFIX,cloudflarewarp.com
+# Workers 品牌
+DOMAIN-SUFFIX,cloudflareworkers.com
+# Zero Trust Access
+DOMAIN-SUFFIX,cloudflareaccess.com
+# WARP 客户端
+DOMAIN-SUFFIX,cloudflareclient.com
+# Gateway 网关
+DOMAIN-SUFFIX,cloudflare-gateway.com
+# Cloudflare Apps
+DOMAIN-SUFFIX,cloudflareapps.com
+# 健康检查
+DOMAIN-SUFFIX,cloudflareok.com
+
+# --- 开发者平台域名 ---
+# Cloudflare Workers 部署域
+DOMAIN-SUFFIX,workers.dev
+# Cloudflare Pages 部署域
+DOMAIN-SUFFIX,pages.dev
+# R2 对象存储公开访问域
+DOMAIN-SUFFIX,r2.dev
+# 快速隧道（Cloudflare Tunnel）
+DOMAIN-SUFFIX,trycloudflare.com
+
+# --- CDN & 媒体分发 ---
+# 图片分发（Cloudflare Images）
+DOMAIN-SUFFIX,imagedelivery.net
+# 视频分发（Cloudflare Stream）
+DOMAIN-SUFFIX,videodelivery.net
+
+# --- 安全 & 隐私基础设施 ---
+# Encrypted SNI（加密SNI检测）
+DOMAIN-SUFFIX,encryptedsni.com
+# BGP 安全检测
+DOMAIN-SUFFIX,isbgpsafeyet.com
+# 权威DNS基础设施
+DOMAIN-SUFFIX,foundationdns.com
+DOMAIN-SUFFIX,foundationdns.net
+DOMAIN-SUFFIX,foundationdns.org
+
+# --- WARP VPN ---
+DOMAIN-SUFFIX,warp.plus
+DOMAIN-SUFFIX,pacloudflare.com
+
+# --- Cloudflare 1.1.1.1 DNS IP（精确匹配） ---
+# 标准 DNS
+IP-CIDR,1.1.1.1/32,no-resolve
+IP-CIDR,1.0.0.1/32,no-resolve
+# 恶意软件拦截 DNS
+IP-CIDR,1.1.1.2/32,no-resolve
+IP-CIDR,1.0.0.2/32,no-resolve
+# 恶意软件+成人内容拦截 DNS
+IP-CIDR,1.1.1.3/32,no-resolve
+IP-CIDR,1.0.0.3/32,no-resolve
+# IPv6 DNS
+IP-CIDR6,2606:4700:4700::1111/128,no-resolve
+IP-CIDR6,2606:4700:4700::1001/128,no-resolve
+IP-CIDR6,2606:4700:4700::1112/128,no-resolve
+IP-CIDR6,2606:4700:4700::1002/128,no-resolve
+
+# ========================
+# 🐳 Docker（全产品线）
+# ========================
+
+# --- 核心平台 ---
+# 官网、文档、博客、产品页面
+DOMAIN-SUFFIX,docker.com
+# Docker Hub 镜像仓库核心域（pull/push 使用 docker.io）
+DOMAIN-SUFFIX,docker.io
+
+# --- Docker Hub & Registry ---
+# Docker Hub 网页端（DOMAIN-SUFFIX,docker.com 已覆盖 hub.docker.com）
+# 镜像拉取/推送 API（registry-1.docker.io 等已由 docker.io 覆盖）
+# 认证服务（auth.docker.io 已由 docker.io 覆盖）
+
+# --- Docker Desktop 更新 & 遥测 ---
+# Desktop 更新检查（desktop.docker.com 已由 docker.com 覆盖）
+# 新版 API（api.docker.com 已由 docker.com 覆盖）
+# Scout 安全扫描服务（api.dso.docker.com 已由 docker.com 覆盖）
+# 登录认证（login.docker.com / auth.docker.com 已由 docker.com 覆盖）
+
+# --- Docker 镜像分发说明 ---
+# production.cloudflare.docker.com 已被 DOMAIN-SUFFIX,docker.com 覆盖
+# cloudflarestorage.com 已被 Cloudflare 部分的 DOMAIN-SUFFIX,cloudflarestorage.com 覆盖
+
+# --- Docker 状态页面 ---
+DOMAIN-SUFFIX,dockerstatus.com
+
+# --- Docker 关联第三方服务 ---
+# 分析遥测（Segment）
+DOMAIN-SUFFIX,segment.io
+DOMAIN-SUFFIX,segment.com
+# 错误上报（Bugsnag）
+DOMAIN,notify.bugsnag.com
+DOMAIN,sessions.bugsnag.com
+# 诊断日志上传（S3）
+DOMAIN,docker-pinata-support.s3.amazonaws.com
+
+# --- 常用第三方容器注册中心（可选，按需启用） ---
+# Quay.io（Red Hat 容器仓库）
+# DOMAIN-SUFFIX,quay.io
+# Microsoft 容器注册中心
+# DOMAIN-SUFFIX,mcr.microsoft.com
+# Google 容器注册中心
+# DOMAIN-SUFFIX,gcr.io
+# AWS 公共容器注册中心
+# DOMAIN-SUFFIX,public.ecr.aws
