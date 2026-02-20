@@ -2,7 +2,7 @@
 DOMAIN-KEYWORD,missav
 DOMAIN-KEYWORD,dl-a10b-
 DOMAIN-KEYWORD,mega
-# 网盘（KEYWORD已覆盖所有pikpak子域名，无需再写SUFFIX）
+# 网盘
 DOMAIN-KEYWORD,mypikpak
 DOMAIN-KEYWORD,pikpak
 
@@ -18,12 +18,3 @@ DOMAIN-SUFFIX,poe.com
 DOMAIN-SUFFIX,rutracker.org
 DOMAIN-SUFFIX,stga.cn
 DOMAIN-SUFFIX,dmand5.com
-
-# ========================
-# Google（顶级域名已覆盖所有子域名，无需再单独写）
-# ========================
-#DOMAIN-SUFFIX,google.com
-#DOMAIN-SUFFIX,googleusercontent.com
-#DOMAIN-SUFFIX,googleapis.com
-#DOMAIN-SUFFIX,googlesyndication.com
-#DOMAIN-SUFFIX,gstatic.com
