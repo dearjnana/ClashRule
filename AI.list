@@ -1,5 +1,5 @@
 # ======================================
-# 🎯 AI 相关服务规则 - 优化版 2025.02.12
+# 🎯 AI 相关服务规则 - 优化版 2026.03.08
 # 本规则用于 Clash，匹配主要 AI 服务的域名并走指定节点
 # ======================================
 # ⚠️ 核心原则：
@@ -120,3 +120,45 @@ DOMAIN-SUFFIX,perplexity.ai
 # ========================
 DOMAIN-SUFFIX,stability.ai
 DOMAIN-SUFFIX,scale.com
+
+# ========================
+# 🚀 Google Antigravity IDE
+# ========================
+# 官网 / 下载 / 文档 / 更新日志
+# antigravity.google 是 Google 专属顶级域 .google 下的二级域
+# 需完整 SUFFIX 匹配，KEYWORD,antigravity 可覆盖非 .google 域的 antigravity.com
+DOMAIN-KEYWORD,antigravity
+DOMAIN-SUFFIX,antigravity.google
+
+# 核心 AI API 端点（Cloud Code 后端，Antigravity 独有，非通用 googleapis）
+# ⚠️ 不使用 DOMAIN-SUFFIX,googleapis.com → 太宽泛，覆盖 Google 全平台
+# 仅精确匹配 Antigravity 使用的专属 Cloud Code 端点
+DOMAIN,daily-cloudcode-pa.sandbox.googleapis.com
+DOMAIN,cloudcode-pa.googleapis.com
+DOMAIN,cloudaicompanion.googleapis.com
+
+# 扩展商店：Antigravity 无法使用微软 VS Marketplace，改用 Open VSX
+DOMAIN-SUFFIX,open-vsx.org
+
+# VS Code 底层组件（Antigravity 基于 VS Code fork，需要以下 CDN 加载资源）
+# ⚠️ 不通配 microsoft.com / visualstudio.com 整域
+DOMAIN-SUFFIX,vscode-cdn.net
+DOMAIN-SUFFIX,vsassets.io
+DOMAIN,vscode.download.prss.microsoft.com
+DOMAIN,update.code.visualstudio.com
+
+# Google Cloud Run（Antigravity 的部分 Agent 任务通过 run.app 部署沙箱）
+# ⚠️ run.app 被大量 GCP 应用使用，改用精确子域匹配
+DOMAIN,antigravity-sandbox.run.app
+
+# Google 账号授权（Antigravity 登录依赖 OAuth，以下为其专用端点）
+# ⚠️ 不通配 google.com / accounts.google.com（覆盖太宽）
+DOMAIN,clientsidediscovery-pa.googleapis.com
+
+# 进程名匹配（仅 Clash for Windows / Clash Verge / Mihomo 桌面端支持）
+# Windows 可执行文件
+PROCESS-NAME,Antigravity.exe
+# Windows 语言服务器（代码补全/跳转依赖）
+PROCESS-NAME,language_server_windows_x64.exe
+# Linux / macOS 可执行文件
+PROCESS-NAME,antigravity
