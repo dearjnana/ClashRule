@@ -1,5 +1,5 @@
 # Adobe 屏蔽
-DOMAIN-SUFFIX,adobe.io
+DOMAIN-SUFFIX,adobe.io,DROP
 # CareUEyes
 DOMAIN-SUFFIX,careueyes.com,DROP
 DOMAIN-SUFFIX,update.careueyes.com,DROP
@@ -10,3 +10,9 @@ DOMAIN-SUFFIX,adobestats.io,DROP
 DOMAIN-SUFFIX,cdn.oobesaas.adobe.com,DROP
 DOMAIN-SUFFIX,adobe.com,DROP
 DOMAIN-SUFFIX,adobeccstatic.com,DROP
+# CareUEyes 屏蔽
+DOMAIN-SUFFIX,care-eyes.com,DROP
+DOMAIN-SUFFIX,www.care-eyes.com,DROP
+DOMAIN-SUFFIX,careueyes.com,DROP
+DOMAIN-SUFFIX,update.careueyes.com,DROP
+DOMAIN-SUFFIX,api.careueyes.com,DROP
