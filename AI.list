@@ -9,13 +9,6 @@
 # ======================================
 
 # ========================
-# minimax国内版走国内IP
-# ========================
-DOMAIN-SUFFIX,minimaxi.com,DIRECT
-DOMAIN-KEYWORD,minimaxi,DIRECT
-
-
-# ========================
 # 🌟 特朗普真实社交平台
 # ========================
 DOMAIN-KEYWORD,truthsocial
