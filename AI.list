@@ -11,7 +11,8 @@
 # ========================
 # minimax国内版走国内IP
 # ========================
-DOMAIN-SUFFIX,api.minimaxi.com,DIRECT
+DOMAIN-SUFFIX,minimaxi.com,DIRECT
+DOMAIN-KEYWORD,minimaxi,DIRECT
 
 
 # ========================
