@@ -1,5 +1,15 @@
-# 内容：YouTube
-# 数量：17条
+# ========================
+# 🌐 Google 基础/通用服务 (账号登录、API、广告、数据分析等)
+# ========================
+DOMAIN,google-analytics.com
+DOMAIN-SUFFIX,google.com
+DOMAIN-SUFFIX,googleapis.com
+DOMAIN-SUFFIX,googleusercontent.com
+DOMAIN-SUFFIX,googlesyndication.com
+
+# ========================
+# 📺 YouTube 
+# ========================
 DOMAIN-KEYWORD,youtube
 DOMAIN,youtubei.googleapis.com
 DOMAIN,yt3.ggpht.com
@@ -14,3 +24,4 @@ DOMAIN-SUFFIX,youtubegaming.com
 DOMAIN-SUFFIX,youtubekids.com
 DOMAIN-SUFFIX,yt.be
 DOMAIN-SUFFIX,ytimg.com
+DOMAIN-SUFFIX,ggpht.com
