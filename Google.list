@@ -1,19 +1,22 @@
 # ========================
-# 🧠 Google AI (Gemini & DeepMind)
+# 🌐 Google 基础/通用服务 (账号登录、API、广告、数据分析等)
 # ========================
 DOMAIN,google-analytics.com
+DOMAIN-SUFFIX,google.com
+DOMAIN-SUFFIX,googleapis.com
+DOMAIN-SUFFIX,googleusercontent.com
+DOMAIN-SUFFIX,googlesyndication.com
+
+# ========================
+# 🧠 Google AI (Gemini & DeepMind) - 精准规则
+# ========================
 DOMAIN,gemini.google.com
 DOMAIN,geminiapp.google.com
 DOMAIN,aistudio.google.com
 DOMAIN,ai.google.dev
 DOMAIN,makersuite.google.com
-
+DOMAIN,bard.google.com
 DOMAIN-KEYWORD,generativelanguage
-
 DOMAIN-SUFFIX,deepmind.com
 DOMAIN-SUFFIX,deepmind.google
-DOMAIN-SUFFIX,google.com
-DOMAIN-SUFFIX,googleusercontent.com
-DOMAIN-SUFFIX,googleapis.com
-DOMAIN-SUFFIX,googlesyndication.com
 DOMAIN-SUFFIX,generativeai.google
