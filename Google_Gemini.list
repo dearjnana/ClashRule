@@ -1,0 +1,32 @@
+payload:
+  # ========================
+  # 🧠 Google Gemini (Web 网页端 & 专属短域名)
+  # ========================
+  - DOMAIN,gemini.google.com
+  - DOMAIN-SUFFIX,gemini.google
+  - DOMAIN-SUFFIX,bard.google.com
+
+  # ========================
+  # 📱 Google Gemini (App 客户端 / 语音助手底层交互)
+  # ========================
+  - DOMAIN,geminiapp.google.com
+  - DOMAIN,proactivebackend-pa.googleapis.com
+  - DOMAIN,geller-pa.googleapis.com
+
+  # ========================
+  # ⚙️ Google AI Studio & Gemini API (核心数据流与接口调用)
+  # ========================
+  - DOMAIN,generativelanguage.googleapis.com
+  - DOMAIN,alkalimakersuite-pa.clients6.google.com
+  - DOMAIN,alkalicore-pa.clients6.google.com
+  - DOMAIN,waa-pa.clients6.google.com
+  - DOMAIN-SUFFIX,aistudio.google.com
+  - DOMAIN-SUFFIX,ai.google.dev
+  - DOMAIN-SUFFIX,makersuite.google.com
+
+  # ========================
+  # 🔬 DeepMind & 生成式 AI 独立域
+  # ========================
+  - DOMAIN-SUFFIX,deepmind.com
+  - DOMAIN-SUFFIX,deepmind.google
+  - DOMAIN-SUFFIX,generativeai.google
