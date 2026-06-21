@@ -12,6 +12,7 @@ DOMAIN-SUFFIX,linux.do
 # ========================
 # 🐙 GitHub（全产品线）
 # ========================
+DOMAIN-SUFFIX,github-copilot.com
 
 # --- 核心平台 ---
 # 主站、API、Gist、Actions、Codespaces、Packages 等
