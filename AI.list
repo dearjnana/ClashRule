@@ -1,13 +1,3 @@
-# ======================================
-# 🎯 AI 相关服务规则 - 优化版 2026.03.08
-# 本规则用于 Clash，匹配主要 AI 服务的域名并走指定节点
-# ======================================
-# ⚠️ 核心原则：
-#   1. KEYWORD 只用于高度唯一的词（不会误匹配其他服务）
-#   2. Google/AWS/Azure 等云平台不能用 SUFFIX 通配，必须精确到 AI 子域名
-#   3. 通用第三方服务（auth0/stripe/sentry等）不应收入本规则
-# ======================================
-
 # ========================
 # 🌟 特朗普真实社交平台
 # ========================
@@ -25,16 +15,19 @@ DOMAIN-KEYWORD,replicate
 DOMAIN-KEYWORD,runwayml
 DOMAIN-KEYWORD,midjourney
 DOMAIN-KEYWORD,luma
-# ❌ 已移除 DOMAIN-KEYWORD,gemini → 改为下方精确域名（避免 IP 分裂）
-# ❌ 已修复 DOMAIN-KEYWORD,Claude → 改为小写 claude（Clash KEYWORD 区分大小写）
 
 # ========================
-# 🚀 OpenAI 生态系统
+# 🚀 OpenAI 生态系统 (ChatGPT / API)
 # ========================
-# 以下域名不含 openai 关键词，KEYWORD 无法覆盖
 DOMAIN,browser-intake-datadoghq.com
+DOMAIN,chat.openai.com.cdn.cloudflare.net
+DOMAIN,openai-api.arkoselabs.com
+DOMAIN,openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net
+DOMAIN,openaicomproductionae4b.blob.core.windows.net
+DOMAIN,production-openaicom-storage.azureedge.net
 DOMAIN,static.cloudflareinsights.com
 DOMAIN-SUFFIX,ai.com
+DOMAIN-SUFFIX,api.statsig.com
 DOMAIN-SUFFIX,chatgpt.com
 DOMAIN-SUFFIX,chatgpt.livekit.cloud
 DOMAIN-SUFFIX,client-api.arkoselabs.com
@@ -45,14 +38,29 @@ DOMAIN-SUFFIX,launchdarkly.com
 DOMAIN-SUFFIX,oaistatic.com
 DOMAIN-SUFFIX,oaiusercontent.com
 DOMAIN-SUFFIX,observeit.net
+DOMAIN-SUFFIX,openai.com
+DOMAIN-SUFFIX,openaiapi-site.azureedge.net
+DOMAIN-SUFFIX,openaicom.imgix.net
 DOMAIN-SUFFIX,turn.livekit.cloud
-DOMAIN-SUFFIX,api.statsig.com
 IP-CIDR,24.199.123.28/32,no-resolve
 IP-CIDR,64.23.132.171/32,no-resolve
 IP-ASN,20473,no-resolve
-# ❌ 已移除（通用第三方服务，被大量非 AI 网站使用，会误导流量）：
-#   auth0.com(通用认证) stripe.com(支付) sentry.io(监控) segment.io(分析)
-#   intercom.io(客服) identrust.com(CA证书) algolia.net(搜索)
+
+# ========================
+# 🤖 Claude (Anthropic)
+# ========================
+DOMAIN-SUFFIX,anthropic.com
+DOMAIN-SUFFIX,claude.ai
+DOMAIN-SUFFIX,fuclaude.com
+
+# ========================
+# 🐺 Grok (xAI)
+# ========================
+DOMAIN-SUFFIX,x.ai
+DOMAIN-SUFFIX,grok.com
+DOMAIN-SUFFIX,featureassets.org
+DOMAIN-SUFFIX,xai.chronosphere.io
+IP-CIDR,17.253.4.125/32,no-resolve
 
 # ========================
 # 🤖 GitHub Copilot
@@ -60,58 +68,27 @@ IP-ASN,20473,no-resolve
 DOMAIN-SUFFIX,github-copilot.com
 
 # ========================
-# 🧠 Google AI (Gemini & DeepMind)
+# 🔷 Microsoft AI (仅 AI 服务)
 # ========================
-# ⚠️ 关键修复：不使用 DOMAIN-KEYWORD,gemini
-# 原因：gemini.google.com 会被截住走 OpenAi(美国)，但页面加载的
-#       www.google.com、googleapis.com 等子资源不含 "gemini"，走了
-#       节点选择(香港) → 同一会话两个国家 IP → Google 报"异常流量"
-# 方案：用精确域名匹配 Gemini 专属域名
-#DOMAIN,gemini.google.com
-#DOMAIN,geminiapp.google.com
-#DOMAIN,deepmind.google.com
-#DOMAIN,aistudio.google.com
-#DOMAIN,ai.google.dev
-#DOMAIN,alkalimakersuite-pa.clients6.google.com
-#DOMAIN,makersuite.google.com
-#DOMAIN-SUFFIX,bard.google.com
-#DOMAIN-SUFFIX,deepmind.com
-#DOMAIN-SUFFIX,deepmind.google
-#DOMAIN-SUFFIX,generativeai.google
-#DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com
-#DOMAIN-SUFFIX,apis.google.com
-#DOMAIN-KEYWORD,colab
-#DOMAIN-KEYWORD,developerprofiles
-#DOMAIN-KEYWORD,generativelanguage
-
-# ========================
-# 🔷 Microsoft AI (仅 AI 服务，不通配整个 Azure)
-# ========================
-# ❌ 已移除 DOMAIN-SUFFIX,azure.com → 会截住整个 Azure 云！
-# ❌ 已移除 DOMAIN-SUFFIX,cognitive.microsoft.com → 改为精确匹配
 DOMAIN-SUFFIX,openai.azure.com
 DOMAIN-SUFFIX,cognitiveservices.azure.com
 DOMAIN-SUFFIX,api.cognitive.microsoft.com
 
 # ========================
-# 🏢 IBM Watson AI (仅 Watson，不通配整个 ibm.com)
+# 🏢 IBM Watson AI
 # ========================
-# ❌ 已移除 DOMAIN-SUFFIX,ibm.com → 会截住 IBM 所有服务！
 DOMAIN-SUFFIX,watsonplatform.net
 
 # ========================
-# 🛍️ Amazon AI (仅 Bedrock/SageMaker，不通配整个 AWS)
+# 🛍️ Amazon AI (仅 Bedrock/SageMaker)
 # ========================
-# ❌ 已移除 DOMAIN-SUFFIX,amazonaws.com → 会截住半个互联网！
-# ❌ 已移除 DOMAIN-SUFFIX,aws.amazon.com → 会截住 AWS 控制台
 DOMAIN-SUFFIX,bedrock.amazonaws.com
 DOMAIN-SUFFIX,sagemaker.amazonaws.com
 DOMAIN-SUFFIX,bedrock-runtime.amazonaws.com
 
 # ========================
-# 🌍 欧洲 AI 服务
+# 🌍 欧洲及其他 AI 服务
 # ========================
-DOMAIN-SUFFIX,fuclaude.com
 DOMAIN-SUFFIX,mistral.ai
 DOMAIN-SUFFIX,perplexity.ai
 
@@ -124,41 +101,19 @@ DOMAIN-SUFFIX,scale.com
 # ========================
 # 🚀 Google Antigravity IDE
 # ========================
-# 官网 / 下载 / 文档 / 更新日志
-# antigravity.google 是 Google 专属顶级域 .google 下的二级域
-# 需完整 SUFFIX 匹配，KEYWORD,antigravity 可覆盖非 .google 域的 antigravity.com
 DOMAIN-KEYWORD,antigravity
 DOMAIN-SUFFIX,antigravity.google
-
-# 核心 AI API 端点（Cloud Code 后端，Antigravity 独有，非通用 googleapis）
-# ⚠️ 不使用 DOMAIN-SUFFIX,googleapis.com → 太宽泛，覆盖 Google 全平台
-# 仅精确匹配 Antigravity 使用的专属 Cloud Code 端点
 DOMAIN,daily-cloudcode-pa.sandbox.googleapis.com
 DOMAIN,cloudcode-pa.googleapis.com
 DOMAIN,cloudaicompanion.googleapis.com
-
-# 扩展商店：Antigravity 无法使用微软 VS Marketplace，改用 Open VSX
 DOMAIN-SUFFIX,open-vsx.org
-
-# VS Code 底层组件（Antigravity 基于 VS Code fork，需要以下 CDN 加载资源）
-# ⚠️ 不通配 microsoft.com / visualstudio.com 整域
 DOMAIN-SUFFIX,vscode-cdn.net
 DOMAIN-SUFFIX,vsassets.io
 DOMAIN,vscode.download.prss.microsoft.com
 DOMAIN,update.code.visualstudio.com
-
-# Google Cloud Run（Antigravity 的部分 Agent 任务通过 run.app 部署沙箱）
-# ⚠️ run.app 被大量 GCP 应用使用，改用精确子域匹配
 DOMAIN,antigravity-sandbox.run.app
-
-# Google 账号授权（Antigravity 登录依赖 OAuth，以下为其专用端点）
-# ⚠️ 不通配 google.com / accounts.google.com（覆盖太宽）
 DOMAIN,clientsidediscovery-pa.googleapis.com
-
-# 进程名匹配（仅 Clash for Windows / Clash Verge / Mihomo 桌面端支持）
-# Windows 可执行文件
+#进程匹配
 PROCESS-NAME,Antigravity.exe
-# Windows 语言服务器（代码补全/跳转依赖）
 PROCESS-NAME,language_server_windows_x64.exe
-# Linux / macOS 可执行文件
 PROCESS-NAME,antigravity
