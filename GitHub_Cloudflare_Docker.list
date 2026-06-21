@@ -1,7 +1,7 @@
 # ============================================================
 # 🐙 GitHub + ☁️ Cloudflare + 🐳 Docker 全产品线 Clash 分流规则
 # 适用场景：将以上服务的流量走自定义高速通道
-# 更新日期：2026-02-20
+# 更新日期：2026-06-21
 # 说明：DOMAIN-SUFFIX 已自动匹配该域名及其所有子域名，
 #       例如 DOMAIN-SUFFIX,github.com 会匹配 api.github.com、
 #       gist.github.com 等，无需额外列出子域名。
@@ -181,17 +181,9 @@ IP-CIDR6,2606:4700:4700::1002/128,no-resolve
 # ========================
 # 🐳 Docker（全产品线）
 # ========================
-DOMAIN-SUFFIX,docker.com
-DOMAIN-SUFFIX,docker.io
-DOMAIN-SUFFIX,docker.client.com
-DOMAIN-SUFFIX,cloudfront.docker.com
-DOMAIN-SUFFIX,index.docker.io
-DOMAIN-SUFFIX,production.cloudfront.docker.com
 
-# --- 核心平台 ---
-# 官网、文档、博客、产品页面
+# --- 核心平台与镜像仓库 ---
 DOMAIN-SUFFIX,docker.com
-# Docker Hub 镜像仓库核心域（pull/push 使用 docker.io）
 DOMAIN-SUFFIX,docker.io
 
 # --- Docker 状态页面 ---
@@ -206,4 +198,3 @@ DOMAIN,notify.bugsnag.com
 DOMAIN,sessions.bugsnag.com
 # 诊断日志上传（S3）
 DOMAIN,docker-pinata-support.s3.amazonaws.com
-
