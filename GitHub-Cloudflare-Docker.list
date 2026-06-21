@@ -181,6 +181,10 @@ IP-CIDR6,2606:4700:4700::1002/128,no-resolve
 # ========================
 # 🐳 Docker（全产品线）
 # ========================
+DOMAIN-SUFFIX,docker.com
+DOMAIN-SUFFIX,docker.io
+DOMAIN-SUFFIX,docker.client.com
+DOMAIN-SUFFIX,cloudfront.docker.com
 
 # --- 核心平台 ---
 # 官网、文档、博客、产品页面
