@@ -185,27 +185,14 @@ DOMAIN-SUFFIX,docker.com
 DOMAIN-SUFFIX,docker.io
 DOMAIN-SUFFIX,docker.client.com
 DOMAIN-SUFFIX,cloudfront.docker.com
+DOMAIN-SUFFIX,index.docker.io
+DOMAIN-SUFFIX,production.cloudfront.docker.com
 
 # --- 核心平台 ---
 # 官网、文档、博客、产品页面
 DOMAIN-SUFFIX,docker.com
 # Docker Hub 镜像仓库核心域（pull/push 使用 docker.io）
 DOMAIN-SUFFIX,docker.io
-
-# --- Docker Hub & Registry ---
-# Docker Hub 网页端（DOMAIN-SUFFIX,docker.com 已覆盖 hub.docker.com）
-# 镜像拉取/推送 API（registry-1.docker.io 等已由 docker.io 覆盖）
-# 认证服务（auth.docker.io 已由 docker.io 覆盖）
-
-# --- Docker Desktop 更新 & 遥测 ---
-# Desktop 更新检查（desktop.docker.com 已由 docker.com 覆盖）
-# 新版 API（api.docker.com 已由 docker.com 覆盖）
-# Scout 安全扫描服务（api.dso.docker.com 已由 docker.com 覆盖）
-# 登录认证（login.docker.com / auth.docker.com 已由 docker.com 覆盖）
-
-# --- Docker 镜像分发说明 ---
-# production.cloudflare.docker.com 已被 DOMAIN-SUFFIX,docker.com 覆盖
-# cloudflarestorage.com 已被 Cloudflare 部分的 DOMAIN-SUFFIX,cloudflarestorage.com 覆盖
 
 # --- Docker 状态页面 ---
 DOMAIN-SUFFIX,dockerstatus.com
@@ -220,12 +207,3 @@ DOMAIN,sessions.bugsnag.com
 # 诊断日志上传（S3）
 DOMAIN,docker-pinata-support.s3.amazonaws.com
 
-# --- 常用第三方容器注册中心（可选，按需启用） ---
-# Quay.io（Red Hat 容器仓库）
-# DOMAIN-SUFFIX,quay.io
-# Microsoft 容器注册中心
-# DOMAIN-SUFFIX,mcr.microsoft.com
-# Google 容器注册中心
-# DOMAIN-SUFFIX,gcr.io
-# AWS 公共容器注册中心
-# DOMAIN-SUFFIX,public.ecr.aws
