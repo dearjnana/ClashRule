@@ -1,0 +1,3 @@
+# Pixiv 内置的 mintegral 广告/统计 SDK 他是通过这个来识别地区的,如果不屏蔽就不显示图片.
+DOMAIN-KEYWORD,mintegral
+DOMAIN-KEYWORD,mtgglobals
