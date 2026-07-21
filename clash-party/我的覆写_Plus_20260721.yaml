@@ -1,0 +1,333 @@
+# 全局配置
+port: 7890
+socks-port: 7891
+redir-port: 7892
+mixed-port: 7893
+tproxy-port: 7894
+ipv6: false
+allow-lan: true
+unified-delay: true
+tcp-concurrent: true
+  
+geodata-mode: false
+geodata-loader: standard
+geo-auto-update: true
+geo-update-interval: 48
+geox-url:
+  geoip: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat"
+  geosite: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat"
+  mmdb: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
+  asn: "https://github.com/xishang0128/geoip/releases/download/latest/GeoLite2-ASN.mmdb"
+  
+# 控制面板
+external-controller: 0.0.0.0:9090
+secret: ""
+external-ui: ui
+external-ui-url: "https://ghp.ci/https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip"
+
+# 匹配进程
+find-process-mode: strict
+global-client-fingerprint: chrome
+keep-alive-idle: 300
+keep-alive-interval: 30
+
+# 策略组选择和fakeip缓存
+profile:
+  store-selected: true
+  store-fake-ip: true
+  
+# 流量嗅探
+sniffer:
+  enable: true
+  sniff:
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+    TLS:
+      ports: [443, 8443]
+    QUIC:
+      ports: [443, 8443]
+  force-domain:
+    - +.v2ex.com
+  skip-domain:
+    - "Mijia Cloud"
+    - "dlg.io.mi.com"
+    - "+.push.apple.com"
+    - "+.apple.com"
+    
+# 代理模式
+tun:
+  enable: true
+  stack: mixed
+  mtu: 1500
+  dns-hijack:
+    - "any:53"
+    - "tcp://any:53"
+  auto-route: true
+  auto-redirect: true
+  auto-detect-interface: true
+  
+# DNS 配置
+dns:
+  enable: true
+  listen: 0.0.0.0:1053
+  prefer-h3: false
+  respect-rules: true
+  use-system-hosts: false
+  cache-algorithm: arc
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - '+.lan'
+    - '+.local'
+    - '+.localhost'
+    - '+.msftconnecttest.com'
+    - '+.msftncsi.com'
+    - 'localhost.ptlogin2.qq.com'
+    - 'localhost.sec.qq.com'
+    - 'localhost.work.weixin.qq.com'
+    - 'time.*.com'
+    - 'time.*.gov'
+    - 'time.*.edu.cn'
+    - 'time.*.apple.com'
+    - 'time-ios.apple.com'
+    - 'time1.*.com'
+    - 'time2.*.com'
+    - 'time3.*.com'
+    - 'time4.*.com'
+    - 'time5.*.com'
+    - 'time6.*.com'
+    - 'time7.*.com'
+    - 'ntp.*.com'
+    - 'ntp1.*.com'
+    - 'ntp2.*.com'
+    - 'ntp3.*.com'
+    - '*.time.edu.cn'
+    - '*.ntp.org.cn'
+    - '+.pool.ntp.org'
+    - 'connectivitycheck.gstatic.com'
+    - 'connectivitycheck.platform.hicloud.com'
+    - 'wifi.vivo.com.cn'
+    - '+.nflxvideo.net'
+    - '*.n.n.srv.nintendo.net'
+    - '+.stun.playstation.net'
+    - 'xbox.*.microsoft.com'
+    - '+.xboxlive.com'
+    - '*.stun.*.*.*.stun.*.*'
+    - 'stun.*.*'
+    - 'stun.*.*.*'
+    - '+.stun.*.*'
+    - '+.stun.*.*.*'
+    - '+.stun.*.*.*.*'
+    - '+.mijia.tech'
+    - '+.trafficmanager.net'
+    - 'lens.l.google.com'
+    - '*.mcdn.bilivideo.cn'
+    - 'music.163.com'
+    - '*.music.163.com'
+    - '*.126.net'
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+  nameserver:
+    - https://8.8.8.8/dns-query
+    - https://1.1.1.1/dns-query
+  proxy-server-nameserver:
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+  direct-nameserver:
+    - https://223.5.5.5/dns-query
+    - https://doh.pub/dns-query
+  direct-nameserver-follow-policy: false
+  nameserver-policy:
+    'geosite:cn':
+      - https://223.5.5.5/dns-query
+      - https://doh.pub/dns-query
+ 
+# 极简锚点菜单
+pr: &pr {type: select, proxies: [🚀 节点选择, 🛡️ 全局智能容灾, ☁️🌏 良心云-最优, ☄️🌏 iKuuu-最优, ⚡🌏 MESL-最优, 🔮🌏 宝可梦-最优, ♻️ 香港自动, ♻️ 台湾自动, ♻️ 日本自动, ♻️ 韩国自动, ♻️ 新加坡自动, ♻️ 美国自动, 🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇰🇷 韩国节点, 🇸🇬 新加坡节点, 🇺🇲 美国节点, 🌐 全部节点, DIRECT, REJECT]}
+# 策略组
+proxy-groups:
+  - {name: 🚀 节点选择, type: select, proxies: [🛡️ 全局智能容灾, ☁️🌏 良心云-最优, ☄️🌏 iKuuu-最优, ⚡🌏 MESL-最优, 🔮🌏 宝可梦-最优, ♻️ 香港自动, ♻️ 日本自动, ♻️ 新加坡自动, ♻️ 美国自动, 🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇰🇷 韩国节点, 🇸🇬 新加坡节点, 🇺🇲 美国节点, 🌐 全部节点, DIRECT, REJECT]}
+  - {name: 🛸 IP归属地伪装, type: select, proxies: [DIRECT, 🚀 节点选择]}
+  - {name: 🎐 Gemini, <<: *pr}
+  - {name: 🍀 Google, <<: *pr}
+  - {name: 📹 YouTube, <<: *pr}
+  - {name: 🤖 ChatGPT, <<: *pr}
+  - {name: 🖥️ GitHub-Cloudflare-Docker, <<: *pr}
+  - {name: 🚀 摧城, <<: *pr}
+  - {name: 🚀 摧城低速, <<: *pr}
+  - {name: 🔞 18X, <<: *pr}
+  - {name: ✨ Samsung, <<: *pr}
+  - {name: 🎮 游戏平台, <<: *pr}  
+  - {name: 🐬 OneDrive, <<: *pr}
+  - {name: 🪟 Microsoft, <<: *pr}
+  - {name: 🎵 TikTok, <<: *pr}
+  - {name: 📲 Telegram, <<: *pr}
+  - {name: 🎥 NETFLIX, <<: *pr}
+  - {name: 🧸 Disney, <<: *pr}
+  - {name: ✈️ Speedtest, <<: *pr}
+  - {name: 💶 PayPal, <<: *pr}
+  - {name: 🍎 Apple, <<: *pr}
+  - {name: 🎯 全球直连, type: select, proxies: [DIRECT, 🚀 节点选择]}
+  - {name: 🐟 漏网之鱼, <<: *pr}
+  - {name: 🚫 广告拦截, type: select, proxies: [REJECT, 🚀 节点选择]}
+
+  # ===== 全局智能容灾 (第一层: Fallback 严格执行 良心云 -> iKuuu -> MESL -> 宝可梦) =====
+  - {name: 🛡️ 全局智能容灾, type: fallback, proxies: [☁️🌏 良心云-最优, ☄️🌏 iKuuu-最优, ⚡🌏 MESL-最优, 🔮🌏 宝可梦-最优], url: 'http://connectivitycheck.gstatic.com/generate_204', interval: 300}
+  # (第二层: Url-test 在每个机场内存活节点中选最低延迟)
+  - {name: ☁️🌏 良心云-最优, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "(?=.*良心云)^((?!(失联|超时|官网|售后|剩余|到期|自助开通|主流)).)*$"}
+  - {name: ☄️🌏 iKuuu-最优, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "(?=.*(?i)ikuuu)^((?!(失联|超时|官网|售后|剩余|到期|自助开通|主流)).)*$"}
+  - {name: ⚡🌏 MESL-最优, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "(?=.*(?i)MESL)^((?!(失联|超时|官网|售后|剩余|到期|自助开通|主流)).)*$"}
+  - {name: 🔮🌏 宝可梦-最优, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "(?=.*(?i)宝可梦)^((?!(失联|超时|官网|售后|剩余|到期|自助开通|主流)).)*$"}
+
+  # ===== 手动选区 (将订阅中匹配该国家的节点聚合，供临时特定业务手动指派) =====
+  - {name: 🇭🇰 香港节点, type: select, include-all: true, filter: "(?=.*(港|HK|(?i)Hong))^((?!(台|日|韩|新|深|美)).)*$"}
+  - {name: 🇹🇼 台湾节点, type: select, include-all: true, filter: "(?i)台|台湾|TW|台北|Taipei|高雄|Kaohsiung|台中|Taichung|新北|New Taipei|桃园|Taoyuan"}
+  - {name: 🇯🇵 日本节点, type: select, include-all: true, filter: "(?i)日|jp|japan"}
+  - {name: 🇰🇷 韩国节点, type: select, include-all: true, filter: "(?i)韩|韩国|KR|Korea|首尔|Seoul|釜山|Busan|仁川|Incheon|大邱|Daegu|光州|Gwangju|大田|Daejeon|蔚山|Ulsan"}
+  - {name: 🇸🇬 新加坡节点, type: select, include-all: true, filter: "(?i)新|新加坡|SG|Singapore|狮城"}
+  - {name: 🇺🇲 美国节点, type: select, include-all: true, filter: "(?i)美|us|unitedstates|united states"}
+
+  # ===== 核心地区独立智能容灾 (逻辑同全局，保证选定特定国家时依然遵循流量优先级) =====
+  # [香港]
+  - {name: ♻️ 香港自动, type: fallback, proxies: [☁️🇭🇰 良心云-香港, ☄️🇭🇰 iKuuu-香港, ⚡🇭🇰 MESL-香港, 🔮🇭🇰 宝可梦-香港], url: 'http://connectivitycheck.gstatic.com/generate_204', interval: 300}
+  - {name: ☁️🇭🇰 良心云-香港, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "(?=.*良心云)(?=.*(港|HK|(?i)Hong))"}
+  - {name: ☄️🇭🇰 iKuuu-香港, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "(?=.*(?i)iKuuu)(?=.*(港|HK|(?i)Hong))"}
+  - {name: ⚡🇭🇰 MESL-香港, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "(?=.*(?i)MESL)(?=.*(港|HK|(?i)Hong))"}
+  - {name: 🔮🇭🇰 宝可梦-香港, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "(?=.*(?i)宝可梦)(?=.*(港|HK|(?i)Hong))"}
+
+  # [台湾]
+  - {name: ♻️ 台湾自动, type: fallback, proxies: [☁️🇹🇼 良心云-台湾, ☄️🇹🇼 iKuuu-台湾, ⚡🇹🇼 MESL-台湾, 🔮🇹🇼 宝可梦-台湾], url: 'http://connectivitycheck.gstatic.com/generate_204', interval: 300}
+  - {name: ☁️🇹🇼 良心云-台湾, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "(?=.*良心云)(?=.*(台湾|TW|台|台北|(?i)Taipei|高雄|(?i)Kaohsiung|台中|(?i)Taichung|新北|(?i)New Taipei|桃园|(?i)Taoyuan))"}
+  - {name: ☄️🇹🇼 iKuuu-台湾, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "(?=.*(?i)iKuuu)(?=.*(台湾|TW|台|台北|(?i)Taipei|高雄|(?i)Kaohsiung|台中|(?i)Taichung|新北|(?i)New Taipei|桃园|(?i)Taoyuan))"}
+  - {name: ⚡🇹🇼 MESL-台湾, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "(?=.*(?i)MESL)(?=.*(台湾|TW|台|台北|(?i)Taipei|高雄|(?i)Kaohsiung|台中|(?i)Taichung|新北|(?i)New Taipei|桃园|(?i)Taoyuan))"}
+  - {name: 🔮🇹🇼 宝可梦-台湾, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "(?=.*(?i)宝可梦)(?=.*(台湾|TW|台|台北|(?i)Taipei|高雄|(?i)Kaohsiung|台中|(?i)Taichung|新北|(?i)New Taipei|桃园|(?i)Taoyuan))"}
+
+  # [日本]
+  - {name: ♻️ 日本自动, type: fallback, proxies: [☁️🇯🇵 良心云-日本, ☄️🇯🇵 iKuuu-日本, ⚡🇯🇵 MESL-日本, 🔮🇯🇵 宝可梦-日本], url: 'http://connectivitycheck.gstatic.com/generate_204', interval: 300}
+  - {name: ☁️🇯🇵 良心云-日本, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "(?=.*良心云)(?=.*(日|JP|(?i)Japan|川日|东京|(?i)Tokyo|大阪|(?i)Osaka|泉日|埼玉|沪日|深日|名古屋|(?i)Nagoya|福冈|(?i)Fukuoka|京都|(?i)Kyoto|神户|(?i)Kobe))"}
+  - {name: ☄️🇯🇵 iKuuu-日本, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "(?=.*(?i)iKuuu)(?=.*(日|JP|(?i)Japan|川日|东京|(?i)Tokyo|大阪|(?i)Osaka|泉日|埼玉|沪日|深日|名古屋|(?i)Nagoya|福冈|(?i)Fukuoka|京都|(?i)Kyoto|神户|(?i)Kobe))"}
+  - {name: ⚡🇯🇵 MESL-日本, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "(?=.*(?i)MESL)(?=.*(日|JP|(?i)Japan|川日|东京|(?i)Tokyo|大阪|(?i)Osaka|泉日|埼玉|沪日|深日|名古屋|(?i)Nagoya|福冈|(?i)Fukuoka|京都|(?i)Kyoto|神户|(?i)Kobe))"}
+  - {name: 🔮🇯🇵 宝可梦-日本, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "(?=.*(?i)宝可梦)(?=.*(日|JP|(?i)Japan|川日|东京|(?i)Tokyo|大阪|(?i)Osaka|泉日|埼玉|沪日|深日|名古屋|(?i)Nagoya|福冈|(?i)Fukuoka|京都|(?i)Kyoto|神户|(?i)Kobe))"}
+
+  # [韩国]
+  - {name: ♻️ 韩国自动, type: fallback, proxies: [☁️🇰🇷 良心云-韩国, ☄️🇰🇷 iKuuu-韩国, ⚡🇰🇷 MESL-韩国, 🔮🇰🇷 宝可梦-韩国], url: 'http://connectivitycheck.gstatic.com/generate_204', interval: 300}
+  - {name: ☁️🇰🇷 良心云-韩国, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "(?=.*良心云)(?=.*(韩|韩国|KR|(?i)Korea|首尔|(?i)Seoul|釜山|(?i)Busan|仁川|(?i)Incheon|大邱|(?i)Daegu|光州|(?i)Gwangju|大田|(?i)Daejeon|蔚山|(?i)Ulsan))"}
+  - {name: ☄️🇰🇷 iKuuu-韩国, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "(?=.*(?i)iKuuu)(?=.*(韩|韩国|KR|(?i)Korea|首尔|(?i)Seoul|釜山|(?i)Busan|仁川|(?i)Incheon|大邱|(?i)Daegu|光州|(?i)Gwangju|大田|(?i)Daejeon|蔚山|(?i)Ulsan))"}
+  - {name: ⚡🇰🇷 MESL-韩国, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "(?=.*(?i)MESL)(?=.*(韩|韩国|KR|(?i)Korea|首尔|(?i)Seoul|釜山|(?i)Busan|仁川|(?i)Incheon|大邱|(?i)Daegu|光州|(?i)Gwangju|大田|(?i)Daejeon|蔚山|(?i)Ulsan))"}
+  - {name: 🔮🇰🇷 宝可梦-韩国, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "(?=.*(?i)宝可梦)(?=.*(韩|韩国|KR|(?i)Korea|首尔|(?i)Seoul|釜山|(?i)Busan|仁川|(?i)Incheon|大邱|(?i)Daegu|光州|(?i)Gwangju|大田|(?i)Daejeon|蔚山|(?i)Ulsan))"}
+
+  # [新加坡]
+  - {name: ♻️ 新加坡自动, type: fallback, proxies: [☁️🇸🇬 良心云-新加坡, ☄️🇸🇬 iKuuu-新加坡, ⚡🇸🇬 MESL-新加坡, 🔮🇸🇬 宝可梦-新加坡], url: 'http://connectivitycheck.gstatic.com/generate_204', interval: 300}
+  - {name: ☁️🇸🇬 良心云-新加坡, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "(?=.*良心云)(?=.*(新|新加坡|SG|(?i)Singapore|狮城))"}
+  - {name: ☄️🇸🇬 iKuuu-新加坡, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "(?=.*(?i)iKuuu)(?=.*(新|新加坡|SG|(?i)Singapore|狮城))"}
+  - {name: ⚡🇸🇬 MESL-新加坡, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "(?=.*(?i)MESL)(?=.*(新|新加坡|SG|(?i)Singapore|狮城))"}
+  - {name: 🔮🇸🇬 宝可梦-新加坡, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "(?=.*(?i)宝可梦)(?=.*(新|新加坡|SG|(?i)Singapore|狮城))"}
+
+  # [美国]
+  - {name: ♻️ 美国自动, type: fallback, proxies: [☁️🇺🇸 良心云-美国, ☄️🇺🇸 iKuuu-美国, ⚡🇺🇸 MESL-美国, 🔮🇺🇸 宝可梦-美国], url: 'http://connectivitycheck.gstatic.com/generate_204', interval: 300}
+  - {name: ☁️🇺🇸 良心云-美国, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "(?=.*良心云)(?=.*(美|US|(?i)States|(?i)America|纽约|洛杉矶|芝加哥|西雅图|硅谷|圣何塞|圣克拉拉|旧金山|华盛顿|波特兰|底特律|凤凰城|费城|迈阿密|波士顿))"}
+  - {name: ☄️🇺🇸 iKuuu-美国, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "(?=.*(?i)iKuuu)(?=.*(美|US|(?i)States|(?i)America|纽约|洛杉矶|芝加哥|西雅图|硅谷|圣何塞|圣克拉拉|旧金山|华盛顿|波特兰|底特律|凤凰城|费城|迈阿密|波士顿))"}
+  - {name: ⚡🇺🇸 MESL-美国, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "(?=.*(?i)MESL)(?=.*(美|US|(?i)States|(?i)America|纽约|洛杉矶|芝加哥|西雅图|硅谷|圣何塞|圣克拉拉|旧金山|华盛顿|波特兰|底特律|凤凰城|费城|迈阿密|波士顿))"}
+  - {name: 🔮🇺🇸 宝可梦-美国, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "(?=.*(?i)宝可梦)(?=.*(美|US|(?i)States|(?i)America|纽约|洛杉矶|芝加哥|西雅图|硅谷|圣何塞|圣克拉拉|旧金山|华盛顿|波特兰|底特律|凤凰城|费城|迈阿密|波士顿))"}
+
+  # ===== 杂项控制 =====
+  - {name: 🌐 全部节点, type: select, include-all: true, filter: "^((?!失联|超时|官网|售后|剩余|到期|自助开通).)*$"}
+  #- {name: 🚫 Adobe弹窗屏蔽_拒绝, type: select, proxies: [REJECT,DIRECT]}
+  #- {name: ✔️ Adobe弹窗屏蔽_通过, type: select, proxies: [DIRECT,REJECT, 🚀 节点选择]}
+
+# 规则
+rules:
+  - RULE-SET,BanAD,🚫 广告拦截
+  - RULE-SET,MyBanAD,🚫 广告拦截
+  - RULE-SET,Adobe_reject,🚫 广告拦截
+  - RULE-SET,Adobe_direct,🎯 全球直连
+  - RULE-SET,private_domain,DIRECT
+  - PROCESS-NAME,electerm.exe,DIRECT
+  - PROCESS-NAME,WinSCP.exe,DIRECT
+  - RULE-SET,IPweizhuang,🛸 IP归属地伪装
+  - RULE-SET,Gemini,🎐 Gemini
+  - RULE-SET,Google,🍀 Google
+  - RULE-SET,GoogleEarth,🍀 Google 
+  - RULE-SET,YouTube,📹 YouTube
+  - RULE-SET,YouTubeMusic,📹 YouTube
+  - RULE-SET,ai,🤖 ChatGPT
+  - RULE-SET,GCD,🖥️ GitHub-Cloudflare-Docker  
+  - RULE-SET,github_domain,🖥️ GitHub-Cloudflare-Docker
+  - RULE-SET,cuicheng,🚀 摧城
+  - RULE-SET,cuicheng_LS,🚀 摧城低速
+  - RULE-SET,iwara,🔞 18X
+  - RULE-SET,pixiv,🔞 18X
+  - RULE-SET,Samsung,✨ Samsung
+  - RULE-SET,onedrive_domain,🐬 OneDrive
+  - RULE-SET,microsoft_domain,🪟 Microsoft
+  - RULE-SET,apple_domain,🍎 Apple
+  - RULE-SET,tiktok_domain,🎵 TikTok
+  - RULE-SET,speedtest_domain,✈️ Speedtest
+  - RULE-SET,telegram_domain,📲 Telegram
+  - RULE-SET,netflix_domain,🎥 NETFLIX
+  - RULE-SET,Disney_domain,🧸 Disney
+  - RULE-SET,paypal_domain,💶 PayPal
+  - RULE-SET,Games1_domain,🎮 游戏平台 
+  - RULE-SET,Games2_domain,🎮 游戏平台 
+  - RULE-SET,Games3_domain,🎮 游戏平台 
+  - RULE-SET,Games4_domain,🎮 游戏平台
+  - RULE-SET,Games5_domain,🎮 游戏平台
+  - RULE-SET,proxylite,🚀 节点选择
+  - RULE-SET,google_ip,🍀 Google,no-resolve
+  - RULE-SET,netflix_ip,🎥 NETFLIX,no-resolve
+  - RULE-SET,telegram_ip,📲 Telegram,no-resolve
+  - RULE-SET,SteamCN,🎯 全球直连
+  - RULE-SET,cn_domain,🎯 全球直连
+  - RULE-SET,cn_ip,🎯 全球直连
+  - MATCH,🐟 漏网之鱼
+
+rule-anchor:
+  ip: &ip {type: http, interval: 86400, behavior: ipcidr, format: mrs}
+  domain: &domain {type: http, interval: 86400, behavior: domain, format: mrs}
+  class: &class {type: http, interval: 86400, behavior: classical, format: text}
+  class_yaml: &class_yaml {type: http, interval: 86400, behavior: classical, format: yaml}
+
+rule-providers: 
+  BanAD: {!!merge <<: *class, url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/BanAD.list?timestamp=1770893652"}
+  MyBanAD: {!!merge <<: *class, url: "https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/BanAD.list?timestamp=1770893652"}
+  Adobe_reject: {!!merge <<: *class, url: "https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/Adobe_REJECT.list?timestamp=1743408324"}
+  Adobe_direct: {!!merge <<: *class, url: "https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/Adobe_DIRECT.list?timestamp=1743408324"}
+  IPweizhuang: {!!merge <<: *class_yaml, url: "https://raw.githubusercontent.com/lwd-temp/anti-ip-attribution/main/generated/rule-provider.yaml"}
+  Gemini: {!!merge <<: *class, url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Gemini.list?timestamp=1770893652"}
+  ai: {!!merge <<: *class, url: "https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/AI.list?timestamp=1743408323"}
+  GCD: {!!merge <<: *class, url: "https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/GitHub_Cloudflare_Docker.list?timestamp=1782091279"}
+  cuicheng: {!!merge <<: *class, url: "https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/CC.list?timestamp=1743408329"}
+  cuicheng_LS: {!!merge <<: *class, url: "https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/CC_LS.list?timestamp=1743408329"}
+  iwara: {!!merge <<: *class, url: "https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/iwara.list?timestamp=1743408322"}
+  pixiv: {!!merge <<: *class, url: "https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/pixiv.list?timestamp=1770893652"}
+  Samsung: {!!merge <<: *class, url: "https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/Samsung.list?timestamp=1743408321"}
+  Games1_domain: {!!merge <<: *class, url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Epic.list?timestamp=1770893652"}
+  Games2_domain: {!!merge <<: *class, url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Origin.list?timestamp=1770893652"}
+  Games3_domain: {!!merge <<: *class, url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Sony.list?timestamp=1770893652"}
+  Games4_domain: {!!merge <<: *class, url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Steam.list?timestamp=1770893652"}
+  Games5_domain: {!!merge <<: *class, url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Nintendo.list?timestamp=1770893652"}
+  private_domain: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"}
+  proxylite: {!!merge <<: *class, url: "https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/proxy.list"}
+  YouTube: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/YouTube.list?timestamp=1770893652"}
+  YouTubeMusic: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/YouTubeMusic.list?timestamp=1770893652"}
+  Google: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Google.list?timestamp=1770893652"}
+  GoogleEarth: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs"}
+  github_domain: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs"}
+  telegram_domain: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs"}
+  netflix_domain: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.mrs"}
+  Disney_domain: {!!merge <<: *class_yaml, url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Disney/Disney.list"}
+  paypal_domain: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/paypal.mrs"}
+  onedrive_domain: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/onedrive.mrs"}
+  microsoft_domain: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs"}
+  apple_domain: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs"}
+  speedtest_domain: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/ookla-speedtest.mrs"}
+  tiktok_domain: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.mrs"}
+  SteamCN: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/SteamCN.list?timestamp=1770893652"}
+  cn_domain: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"}
+  
+  cn_ip: {!!merge <<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"}
+  google_ip: {!!merge <<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs"}
+  telegram_ip: {!!merge <<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs"}
+  netflix_ip: {!!merge <<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.mrs"}
