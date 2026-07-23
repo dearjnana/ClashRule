@@ -1,4 +1,6 @@
-# DOMAIN-SUFFIX
+# ==========================================
+# Pixiv 官方主站与图片 CDN 域名
+# ==========================================
 DOMAIN-SUFFIX,booth.pm
 DOMAIN-SUFFIX,fanbox.cc
 DOMAIN-SUFFIX,pixiv.cat
@@ -10,3 +12,27 @@ DOMAIN-SUFFIX,pximg.net
 DOMAIN-SUFFIX,ads-pixiv.net
 DOMAIN-SUFFIX,pixivsketch.net
 DOMAIN-SUFFIX,pimg.jp
+
+# ==========================================
+# Pixiv Android 客户端依赖 SDK 域名
+# (避免被 BanAD 误杀导致初始化失败/图片卡死)
+# ==========================================
+# --- AppLovin 架构 ---
+DOMAIN-SUFFIX,applovin.com
+DOMAIN-SUFFIX,applvn.com
+
+# --- Appier 架构 ---
+DOMAIN-SUFFIX,appier.net
+DOMAIN-SUFFIX,adsappier.com
+DOMAIN-SUFFIX,appiersig.com
+
+# --- InMobi 架构 ---
+DOMAIN-SUFFIX,inmobi.com
+DOMAIN-SUFFIX,inmobicdn.net
+
+# --- Pangle (字节海外) ---
+DOMAIN-SUFFIX,pangle.io
+
+# --- Inner-Active / Rubicon 聚合架构 ---
+DOMAIN-SUFFIX,inner-active.mobi
+DOMAIN-SUFFIX,rubiconproject.com
