@@ -215,10 +215,10 @@ DOMAIN-SUFFIX,il8r.com
 DOMAIN-SUFFIX,imageter.com
 DOMAIN-SUFFIX,immob.cn
 DOMAIN-SUFFIX,inad.com
-DOMAIN-SUFFIX,inmobi.cn
-DOMAIN-SUFFIX,inmobi.net
-DOMAIN-SUFFIX,inmobicdn.cn
-DOMAIN-SUFFIX,inmobicdn.net
+# DOMAIN-SUFFIX,inmobi.cn
+# DOMAIN-SUFFIX,inmobi.net
+# DOMAIN-SUFFIX,inmobicdn.cn
+# DOMAIN-SUFFIX,inmobicdn.net
 DOMAIN-SUFFIX,innity.com
 DOMAIN-SUFFIX,instabug.com
 DOMAIN-SUFFIX,intely.cn
@@ -495,7 +495,7 @@ DOMAIN-SUFFIX,hyperpromote.com
 DOMAIN-SUFFIX,i-mobile.co.jp
 DOMAIN-SUFFIX,imrworldwide.com
 DOMAIN-SUFFIX,inmobi.com
-DOMAIN-SUFFIX,inner-active.mobi
+# DOMAIN-SUFFIX,inner-active.mobi
 DOMAIN-SUFFIX,intentiq.com
 DOMAIN-SUFFIX,inter1ads.com
 DOMAIN-SUFFIX,ipredictive.com
@@ -540,7 +540,7 @@ DOMAIN-SUFFIX,propellerads.com
 DOMAIN-SUFFIX,quantserve.com
 DOMAIN-SUFFIX,rayjump.com
 DOMAIN-SUFFIX,revdepo.com
-DOMAIN-SUFFIX,rubiconproject.com
+# DOMAIN-SUFFIX,rubiconproject.com
 DOMAIN-SUFFIX,sape.ru
 DOMAIN-SUFFIX,scorecardresearch.com
 DOMAIN-SUFFIX,segment.com
