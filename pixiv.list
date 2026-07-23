@@ -15,7 +15,7 @@ DOMAIN-SUFFIX,pimg.jp
 
 # ==========================================
 # Pixiv Android 客户端依赖 SDK 域名
-# (避免被 BanAD 误杀导致初始化失败/图片卡死)
+# (防止 BanAD 误杀导致初始化死锁/卡图)
 # ==========================================
 # --- AppLovin 架构 ---
 DOMAIN-SUFFIX,applovin.com
@@ -30,7 +30,7 @@ DOMAIN-SUFFIX,appiersig.com
 DOMAIN-SUFFIX,inmobi.com
 DOMAIN-SUFFIX,inmobicdn.net
 
-# --- Pangle (字节海外) ---
+# --- Pangle (字节海外广告) ---
 DOMAIN-SUFFIX,pangle.io
 
 # --- Inner-Active / Rubicon 聚合架构 ---
