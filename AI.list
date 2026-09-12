@@ -11,10 +11,15 @@ DOMAIN-KEYWORD,anthropic
 DOMAIN-KEYWORD,claude
 DOMAIN-KEYWORD,cohere
 DOMAIN-KEYWORD,huggingface
-DOMAIN-KEYWORD,replicate
 DOMAIN-KEYWORD,runwayml
 DOMAIN-KEYWORD,midjourney
-DOMAIN-KEYWORD,luma
+
+# [V4.1 收窄] 原 DOMAIN-KEYWORD,luma / antigravity / replicate 会误伤任何含该词的域名
+# (例如 replicated.com 是无关的 Kubernetes 公司), 改为精确后缀:
+DOMAIN-SUFFIX,lumalabs.ai
+DOMAIN-SUFFIX,luma.ai
+DOMAIN-SUFFIX,replicate.com
+# antigravity 仅保留下方 DOMAIN-SUFFIX,antigravity.google, 关键字整条删除
 
 # ========================
 # 🚀 OpenAI 生态系统 (ChatGPT / API)
@@ -44,7 +49,11 @@ DOMAIN-SUFFIX,openaicom.imgix.net
 DOMAIN-SUFFIX,turn.livekit.cloud
 IP-CIDR,24.199.123.28/32,no-resolve
 IP-CIDR,64.23.132.171/32,no-resolve
-IP-ASN,20473,no-resolve
+
+# [V4.1 收窄] 原 IP-ASN,20473(Vultr) 已删除:
+# 该规则会把"所有"连到 Vultr 机房的纯 IP 流量(包括你自己的 VPS SSH)
+# 全部送进 💬 OpenAi 组, 且优先级高于 DST-PORT,22 → 节点选择 的规则。
+# ChatGPT 的 API 域名已由上方域名规则完整覆盖, 无需 ASN 兜底。
 
 # ========================
 # 🤖 Claude (Anthropic)
@@ -101,7 +110,6 @@ DOMAIN-SUFFIX,scale.com
 # ========================
 # 🚀 Google Antigravity IDE
 # ========================
-DOMAIN-KEYWORD,antigravity
 DOMAIN-SUFFIX,antigravity.google
 DOMAIN,daily-cloudcode-pa.sandbox.googleapis.com
 DOMAIN,cloudcode-pa.googleapis.com
@@ -113,7 +121,7 @@ DOMAIN,vscode.download.prss.microsoft.com
 DOMAIN,update.code.visualstudio.com
 DOMAIN,antigravity-sandbox.run.app
 DOMAIN,clientsidediscovery-pa.googleapis.com
-#进程匹配
+#进程匹配 (路由环境下不生效, 保留无害)
 PROCESS-NAME,Antigravity.exe
 PROCESS-NAME,language_server_windows_x64.exe
 PROCESS-NAME,antigravity
