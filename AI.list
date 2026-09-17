@@ -27,6 +27,7 @@ DOMAIN-SUFFIX,replicate.com
 #codex
 DOMAIN,.oaistatic.com
 DOMAIN,cloudflare.com
+DOMAIN,mtalk.google.com
 
 DOMAIN,browser-intake-datadoghq.com
 DOMAIN,chat.openai.com.cdn.cloudflare.net
