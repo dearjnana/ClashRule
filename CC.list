@@ -1,15 +1,10 @@
 # 摧城
-#Codex 微信eto
+
+#Codex  AI中转 微信eto
 DOMAIN-KEYWORD,prismio.net
 
-DOMAIN-KEYWORD,missav
+#机场
 DOMAIN-KEYWORD,meslcloud
-DOMAIN-KEYWORD,dl-a10b-
-# [V4.1 收窄] 原 DOMAIN-KEYWORD,mega 会命中任何含 "mega" 的域名, 收窄为精确后缀:
-DOMAIN-SUFFIX,mega.nz
-DOMAIN-SUFFIX,mega.io
-# 网盘 (mypikpak 为 pikpak 子串, 保留一条即可)
-DOMAIN-KEYWORD,pikpak
 
 # 🎰 金融
 DOMAIN-SUFFIX,futunn.com
