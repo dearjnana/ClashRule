@@ -1,0 +1,10 @@
+# Epic.list — reviewed local copy, 2026-09-20
+# Source: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Epic.list
+# Policy and priority: profiles/MyRuleClash_Plus_V1.optimized.ini
+# Cross-file deduplication is specific to this INI order.
+# Rules: 5
+DOMAIN-SUFFIX,epicgames.com
+DOMAIN-SUFFIX,epicgames.dev
+DOMAIN-SUFFIX,helpshift.com
+DOMAIN-SUFFIX,paragon.com
+DOMAIN-SUFFIX,unrealengine.com

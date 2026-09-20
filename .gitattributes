@@ -1,0 +1,13 @@
+# New maintained artifacts use LF on every host.
+/README.md text eol=lf
+/profiles/** text eol=lf
+/providers/** text eol=lf
+/rules/** text eol=lf
+/templates/** text eol=lf
+/tools/** text eol=lf
+/docs/** text eol=lf
+/audit/** text eol=lf
+/licenses/** text eol=lf
+# Immutable upstream bytes: preserve SHA-256, including CRLF and upstream spacing.
+/audit/original/** -text -whitespace
+/docs/legacy/** -whitespace

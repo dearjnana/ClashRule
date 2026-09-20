@@ -1,0 +1,6 @@
+# Adobe_DIRECT.list — reviewed local copy, 2026-09-20
+# Source: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/Adobe_DIRECT.list
+# Policy and priority: profiles/MyRuleClash_Plus_V1.optimized.ini
+# Cross-file deduplication is specific to this INI order.
+# Rules: 1
+DOMAIN,lcs-cops.adobe.io

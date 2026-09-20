@@ -1,0 +1,653 @@
+{
+  "downloaded_at": "2026-09-20T03:54:36.038945+00:00",
+  "entries": [
+    {
+      "line": 30,
+      "target": "🎯 全球直连",
+      "ref": "https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/Adobe_DIRECT.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 31,
+      "target": "🔞 18X",
+      "ref": "https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/pixiv.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 32,
+      "target": "🛑 广告拦截",
+      "ref": "https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/Adobe_REJECT.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 33,
+      "target": "🍃 应用净化",
+      "ref": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/BanProgramAD.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 34,
+      "target": "🔞 18X",
+      "ref": "https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/iwara.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 37,
+      "target": "📹 YouTube",
+      "ref": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/YouTube.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 38,
+      "target": "🎥 奈飞视频",
+      "ref": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Netflix.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 39,
+      "target": "🐹 迪士尼",
+      "ref": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/DisneyPlus.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 40,
+      "target": "📺 巴哈姆特",
+      "ref": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Bahamut.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 41,
+      "target": "📺 哔哩哔哩",
+      "ref": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/BilibiliHMT.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 42,
+      "target": "📺 哔哩哔哩",
+      "ref": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Bilibili.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 43,
+      "target": "🌏 国内媒体",
+      "ref": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/ChinaMedia.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 46,
+      "target": "💬 OpenAi",
+      "ref": "https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/AI.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 47,
+      "target": "👨‍💻 GitHub",
+      "ref": "https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/GitHub_Cloudflare_Docker.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 48,
+      "target": "🎐 Gemini",
+      "ref": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Gemini.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 49,
+      "target": "📢 谷歌FCM",
+      "ref": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/GoogleFCM.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 50,
+      "target": "🎯 全球直连",
+      "ref": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/GoogleCN.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 51,
+      "target": "✨ Google生态",
+      "ref": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Google.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 52,
+      "target": "✨ Google生态",
+      "ref": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/GoogleEarth.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 53,
+      "target": "🛸 IP归属地伪装",
+      "ref": "clash-classic:https://raw.githubusercontent.com/lwd-temp/anti-ip-attribution/main/generated/rule-provider.yaml",
+      "kind": "ruleset"
+    },
+    {
+      "line": 54,
+      "target": "🚀 摧城",
+      "ref": "https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/CC.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 55,
+      "target": "✨ Samsung",
+      "ref": "https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/Samsung.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 56,
+      "target": "📲 电报消息",
+      "ref": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Telegram.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 57,
+      "target": "📲 电报消息",
+      "ref": "[]IP-CIDR,185.76.151.0/24,no-resolve",
+      "kind": "ruleset"
+    },
+    {
+      "line": 58,
+      "target": "📲 电报消息",
+      "ref": "[]IP-CIDR6,2001:b28:f238::/48,no-resolve",
+      "kind": "ruleset"
+    },
+    {
+      "line": 61,
+      "target": "🎯 全球直连",
+      "ref": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/SteamCN.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 62,
+      "target": "🎮 游戏平台",
+      "ref": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Epic.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 63,
+      "target": "🎮 游戏平台",
+      "ref": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Origin.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 64,
+      "target": "🎮 游戏平台",
+      "ref": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Sony.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 65,
+      "target": "🎮 游戏平台",
+      "ref": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Steam.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 66,
+      "target": "🎮 游戏平台",
+      "ref": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Nintendo.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 69,
+      "target": "🎯 全球直连",
+      "ref": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/AccelerateDirectSites.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 70,
+      "target": "🎯 全球直连",
+      "ref": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/LocalAreaNetwork.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 71,
+      "target": "🎯 全球直连",
+      "ref": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/UnBan.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 74,
+      "target": "Ⓜ️ 微软Bing",
+      "ref": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Bing.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 75,
+      "target": "Ⓜ️ 微软云盘",
+      "ref": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/OneDrive.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 76,
+      "target": "Ⓜ️ 微软服务",
+      "ref": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Microsoft.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 77,
+      "target": "🍎 苹果服务",
+      "ref": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Apple.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 78,
+      "target": "🎶 网易音乐",
+      "ref": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/NetEaseMusic.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 81,
+      "target": "🥒 寡妇网",
+      "ref": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/ProxyGFWlist.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 82,
+      "target": "🥒 寡妇网",
+      "ref": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/ProxyLite.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 85,
+      "target": "🎯 全球直连",
+      "ref": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/ChinaDomain.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 86,
+      "target": "🎯 全球直连",
+      "ref": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/ChinaIp.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 87,
+      "target": "🎯 全球直连",
+      "ref": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/ChinaCompanyIp.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 88,
+      "target": "⏬ 下载专用",
+      "ref": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Download.list",
+      "kind": "ruleset"
+    },
+    {
+      "line": 91,
+      "target": "🎯 全球直连",
+      "ref": "[]GEOIP,CN",
+      "kind": "ruleset"
+    },
+    {
+      "line": 92,
+      "target": "🚀 节点选择",
+      "ref": "[]DST-PORT,22",
+      "kind": "ruleset"
+    },
+    {
+      "line": 93,
+      "target": "🐟 漏网之鱼",
+      "ref": "[]MATCH",
+      "kind": "ruleset"
+    },
+    {
+      "line": 203,
+      "target": "base",
+      "ref": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/GeneralClashConfig.yml",
+      "kind": "base"
+    }
+  ],
+  "downloads": [
+    {
+      "url": "https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/Adobe_DIRECT.list",
+      "path": "audit/original/includes/01-Adobe_DIRECT.list",
+      "bytes": 40,
+      "sha256": "d2be3c955f10f113e177b12bf3a52806fe37a99bcc1a9b633fa2271585806f68",
+      "etag": "\"0c532555f3f5bcfef79c81e7ef6b3d279538d16727a68859e57e262bfca9e5dc\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/pixiv.list",
+      "path": "audit/original/includes/02-pixiv.list",
+      "bytes": 1356,
+      "sha256": "c5eabd2834408cdec128be218b40ddcd1dd0dc22d40577741f4380f304d04d32",
+      "etag": "\"66d360a7aae4580cd0fd78d4b318c4e9728a58f69b61196ee1d1cfa94cbcd92f\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/Adobe_REJECT.list",
+      "path": "audit/original/includes/03-Adobe_REJECT.list",
+      "bytes": 632,
+      "sha256": "59428e8bb23939572dda2ed3eaa273d9eb9d052f3c31db047b1b56ecdb0941fe",
+      "etag": "\"e693a9774fef6df4702848211d8ca329fc844d9a300762331361c45805cf3cb4\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/BanProgramAD.list",
+      "path": "audit/original/includes/04-BanProgramAD.list",
+      "bytes": 32638,
+      "sha256": "35cefd7a4c01d2efa9b4c7928e21caa348f78a3f60b46d7d850f1e3334a5a766",
+      "etag": "\"70840d7b35c481392c609764708928d0d2bbe4144cbbb161ab736845d20c6348\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/iwara.list",
+      "path": "audit/original/includes/05-iwara.list",
+      "bytes": 52,
+      "sha256": "6eb91b97ecf2c02c741d891791e8ebecb40893867fca143f4f49555cbf69baed",
+      "etag": "\"4c5e9e739ef02cd76df4b1623422d02b3d41525d891303f6369c167265607c16\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/YouTube.list",
+      "path": "audit/original/includes/06-YouTube.list",
+      "bytes": 418,
+      "sha256": "5e9d81d4615d993fb899d11f761ff5272465bf11e52233c656c3c3e4ab9cd800",
+      "etag": "\"00fcc6dfd6ec029024ad9a421e8e6cc86c7f534927952cd6a4030eeea45608d2\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Netflix.list",
+      "path": "audit/original/includes/07-Netflix.list",
+      "bytes": 1331,
+      "sha256": "eb09e16b5aa228230e5770bfc04f2eb25261454a0b2e16f05fd3e9d2ab5202b5",
+      "etag": "\"c98b758f732f7f9ab8c81ce3135d58841657653c212512c2a7d17dc361bd12cc\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/DisneyPlus.list",
+      "path": "audit/original/includes/08-DisneyPlus.list",
+      "bytes": 710,
+      "sha256": "97200f549abb5bbb72909abc58afbffdb1f42f35cbcc35366eaf873905e007c6",
+      "etag": "\"f8cea1a0efb4d38704926538bc42c5b113d04bdebcba2ed7c70160c89a8babdf\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Bahamut.list",
+      "path": "audit/original/includes/09-Bahamut.list",
+      "bytes": 182,
+      "sha256": "5c2b875abd3cec4d11612af639163a9b9f68c5828ad42793e7f21bc50f75169c",
+      "etag": "\"0e44950a5991fb7dce0207dd5f41cb43ce8b6b32e67367095eeb631acfda4e6f\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/BilibiliHMT.list",
+      "path": "audit/original/includes/10-BilibiliHMT.list",
+      "bytes": 795,
+      "sha256": "074d94bc66219f7a229a0ddc7150e3befb088b4fbbe3312dc3f95456b2fef96c",
+      "etag": "\"f5eaefc2c65d5f8486b46a85e5411d70528507839aaa3e53008d6197898d27f1\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Bilibili.list",
+      "path": "audit/original/includes/11-Bilibili.list",
+      "bytes": 574,
+      "sha256": "3d111a3c69cb332cdec9c6283acbc9e0c17a62cc25abf43a3390e1667c6861dc",
+      "etag": "\"f1e5d467a3cb2df3457222b2b80545d4c46fdad6f1d2941705fb8380979beff9\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/ChinaMedia.list",
+      "path": "audit/original/includes/12-ChinaMedia.list",
+      "bytes": 1306,
+      "sha256": "69c437c641bbbea0001f33ecf6e8a6333a72f53d537b19ac9fd564d6927a2b21",
+      "etag": "\"a347f778cf5b9d153b850a2731ff60b39a43d16e05832b2300583683f55b97c6\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/AI.list",
+      "path": "audit/original/includes/13-AI.list",
+      "bytes": 4051,
+      "sha256": "a9fa6a3b64518ad45beafa281d8adcf3cec129e8ff2adc7db11c4634f5f953c1",
+      "etag": "\"a452c696bd6d9215c5cdb6697ba9a720694851bed788a1cf9b9a5382a002def7\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/GitHub_Cloudflare_Docker.list",
+      "path": "audit/original/includes/14-GitHub_Cloudflare_Docker.list",
+      "bytes": 5657,
+      "sha256": "7e2f98c57de037608d1c7e8dda040ab94e75db785c34419db5cd1efcf993f0ab",
+      "etag": "\"37af413b54b83b93d2c416eb798a0979250d8fd4a0063185d2c221e6e8028f99\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Gemini.list",
+      "path": "audit/original/includes/15-Gemini.list",
+      "bytes": 451,
+      "sha256": "ba743f476d3dc37538f225e2d63b126756a95a1f71ae665de293909e617da451",
+      "etag": "\"301ada2e48ba504d8e6dc71cb0f05874f403b78f21212e0d31e5ee3339d6c716\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/GoogleFCM.list",
+      "path": "audit/original/includes/16-GoogleFCM.list",
+      "bytes": 1614,
+      "sha256": "f115f84bef66a5aa931fd20f23d6914cdfdfe3d07795d65549d578b91a0f0c48",
+      "etag": "\"a2e36710421e02b0dc7611f87a8e335ecd58c61672ff842a22c166599002857d\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/GoogleCN.list",
+      "path": "audit/original/includes/17-GoogleCN.list",
+      "bytes": 1655,
+      "sha256": "f6321957b557ea4988eb2584a861fedd0e117866c4ff3892283014415898bb08",
+      "etag": "\"1ec6b4a0fb892b8a316d38e20e2f2c79fdd24324465cd1b43370e6cc14b0c621\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Google.list",
+      "path": "audit/original/includes/18-Google.list",
+      "bytes": 671,
+      "sha256": "16b21eebc7a8ab3c08dcdb0f601b5c0b7b4182f46643a6180dfb9bb6fb83bd61",
+      "etag": "\"0a66374b3acdbf3319987c6efe29d9675e22ab77334e09393c6b4373610be91b\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/GoogleEarth.list",
+      "path": "audit/original/includes/19-GoogleEarth.list",
+      "bytes": 567,
+      "sha256": "846bda6c3aace0835a2f02fb1b4ddbc54d8b48ea2e621d82c0757456e750b45c",
+      "etag": "\"d83a4cf305fec67b319067fb3dfcbca55945dc8d6f7b2d6072033a09ea1bb567\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/lwd-temp/anti-ip-attribution/main/generated/rule-provider.yaml",
+      "path": "audit/original/includes/20-rule-provider.yaml",
+      "bytes": 8354,
+      "sha256": "00321c17789625cffdd429671c5f1eca62755c524b05940807443b954464cb0b",
+      "etag": "\"582cf65fda61f3553df8e286600595f6debe7c829c04631d1b79c5e7659f1f6f\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/CC.list",
+      "path": "audit/original/includes/21-CC.list",
+      "bytes": 604,
+      "sha256": "7bcb67de0525be855fed4997a818045b9c8a34027bd64f7c13079ad8ad3c202d",
+      "etag": "\"0fa042c9ed02b31012adf1fb8f9f4d8c4480b52f9db1c7508704be1ef454fcb9\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/Samsung.list",
+      "path": "audit/original/includes/22-Samsung.list",
+      "bytes": 725,
+      "sha256": "b4ece73d51d9f7dca702da1fa1e20e0d16ad2b29f9f3bb1bde3bc07673f92132",
+      "etag": "\"fc20d6609d066edd474efec53a138069d02801ff1bfd85487ed368733b713e24\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Telegram.list",
+      "path": "audit/original/includes/23-Telegram.list",
+      "bytes": 464,
+      "sha256": "73645c86448a39526603584d777a90032c4eedf06327b07a67540d2e8dcdd548",
+      "etag": "\"471f2d830efdab6c44266b0ee33293415b5bdd34b5941b1c98c2b898137763f4\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/SteamCN.list",
+      "path": "audit/original/includes/24-SteamCN.list",
+      "bytes": 497,
+      "sha256": "bf135f78199fbadcb663a047d70eb59ec81bead3a04cfe050036e2921c2ea607",
+      "etag": "\"b94078f3f640b778302717237d032f78d08d45bafdff338d3d55e17d86c8c0bd\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Epic.list",
+      "path": "audit/original/includes/25-Epic.list",
+      "bytes": 204,
+      "sha256": "b0288addbceed03366cc793b4254168fe9e6e7c9fa54875026fb772adb5ba31d",
+      "etag": "\"818596bd34c1ae87945dc315cae978206392e7d044441a7e2be6ec670e24364e\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Origin.list",
+      "path": "audit/original/includes/26-Origin.list",
+      "bytes": 236,
+      "sha256": "f8629e362757a0437696b8df896f4fee0d24c8bca166a076a2b8fa9c179542ff",
+      "etag": "\"a8b95b57cc99fdb0ee737eade04985c53fd503e4a0ef7e71097ae28e5b2b6801\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Sony.list",
+      "path": "audit/original/includes/27-Sony.list",
+      "bytes": 194,
+      "sha256": "26cf715208bc562ba8d8e8d55c880336b5d6662b44b71418978e159148c776cb",
+      "etag": "\"1cecc963c8c9678aa9237aa046ecb3996a46725e9f136609981e01fa46c89e49\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Steam.list",
+      "path": "audit/original/includes/28-Steam.list",
+      "bytes": 607,
+      "sha256": "0abad0ae490ec9b7bf0cf880f83c5229949b14cc5df448c00a0516225a16b011",
+      "etag": "\"a62906b01432b3ae921757c3a6284485014a750fd686722737804a1cfa09a3bb\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Nintendo.list",
+      "path": "audit/original/includes/29-Nintendo.list",
+      "bytes": 450,
+      "sha256": "9c87d2656c1b1e74494f3f9acc72a0fbb4170d3915f533f78775bd2a20b7e7d4",
+      "etag": "\"5eb7748e90295854f2c94e28b90a21b0f39b1b0f1fa401d6918af756688b5f02\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/AccelerateDirectSites.list",
+      "path": "audit/original/includes/30-AccelerateDirectSites.list",
+      "bytes": 6320,
+      "sha256": "0bdca104dbc89e3eb953779c9e25a4afa9948e68990fc3be9c21b06961b0ad42",
+      "etag": "\"304c7cbb0bb220fcb3222aca9bdf09b551b85d460a5ff188088c4bf4faf2425f\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/LocalAreaNetwork.list",
+      "path": "audit/original/includes/31-LocalAreaNetwork.list",
+      "bytes": 1217,
+      "sha256": "0789504d97d8f5b14513c529c61c06f4f862c5cfd20f7cb30bbcd38357e54468",
+      "etag": "\"3720f2270795f942406c7c8c57cc7b6d4daeb91ef3d3df397cf018460ef89af8\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/UnBan.list",
+      "path": "audit/original/includes/32-UnBan.list",
+      "bytes": 1048,
+      "sha256": "016837560f1f0eeb576f81600c95b547bd82e27ba27a175a3b5010de9bd18ffa",
+      "etag": "\"384cb364dc36e798c6352a6d26ea7ca479abf93d61b157c5ede8fbab0b66d7ad\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Bing.list",
+      "path": "audit/original/includes/33-Bing.list",
+      "bytes": 180,
+      "sha256": "b847948e128a0fc882e602c576f87334f7ebd67bbf4e6e3d25e93e28a5b1aeba",
+      "etag": "\"9a5f464edfe67793e5b06580a504b0d1d73a7230e4057ffa7bce58900fb6ce62\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/OneDrive.list",
+      "path": "audit/original/includes/34-OneDrive.list",
+      "bytes": 551,
+      "sha256": "3636efc0957b985dc9ab7a0bdcad7fa2028b873f185fc52a5532b78955acc34a",
+      "etag": "\"8d8d02df63013b628f7ce1f129d59d902d66fc624909e26953aa380fb58f2554\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Microsoft.list",
+      "path": "audit/original/includes/35-Microsoft.list",
+      "bytes": 2176,
+      "sha256": "8df5719d9e188c950a86138a3799cc3ae8da7574e26264f2fb0fd7d22af91015",
+      "etag": "\"f46a6db3d87c66071b447e5d59a4e4c890a21173296745062e74763ce6875c3e\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Apple.list",
+      "path": "audit/original/includes/36-Apple.list",
+      "bytes": 896,
+      "sha256": "64a03502767dfe3dece425c3578b9bd239eeb7dddfef3fb9c3561238c62a289b",
+      "etag": "\"f3da3bf365406a02dd06e8844e6c49d6eb71adeb388ebfbfe3e84fc3de163529\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/NetEaseMusic.list",
+      "path": "audit/original/includes/37-NetEaseMusic.list",
+      "bytes": 1367,
+      "sha256": "8254e2518082103b7b3f88063562cefc3e04350b74aa411aad0ee4a66e8a9338",
+      "etag": "\"0faba83a5bece90ed4f296924f3df55e63fb76ac0671c51a4ca55263e83ec8b3\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/ProxyGFWlist.list",
+      "path": "audit/original/includes/38-ProxyGFWlist.list",
+      "bytes": 118533,
+      "sha256": "020a1bee9784679499889f2910ba58100c93526d0e579d1a8000295f9d24c39f",
+      "etag": "\"9b28280d37dc45889f842bc6e43f50de5c3c257e4cfd591f52ec75cd0caf88db\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/ProxyLite.list",
+      "path": "audit/original/includes/39-ProxyLite.list",
+      "bytes": 12615,
+      "sha256": "3792437f9641479c671ed57e4d3aa81505c5f7dc5d9087fdeabe76551ecda671",
+      "etag": "\"09cac025553f96ced820e3845bbf2e008776daca748d8cbd2c0824adaf9d990d\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/ChinaDomain.list",
+      "path": "audit/original/includes/40-ChinaDomain.list",
+      "bytes": 17251,
+      "sha256": "362edd1f605742b360eaf138f151d7eea96cc17f20ef12da73acbfb80c350e08",
+      "etag": "\"2f1249fbfab9a1b0e2d1949daa7cf865895a9f2a381cb7d1dcab3ed33f73d973\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/ChinaIp.list",
+      "path": "audit/original/includes/41-ChinaIp.list",
+      "bytes": 259593,
+      "sha256": "bb62220ae6ba9ee37421d0ba8ec734dc9d71af2cc8cd7209685f0d4939d7cca2",
+      "etag": "\"06b0fa855cd4f33759c78383361ef067047da626f25d8c02012ba9310084b6f7\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/ChinaCompanyIp.list",
+      "path": "audit/original/includes/42-ChinaCompanyIp.list",
+      "bytes": 7257,
+      "sha256": "cbc63e3daee0c0467558394ce0cfdd342f28e6c0f903bc4b35b6a5f06279d160",
+      "etag": "\"15822258f152fbf6d075bfbb65472f79c736a3868c3cd31abb1183ed1cb80dae\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Download.list",
+      "path": "audit/original/includes/43-Download.list",
+      "bytes": 928,
+      "sha256": "62b72d16b8f2bcbc80eb2c7af35dc03b31c4d82e732af6d227c2a311f04bdadc",
+      "etag": "\"f59cd9d191ba4fb97dc860b44d441bf13accac75bd5adb1ff6fd16142ab9e126\"",
+      "status": "ok"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/GeneralClashConfig.yml",
+      "path": "audit/original/includes/44-GeneralClashConfig.yml",
+      "bytes": 22269,
+      "sha256": "decadc6c5214db3a2e7ceda27e0691c51fe12d4999b72e5eab5ec42592b3a0f4",
+      "etag": "\"2e5035c5d90a4db26d9b8e227c0e376a4297a94cbc77b3cd52ab9c50941cba91\"",
+      "status": "ok"
+    }
+  ]
+}

@@ -1,0 +1,260 @@
+{
+  "rules/block/Adobe_DIRECT.list": {
+    "source": "audit/original/includes/01-Adobe_DIRECT.list",
+    "before": 1,
+    "after_local": 1,
+    "after": 1
+  },
+  "rules/media/pixiv.list": {
+    "source": "audit/original/includes/02-pixiv.list",
+    "before": 22,
+    "after_local": 22,
+    "after": 22
+  },
+  "rules/block/Adobe_REJECT.list": {
+    "source": "audit/original/includes/03-Adobe_REJECT.list",
+    "before": 6,
+    "after_local": 6,
+    "after": 6
+  },
+  "rules/block/BanProgramAD.list": {
+    "source": "audit/original/includes/04-BanProgramAD.list",
+    "before": 1016,
+    "after_local": 994,
+    "after": 992
+  },
+  "rules/media/iwara.list": {
+    "source": "audit/original/includes/05-iwara.list",
+    "before": 2,
+    "after_local": 2,
+    "after": 2
+  },
+  "rules/media/YouTube.list": {
+    "source": "audit/original/includes/06-YouTube.list",
+    "before": 14,
+    "after_local": 14,
+    "after": 7
+  },
+  "rules/media/Netflix.list": {
+    "source": "audit/original/includes/07-Netflix.list",
+    "before": 40,
+    "after_local": 40,
+    "after": 30
+  },
+  "rules/media/DisneyPlus.list": {
+    "source": "audit/original/includes/08-DisneyPlus.list",
+    "before": 20,
+    "after_local": 19,
+    "after": 19
+  },
+  "rules/media/Bahamut.list": {
+    "source": "audit/original/includes/09-Bahamut.list",
+    "before": 5,
+    "after_local": 5,
+    "after": 5
+  },
+  "rules/media/BilibiliHMT.list": {
+    "source": "audit/original/includes/10-BilibiliHMT.list",
+    "before": 21,
+    "after_local": 21,
+    "after": 21
+  },
+  "rules/media/Bilibili.list": {
+    "source": "audit/original/includes/11-Bilibili.list",
+    "before": 20,
+    "after_local": 19,
+    "after": 15
+  },
+  "rules/media/ChinaMedia.list": {
+    "source": "audit/original/includes/12-ChinaMedia.list",
+    "before": 38,
+    "after_local": 36,
+    "after": 36
+  },
+  "rules/ai/AI.list": {
+    "source": "audit/original/includes/13-AI.list",
+    "before": 73,
+    "after_local": 69,
+    "after": 57
+  },
+  "rules/services/GitHub_Cloudflare_Docker.list": {
+    "source": "audit/original/includes/14-GitHub_Cloudflare_Docker.list",
+    "before": 83,
+    "after_local": 83,
+    "after": 83
+  },
+  "rules/ai/Gemini.list": {
+    "source": "audit/original/includes/15-Gemini.list",
+    "before": 13,
+    "after_local": 24,
+    "after": 24
+  },
+  "rules/google/GoogleFCM.list": {
+    "source": "audit/original/includes/16-GoogleFCM.list",
+    "before": 44,
+    "after_local": 44,
+    "after": 44
+  },
+  "rules/google/GoogleCN.list": {
+    "source": "audit/original/includes/17-GoogleCN.list",
+    "before": 48,
+    "after_local": 48,
+    "after": 48
+  },
+  "rules/google/Google.list": {
+    "source": "audit/original/includes/18-Google.list",
+    "before": 25,
+    "after_local": 25,
+    "after": 23
+  },
+  "rules/google/GoogleEarth.list": {
+    "source": "audit/original/includes/19-GoogleEarth.list",
+    "before": 16,
+    "after_local": 16,
+    "after": 0
+  },
+  "rules/privacy/IPAttribution.list": {
+    "source": "audit/original/includes/20-rule-provider.yaml",
+    "before": 233,
+    "after_local": 213,
+    "after": 213
+  },
+  "rules/services/CC.list": {
+    "source": "audit/original/includes/21-CC.list",
+    "before": 16,
+    "after_local": 16,
+    "after": 16
+  },
+  "rules/services/Samsung.list": {
+    "source": "audit/original/includes/22-Samsung.list",
+    "before": 13,
+    "after_local": 9,
+    "after": 9
+  },
+  "rules/messaging/Telegram.list": {
+    "source": "audit/original/includes/23-Telegram.list",
+    "before": 14,
+    "after_local": 16,
+    "after": 14
+  },
+  "rules/games/SteamCN.list": {
+    "source": "audit/original/includes/24-SteamCN.list",
+    "before": 16,
+    "after_local": 16,
+    "after": 16
+  },
+  "rules/games/Epic.list": {
+    "source": "audit/original/includes/25-Epic.list",
+    "before": 6,
+    "after_local": 5,
+    "after": 5
+  },
+  "rules/games/Origin.list": {
+    "source": "audit/original/includes/26-Origin.list",
+    "before": 7,
+    "after_local": 7,
+    "after": 7
+  },
+  "rules/games/Sony.list": {
+    "source": "audit/original/includes/27-Sony.list",
+    "before": 5,
+    "after_local": 5,
+    "after": 5
+  },
+  "rules/games/Steam.list": {
+    "source": "audit/original/includes/28-Steam.list",
+    "before": 18,
+    "after_local": 18,
+    "after": 18
+  },
+  "rules/games/Nintendo.list": {
+    "source": "audit/original/includes/29-Nintendo.list",
+    "before": 15,
+    "after_local": 15,
+    "after": 15
+  },
+  "rules/network/AccelerateDirectSites.list": {
+    "source": "audit/original/includes/30-AccelerateDirectSites.list",
+    "before": 245,
+    "after_local": 245,
+    "after": 245
+  },
+  "rules/network/LocalAreaNetwork.list": {
+    "source": "audit/original/includes/31-LocalAreaNetwork.list",
+    "before": 37,
+    "after_local": 37,
+    "after": 36
+  },
+  "rules/network/UnBan.list": {
+    "source": "audit/original/includes/32-UnBan.list",
+    "before": 31,
+    "after_local": 31,
+    "after": 29
+  },
+  "rules/services/Bing.list": {
+    "source": "audit/original/includes/33-Bing.list",
+    "before": 3,
+    "after_local": 3,
+    "after": 3
+  },
+  "rules/services/OneDrive.list": {
+    "source": "audit/original/includes/34-OneDrive.list",
+    "before": 17,
+    "after_local": 17,
+    "after": 14
+  },
+  "rules/services/Microsoft.list": {
+    "source": "audit/original/includes/35-Microsoft.list",
+    "before": 79,
+    "after_local": 79,
+    "after": 79
+  },
+  "rules/services/Apple.list": {
+    "source": "audit/original/includes/36-Apple.list",
+    "before": 29,
+    "after_local": 29,
+    "after": 29
+  },
+  "rules/media/NetEaseMusic.list": {
+    "source": "audit/original/includes/37-NetEaseMusic.list",
+    "before": 37,
+    "after_local": 37,
+    "after": 33
+  },
+  "rules/network/ProxyGFWlist.list": {
+    "source": "audit/original/includes/38-ProxyGFWlist.list",
+    "before": 4319,
+    "after_local": 4315,
+    "after": 4315
+  },
+  "rules/network/ProxyLite.list": {
+    "source": "audit/original/includes/39-ProxyLite.list",
+    "before": 430,
+    "after_local": 410,
+    "after": 257
+  },
+  "rules/network/ChinaDomain.list": {
+    "source": "audit/original/includes/40-ChinaDomain.list",
+    "before": 635,
+    "after_local": 604,
+    "after": 332
+  },
+  "rules/network/ChinaIp.list": {
+    "source": "audit/original/includes/41-ChinaIp.list",
+    "before": 7456,
+    "after_local": 7456,
+    "after": 7456
+  },
+  "rules/network/ChinaCompanyIp.list": {
+    "source": "audit/original/includes/42-ChinaCompanyIp.list",
+    "before": 208,
+    "after_local": 208,
+    "after": 103
+  },
+  "rules/network/Download.list": {
+    "source": "audit/original/includes/43-Download.list",
+    "before": 22,
+    "after_local": 15,
+    "after": 15
+  }
+}
