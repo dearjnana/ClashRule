@@ -1,0 +1,7 @@
+# 用途：CC_LS 分流规则；策略由引用配置指定。
+# 来源：https://github.com/dearjnana/ClashRule
+# 维护：本文件为规则源，按同一策略去重；注释不参与匹配。
+DOMAIN-KEYWORD,fh-xy
+DOMAIN-KEYWORD,fhxy
+DOMAIN-SUFFIX,fh-xy.net
+DOMAIN-SUFFIX,fhxy-b.top

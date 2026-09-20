@@ -1,8 +1,6 @@
-# Sony.list — reviewed local copy, 2026-09-20
-# Source: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Sony.list
-# Policy and priority: profiles/MyRuleClash_Plus_V1.optimized.ini
-# Cross-file deduplication is specific to this INI order.
-# Rules: 5
+# 用途：Sony 分流规则；策略由引用配置指定。
+# 来源：https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Sony.list
+# 维护：本文件为规则源，按同一策略去重；注释不参与匹配。
 DOMAIN-SUFFIX,playstation.com
 DOMAIN-SUFFIX,playstation.net
 DOMAIN-SUFFIX,playstationnetwork.com

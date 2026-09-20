@@ -1,0 +1,20 @@
+# 部署示例；使用前确认端口、目录和访问范围。
+services:
+  filebrowser:
+    image: filebrowser/filebrowser:latest
+    container_name: filebrowser
+    restart: unless-stopped
+    ports:
+    - 8888:80
+    volumes:
+    - ./files:/srv
+    - ./config:/config
+    - ./database:/database
+    environment:
+    - FB_BASEURL=/
+    - TZ=Asia/Shanghai
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'

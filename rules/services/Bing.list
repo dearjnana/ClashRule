@@ -1,9 +1,6 @@
-# Bing.list — reviewed local copy, 2026-09-20
-# Source: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Bing.list
-# Policy and priority: profiles/MyRuleClash_Plus_V1.optimized.ini
-# Cross-file deduplication is specific to this INI order.
-# Rules: 3
-# From https://github.com/ACL4SSR/ACL4SSR/issues/121#issuecomment-1793673237
+# 用途：Bing 分流规则；策略由引用配置指定。
+# 来源：https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Bing.list
+# 维护：本文件为规则源，按同一策略去重；注释不参与匹配。
 DOMAIN-SUFFIX,bing.com
 DOMAIN-SUFFIX,copilot.cloud.microsoft
 DOMAIN-SUFFIX,copilot.microsoft.com

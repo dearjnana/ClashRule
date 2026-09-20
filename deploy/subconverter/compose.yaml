@@ -1,0 +1,96 @@
+# 公网与内网实例独立配置；只挂载设置文件、缓存和统计目录。
+services:
+  subweb:
+    image: aethersailor/subconverter-extended@sha256:ab7ebc278c8beda121442a57395467c43211ad076b5beb4264a92cb7199ef27a
+    container_name: SubConverter-Extended
+    restart: unless-stopped
+    init: true
+    environment:
+      TZ: Asia/Shanghai
+      SUBCONVERTER_SECURITY_PROFILE: public
+      SUBCONVERTER_ALLOW_PUBLIC_UPLOAD: 'false'
+    ports:
+    - 0.0.0.0:25500:25500
+    volumes:
+    - ./public/pref.toml:/base/pref.toml:ro
+    - ./public/cache:/base/cache
+    - ./public/stats:/base/stats
+    healthcheck:
+      test:
+      - CMD
+      - wget
+      - -q
+      - -T
+      - '5'
+      - -O
+      - /dev/null
+      - http://127.0.0.1:25500/healthz
+      interval: 30s
+      timeout: 6s
+      retries: 3
+      start_period: 30s
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
+    mem_limit: 768m
+    mem_reservation: 128m
+    cpus: 2.0
+    pids_limit: 128
+    ulimits:
+      nofile:
+        soft: 8192
+        hard: 8192
+    security_opt:
+    - no-new-privileges:true
+    cap_drop:
+    - ALL
+    stop_grace_period: 30s
+  subweb_BD:
+    image: aethersailor/subconverter-extended@sha256:ab7ebc278c8beda121442a57395467c43211ad076b5beb4264a92cb7199ef27a
+    container_name: SubConverter-Extended-BD
+    restart: unless-stopped
+    init: true
+    environment:
+      TZ: Asia/Shanghai
+      SUBCONVERTER_SECURITY_PROFILE: lan
+      SUBCONVERTER_ALLOW_PUBLIC_UPLOAD: 'false'
+    ports:
+    - ${LAN_BIND_IP:-127.0.0.1}:25501:25500
+    volumes:
+    - ./lan/pref.toml:/base/pref.toml:ro
+    - ./lan/cache:/base/cache
+    - ./lan/stats:/base/stats
+    healthcheck:
+      test:
+      - CMD
+      - wget
+      - -q
+      - -T
+      - '5'
+      - -O
+      - /dev/null
+      - http://127.0.0.1:25500/healthz
+      interval: 30s
+      timeout: 6s
+      retries: 3
+      start_period: 30s
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
+    mem_limit: 512m
+    mem_reservation: 128m
+    cpus: 1.5
+    pids_limit: 128
+    ulimits:
+      nofile:
+        soft: 8192
+        hard: 8192
+    security_opt:
+    - no-new-privileges:true
+    cap_drop:
+    - ALL
+    stop_grace_period: 30s

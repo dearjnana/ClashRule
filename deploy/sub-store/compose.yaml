@@ -1,0 +1,42 @@
+# 数据持久化；后台路径从私密环境文件读取，日志自动轮转。
+services:
+  sub-store:
+    image: xream/sub-store@sha256:7e63f05cbbf50f64bff14def6d5758fc4a896397c4c9168ab39e0d079513276e
+    container_name: substore
+    restart: unless-stopped
+    init: true
+    env_file:
+    - ./.env
+    ports:
+    - 3001:3001
+    volumes:
+    - ./data:/opt/app/data
+    healthcheck:
+      test:
+      - CMD
+      - node
+      - -e
+      - const h=require('http');const p=(process.env.SUB_STORE_FRONTEND_BACKEND_PATH||'').replace(/\/$/,'');h.get({host:'127.0.0.1',port:3001,path:p+'/api/utils/env',timeout:4000},r=>{let
+        b='';r.on('data',x=>b+=x);r.on('end',()=>{try{process.exit(r.statusCode===200&&JSON.parse(b).status==='success'?0:1)}catch{process.exit(1)}})}).on('error',()=>process.exit(1)).on('timeout',function(){this.destroy();process.exit(1)})
+      interval: 30s
+      timeout: 6s
+      retries: 3
+      start_period: 30s
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
+    mem_limit: 1024m
+    mem_reservation: 128m
+    cpus: 2.0
+    pids_limit: 128
+    ulimits:
+      nofile:
+        soft: 8192
+        hard: 8192
+    security_opt:
+    - no-new-privileges:true
+    cap_drop:
+    - ALL
+    stop_grace_period: 30s

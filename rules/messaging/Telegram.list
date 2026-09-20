@@ -1,12 +1,12 @@
-# Telegram.list — reviewed local copy, 2026-09-20
-# Source: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Telegram.list
-# Policy and priority: profiles/MyRuleClash_Plus_V1.optimized.ini
-# Cross-file deduplication is specific to this INI order.
-# Rules: 14
+# 用途：Telegram 分流规则；策略由引用配置指定。
+# 来源：https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Telegram.list
+# 维护：本文件为规则源，按同一策略去重；注释不参与匹配。
 DOMAIN-KEYWORD,telegram
 DOMAIN-SUFFIX,t.me
 DOMAIN-SUFFIX,tdesktop.com
 DOMAIN-SUFFIX,telegra.ph
+DOMAIN-SUFFIX,telegram.me
+DOMAIN-SUFFIX,telegram.org
 DOMAIN-SUFFIX,telesco.pe
 IP-CIDR,91.108.0.0/16,no-resolve
 IP-CIDR,95.161.64.0/20,no-resolve

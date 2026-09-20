@@ -1,8 +1,6 @@
-# AI.list — reviewed local copy, 2026-09-20
-# Source: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/AI.list
-# Policy and priority: profiles/MyRuleClash_Plus_V1.optimized.ini
-# Cross-file deduplication is specific to this INI order.
-# Rules: 57
+# 用途：AI 分流规则；策略由引用配置指定。
+# 来源：https://github.com/dearjnana/ClashRule/blob/7e3da72/AI.list
+# 维护：本文件为规则源，按同一策略去重；注释不参与匹配。
 DOMAIN-KEYWORD,truthsocial
 DOMAIN-KEYWORD,openai
 DOMAIN-KEYWORD,anthropic
@@ -16,6 +14,11 @@ DOMAIN-SUFFIX,luma.ai
 DOMAIN-SUFFIX,replicate.com
 DOMAIN-SUFFIX,oaistatic.com
 DOMAIN,browser-intake-datadoghq.com
+DOMAIN,chat.openai.com.cdn.cloudflare.net
+DOMAIN,openai-api.arkoselabs.com
+DOMAIN,openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net
+DOMAIN,openaicomproductionae4b.blob.core.windows.net
+DOMAIN,production-openaicom-storage.azureedge.net
 DOMAIN,static.cloudflareinsights.com
 DOMAIN-SUFFIX,ai.com
 DOMAIN-SUFFIX,api.statsig.com
@@ -28,14 +31,21 @@ DOMAIN-SUFFIX,host.livekit.cloud
 DOMAIN-SUFFIX,launchdarkly.com
 DOMAIN-SUFFIX,oaiusercontent.com
 DOMAIN-SUFFIX,observeit.net
+DOMAIN-SUFFIX,openai.com
+DOMAIN-SUFFIX,openaiapi-site.azureedge.net
+DOMAIN-SUFFIX,openaicom.imgix.net
 DOMAIN-SUFFIX,turn.livekit.cloud
 IP-CIDR,24.199.123.28/32,no-resolve
 IP-CIDR,64.23.132.171/32,no-resolve
+DOMAIN-SUFFIX,anthropic.com
+DOMAIN-SUFFIX,claude.ai
+DOMAIN-SUFFIX,fuclaude.com
 DOMAIN-SUFFIX,x.ai
 DOMAIN-SUFFIX,grok.com
 DOMAIN-SUFFIX,featureassets.org
 DOMAIN-SUFFIX,xai.chronosphere.io
 DOMAIN-SUFFIX,github-copilot.com
+DOMAIN-SUFFIX,openai.azure.com
 DOMAIN-SUFFIX,cognitiveservices.azure.com
 DOMAIN-SUFFIX,api.cognitive.microsoft.com
 DOMAIN-SUFFIX,watsonplatform.net

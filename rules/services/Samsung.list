@@ -1,8 +1,6 @@
-# Samsung.list — reviewed local copy, 2026-09-20
-# Source: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/Samsung.list
-# Policy and priority: profiles/MyRuleClash_Plus_V1.optimized.ini
-# Cross-file deduplication is specific to this INI order.
-# Rules: 9
+# 用途：Samsung 分流规则；策略由引用配置指定。
+# 来源：https://github.com/dearjnana/ClashRule/blob/7e3da72/Samsung.list
+# 维护：本文件为规则源，按同一策略去重；注释不参与匹配。
 DOMAIN-SUFFIX,galaxy-store.com
 DOMAIN-SUFFIX,samsungapps.com
 DOMAIN-SUFFIX,samsungknox.com

@@ -1,0 +1,5 @@
+# 自动生成，请修改 rules/services/Bing.list 后运行 tools/build.py。
+# 本文件的去重依赖主配置顺序，不宜单独移植。
+DOMAIN-SUFFIX,bing.com
+DOMAIN-SUFFIX,copilot.cloud.microsoft
+DOMAIN-SUFFIX,copilot.microsoft.com

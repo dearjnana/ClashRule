@@ -1,0 +1,9 @@
+# 用途：AdultCloud 分流规则；策略由引用配置指定。
+# 来源：https://github.com/dearjnana/ClashRule
+# 维护：本文件为规则源，按同一策略去重；注释不参与匹配。
+# 这是个人混合出口，MEGA 和 PikPak 本身不是成人内容分类。
+DOMAIN-KEYWORD,missav
+DOMAIN-SUFFIX,mega.nz
+DOMAIN-SUFFIX,mega.io
+DOMAIN-KEYWORD,pikpak
+DOMAIN-KEYWORD,dl-a10b-

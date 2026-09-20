@@ -1,0 +1,24 @@
+# 自动生成，请修改 rules/media/pixiv.list 后运行 tools/build.py。
+# 本文件的去重依赖主配置顺序，不宜单独移植。
+DOMAIN-SUFFIX,booth.pm
+DOMAIN-SUFFIX,fanbox.cc
+DOMAIN-SUFFIX,pixiv.cat
+DOMAIN-SUFFIX,pixiv.co.jp
+DOMAIN-SUFFIX,pixiv.me
+DOMAIN-SUFFIX,pixiv.net
+DOMAIN-SUFFIX,pixiv.org
+DOMAIN-SUFFIX,pximg.net
+DOMAIN-SUFFIX,ads-pixiv.net
+DOMAIN-SUFFIX,pixivsketch.net
+DOMAIN-SUFFIX,pimg.jp
+DOMAIN-SUFFIX,applovin.com
+DOMAIN-SUFFIX,applvn.com
+DOMAIN-SUFFIX,appier.net
+DOMAIN-SUFFIX,adsappier.com
+DOMAIN-SUFFIX,appiersig.com
+DOMAIN-SUFFIX,inmobi.com
+DOMAIN-SUFFIX,inmobicdn.net
+DOMAIN-SUFFIX,pangle.io
+DOMAIN-SUFFIX,inner-active.mobi
+DOMAIN-SUFFIX,rubiconproject.com
+DOMAIN-SUFFIX,unityads.unity3d.com

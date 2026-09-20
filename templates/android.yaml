@@ -1,0 +1,1677 @@
+# 手机基础模板；VPN 接管由 Android 应用负责。
+mixed-port: 7890
+allow-lan: false
+bind-address: 127.0.0.1
+ipv6: true
+mode: rule
+log-level: info
+external-controller: 127.0.0.1:9090
+profile:
+  store-selected: true
+x-clashrule-native-groups:
+- name: 🎐 Gemini
+  type: select
+  proxies:
+  - 🇺🇸 Gemini MESL美国
+  - ♻️ 美国自动
+  - ♻️ 香港自动
+  - 🚀 节点选择
+  - 🛡️ 全局智能容灾-流量
+  - 🛡️ 全局智能容灾-速度
+  - ☁️🌏 良心云-最优
+  - 💰🌏 赚钱-最优
+  - 🦖🌏 宝可梦-最优
+  - 🛍️🌏 LD士多-最优
+  - ⚡🌏 MESL-最优
+  - ☁️🇭🇰 良心云-香港
+  - 💰🇭🇰 赚钱-香港
+  - 🦖🇭🇰 宝可梦-香港
+  - 🛍️🇭🇰 LD士多-香港
+  - ⚡🇭🇰 MESL-香港
+  - ☁️🇹🇼 良心云-台湾
+  - 💰🇹🇼 赚钱-台湾
+  - 🦖🇹🇼 宝可梦-台湾
+  - 🛍️🇹🇼 LD士多-台湾
+  - ⚡🇹🇼 MESL-台湾
+  - ☁️🇯🇵 良心云-日本
+  - 💰🇯🇵 赚钱-日本
+  - 🦖🇯🇵 宝可梦-日本
+  - 🛍️🇯🇵 LD士多-日本
+  - ⚡🇯🇵 MESL-日本
+  - ☁️🇰🇷 良心云-韩国
+  - 💰🇰🇷 赚钱-韩国
+  - 🦖🇰🇷 宝可梦-韩国
+  - 🛍️🇰🇷 LD士多-韩国
+  - ⚡🇰🇷 MESL-韩国
+  - ☁️🇸🇬 良心云-新加坡
+  - 💰🇸🇬 赚钱-新加坡
+  - 🦖🇸🇬 宝可梦-新加坡
+  - 🛍️🇸🇬 LD士多-新加坡
+  - ⚡🇸🇬 MESL-新加坡
+  - ☁️🇺🇸 良心云-美国
+  - 💰🇺🇸 赚钱-美国
+  - 🦖🇺🇸 宝可梦-美国
+  - 🛍️🇺🇸 LD士多-美国
+  - ⚡🇺🇸 MESL-美国
+  - ♻️ 台湾自动
+  - ♻️ 日本自动
+  - 🇭🇰 香港节点
+  - 🇹🇼 台湾节点
+  - 🇯🇵 日本节点
+  - 🇺🇸 美国节点
+  - 🌐 全部节点
+  - DIRECT
+- name: 💬 OpenAi
+  type: select
+  proxies:
+  - ♻️ 美国自动
+  - 🚀 节点选择
+  - 🛡️ 全局智能容灾-流量
+  - 🛡️ 全局智能容灾-速度
+  - ☁️🌏 良心云-最优
+  - 💰🌏 赚钱-最优
+  - 🦖🌏 宝可梦-最优
+  - 🛍️🌏 LD士多-最优
+  - ⚡🌏 MESL-最优
+  - ☁️🇭🇰 良心云-香港
+  - 💰🇭🇰 赚钱-香港
+  - 🦖🇭🇰 宝可梦-香港
+  - 🛍️🇭🇰 LD士多-香港
+  - ⚡🇭🇰 MESL-香港
+  - ☁️🇹🇼 良心云-台湾
+  - 💰🇹🇼 赚钱-台湾
+  - 🦖🇹🇼 宝可梦-台湾
+  - 🛍️🇹🇼 LD士多-台湾
+  - ⚡🇹🇼 MESL-台湾
+  - ☁️🇯🇵 良心云-日本
+  - 💰🇯🇵 赚钱-日本
+  - 🦖🇯🇵 宝可梦-日本
+  - 🛍️🇯🇵 LD士多-日本
+  - ⚡🇯🇵 MESL-日本
+  - ☁️🇰🇷 良心云-韩国
+  - 💰🇰🇷 赚钱-韩国
+  - 🦖🇰🇷 宝可梦-韩国
+  - 🛍️🇰🇷 LD士多-韩国
+  - ⚡🇰🇷 MESL-韩国
+  - ☁️🇸🇬 良心云-新加坡
+  - 💰🇸🇬 赚钱-新加坡
+  - 🦖🇸🇬 宝可梦-新加坡
+  - 🛍️🇸🇬 LD士多-新加坡
+  - ⚡🇸🇬 MESL-新加坡
+  - ☁️🇺🇸 良心云-美国
+  - 💰🇺🇸 赚钱-美国
+  - 🦖🇺🇸 宝可梦-美国
+  - 🛍️🇺🇸 LD士多-美国
+  - ⚡🇺🇸 MESL-美国
+  - ♻️ 香港自动
+  - ♻️ 日本自动
+  - 🇭🇰 香港节点
+  - 🇯🇵 日本节点
+  - 🇺🇸 美国节点
+  - 🌐 全部节点
+  - DIRECT
+- name: 👨‍💻 GitHub
+  type: select
+  proxies:
+  - 🚀 节点选择
+  - 🛡️ 全局智能容灾-流量
+  - 🛡️ 全局智能容灾-速度
+  - ☁️🌏 良心云-最优
+  - 💰🌏 赚钱-最优
+  - 🦖🌏 宝可梦-最优
+  - 🛍️🌏 LD士多-最优
+  - ⚡🌏 MESL-最优
+  - ☁️🇭🇰 良心云-香港
+  - 💰🇭🇰 赚钱-香港
+  - 🦖🇭🇰 宝可梦-香港
+  - 🛍️🇭🇰 LD士多-香港
+  - ⚡🇭🇰 MESL-香港
+  - ☁️🇹🇼 良心云-台湾
+  - 💰🇹🇼 赚钱-台湾
+  - 🦖🇹🇼 宝可梦-台湾
+  - 🛍️🇹🇼 LD士多-台湾
+  - ⚡🇹🇼 MESL-台湾
+  - ☁️🇯🇵 良心云-日本
+  - 💰🇯🇵 赚钱-日本
+  - 🦖🇯🇵 宝可梦-日本
+  - 🛍️🇯🇵 LD士多-日本
+  - ⚡🇯🇵 MESL-日本
+  - ☁️🇰🇷 良心云-韩国
+  - 💰🇰🇷 赚钱-韩国
+  - 🦖🇰🇷 宝可梦-韩国
+  - 🛍️🇰🇷 LD士多-韩国
+  - ⚡🇰🇷 MESL-韩国
+  - ☁️🇸🇬 良心云-新加坡
+  - 💰🇸🇬 赚钱-新加坡
+  - 🦖🇸🇬 宝可梦-新加坡
+  - 🛍️🇸🇬 LD士多-新加坡
+  - ⚡🇸🇬 MESL-新加坡
+  - ☁️🇺🇸 良心云-美国
+  - 💰🇺🇸 赚钱-美国
+  - 🦖🇺🇸 宝可梦-美国
+  - 🛍️🇺🇸 LD士多-美国
+  - ⚡🇺🇸 MESL-美国
+  - ♻️ 香港自动
+  - ♻️ 日本自动
+  - ♻️ 美国自动
+  - 🇭🇰 香港节点
+  - 🇯🇵 日本节点
+  - 🇺🇸 美国节点
+  - 🌐 全部节点
+  - DIRECT
+- name: ✨ Google生态
+  type: select
+  proxies:
+  - 🚀 节点选择
+  - 🛡️ 全局智能容灾-流量
+  - 🛡️ 全局智能容灾-速度
+  - ☁️🌏 良心云-最优
+  - 💰🌏 赚钱-最优
+  - 🦖🌏 宝可梦-最优
+  - 🛍️🌏 LD士多-最优
+  - ⚡🌏 MESL-最优
+  - ☁️🇭🇰 良心云-香港
+  - 💰🇭🇰 赚钱-香港
+  - 🦖🇭🇰 宝可梦-香港
+  - 🛍️🇭🇰 LD士多-香港
+  - ⚡🇭🇰 MESL-香港
+  - ☁️🇹🇼 良心云-台湾
+  - 💰🇹🇼 赚钱-台湾
+  - 🦖🇹🇼 宝可梦-台湾
+  - 🛍️🇹🇼 LD士多-台湾
+  - ⚡🇹🇼 MESL-台湾
+  - ☁️🇯🇵 良心云-日本
+  - 💰🇯🇵 赚钱-日本
+  - 🦖🇯🇵 宝可梦-日本
+  - 🛍️🇯🇵 LD士多-日本
+  - ⚡🇯🇵 MESL-日本
+  - ☁️🇰🇷 良心云-韩国
+  - 💰🇰🇷 赚钱-韩国
+  - 🦖🇰🇷 宝可梦-韩国
+  - 🛍️🇰🇷 LD士多-韩国
+  - ⚡🇰🇷 MESL-韩国
+  - ☁️🇸🇬 良心云-新加坡
+  - 💰🇸🇬 赚钱-新加坡
+  - 🦖🇸🇬 宝可梦-新加坡
+  - 🛍️🇸🇬 LD士多-新加坡
+  - ⚡🇸🇬 MESL-新加坡
+  - ☁️🇺🇸 良心云-美国
+  - 💰🇺🇸 赚钱-美国
+  - 🦖🇺🇸 宝可梦-美国
+  - 🛍️🇺🇸 LD士多-美国
+  - ⚡🇺🇸 MESL-美国
+  - ♻️ 香港自动
+  - ♻️ 日本自动
+  - ♻️ 美国自动
+  - 🇭🇰 香港节点
+  - 🇯🇵 日本节点
+  - 🇺🇸 美国节点
+  - 🌐 全部节点
+  - DIRECT
+- name: 📹 YouTube
+  type: select
+  proxies:
+  - 🚀 节点选择
+  - 🛡️ 全局智能容灾-流量
+  - 🛡️ 全局智能容灾-速度
+  - ☁️🌏 良心云-最优
+  - 💰🌏 赚钱-最优
+  - 🦖🌏 宝可梦-最优
+  - 🛍️🌏 LD士多-最优
+  - ⚡🌏 MESL-最优
+  - ☁️🇭🇰 良心云-香港
+  - 💰🇭🇰 赚钱-香港
+  - 🦖🇭🇰 宝可梦-香港
+  - 🛍️🇭🇰 LD士多-香港
+  - ⚡🇭🇰 MESL-香港
+  - ☁️🇹🇼 良心云-台湾
+  - 💰🇹🇼 赚钱-台湾
+  - 🦖🇹🇼 宝可梦-台湾
+  - 🛍️🇹🇼 LD士多-台湾
+  - ⚡🇹🇼 MESL-台湾
+  - ☁️🇯🇵 良心云-日本
+  - 💰🇯🇵 赚钱-日本
+  - 🦖🇯🇵 宝可梦-日本
+  - 🛍️🇯🇵 LD士多-日本
+  - ⚡🇯🇵 MESL-日本
+  - ☁️🇰🇷 良心云-韩国
+  - 💰🇰🇷 赚钱-韩国
+  - 🦖🇰🇷 宝可梦-韩国
+  - 🛍️🇰🇷 LD士多-韩国
+  - ⚡🇰🇷 MESL-韩国
+  - ☁️🇸🇬 良心云-新加坡
+  - 💰🇸🇬 赚钱-新加坡
+  - 🦖🇸🇬 宝可梦-新加坡
+  - 🛍️🇸🇬 LD士多-新加坡
+  - ⚡🇸🇬 MESL-新加坡
+  - ☁️🇺🇸 良心云-美国
+  - 💰🇺🇸 赚钱-美国
+  - 🦖🇺🇸 宝可梦-美国
+  - 🛍️🇺🇸 LD士多-美国
+  - ⚡🇺🇸 MESL-美国
+  - ♻️ 香港自动
+  - ♻️ 日本自动
+  - ♻️ 美国自动
+  - 🇭🇰 香港节点
+  - 🇯🇵 日本节点
+  - 🇺🇸 美国节点
+  - 🌐 全部节点
+  - DIRECT
+- name: 📲 电报消息
+  type: select
+  proxies:
+  - 🚀 节点选择
+  - 🛡️ 全局智能容灾-流量
+  - 🛡️ 全局智能容灾-速度
+  - ☁️🌏 良心云-最优
+  - 💰🌏 赚钱-最优
+  - 🦖🌏 宝可梦-最优
+  - 🛍️🌏 LD士多-最优
+  - ⚡🌏 MESL-最优
+  - ☁️🇭🇰 良心云-香港
+  - 💰🇭🇰 赚钱-香港
+  - 🦖🇭🇰 宝可梦-香港
+  - 🛍️🇭🇰 LD士多-香港
+  - ⚡🇭🇰 MESL-香港
+  - ☁️🇹🇼 良心云-台湾
+  - 💰🇹🇼 赚钱-台湾
+  - 🦖🇹🇼 宝可梦-台湾
+  - 🛍️🇹🇼 LD士多-台湾
+  - ⚡🇹🇼 MESL-台湾
+  - ☁️🇯🇵 良心云-日本
+  - 💰🇯🇵 赚钱-日本
+  - 🦖🇯🇵 宝可梦-日本
+  - 🛍️🇯🇵 LD士多-日本
+  - ⚡🇯🇵 MESL-日本
+  - ☁️🇰🇷 良心云-韩国
+  - 💰🇰🇷 赚钱-韩国
+  - 🦖🇰🇷 宝可梦-韩国
+  - 🛍️🇰🇷 LD士多-韩国
+  - ⚡🇰🇷 MESL-韩国
+  - ☁️🇸🇬 良心云-新加坡
+  - 💰🇸🇬 赚钱-新加坡
+  - 🦖🇸🇬 宝可梦-新加坡
+  - 🛍️🇸🇬 LD士多-新加坡
+  - ⚡🇸🇬 MESL-新加坡
+  - ☁️🇺🇸 良心云-美国
+  - 💰🇺🇸 赚钱-美国
+  - 🦖🇺🇸 宝可梦-美国
+  - 🛍️🇺🇸 LD士多-美国
+  - ⚡🇺🇸 MESL-美国
+  - ♻️ 香港自动
+  - ♻️ 日本自动
+  - ♻️ 美国自动
+  - 🇭🇰 香港节点
+  - 🇯🇵 日本节点
+  - 🇺🇸 美国节点
+  - 🌐 全部节点
+  - DIRECT
+- name: 🚀 摧城
+  type: select
+  proxies:
+  - 🚀 节点选择
+  - 🛡️ 全局智能容灾-流量
+  - 🛡️ 全局智能容灾-速度
+  - ☁️🌏 良心云-最优
+  - 💰🌏 赚钱-最优
+  - 🦖🌏 宝可梦-最优
+  - 🛍️🌏 LD士多-最优
+  - ⚡🌏 MESL-最优
+  - ☁️🇭🇰 良心云-香港
+  - 💰🇭🇰 赚钱-香港
+  - 🦖🇭🇰 宝可梦-香港
+  - 🛍️🇭🇰 LD士多-香港
+  - ⚡🇭🇰 MESL-香港
+  - ☁️🇹🇼 良心云-台湾
+  - 💰🇹🇼 赚钱-台湾
+  - 🦖🇹🇼 宝可梦-台湾
+  - 🛍️🇹🇼 LD士多-台湾
+  - ⚡🇹🇼 MESL-台湾
+  - ☁️🇯🇵 良心云-日本
+  - 💰🇯🇵 赚钱-日本
+  - 🦖🇯🇵 宝可梦-日本
+  - 🛍️🇯🇵 LD士多-日本
+  - ⚡🇯🇵 MESL-日本
+  - ☁️🇰🇷 良心云-韩国
+  - 💰🇰🇷 赚钱-韩国
+  - 🦖🇰🇷 宝可梦-韩国
+  - 🛍️🇰🇷 LD士多-韩国
+  - ⚡🇰🇷 MESL-韩国
+  - ☁️🇸🇬 良心云-新加坡
+  - 💰🇸🇬 赚钱-新加坡
+  - 🦖🇸🇬 宝可梦-新加坡
+  - 🛍️🇸🇬 LD士多-新加坡
+  - ⚡🇸🇬 MESL-新加坡
+  - ☁️🇺🇸 良心云-美国
+  - 💰🇺🇸 赚钱-美国
+  - 🦖🇺🇸 宝可梦-美国
+  - 🛍️🇺🇸 LD士多-美国
+  - ⚡🇺🇸 MESL-美国
+  - ♻️ 香港自动
+  - ♻️ 日本自动
+  - ♻️ 美国自动
+  - 🇭🇰 香港节点
+  - 🇯🇵 日本节点
+  - 🇺🇸 美国节点
+  - 🌐 全部节点
+  - DIRECT
+- name: 🔞 18X
+  type: select
+  proxies:
+  - 🚀 节点选择
+  - 🛡️ 全局智能容灾-流量
+  - 🛡️ 全局智能容灾-速度
+  - ☁️🌏 良心云-最优
+  - 💰🌏 赚钱-最优
+  - 🦖🌏 宝可梦-最优
+  - 🛍️🌏 LD士多-最优
+  - ⚡🌏 MESL-最优
+  - ☁️🇭🇰 良心云-香港
+  - 💰🇭🇰 赚钱-香港
+  - 🦖🇭🇰 宝可梦-香港
+  - 🛍️🇭🇰 LD士多-香港
+  - ⚡🇭🇰 MESL-香港
+  - ☁️🇹🇼 良心云-台湾
+  - 💰🇹🇼 赚钱-台湾
+  - 🦖🇹🇼 宝可梦-台湾
+  - 🛍️🇹🇼 LD士多-台湾
+  - ⚡🇹🇼 MESL-台湾
+  - ☁️🇯🇵 良心云-日本
+  - 💰🇯🇵 赚钱-日本
+  - 🦖🇯🇵 宝可梦-日本
+  - 🛍️🇯🇵 LD士多-日本
+  - ⚡🇯🇵 MESL-日本
+  - ☁️🇰🇷 良心云-韩国
+  - 💰🇰🇷 赚钱-韩国
+  - 🦖🇰🇷 宝可梦-韩国
+  - 🛍️🇰🇷 LD士多-韩国
+  - ⚡🇰🇷 MESL-韩国
+  - ☁️🇸🇬 良心云-新加坡
+  - 💰🇸🇬 赚钱-新加坡
+  - 🦖🇸🇬 宝可梦-新加坡
+  - 🛍️🇸🇬 LD士多-新加坡
+  - ⚡🇸🇬 MESL-新加坡
+  - ☁️🇺🇸 良心云-美国
+  - 💰🇺🇸 赚钱-美国
+  - 🦖🇺🇸 宝可梦-美国
+  - 🛍️🇺🇸 LD士多-美国
+  - ⚡🇺🇸 MESL-美国
+  - ♻️ 香港自动
+  - ♻️ 日本自动
+  - ♻️ 美国自动
+  - 🇭🇰 香港节点
+  - 🇯🇵 日本节点
+  - 🇺🇸 美国节点
+  - 🌐 全部节点
+  - DIRECT
+- name: ✨ Samsung
+  type: select
+  proxies:
+  - 🚀 节点选择
+  - 🛡️ 全局智能容灾-流量
+  - 🛡️ 全局智能容灾-速度
+  - ☁️🌏 良心云-最优
+  - 💰🌏 赚钱-最优
+  - 🦖🌏 宝可梦-最优
+  - 🛍️🌏 LD士多-最优
+  - ⚡🌏 MESL-最优
+  - ☁️🇭🇰 良心云-香港
+  - 💰🇭🇰 赚钱-香港
+  - 🦖🇭🇰 宝可梦-香港
+  - 🛍️🇭🇰 LD士多-香港
+  - ⚡🇭🇰 MESL-香港
+  - ☁️🇹🇼 良心云-台湾
+  - 💰🇹🇼 赚钱-台湾
+  - 🦖🇹🇼 宝可梦-台湾
+  - 🛍️🇹🇼 LD士多-台湾
+  - ⚡🇹🇼 MESL-台湾
+  - ☁️🇯🇵 良心云-日本
+  - 💰🇯🇵 赚钱-日本
+  - 🦖🇯🇵 宝可梦-日本
+  - 🛍️🇯🇵 LD士多-日本
+  - ⚡🇯🇵 MESL-日本
+  - ☁️🇰🇷 良心云-韩国
+  - 💰🇰🇷 赚钱-韩国
+  - 🦖🇰🇷 宝可梦-韩国
+  - 🛍️🇰🇷 LD士多-韩国
+  - ⚡🇰🇷 MESL-韩国
+  - ☁️🇸🇬 良心云-新加坡
+  - 💰🇸🇬 赚钱-新加坡
+  - 🦖🇸🇬 宝可梦-新加坡
+  - 🛍️🇸🇬 LD士多-新加坡
+  - ⚡🇸🇬 MESL-新加坡
+  - ☁️🇺🇸 良心云-美国
+  - 💰🇺🇸 赚钱-美国
+  - 🦖🇺🇸 宝可梦-美国
+  - 🛍️🇺🇸 LD士多-美国
+  - ⚡🇺🇸 MESL-美国
+  - ♻️ 香港自动
+  - ♻️ 日本自动
+  - ♻️ 美国自动
+  - 🇭🇰 香港节点
+  - 🇯🇵 日本节点
+  - 🇺🇸 美国节点
+  - 🌐 全部节点
+  - DIRECT
+- name: 📢 谷歌FCM
+  type: select
+  proxies:
+  - 🚀 节点选择
+  - 🛡️ 全局智能容灾-流量
+  - 🛡️ 全局智能容灾-速度
+  - ☁️🌏 良心云-最优
+  - 💰🌏 赚钱-最优
+  - 🦖🌏 宝可梦-最优
+  - 🛍️🌏 LD士多-最优
+  - ⚡🌏 MESL-最优
+  - ☁️🇭🇰 良心云-香港
+  - 💰🇭🇰 赚钱-香港
+  - 🦖🇭🇰 宝可梦-香港
+  - 🛍️🇭🇰 LD士多-香港
+  - ⚡🇭🇰 MESL-香港
+  - ☁️🇹🇼 良心云-台湾
+  - 💰🇹🇼 赚钱-台湾
+  - 🦖🇹🇼 宝可梦-台湾
+  - 🛍️🇹🇼 LD士多-台湾
+  - ⚡🇹🇼 MESL-台湾
+  - ☁️🇯🇵 良心云-日本
+  - 💰🇯🇵 赚钱-日本
+  - 🦖🇯🇵 宝可梦-日本
+  - 🛍️🇯🇵 LD士多-日本
+  - ⚡🇯🇵 MESL-日本
+  - ☁️🇰🇷 良心云-韩国
+  - 💰🇰🇷 赚钱-韩国
+  - 🦖🇰🇷 宝可梦-韩国
+  - 🛍️🇰🇷 LD士多-韩国
+  - ⚡🇰🇷 MESL-韩国
+  - ☁️🇸🇬 良心云-新加坡
+  - 💰🇸🇬 赚钱-新加坡
+  - 🦖🇸🇬 宝可梦-新加坡
+  - 🛍️🇸🇬 LD士多-新加坡
+  - ⚡🇸🇬 MESL-新加坡
+  - ☁️🇺🇸 良心云-美国
+  - 💰🇺🇸 赚钱-美国
+  - 🦖🇺🇸 宝可梦-美国
+  - 🛍️🇺🇸 LD士多-美国
+  - ⚡🇺🇸 MESL-美国
+  - ♻️ 香港自动
+  - ♻️ 日本自动
+  - 🇭🇰 香港节点
+  - 🇯🇵 日本节点
+  - 🌐 全部节点
+  - DIRECT
+- name: 🎮 游戏平台
+  type: select
+  proxies:
+  - 🚀 节点选择
+  - 🛡️ 全局智能容灾-流量
+  - 🛡️ 全局智能容灾-速度
+  - ☁️🌏 良心云-最优
+  - 💰🌏 赚钱-最优
+  - 🦖🌏 宝可梦-最优
+  - 🛍️🌏 LD士多-最优
+  - ⚡🌏 MESL-最优
+  - ☁️🇭🇰 良心云-香港
+  - 💰🇭🇰 赚钱-香港
+  - 🦖🇭🇰 宝可梦-香港
+  - 🛍️🇭🇰 LD士多-香港
+  - ⚡🇭🇰 MESL-香港
+  - ☁️🇹🇼 良心云-台湾
+  - 💰🇹🇼 赚钱-台湾
+  - 🦖🇹🇼 宝可梦-台湾
+  - 🛍️🇹🇼 LD士多-台湾
+  - ⚡🇹🇼 MESL-台湾
+  - ☁️🇯🇵 良心云-日本
+  - 💰🇯🇵 赚钱-日本
+  - 🦖🇯🇵 宝可梦-日本
+  - 🛍️🇯🇵 LD士多-日本
+  - ⚡🇯🇵 MESL-日本
+  - ☁️🇰🇷 良心云-韩国
+  - 💰🇰🇷 赚钱-韩国
+  - 🦖🇰🇷 宝可梦-韩国
+  - 🛍️🇰🇷 LD士多-韩国
+  - ⚡🇰🇷 MESL-韩国
+  - ☁️🇸🇬 良心云-新加坡
+  - 💰🇸🇬 赚钱-新加坡
+  - 🦖🇸🇬 宝可梦-新加坡
+  - 🛍️🇸🇬 LD士多-新加坡
+  - ⚡🇸🇬 MESL-新加坡
+  - ☁️🇺🇸 良心云-美国
+  - 💰🇺🇸 赚钱-美国
+  - 🦖🇺🇸 宝可梦-美国
+  - 🛍️🇺🇸 LD士多-美国
+  - ⚡🇺🇸 MESL-美国
+  - ♻️ 香港自动
+  - ♻️ 日本自动
+  - 🇭🇰 香港节点
+  - 🇯🇵 日本节点
+  - 🌐 全部节点
+  - DIRECT
+- name: 🎥 奈飞视频
+  type: select
+  proxies:
+  - 🚀 节点选择
+  - 🛡️ 全局智能容灾-流量
+  - 🛡️ 全局智能容灾-速度
+  - ☁️🌏 良心云-最优
+  - 💰🌏 赚钱-最优
+  - 🦖🌏 宝可梦-最优
+  - 🛍️🌏 LD士多-最优
+  - ⚡🌏 MESL-最优
+  - ☁️🇭🇰 良心云-香港
+  - 💰🇭🇰 赚钱-香港
+  - 🦖🇭🇰 宝可梦-香港
+  - 🛍️🇭🇰 LD士多-香港
+  - ⚡🇭🇰 MESL-香港
+  - ☁️🇹🇼 良心云-台湾
+  - 💰🇹🇼 赚钱-台湾
+  - 🦖🇹🇼 宝可梦-台湾
+  - 🛍️🇹🇼 LD士多-台湾
+  - ⚡🇹🇼 MESL-台湾
+  - ☁️🇯🇵 良心云-日本
+  - 💰🇯🇵 赚钱-日本
+  - 🦖🇯🇵 宝可梦-日本
+  - 🛍️🇯🇵 LD士多-日本
+  - ⚡🇯🇵 MESL-日本
+  - ☁️🇰🇷 良心云-韩国
+  - 💰🇰🇷 赚钱-韩国
+  - 🦖🇰🇷 宝可梦-韩国
+  - 🛍️🇰🇷 LD士多-韩国
+  - ⚡🇰🇷 MESL-韩国
+  - ☁️🇸🇬 良心云-新加坡
+  - 💰🇸🇬 赚钱-新加坡
+  - 🦖🇸🇬 宝可梦-新加坡
+  - 🛍️🇸🇬 LD士多-新加坡
+  - ⚡🇸🇬 MESL-新加坡
+  - ☁️🇺🇸 良心云-美国
+  - 💰🇺🇸 赚钱-美国
+  - 🦖🇺🇸 宝可梦-美国
+  - 🛍️🇺🇸 LD士多-美国
+  - ⚡🇺🇸 MESL-美国
+  - ♻️ 香港自动
+  - ♻️ 日本自动
+  - ♻️ 美国自动
+  - 🇭🇰 香港节点
+  - 🇯🇵 日本节点
+  - 🇺🇸 美国节点
+  - 🌐 全部节点
+  - DIRECT
+- name: 🐹 迪士尼
+  type: select
+  proxies:
+  - 🚀 节点选择
+  - 🛡️ 全局智能容灾-流量
+  - 🛡️ 全局智能容灾-速度
+  - ☁️🌏 良心云-最优
+  - 💰🌏 赚钱-最优
+  - 🦖🌏 宝可梦-最优
+  - 🛍️🌏 LD士多-最优
+  - ⚡🌏 MESL-最优
+  - ☁️🇭🇰 良心云-香港
+  - 💰🇭🇰 赚钱-香港
+  - 🦖🇭🇰 宝可梦-香港
+  - 🛍️🇭🇰 LD士多-香港
+  - ⚡🇭🇰 MESL-香港
+  - ☁️🇹🇼 良心云-台湾
+  - 💰🇹🇼 赚钱-台湾
+  - 🦖🇹🇼 宝可梦-台湾
+  - 🛍️🇹🇼 LD士多-台湾
+  - ⚡🇹🇼 MESL-台湾
+  - ☁️🇯🇵 良心云-日本
+  - 💰🇯🇵 赚钱-日本
+  - 🦖🇯🇵 宝可梦-日本
+  - 🛍️🇯🇵 LD士多-日本
+  - ⚡🇯🇵 MESL-日本
+  - ☁️🇰🇷 良心云-韩国
+  - 💰🇰🇷 赚钱-韩国
+  - 🦖🇰🇷 宝可梦-韩国
+  - 🛍️🇰🇷 LD士多-韩国
+  - ⚡🇰🇷 MESL-韩国
+  - ☁️🇸🇬 良心云-新加坡
+  - 💰🇸🇬 赚钱-新加坡
+  - 🦖🇸🇬 宝可梦-新加坡
+  - 🛍️🇸🇬 LD士多-新加坡
+  - ⚡🇸🇬 MESL-新加坡
+  - ☁️🇺🇸 良心云-美国
+  - 💰🇺🇸 赚钱-美国
+  - 🦖🇺🇸 宝可梦-美国
+  - 🛍️🇺🇸 LD士多-美国
+  - ⚡🇺🇸 MESL-美国
+  - ♻️ 香港自动
+  - ♻️ 日本自动
+  - ♻️ 美国自动
+  - 🇭🇰 香港节点
+  - 🇯🇵 日本节点
+  - 🇺🇸 美国节点
+  - 🌐 全部节点
+  - DIRECT
+- name: 📺 巴哈姆特
+  type: select
+  proxies:
+  - ♻️ 台湾自动
+  - 🚀 节点选择
+  - 🛡️ 全局智能容灾-流量
+  - 🛡️ 全局智能容灾-速度
+  - ☁️🌏 良心云-最优
+  - 💰🌏 赚钱-最优
+  - 🦖🌏 宝可梦-最优
+  - 🛍️🌏 LD士多-最优
+  - ⚡🌏 MESL-最优
+  - ☁️🇭🇰 良心云-香港
+  - 💰🇭🇰 赚钱-香港
+  - 🦖🇭🇰 宝可梦-香港
+  - 🛍️🇭🇰 LD士多-香港
+  - ⚡🇭🇰 MESL-香港
+  - ☁️🇹🇼 良心云-台湾
+  - 💰🇹🇼 赚钱-台湾
+  - 🦖🇹🇼 宝可梦-台湾
+  - 🛍️🇹🇼 LD士多-台湾
+  - ⚡🇹🇼 MESL-台湾
+  - ☁️🇯🇵 良心云-日本
+  - 💰🇯🇵 赚钱-日本
+  - 🦖🇯🇵 宝可梦-日本
+  - 🛍️🇯🇵 LD士多-日本
+  - ⚡🇯🇵 MESL-日本
+  - ☁️🇰🇷 良心云-韩国
+  - 💰🇰🇷 赚钱-韩国
+  - 🦖🇰🇷 宝可梦-韩国
+  - 🛍️🇰🇷 LD士多-韩国
+  - ⚡🇰🇷 MESL-韩国
+  - ☁️🇸🇬 良心云-新加坡
+  - 💰🇸🇬 赚钱-新加坡
+  - 🦖🇸🇬 宝可梦-新加坡
+  - 🛍️🇸🇬 LD士多-新加坡
+  - ⚡🇸🇬 MESL-新加坡
+  - ☁️🇺🇸 良心云-美国
+  - 💰🇺🇸 赚钱-美国
+  - 🦖🇺🇸 宝可梦-美国
+  - 🛍️🇺🇸 LD士多-美国
+  - ⚡🇺🇸 MESL-美国
+  - 🇹🇼 台湾节点
+  - 🌐 全部节点
+  - DIRECT
+- name: Ⓜ️ 微软Bing
+  type: select
+  proxies:
+  - 🚀 节点选择
+  - 🛡️ 全局智能容灾-流量
+  - 🛡️ 全局智能容灾-速度
+  - ☁️🌏 良心云-最优
+  - 💰🌏 赚钱-最优
+  - 🦖🌏 宝可梦-最优
+  - 🛍️🌏 LD士多-最优
+  - ⚡🌏 MESL-最优
+  - ☁️🇭🇰 良心云-香港
+  - 💰🇭🇰 赚钱-香港
+  - 🦖🇭🇰 宝可梦-香港
+  - 🛍️🇭🇰 LD士多-香港
+  - ⚡🇭🇰 MESL-香港
+  - ☁️🇹🇼 良心云-台湾
+  - 💰🇹🇼 赚钱-台湾
+  - 🦖🇹🇼 宝可梦-台湾
+  - 🛍️🇹🇼 LD士多-台湾
+  - ⚡🇹🇼 MESL-台湾
+  - ☁️🇯🇵 良心云-日本
+  - 💰🇯🇵 赚钱-日本
+  - 🦖🇯🇵 宝可梦-日本
+  - 🛍️🇯🇵 LD士多-日本
+  - ⚡🇯🇵 MESL-日本
+  - ☁️🇰🇷 良心云-韩国
+  - 💰🇰🇷 赚钱-韩国
+  - 🦖🇰🇷 宝可梦-韩国
+  - 🛍️🇰🇷 LD士多-韩国
+  - ⚡🇰🇷 MESL-韩国
+  - ☁️🇸🇬 良心云-新加坡
+  - 💰🇸🇬 赚钱-新加坡
+  - 🦖🇸🇬 宝可梦-新加坡
+  - 🛍️🇸🇬 LD士多-新加坡
+  - ⚡🇸🇬 MESL-新加坡
+  - ☁️🇺🇸 良心云-美国
+  - 💰🇺🇸 赚钱-美国
+  - 🦖🇺🇸 宝可梦-美国
+  - 🛍️🇺🇸 LD士多-美国
+  - ⚡🇺🇸 MESL-美国
+  - ♻️ 香港自动
+  - ♻️ 日本自动
+  - ♻️ 美国自动
+  - 🇭🇰 香港节点
+  - 🇯🇵 日本节点
+  - 🇺🇸 美国节点
+  - 🌐 全部节点
+  - DIRECT
+- name: Ⓜ️ 微软云盘
+  type: select
+  proxies:
+  - DIRECT
+  - 🚀 节点选择
+  - 🛡️ 全局智能容灾-流量
+  - 🛡️ 全局智能容灾-速度
+  - ☁️🌏 良心云-最优
+  - 💰🌏 赚钱-最优
+  - 🦖🌏 宝可梦-最优
+  - 🛍️🌏 LD士多-最优
+  - ⚡🌏 MESL-最优
+  - ☁️🇭🇰 良心云-香港
+  - 💰🇭🇰 赚钱-香港
+  - 🦖🇭🇰 宝可梦-香港
+  - 🛍️🇭🇰 LD士多-香港
+  - ⚡🇭🇰 MESL-香港
+  - ☁️🇹🇼 良心云-台湾
+  - 💰🇹🇼 赚钱-台湾
+  - 🦖🇹🇼 宝可梦-台湾
+  - 🛍️🇹🇼 LD士多-台湾
+  - ⚡🇹🇼 MESL-台湾
+  - ☁️🇯🇵 良心云-日本
+  - 💰🇯🇵 赚钱-日本
+  - 🦖🇯🇵 宝可梦-日本
+  - 🛍️🇯🇵 LD士多-日本
+  - ⚡🇯🇵 MESL-日本
+  - ☁️🇰🇷 良心云-韩国
+  - 💰🇰🇷 赚钱-韩国
+  - 🦖🇰🇷 宝可梦-韩国
+  - 🛍️🇰🇷 LD士多-韩国
+  - ⚡🇰🇷 MESL-韩国
+  - ☁️🇸🇬 良心云-新加坡
+  - 💰🇸🇬 赚钱-新加坡
+  - 🦖🇸🇬 宝可梦-新加坡
+  - 🛍️🇸🇬 LD士多-新加坡
+  - ⚡🇸🇬 MESL-新加坡
+  - ☁️🇺🇸 良心云-美国
+  - 💰🇺🇸 赚钱-美国
+  - 🦖🇺🇸 宝可梦-美国
+  - 🛍️🇺🇸 LD士多-美国
+  - ⚡🇺🇸 MESL-美国
+  - ♻️ 香港自动
+  - ♻️ 日本自动
+  - 🇭🇰 香港节点
+  - 🇯🇵 日本节点
+  - 🌐 全部节点
+- name: Ⓜ️ 微软服务
+  type: select
+  proxies:
+  - DIRECT
+  - 🚀 节点选择
+  - 🛡️ 全局智能容灾-流量
+  - 🛡️ 全局智能容灾-速度
+  - ☁️🌏 良心云-最优
+  - 💰🌏 赚钱-最优
+  - 🦖🌏 宝可梦-最优
+  - 🛍️🌏 LD士多-最优
+  - ⚡🌏 MESL-最优
+  - ☁️🇭🇰 良心云-香港
+  - 💰🇭🇰 赚钱-香港
+  - 🦖🇭🇰 宝可梦-香港
+  - 🛍️🇭🇰 LD士多-香港
+  - ⚡🇭🇰 MESL-香港
+  - ☁️🇹🇼 良心云-台湾
+  - 💰🇹🇼 赚钱-台湾
+  - 🦖🇹🇼 宝可梦-台湾
+  - 🛍️🇹🇼 LD士多-台湾
+  - ⚡🇹🇼 MESL-台湾
+  - ☁️🇯🇵 良心云-日本
+  - 💰🇯🇵 赚钱-日本
+  - 🦖🇯🇵 宝可梦-日本
+  - 🛍️🇯🇵 LD士多-日本
+  - ⚡🇯🇵 MESL-日本
+  - ☁️🇰🇷 良心云-韩国
+  - 💰🇰🇷 赚钱-韩国
+  - 🦖🇰🇷 宝可梦-韩国
+  - 🛍️🇰🇷 LD士多-韩国
+  - ⚡🇰🇷 MESL-韩国
+  - ☁️🇸🇬 良心云-新加坡
+  - 💰🇸🇬 赚钱-新加坡
+  - 🦖🇸🇬 宝可梦-新加坡
+  - 🛍️🇸🇬 LD士多-新加坡
+  - ⚡🇸🇬 MESL-新加坡
+  - ☁️🇺🇸 良心云-美国
+  - 💰🇺🇸 赚钱-美国
+  - 🦖🇺🇸 宝可梦-美国
+  - 🛍️🇺🇸 LD士多-美国
+  - ⚡🇺🇸 MESL-美国
+  - ♻️ 香港自动
+  - ♻️ 日本自动
+  - 🇭🇰 香港节点
+  - 🇯🇵 日本节点
+  - 🌐 全部节点
+- name: 🍎 苹果服务
+  type: select
+  proxies:
+  - DIRECT
+  - 🚀 节点选择
+  - 🛡️ 全局智能容灾-流量
+  - 🛡️ 全局智能容灾-速度
+  - ☁️🌏 良心云-最优
+  - 💰🌏 赚钱-最优
+  - 🦖🌏 宝可梦-最优
+  - 🛍️🌏 LD士多-最优
+  - ⚡🌏 MESL-最优
+  - ☁️🇭🇰 良心云-香港
+  - 💰🇭🇰 赚钱-香港
+  - 🦖🇭🇰 宝可梦-香港
+  - 🛍️🇭🇰 LD士多-香港
+  - ⚡🇭🇰 MESL-香港
+  - ☁️🇹🇼 良心云-台湾
+  - 💰🇹🇼 赚钱-台湾
+  - 🦖🇹🇼 宝可梦-台湾
+  - 🛍️🇹🇼 LD士多-台湾
+  - ⚡🇹🇼 MESL-台湾
+  - ☁️🇯🇵 良心云-日本
+  - 💰🇯🇵 赚钱-日本
+  - 🦖🇯🇵 宝可梦-日本
+  - 🛍️🇯🇵 LD士多-日本
+  - ⚡🇯🇵 MESL-日本
+  - ☁️🇰🇷 良心云-韩国
+  - 💰🇰🇷 赚钱-韩国
+  - 🦖🇰🇷 宝可梦-韩国
+  - 🛍️🇰🇷 LD士多-韩国
+  - ⚡🇰🇷 MESL-韩国
+  - ☁️🇸🇬 良心云-新加坡
+  - 💰🇸🇬 赚钱-新加坡
+  - 🦖🇸🇬 宝可梦-新加坡
+  - 🛍️🇸🇬 LD士多-新加坡
+  - ⚡🇸🇬 MESL-新加坡
+  - ☁️🇺🇸 良心云-美国
+  - 💰🇺🇸 赚钱-美国
+  - 🦖🇺🇸 宝可梦-美国
+  - 🛍️🇺🇸 LD士多-美国
+  - ⚡🇺🇸 MESL-美国
+  - ♻️ 香港自动
+  - ♻️ 日本自动
+  - 🇭🇰 香港节点
+  - 🇯🇵 日本节点
+  - 🌐 全部节点
+- name: 🎶 网易音乐
+  type: select
+  proxies:
+  - DIRECT
+  - 🚀 节点选择
+  - ♻️ 香港自动
+  - 🇭🇰 香港节点
+  - 🌐 全部节点
+- name: 🌏 国内媒体
+  type: select
+  proxies:
+  - DIRECT
+  - 🚀 节点选择
+  - ♻️ 香港自动
+  - 🇭🇰 香港节点
+  - 🌐 全部节点
+- name: 📺 哔哩哔哩
+  type: select
+  proxies:
+  - DIRECT
+  - 🚀 节点选择
+  - ♻️ 香港自动
+  - ♻️ 台湾自动
+  - 🇭🇰 香港节点
+  - 🇹🇼 台湾节点
+  - 🌐 全部节点
+- name: 🥒 寡妇网
+  type: select
+  proxies:
+  - 🚀 节点选择
+  - 🛡️ 全局智能容灾-流量
+  - 🛡️ 全局智能容灾-速度
+  - ☁️🌏 良心云-最优
+  - 💰🌏 赚钱-最优
+  - 🦖🌏 宝可梦-最优
+  - 🛍️🌏 LD士多-最优
+  - ⚡🌏 MESL-最优
+  - ☁️🇭🇰 良心云-香港
+  - 💰🇭🇰 赚钱-香港
+  - 🦖🇭🇰 宝可梦-香港
+  - 🛍️🇭🇰 LD士多-香港
+  - ⚡🇭🇰 MESL-香港
+  - ☁️🇹🇼 良心云-台湾
+  - 💰🇹🇼 赚钱-台湾
+  - 🦖🇹🇼 宝可梦-台湾
+  - 🛍️🇹🇼 LD士多-台湾
+  - ⚡🇹🇼 MESL-台湾
+  - ☁️🇯🇵 良心云-日本
+  - 💰🇯🇵 赚钱-日本
+  - 🦖🇯🇵 宝可梦-日本
+  - 🛍️🇯🇵 LD士多-日本
+  - ⚡🇯🇵 MESL-日本
+  - ☁️🇰🇷 良心云-韩国
+  - 💰🇰🇷 赚钱-韩国
+  - 🦖🇰🇷 宝可梦-韩国
+  - 🛍️🇰🇷 LD士多-韩国
+  - ⚡🇰🇷 MESL-韩国
+  - ☁️🇸🇬 良心云-新加坡
+  - 💰🇸🇬 赚钱-新加坡
+  - 🦖🇸🇬 宝可梦-新加坡
+  - 🛍️🇸🇬 LD士多-新加坡
+  - ⚡🇸🇬 MESL-新加坡
+  - ☁️🇺🇸 良心云-美国
+  - 💰🇺🇸 赚钱-美国
+  - 🦖🇺🇸 宝可梦-美国
+  - 🛍️🇺🇸 LD士多-美国
+  - ⚡🇺🇸 MESL-美国
+  - ♻️ 香港自动
+  - ♻️ 日本自动
+  - ♻️ 美国自动
+  - 🇭🇰 香港节点
+  - 🇯🇵 日本节点
+  - 🇺🇸 美国节点
+  - 🌐 全部节点
+  - DIRECT
+- name: ⏬ 下载专用
+  type: select
+  proxies:
+  - DIRECT
+  - 🚀 节点选择
+  - 🛡️ 全局智能容灾-流量
+  - 🛡️ 全局智能容灾-速度
+  - ☁️🌏 良心云-最优
+  - 💰🌏 赚钱-最优
+  - 🦖🌏 宝可梦-最优
+  - 🛍️🌏 LD士多-最优
+  - ⚡🌏 MESL-最优
+  - ☁️🇭🇰 良心云-香港
+  - 💰🇭🇰 赚钱-香港
+  - 🦖🇭🇰 宝可梦-香港
+  - 🛍️🇭🇰 LD士多-香港
+  - ⚡🇭🇰 MESL-香港
+  - ☁️🇹🇼 良心云-台湾
+  - 💰🇹🇼 赚钱-台湾
+  - 🦖🇹🇼 宝可梦-台湾
+  - 🛍️🇹🇼 LD士多-台湾
+  - ⚡🇹🇼 MESL-台湾
+  - ☁️🇯🇵 良心云-日本
+  - 💰🇯🇵 赚钱-日本
+  - 🦖🇯🇵 宝可梦-日本
+  - 🛍️🇯🇵 LD士多-日本
+  - ⚡🇯🇵 MESL-日本
+  - ☁️🇰🇷 良心云-韩国
+  - 💰🇰🇷 赚钱-韩国
+  - 🦖🇰🇷 宝可梦-韩国
+  - 🛍️🇰🇷 LD士多-韩国
+  - ⚡🇰🇷 MESL-韩国
+  - ☁️🇸🇬 良心云-新加坡
+  - 💰🇸🇬 赚钱-新加坡
+  - 🦖🇸🇬 宝可梦-新加坡
+  - 🛍️🇸🇬 LD士多-新加坡
+  - ⚡🇸🇬 MESL-新加坡
+  - ☁️🇺🇸 良心云-美国
+  - 💰🇺🇸 赚钱-美国
+  - 🦖🇺🇸 宝可梦-美国
+  - 🛍️🇺🇸 LD士多-美国
+  - ⚡🇺🇸 MESL-美国
+  - 🇭🇰 香港节点
+  - 🇯🇵 日本节点
+  - 🌐 全部节点
+- name: 🐟 漏网之鱼
+  type: select
+  proxies:
+  - 🚀 节点选择
+  - 🛡️ 全局智能容灾-流量
+  - 🛡️ 全局智能容灾-速度
+  - ☁️🌏 良心云-最优
+  - 💰🌏 赚钱-最优
+  - 🦖🌏 宝可梦-最优
+  - 🛍️🌏 LD士多-最优
+  - ⚡🌏 MESL-最优
+  - ☁️🇭🇰 良心云-香港
+  - 💰🇭🇰 赚钱-香港
+  - 🦖🇭🇰 宝可梦-香港
+  - 🛍️🇭🇰 LD士多-香港
+  - ⚡🇭🇰 MESL-香港
+  - ☁️🇹🇼 良心云-台湾
+  - 💰🇹🇼 赚钱-台湾
+  - 🦖🇹🇼 宝可梦-台湾
+  - 🛍️🇹🇼 LD士多-台湾
+  - ⚡🇹🇼 MESL-台湾
+  - ☁️🇯🇵 良心云-日本
+  - 💰🇯🇵 赚钱-日本
+  - 🦖🇯🇵 宝可梦-日本
+  - 🛍️🇯🇵 LD士多-日本
+  - ⚡🇯🇵 MESL-日本
+  - ☁️🇰🇷 良心云-韩国
+  - 💰🇰🇷 赚钱-韩国
+  - 🦖🇰🇷 宝可梦-韩国
+  - 🛍️🇰🇷 LD士多-韩国
+  - ⚡🇰🇷 MESL-韩国
+  - ☁️🇸🇬 良心云-新加坡
+  - 💰🇸🇬 赚钱-新加坡
+  - 🦖🇸🇬 宝可梦-新加坡
+  - 🛍️🇸🇬 LD士多-新加坡
+  - ⚡🇸🇬 MESL-新加坡
+  - ☁️🇺🇸 良心云-美国
+  - 💰🇺🇸 赚钱-美国
+  - 🦖🇺🇸 宝可梦-美国
+  - 🛍️🇺🇸 LD士多-美国
+  - ⚡🇺🇸 MESL-美国
+  - ♻️ 香港自动
+  - ♻️ 日本自动
+  - ♻️ 美国自动
+  - 🇭🇰 香港节点
+  - 🇯🇵 日本节点
+  - 🇺🇸 美国节点
+  - 🌐 全部节点
+  - DIRECT
+- name: 🛡️ 全局智能容灾-流量
+  type: fallback
+  proxies:
+  - ☁️🌏 良心云-最优
+  - 💰🌏 赚钱-最优
+  - 🦖🌏 宝可梦-最优
+  - 🛍️🌏 LD士多-最优
+  - ⚡🌏 MESL-最优
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+- name: 🛡️ 全局智能容灾-速度
+  type: url-test
+  proxies:
+  - ☁️🌏 良心云-最优
+  - 💰🌏 赚钱-最优
+  - 🦖🌏 宝可梦-最优
+  - 🛍️🌏 LD士多-最优
+  - ⚡🌏 MESL-最优
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: ☁️🌏 良心云-最优
+  type: url-test
+  include-all: true
+  filter: (?i)^(?=.*良心云)(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期)).*$
+  empty-fallback: REJECT
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: 💰🌏 赚钱-最优
+  type: url-test
+  include-all: true
+  filter: (?i)^(?=.*赚钱)(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期)).*$
+  empty-fallback: REJECT
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: 🦖🌏 宝可梦-最优
+  type: url-test
+  include-all: true
+  filter: (?i)^(?=.*宝可梦)(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期)).*$
+  empty-fallback: REJECT
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: 🛍️🌏 LD士多-最优
+  type: url-test
+  include-all: true
+  filter: (?i)^(?=.*LD士多)(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期)).*$
+  empty-fallback: REJECT
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: ⚡🌏 MESL-最优
+  type: url-test
+  include-all: true
+  filter: (?i)^(?=.*MESL)(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期)).*$
+  empty-fallback: REJECT
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: 🚀 节点选择
+  type: select
+  proxies:
+  - 🛡️ 全局智能容灾-流量
+  - 🛡️ 全局智能容灾-速度
+  - ☁️🌏 良心云-最优
+  - 💰🌏 赚钱-最优
+  - 🦖🌏 宝可梦-最优
+  - 🛍️🌏 LD士多-最优
+  - ⚡🌏 MESL-最优
+  - ☁️🇭🇰 良心云-香港
+  - 💰🇭🇰 赚钱-香港
+  - 🦖🇭🇰 宝可梦-香港
+  - 🛍️🇭🇰 LD士多-香港
+  - ⚡🇭🇰 MESL-香港
+  - ☁️🇹🇼 良心云-台湾
+  - 💰🇹🇼 赚钱-台湾
+  - 🦖🇹🇼 宝可梦-台湾
+  - 🛍️🇹🇼 LD士多-台湾
+  - ⚡🇹🇼 MESL-台湾
+  - ☁️🇯🇵 良心云-日本
+  - 💰🇯🇵 赚钱-日本
+  - 🦖🇯🇵 宝可梦-日本
+  - 🛍️🇯🇵 LD士多-日本
+  - ⚡🇯🇵 MESL-日本
+  - ☁️🇰🇷 良心云-韩国
+  - 💰🇰🇷 赚钱-韩国
+  - 🦖🇰🇷 宝可梦-韩国
+  - 🛍️🇰🇷 LD士多-韩国
+  - ⚡🇰🇷 MESL-韩国
+  - ☁️🇸🇬 良心云-新加坡
+  - 💰🇸🇬 赚钱-新加坡
+  - 🦖🇸🇬 宝可梦-新加坡
+  - 🛍️🇸🇬 LD士多-新加坡
+  - ⚡🇸🇬 MESL-新加坡
+  - ☁️🇺🇸 良心云-美国
+  - 💰🇺🇸 赚钱-美国
+  - 🦖🇺🇸 宝可梦-美国
+  - 🛍️🇺🇸 LD士多-美国
+  - ⚡🇺🇸 MESL-美国
+  - ♻️ 香港自动
+  - ♻️ 台湾自动
+  - ♻️ 日本自动
+  - ♻️ 韩国自动
+  - ♻️ 新加坡自动
+  - ♻️ 美国自动
+  - 🇭🇰 香港节点
+  - 🇹🇼 台湾节点
+  - 🇯🇵 日本节点
+  - 🇰🇷 韩国节点
+  - 🇸🇬 新加坡节点
+  - 🇺🇸 美国节点
+  - 🌐 全部节点
+  - DIRECT
+- name: ♻️ 香港自动
+  type: url-test
+  proxies:
+  - ☁️🇭🇰 良心云-香港
+  - 💰🇭🇰 赚钱-香港
+  - 🦖🇭🇰 宝可梦-香港
+  - 🛍️🇭🇰 LD士多-香港
+  - ⚡🇭🇰 MESL-香港
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: ♻️ 台湾自动
+  type: url-test
+  proxies:
+  - ☁️🇹🇼 良心云-台湾
+  - 💰🇹🇼 赚钱-台湾
+  - 🦖🇹🇼 宝可梦-台湾
+  - 🛍️🇹🇼 LD士多-台湾
+  - ⚡🇹🇼 MESL-台湾
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: ♻️ 日本自动
+  type: url-test
+  proxies:
+  - ☁️🇯🇵 良心云-日本
+  - 💰🇯🇵 赚钱-日本
+  - 🦖🇯🇵 宝可梦-日本
+  - 🛍️🇯🇵 LD士多-日本
+  - ⚡🇯🇵 MESL-日本
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: ♻️ 韩国自动
+  type: url-test
+  proxies:
+  - ☁️🇰🇷 良心云-韩国
+  - 💰🇰🇷 赚钱-韩国
+  - 🦖🇰🇷 宝可梦-韩国
+  - 🛍️🇰🇷 LD士多-韩国
+  - ⚡🇰🇷 MESL-韩国
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: ♻️ 新加坡自动
+  type: url-test
+  proxies:
+  - ☁️🇸🇬 良心云-新加坡
+  - 💰🇸🇬 赚钱-新加坡
+  - 🦖🇸🇬 宝可梦-新加坡
+  - 🛍️🇸🇬 LD士多-新加坡
+  - ⚡🇸🇬 MESL-新加坡
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: ♻️ 美国自动
+  type: url-test
+  proxies:
+  - ☁️🇺🇸 良心云-美国
+  - 💰🇺🇸 赚钱-美国
+  - 🦖🇺🇸 宝可梦-美国
+  - 🛍️🇺🇸 LD士多-美国
+  - ⚡🇺🇸 MESL-美国
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: ☁️🇭🇰 良心云-香港
+  type: url-test
+  include-all: true
+  filter: (?i)^(?=.*良心云)(?=.*(?:🇭🇰|香港|hong\s*kong|\bhk\b|沪港|深港|广港))(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期)).*$
+  empty-fallback: REJECT
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: 💰🇭🇰 赚钱-香港
+  type: url-test
+  include-all: true
+  filter: (?i)^(?=.*赚钱)(?=.*(?:🇭🇰|香港|hong\s*kong|\bhk\b|沪港|深港|广港))(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期)).*$
+  empty-fallback: REJECT
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: 🦖🇭🇰 宝可梦-香港
+  type: url-test
+  include-all: true
+  filter: (?i)^(?=.*宝可梦)(?=.*(?:🇭🇰|香港|hong\s*kong|\bhk\b|沪港|深港|广港))(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期)).*$
+  empty-fallback: REJECT
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: 🛍️🇭🇰 LD士多-香港
+  type: url-test
+  include-all: true
+  filter: (?i)^(?=.*LD士多)(?=.*(?:🇭🇰|香港|hong\s*kong|\bhk\b|沪港|深港|广港))(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期)).*$
+  empty-fallback: REJECT
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: ⚡🇭🇰 MESL-香港
+  type: url-test
+  include-all: true
+  filter: (?i)^(?=.*MESL)(?=.*(?:🇭🇰|香港|hong\s*kong|\bhk\b|沪港|深港|广港))(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期)).*$
+  empty-fallback: REJECT
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: ☁️🇹🇼 良心云-台湾
+  type: url-test
+  include-all: true
+  filter: (?i)^(?=.*良心云)(?=.*(?:🇹🇼|台湾|台灣|台北|台中|新北|高雄|桃园|taiwan|taipei|kaohsiung|taichung|taoyuan|\btw\b))(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期)).*$
+  empty-fallback: REJECT
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: 💰🇹🇼 赚钱-台湾
+  type: url-test
+  include-all: true
+  filter: (?i)^(?=.*赚钱)(?=.*(?:🇹🇼|台湾|台灣|台北|台中|新北|高雄|桃园|taiwan|taipei|kaohsiung|taichung|taoyuan|\btw\b))(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期)).*$
+  empty-fallback: REJECT
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: 🦖🇹🇼 宝可梦-台湾
+  type: url-test
+  include-all: true
+  filter: (?i)^(?=.*宝可梦)(?=.*(?:🇹🇼|台湾|台灣|台北|台中|新北|高雄|桃园|taiwan|taipei|kaohsiung|taichung|taoyuan|\btw\b))(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期)).*$
+  empty-fallback: REJECT
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: 🛍️🇹🇼 LD士多-台湾
+  type: url-test
+  include-all: true
+  filter: (?i)^(?=.*LD士多)(?=.*(?:🇹🇼|台湾|台灣|台北|台中|新北|高雄|桃园|taiwan|taipei|kaohsiung|taichung|taoyuan|\btw\b))(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期)).*$
+  empty-fallback: REJECT
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: ⚡🇹🇼 MESL-台湾
+  type: url-test
+  include-all: true
+  filter: (?i)^(?=.*MESL)(?=.*(?:🇹🇼|台湾|台灣|台北|台中|新北|高雄|桃园|taiwan|taipei|kaohsiung|taichung|taoyuan|\btw\b))(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期)).*$
+  empty-fallback: REJECT
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: ☁️🇯🇵 良心云-日本
+  type: url-test
+  include-all: true
+  filter: (?i)^(?=.*良心云)(?=.*(?:🇯🇵|日本|东京|東京|大阪|埼玉|名古屋|福冈|福岡|京都|神户|japan|tokyo|osaka|nagoya|fukuoka|kyoto|kobe|\bjp\b|沪日|深日|泉日|川日))(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期)).*$
+  empty-fallback: REJECT
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: 💰🇯🇵 赚钱-日本
+  type: url-test
+  include-all: true
+  filter: (?i)^(?=.*赚钱)(?=.*(?:🇯🇵|日本|东京|東京|大阪|埼玉|名古屋|福冈|福岡|京都|神户|japan|tokyo|osaka|nagoya|fukuoka|kyoto|kobe|\bjp\b|沪日|深日|泉日|川日))(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期)).*$
+  empty-fallback: REJECT
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: 🦖🇯🇵 宝可梦-日本
+  type: url-test
+  include-all: true
+  filter: (?i)^(?=.*宝可梦)(?=.*(?:🇯🇵|日本|东京|東京|大阪|埼玉|名古屋|福冈|福岡|京都|神户|japan|tokyo|osaka|nagoya|fukuoka|kyoto|kobe|\bjp\b|沪日|深日|泉日|川日))(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期)).*$
+  empty-fallback: REJECT
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: 🛍️🇯🇵 LD士多-日本
+  type: url-test
+  include-all: true
+  filter: (?i)^(?=.*LD士多)(?=.*(?:🇯🇵|日本|东京|東京|大阪|埼玉|名古屋|福冈|福岡|京都|神户|japan|tokyo|osaka|nagoya|fukuoka|kyoto|kobe|\bjp\b|沪日|深日|泉日|川日))(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期)).*$
+  empty-fallback: REJECT
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: ⚡🇯🇵 MESL-日本
+  type: url-test
+  include-all: true
+  filter: (?i)^(?=.*MESL)(?=.*(?:🇯🇵|日本|东京|東京|大阪|埼玉|名古屋|福冈|福岡|京都|神户|japan|tokyo|osaka|nagoya|fukuoka|kyoto|kobe|\bjp\b|沪日|深日|泉日|川日))(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期)).*$
+  empty-fallback: REJECT
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: ☁️🇰🇷 良心云-韩国
+  type: url-test
+  include-all: true
+  filter: (?i)^(?=.*良心云)(?=.*(?:🇰🇷|韩国|韓國|首尔|首爾|釜山|仁川|大邱|光州|大田|蔚山|korea|seoul|busan|incheon|daegu|gwangju|daejeon|ulsan|\bkr\b))(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期)).*$
+  empty-fallback: REJECT
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: 💰🇰🇷 赚钱-韩国
+  type: url-test
+  include-all: true
+  filter: (?i)^(?=.*赚钱)(?=.*(?:🇰🇷|韩国|韓國|首尔|首爾|釜山|仁川|大邱|光州|大田|蔚山|korea|seoul|busan|incheon|daegu|gwangju|daejeon|ulsan|\bkr\b))(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期)).*$
+  empty-fallback: REJECT
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: 🦖🇰🇷 宝可梦-韩国
+  type: url-test
+  include-all: true
+  filter: (?i)^(?=.*宝可梦)(?=.*(?:🇰🇷|韩国|韓國|首尔|首爾|釜山|仁川|大邱|光州|大田|蔚山|korea|seoul|busan|incheon|daegu|gwangju|daejeon|ulsan|\bkr\b))(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期)).*$
+  empty-fallback: REJECT
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: 🛍️🇰🇷 LD士多-韩国
+  type: url-test
+  include-all: true
+  filter: (?i)^(?=.*LD士多)(?=.*(?:🇰🇷|韩国|韓國|首尔|首爾|釜山|仁川|大邱|光州|大田|蔚山|korea|seoul|busan|incheon|daegu|gwangju|daejeon|ulsan|\bkr\b))(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期)).*$
+  empty-fallback: REJECT
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: ⚡🇰🇷 MESL-韩国
+  type: url-test
+  include-all: true
+  filter: (?i)^(?=.*MESL)(?=.*(?:🇰🇷|韩国|韓國|首尔|首爾|釜山|仁川|大邱|光州|大田|蔚山|korea|seoul|busan|incheon|daegu|gwangju|daejeon|ulsan|\bkr\b))(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期)).*$
+  empty-fallback: REJECT
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: ☁️🇸🇬 良心云-新加坡
+  type: url-test
+  include-all: true
+  filter: (?i)^(?=.*良心云)(?=.*(?:🇸🇬|新加坡|狮城|獅城|singapore|\bsg\b))(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期)).*$
+  empty-fallback: REJECT
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: 💰🇸🇬 赚钱-新加坡
+  type: url-test
+  include-all: true
+  filter: (?i)^(?=.*赚钱)(?=.*(?:🇸🇬|新加坡|狮城|獅城|singapore|\bsg\b))(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期)).*$
+  empty-fallback: REJECT
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: 🦖🇸🇬 宝可梦-新加坡
+  type: url-test
+  include-all: true
+  filter: (?i)^(?=.*宝可梦)(?=.*(?:🇸🇬|新加坡|狮城|獅城|singapore|\bsg\b))(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期)).*$
+  empty-fallback: REJECT
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: 🛍️🇸🇬 LD士多-新加坡
+  type: url-test
+  include-all: true
+  filter: (?i)^(?=.*LD士多)(?=.*(?:🇸🇬|新加坡|狮城|獅城|singapore|\bsg\b))(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期)).*$
+  empty-fallback: REJECT
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: ⚡🇸🇬 MESL-新加坡
+  type: url-test
+  include-all: true
+  filter: (?i)^(?=.*MESL)(?=.*(?:🇸🇬|新加坡|狮城|獅城|singapore|\bsg\b))(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期)).*$
+  empty-fallback: REJECT
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: ☁️🇺🇸 良心云-美国
+  type: url-test
+  include-all: true
+  filter: (?i)^(?=.*良心云)(?=.*(?:🇺🇸|美国|美國|united\s*states|\busa?\b|洛杉矶|洛杉磯|纽约|紐約|西雅图|西雅圖|圣何塞|硅谷|旧金山|華盛頓|华盛顿))(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期))(?!.*(?:亚美尼亚|亞美尼亞|armenia|russia|australia|belarus|cyprus)).*$
+  empty-fallback: REJECT
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: 💰🇺🇸 赚钱-美国
+  type: url-test
+  include-all: true
+  filter: (?i)^(?=.*赚钱)(?=.*(?:🇺🇸|美国|美國|united\s*states|\busa?\b|洛杉矶|洛杉磯|纽约|紐約|西雅图|西雅圖|圣何塞|硅谷|旧金山|華盛頓|华盛顿))(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期))(?!.*(?:亚美尼亚|亞美尼亞|armenia|russia|australia|belarus|cyprus)).*$
+  empty-fallback: REJECT
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: 🦖🇺🇸 宝可梦-美国
+  type: url-test
+  include-all: true
+  filter: (?i)^(?=.*宝可梦)(?=.*(?:🇺🇸|美国|美國|united\s*states|\busa?\b|洛杉矶|洛杉磯|纽约|紐約|西雅图|西雅圖|圣何塞|硅谷|旧金山|華盛頓|华盛顿))(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期))(?!.*(?:亚美尼亚|亞美尼亞|armenia|russia|australia|belarus|cyprus)).*$
+  empty-fallback: REJECT
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: 🛍️🇺🇸 LD士多-美国
+  type: url-test
+  include-all: true
+  filter: (?i)^(?=.*LD士多)(?=.*(?:🇺🇸|美国|美國|united\s*states|\busa?\b|洛杉矶|洛杉磯|纽约|紐約|西雅图|西雅圖|圣何塞|硅谷|旧金山|華盛頓|华盛顿))(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期))(?!.*(?:亚美尼亚|亞美尼亞|armenia|russia|australia|belarus|cyprus)).*$
+  empty-fallback: REJECT
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: ⚡🇺🇸 MESL-美国
+  type: url-test
+  include-all: true
+  filter: (?i)^(?=.*MESL)(?=.*(?:🇺🇸|美国|美國|united\s*states|\busa?\b|洛杉矶|洛杉磯|纽约|紐約|西雅图|西雅圖|圣何塞|硅谷|旧金山|華盛頓|华盛顿))(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期))(?!.*(?:亚美尼亚|亞美尼亞|armenia|russia|australia|belarus|cyprus)).*$
+  empty-fallback: REJECT
+  url: https://cp.cloudflare.com/generate_204
+  interval: 900
+  timeout: 5000
+  lazy: true
+  expected-status: '204'
+  tolerance: 150
+- name: 🇭🇰 香港节点
+  type: select
+  include-all: true
+  filter: (?i)^(?=.*(?:🇭🇰|香港|hong\s*kong|\bhk\b|沪港|深港|广港))(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期)).*$
+  empty-fallback: REJECT
+- name: 🇹🇼 台湾节点
+  type: select
+  include-all: true
+  filter: (?i)^(?=.*(?:🇹🇼|台湾|台灣|台北|台中|新北|高雄|桃园|taiwan|taipei|kaohsiung|taichung|taoyuan|\btw\b))(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期)).*$
+  empty-fallback: REJECT
+- name: 🇯🇵 日本节点
+  type: select
+  include-all: true
+  filter: (?i)^(?=.*(?:🇯🇵|日本|东京|東京|大阪|埼玉|名古屋|福冈|福岡|京都|神户|japan|tokyo|osaka|nagoya|fukuoka|kyoto|kobe|\bjp\b|沪日|深日|泉日|川日))(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期)).*$
+  empty-fallback: REJECT
+- name: 🇰🇷 韩国节点
+  type: select
+  include-all: true
+  filter: (?i)^(?=.*(?:🇰🇷|韩国|韓國|首尔|首爾|釜山|仁川|大邱|光州|大田|蔚山|korea|seoul|busan|incheon|daegu|gwangju|daejeon|ulsan|\bkr\b))(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期)).*$
+  empty-fallback: REJECT
+- name: 🇸🇬 新加坡节点
+  type: select
+  include-all: true
+  filter: (?i)^(?=.*(?:🇸🇬|新加坡|狮城|獅城|singapore|\bsg\b))(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期)).*$
+  empty-fallback: REJECT
+- name: 🇺🇸 美国节点
+  type: select
+  include-all: true
+  filter: (?i)^(?=.*(?:🇺🇸|美国|美國|united\s*states|\busa?\b|洛杉矶|洛杉磯|纽约|紐約|西雅图|西雅圖|圣何塞|硅谷|旧金山|華盛頓|华盛顿))(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期))(?!.*(?:亚美尼亚|亞美尼亞|armenia|russia|australia|belarus|cyprus)).*$
+  empty-fallback: REJECT
+- name: 🌐 全部节点
+  type: select
+  include-all: true
+  filter: (?i)^(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期)).*$
+  empty-fallback: REJECT
+- name: 🛸 IP归属地伪装
+  type: select
+  proxies:
+  - DIRECT
+  - 🚀 节点选择
+- name: 🎯 全球直连
+  type: select
+  proxies:
+  - DIRECT
+  - 🚀 节点选择
+- name: 🛑 广告拦截
+  type: select
+  proxies:
+  - REJECT
+  - DIRECT
+- name: 🍃 应用净化
+  type: select
+  proxies:
+  - REJECT
+  - DIRECT
+- name: 🇺🇸 Gemini MESL美国
+  type: select
+  include-all: true
+  filter: (?i)^(?=.*MESL)(?=.*(?:🇺🇸|美国|美國|united\s*states|\busa?\b|洛杉矶|洛杉磯|纽约|紐約|西雅图|西雅圖|圣何塞|硅谷|旧金山|華盛頓|华盛顿))(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期))(?!.*(?:亚美尼亚|亞美尼亞|armenia|russia|australia|belarus|cyprus)).*$
+  empty-fallback: REJECT
+  default-selected: '[MESL]🇺🇸 美国 01'
+rule-providers:
+  ChinaIP:
+    type: http
+    behavior: ipcidr
+    format: text
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/providers/ChinaIP.txt
+    path: ./rule_provider/local-ChinaIP.txt
+    interval: 86400
+  ProxyGFW:
+    type: http
+    behavior: domain
+    format: text
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/providers/ProxyGFW.txt
+    path: ./rule_provider/local-ProxyGFW.txt
+    interval: 86400

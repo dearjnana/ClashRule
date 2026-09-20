@@ -1,10 +1,6 @@
-# rule-provider.yaml — reviewed local copy, 2026-09-20
-# Source: https://raw.githubusercontent.com/lwd-temp/anti-ip-attribution/main/generated/rule-provider.yaml
-# Policy and priority: profiles/MyRuleClash_Plus_V1.optimized.ini
-# Cross-file deduplication is specific to this INI order.
-# Rules: 213
-# https://github.com/SunsetMkt/anti-ip-attribution
-# 适用于Clash的Rule Provider功能，详见https://lancellc.gitbook.io/clash/clash-config-file/rule-provider
+# 用途：IPAttribution 分流规则；策略由引用配置指定。
+# 来源：https://raw.githubusercontent.com/lwd-temp/anti-ip-attribution/main/generated/rule-provider.yaml
+# 维护：本文件为规则源，按同一策略去重；注释不参与匹配。
 IP-CIDR,47.101.175.206/32,no-resolve
 IP-CIDR,47.100.123.169/32,no-resolve
 IP-CIDR,120.46.169.234/32,no-resolve

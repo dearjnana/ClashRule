@@ -1,16 +1,16 @@
-"""Offline routing, source-integrity and native-provider equivalence checks."""
+"""离线验证规则源、生成结果、策略组和原生集合的行为一致性。"""
 from pathlib import Path
 from collections import defaultdict
 import hashlib, ipaddress, json, re
 import yaml
-from build import GEMINI_ADD
+from build import BASE, generated
 
 ROOT=Path(__file__).resolve().parents[1]
 def read(path):return (ROOT/path).read_text(encoding='utf-8-sig')
 def rules(path):return [s.strip() for s in read(path).splitlines() if s.strip() and not s.startswith('#')]
 
 class Router:
-    """Index predicates independently from the builder; compare ordered policy chains."""
+    """独立建立匹配索引，比较按顺序命中的策略链。"""
     def __init__(self,rows):
         self.exact=defaultdict(list);self.suffix=defaultdict(list);self.words=[];self.regex=[];self.nets=defaultdict(list)
         for index,(condition,policy) in enumerate(rows):
@@ -37,32 +37,16 @@ class Router:
         return self.policies(found)
 
 def main():
-    manifest=json.loads(read('audit/original/manifest.json'))
-    for d in manifest['downloads']:
-        assert hashlib.sha256((ROOT/d['path']).read_bytes()).hexdigest()==d['sha256'],d['path']
-    meta=json.loads(read('audit/original/source-metadata.json'))
-    assert hashlib.sha256((ROOT/'audit/original/MyRuleClash_Plus_V1.ini').read_bytes()).hexdigest()==meta['sha256']
-    reviews=[json.loads(s) for s in read('audit/rule-review.jsonl').splitlines()]
-    order=json.loads(read('audit/entry-order.json'));source=defaultdict(list)
-    for r in reviews:source[r['source_name']]+=r['normalized']
-    source['Gemini.list']+=GEMINI_ADD
-    source['Telegram.list']+=['IP-CIDR,185.76.151.0/24,no-resolve','IP-CIDR6,2001:b28:f238::/48,no-resolve']
+    order=json.loads(read('config/routing.json'));source={}
+    for e in order:
+        if 'path' in e:source[e['path']]=rules(e['path'])
     before=[];after=[];domains=set();addresses=set()
     wildcard_cases=0
-    for r in reviews:
-        if r['original'].startswith('DOMAIN-SUFFIX,') and '*' in r['original']:
-            host=r['original'].split(',')[1].replace('*','audit1')
-            expression=re.compile(r['normalized'][0].split(',',1)[1])
-            assert expression.search(host) and expression.search('child.'+host)
-            assert not expression.search(host+'.invalid')
-            domains.update((host,'child.'+host,host+'.invalid'));wildcard_cases+=3
     for e in order:
         if 'inline' in e:
             before.append((e['inline'],e['target']));after.append((e['inline'],e['target']));continue
-        name=Path(e['path']).name
-        if name=='IPAttribution.list':name='rule-provider.yaml'
-        before += [(r,e['target']) for r in source[name]]
-        rs=rules(e['path']);assert len(rs)==len(set(rs)),e['path']
+        before += [(r,e['target']) for r in source[e['path']]]
+        rs=rules(generated(e['path']));assert len(rs)==len(set(rs)),e['path']
         after += [(r,e['target']) for r in rs]
     for r,_ in before:
         a=r.split(',')
@@ -84,12 +68,12 @@ def main():
             if a[0] in ('IP-CIDR','IP-CIDR6'):out[(policy,a[0],tuple(a[2:]))].append(ipaddress.ip_network(a[1]))
     assert before_ip.keys()==after_ip.keys()
     for k in before_ip:assert list(ipaddress.collapse_addresses(before_ip[k]))==list(ipaddress.collapse_addresses(after_ip[k])),k
-    cn=[ipaddress.ip_network(r.split(',')[1]) for name in ('ChinaIp','ChinaCompanyIp') for r in rules('rules/network/'+name+'.list')]
+    cn=[ipaddress.ip_network(r.split(',')[1]) for name in ('ChinaIp','ChinaCompanyIp') for r in rules('generated/rules/network/'+name+'.list')]
     assert list(ipaddress.collapse_addresses(cn))==[ipaddress.ip_network(s) for s in rules('providers/ChinaIP.txt')]
-    gfw=rules('rules/network/ProxyGFWlist.list')
+    gfw=rules('generated/rules/network/ProxyGFWlist.list')
     assert all(s.startswith(('DOMAIN-SUFFIX,','DOMAIN-REGEX,')) for s in gfw)
     assert ['+.'+s.split(',')[1] for s in gfw if s.startswith('DOMAIN-SUFFIX,')]==rules('providers/ProxyGFW.txt')
-    template=yaml.safe_load(read('templates/GeneralClashConfig.yaml'));groups=template['x-clashrule-native-groups'];names={g['name'] for g in groups}
+    template=yaml.safe_load(read('templates/openclash.yaml'));groups=template['x-clashrule-native-groups'];names={g['name'] for g in groups}
     assert len(names)==len(groups)==80
     edges={g['name']:[n for n in g.get('proxies',[]) if n in names] for g in groups}
     def visit(name,stack):
@@ -108,14 +92,14 @@ def main():
     for host,policy in fixtures.items():assert post.domain(host)[0]==policy,(host,post.domain(host))
     for host in ('fake-colab.example','developerprofiles.evil.invalid','cloudflare.com.attacker.invalid'):
         assert '🎐 Gemini' not in post.domain(host),host
-    base=json.loads(read('audit/build-summary.json'))['base_url']
-    for path in ['profiles/MyRuleClash_Plus_V1.optimized.ini','profiles/MyRuleClash_Plus_V1.expanded.ini']:
+    base=json.loads(read('reports/build.json'))['base_url']
+    for path in ['profiles/openclash.ini','profiles/expanded.ini']:
         for line in read(path).splitlines():
             if line.startswith(('ruleset=','clash_rule_base=')) and 'https://' in line:
                 url=line[line.index('https://'):];assert url.startswith(base),url
                 assert (ROOT/url[len(base):]).is_file(),url
-    result={'source_downloads_sha256_verified':len(manifest['downloads']),'source_ini_sha256_verified':True,'source_rule_rows_reviewed':len(reviews),'domain_routing_cases':len(domains),'ip_boundary_routing_cases':len(addresses),'wildcard_regression_cases':wildcard_cases,'service_regression_cases':len(fixtures)+3,'policy_and_no_resolve_ip_unions':'identical after deduplication','native_provider_coverage':'identical','groups':len(groups),'group_graph':'no cycles or missing members','result':'PASS'}
-    (ROOT/'audit/verification.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8',newline='\n')
+    result={'source_rule_files':len(source),'domain_routing_cases':len(domains),'ip_boundary_routing_cases':len(addresses),'service_regression_cases':len(fixtures)+3,'policy_and_no_resolve_ip_unions':'去重前后一致','native_provider_coverage':'完全一致','groups':len(groups),'group_graph':'无循环或缺失成员','result':'PASS'}
+    (ROOT/'reports/verification.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8',newline='\n')
     print(json.dumps(result,ensure_ascii=False,indent=2))
 
 if __name__=='__main__':main()

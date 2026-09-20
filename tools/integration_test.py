@@ -5,7 +5,7 @@ import yaml
 
 from finalize import finalize
 import argparse
-parser=argparse.ArgumentParser(description='Isolated converter/Mihomo integration test; requires local official binaries.')
+parser=argparse.ArgumentParser(description='隔离测试转换器和 Mihomo，需要提供官方二进制路径。')
 parser.add_argument('--subconverter-dir',required=True,type=Path)
 parser.add_argument('--mihomo',required=True,type=Path)
 args=parser.parse_args()
@@ -48,20 +48,20 @@ proc=subprocess.Popen([str(SUB/('subconverter.exe' if os.name=='nt' else 'subcon
 summary={}
 try:
     wait_for('http://127.0.0.1:25591/version',proc)
-    for label,config in [('main','profiles/MyRuleClash_Plus_V1.optimized.ini'),('expanded','profiles/MyRuleClash_Plus_V1.expanded.ini')]:
+    for label,config in [('main','profiles/openclash.ini'),('expanded','profiles/expanded.ini'),('android','profiles/android.ini')]:
         url='http://127.0.0.1:25591/sub?'+urllib.parse.urlencode({'target':'clash','url':LOCAL+'subscription.yaml','config':LOCAL+config,'new_name':'true','expand':'true'})
         data=fetch(url);(RUN/(label+'.yaml')).write_bytes(data)
         parsed=finalize(yaml.safe_load(data));groups=parsed.get('proxy-groups',[])
         (RUN/(label+'-ready.yaml')).write_text(yaml.safe_dump(parsed,allow_unicode=True,sort_keys=False),encoding='utf-8')
-        native=yaml.safe_load((ROOT/('templates/GeneralClashConfig'+('.expanded' if label=='expanded' else '')+'.yaml')).read_text(encoding='utf-8'))
+        native=yaml.safe_load((ROOT/('templates/'+('openclash' if label=='main' else label)+'.yaml')).read_text(encoding='utf-8'))
         byname={g['name']:g for g in groups}
         differences=[g['name'] for g in native['x-clashrule-native-groups'] if byname.get(g['name'])!=g]
         summary[label]={'groups':len(groups),'rules':len(parsed.get('rules',[])),'group_differences':differences,'providers':len(parsed.get('rule-providers',{}))}
         (RUN/'conversion-summary.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2),encoding='utf-8')
         print(label,summary[label],flush=True)
         assert not differences, differences
-        # -t parses all rules/groups without opening proxy ports. Real provider files
-        # are copied into its own cache to avoid depending on unpublished GitHub URLs.
+        # 只检查规则和策略组，不打开代理端口。
+        # 使用独立缓存中的规则集，避免依赖尚未发布的远程文件。
         corehome=RUN/label;corehome.mkdir(exist_ok=True)
         for provider in parsed.get('rule-providers',{}).values():
             path=corehome/provider['path'];path.parent.mkdir(parents=True,exist_ok=True)
@@ -72,7 +72,7 @@ try:
         print(test.stdout[-3000:],test.stderr[-1000:],flush=True)
         assert test.returncode==0
         if label=='expanded':
-            assert parsed['rules']==(ROOT/'audit/rules-expanded.txt').read_text(encoding='utf-8').splitlines()
+            assert parsed['rules']==(ROOT/'reports/rules-expanded.txt').read_text(encoding='utf-8').splitlines()
         if label=='main':
             runtime=copy.deepcopy(parsed)
             runtime.update({'mixed-port':0,'socks-port':0,'port':0,'allow-lan':False,'external-controller':'127.0.0.1:25593','dns':{'enable':False},'tun':{'enable':False}})

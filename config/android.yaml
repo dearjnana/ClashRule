@@ -1,0 +1,8 @@
+# 适配 Clash Meta for Android；不开放局域网代理，不配置 Linux 路由或透明代理端口。
+mixed-port: 7890
+allow-lan: false
+bind-address: 127.0.0.1
+external-controller: 127.0.0.1:9090
+profile:
+  store-selected: true
+# DNS 与 VPN 接管由应用设置控制，避免继承路由器的网络环境。

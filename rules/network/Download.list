@@ -1,8 +1,6 @@
-# Download.list — reviewed local copy, 2026-09-20
-# Source: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Download.list
-# Policy and priority: profiles/MyRuleClash_Plus_V1.optimized.ini
-# Cross-file deduplication is specific to this INI order.
-# Rules: 15
+# 用途：Download 分流规则；策略由引用配置指定。
+# 来源：https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Download.list
+# 维护：本文件为规则源，按同一策略去重；注释不参与匹配。
 PROCESS-NAME,aria2c.exe
 PROCESS-NAME,fdm.exe
 PROCESS-NAME,Folx.exe

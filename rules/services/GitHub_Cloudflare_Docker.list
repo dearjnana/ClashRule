@@ -1,8 +1,6 @@
-# GitHub_Cloudflare_Docker.list — reviewed local copy, 2026-09-20
-# Source: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/GitHub_Cloudflare_Docker.list
-# Policy and priority: profiles/MyRuleClash_Plus_V1.optimized.ini
-# Cross-file deduplication is specific to this INI order.
-# Rules: 83
+# 用途：GitHub_Cloudflare_Docker 分流规则；策略由引用配置指定。
+# 来源：https://github.com/dearjnana/ClashRule/blob/7e3da72/GitHub_Cloudflare_Docker.list
+# 维护：本文件为规则源，按同一策略去重；注释不参与匹配。
 DOMAIN-SUFFIX,linux.do
 DOMAIN-SUFFIX,github-copilot.com
 DOMAIN-SUFFIX,github.com

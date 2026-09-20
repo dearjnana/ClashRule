@@ -1,9 +1,6 @@
-# LocalAreaNetwork.list — reviewed local copy, 2026-09-20
-# Source: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/LocalAreaNetwork.list
-# Policy and priority: profiles/MyRuleClash_Plus_V1.optimized.ini
-# Cross-file deduplication is specific to this INI order.
-# Rules: 36
-# 参考：https://en.wikipedia.org/wiki/Reserved_IP_addresses
+# 用途：LocalAreaNetwork 分流规则；策略由引用配置指定。
+# 来源：https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/LocalAreaNetwork.list
+# 维护：本文件为规则源，按同一策略去重；注释不参与匹配。
 DOMAIN-SUFFIX,acl4.ssr
 DOMAIN-SUFFIX,ip6-localhost
 DOMAIN-SUFFIX,ip6-loopback

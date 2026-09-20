@@ -1,0 +1,186 @@
+[
+  {
+    "target": "🎐 Gemini",
+    "path": "rules/ai/Gemini.list"
+  },
+  {
+    "target": "📢 谷歌FCM",
+    "path": "rules/google/GoogleFCM.list"
+  },
+  {
+    "target": "🎯 全球直连",
+    "path": "rules/block/Adobe_DIRECT.list"
+  },
+  {
+    "target": "🔞 18X",
+    "path": "rules/media/pixiv.list"
+  },
+  {
+    "target": "🛑 广告拦截",
+    "path": "rules/block/Adobe_REJECT.list"
+  },
+  {
+    "target": "🍃 应用净化",
+    "path": "rules/block/BanProgramAD.list"
+  },
+  {
+    "target": "🔞 18X",
+    "path": "rules/media/iwara.list"
+  },
+  {
+    "target": "📹 YouTube",
+    "path": "rules/media/YouTube.list"
+  },
+  {
+    "target": "🎥 奈飞视频",
+    "path": "rules/media/Netflix.list"
+  },
+  {
+    "target": "🐹 迪士尼",
+    "path": "rules/media/DisneyPlus.list"
+  },
+  {
+    "target": "📺 巴哈姆特",
+    "path": "rules/media/Bahamut.list"
+  },
+  {
+    "target": "📺 哔哩哔哩",
+    "path": "rules/media/BilibiliHMT.list"
+  },
+  {
+    "target": "📺 哔哩哔哩",
+    "path": "rules/media/Bilibili.list"
+  },
+  {
+    "target": "🌏 国内媒体",
+    "path": "rules/media/ChinaMedia.list"
+  },
+  {
+    "target": "💬 OpenAi",
+    "path": "rules/ai/AI.list"
+  },
+  {
+    "target": "👨‍💻 GitHub",
+    "path": "rules/services/GitHub_Cloudflare_Docker.list"
+  },
+  {
+    "target": "🎯 全球直连",
+    "path": "rules/google/GoogleCN.list"
+  },
+  {
+    "target": "✨ Google生态",
+    "path": "rules/google/Google.list"
+  },
+  {
+    "target": "✨ Google生态",
+    "path": "rules/google/GoogleEarth.list"
+  },
+  {
+    "target": "🛸 IP归属地伪装",
+    "path": "rules/privacy/IPAttribution.list"
+  },
+  {
+    "target": "🚀 摧城",
+    "path": "rules/services/CC.list"
+  },
+  {
+    "target": "✨ Samsung",
+    "path": "rules/services/Samsung.list"
+  },
+  {
+    "target": "📲 电报消息",
+    "path": "rules/messaging/Telegram.list"
+  },
+  {
+    "target": "🎯 全球直连",
+    "path": "rules/games/SteamCN.list"
+  },
+  {
+    "target": "🎮 游戏平台",
+    "path": "rules/games/Epic.list"
+  },
+  {
+    "target": "🎮 游戏平台",
+    "path": "rules/games/Origin.list"
+  },
+  {
+    "target": "🎮 游戏平台",
+    "path": "rules/games/Sony.list"
+  },
+  {
+    "target": "🎮 游戏平台",
+    "path": "rules/games/Steam.list"
+  },
+  {
+    "target": "🎮 游戏平台",
+    "path": "rules/games/Nintendo.list"
+  },
+  {
+    "target": "🎯 全球直连",
+    "path": "rules/network/AccelerateDirectSites.list"
+  },
+  {
+    "target": "🎯 全球直连",
+    "path": "rules/network/LocalAreaNetwork.list"
+  },
+  {
+    "target": "🎯 全球直连",
+    "path": "rules/network/UnBan.list"
+  },
+  {
+    "target": "Ⓜ️ 微软Bing",
+    "path": "rules/services/Bing.list"
+  },
+  {
+    "target": "Ⓜ️ 微软云盘",
+    "path": "rules/services/OneDrive.list"
+  },
+  {
+    "target": "Ⓜ️ 微软服务",
+    "path": "rules/services/Microsoft.list"
+  },
+  {
+    "target": "🍎 苹果服务",
+    "path": "rules/services/Apple.list"
+  },
+  {
+    "target": "🎶 网易音乐",
+    "path": "rules/media/NetEaseMusic.list"
+  },
+  {
+    "target": "🥒 寡妇网",
+    "path": "rules/network/ProxyGFWlist.list"
+  },
+  {
+    "target": "🥒 寡妇网",
+    "path": "rules/network/ProxyLite.list"
+  },
+  {
+    "target": "🎯 全球直连",
+    "path": "rules/network/ChinaDomain.list"
+  },
+  {
+    "target": "🎯 全球直连",
+    "path": "rules/network/ChinaIp.list"
+  },
+  {
+    "target": "🎯 全球直连",
+    "path": "rules/network/ChinaCompanyIp.list"
+  },
+  {
+    "target": "⏬ 下载专用",
+    "path": "rules/network/Download.list"
+  },
+  {
+    "target": "🎯 全球直连",
+    "inline": "GEOIP,CN"
+  },
+  {
+    "target": "🚀 节点选择",
+    "inline": "DST-PORT,22"
+  },
+  {
+    "target": "🐟 漏网之鱼",
+    "inline": "MATCH"
+  }
+]

@@ -1,0 +1,17 @@
+# 部署示例；使用前确认端口、目录和访问范围。
+services:
+  ddns-go:
+    image: jeessy/ddns-go:latest
+    container_name: ddns-go
+    restart: unless-stopped
+    ports:
+    - 9876:9876
+    volumes:
+    - ./config:/root
+    environment:
+    - TZ=Asia/Shanghai
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'

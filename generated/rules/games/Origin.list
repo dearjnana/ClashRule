@@ -1,0 +1,9 @@
+# 自动生成，请修改 rules/games/Origin.list 后运行 tools/build.py。
+# 本文件的去重依赖主配置顺序，不宜单独移植。
+DOMAIN,cloudsync-prod.s3.amazonaws.com
+DOMAIN,eaasserts-a.akamaihd.net
+DOMAIN,origin-a.akamaihd.net
+DOMAIN,originasserts.akamaized.net
+DOMAIN,rtm.tnt-ea.com
+DOMAIN-SUFFIX,ea.com
+DOMAIN-SUFFIX,origin.com
