@@ -1,4 +1,4 @@
-# 自动生成，请修改 rules/network/ChinaIp.list 后运行 tools/build.py。
+# 自动生成，请修改 rules/network/ChinaIp.list 后等待自动构建。
 # 本文件的去重依赖主配置顺序，不宜单独移植。
 IP-CIDR,1.0.1.0/24,no-resolve
 IP-CIDR,1.0.2.0/23,no-resolve

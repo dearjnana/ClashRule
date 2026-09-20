@@ -1,4 +1,4 @@
-# 自动生成，请修改 rules/privacy/IPAttribution.list 后运行 tools/build.py。
+# 自动生成，请修改 rules/privacy/IPAttribution.list 后等待自动构建。
 # 本文件的去重依赖主配置顺序，不宜单独移植。
 IP-CIDR,47.101.175.206/32,no-resolve
 IP-CIDR,47.100.123.169/32,no-resolve
