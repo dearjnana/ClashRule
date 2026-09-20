@@ -1,6 +1,20 @@
 # 用途：ProxyLite 分流规则；策略由引用配置指定。
 # 来源：https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/ProxyLite.list
 # 维护：本文件为规则源，按同一策略去重；注释不参与匹配。
+# 补充来源：https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/ProxyGFWlist.list
+# 正则补充：保留转义及顺序，紧接 ProxyGFW 原生域名集合匹配。
+DOMAIN-REGEX,(?i)(^|\.)[^.]+\.pimg\.tw$
+DOMAIN-REGEX,(?i)(^|\.)[^.]+\.sf\.net$
+DOMAIN-REGEX,(?i)(^|\.)[^.]+\.tuzaijidi\.com$
+DOMAIN-REGEX,(?i)(^|\.)[^.]+\.wordpress\.com$
+DOMAIN-REGEX,(?i)(^|\.)[^.]*2\.bahamut\.com\.tw$
+DOMAIN-REGEX,(?i)(^|\.)boxun[^.]*\.azurewebsites\.net$
+DOMAIN-REGEX,(?i)(^|\.)cdn[^.]*\.i\-scmp\.com$
+DOMAIN-REGEX,(?i)(^|\.)cdn[^.]*\.search\.xxx$
+DOMAIN-REGEX,(?i)(^|\.)fbcdn[^.]*\.akamaihd\.net$
+DOMAIN-REGEX,(?i)(^|\.)hum[^.]*\.uchicago\.edu$
+DOMAIN-REGEX,(?i)(^|\.)img[^.]*\.picturedip\.com$
+DOMAIN-REGEX,(?i)(^|\.)ss[^.]*\.4sqi\.net$
 DOMAIN-SUFFIX,1password.com
 DOMAIN-SUFFIX,adguard.org
 DOMAIN-SUFFIX,bit.no.com

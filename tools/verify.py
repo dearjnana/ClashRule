@@ -71,8 +71,8 @@ def main():
     cn=[ipaddress.ip_network(r.split(',')[1]) for name in ('ChinaIp','ChinaCompanyIp') for r in rules('generated/rules/network/'+name+'.list')]
     assert list(ipaddress.collapse_addresses(cn))==[ipaddress.ip_network(s) for s in rules('providers/ChinaIP.txt')]
     gfw=rules('generated/rules/network/ProxyGFWlist.list')
-    assert all(s.startswith(('DOMAIN-SUFFIX,','DOMAIN-REGEX,')) for s in gfw)
-    assert ['+.'+s.split(',')[1] for s in gfw if s.startswith('DOMAIN-SUFFIX,')]==rules('providers/ProxyGFW.txt')
+    assert all(s.startswith('DOMAIN-SUFFIX,') for s in gfw)
+    assert ['+.'+s.split(',')[1] for s in gfw]==rules('providers/ProxyGFW.txt')
     template=yaml.safe_load(read('templates/openclash.yaml'));groups=template['x-clashrule-native-groups'];names={g['name'] for g in groups}
     assert len(names)==len(groups)==80
     edges={g['name']:[n for n in g.get('proxies',[]) if n in names] for g in groups}

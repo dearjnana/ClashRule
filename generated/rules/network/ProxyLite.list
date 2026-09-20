@@ -1,5 +1,17 @@
 # 自动生成，请修改 rules/network/ProxyLite.list 后运行 tools/build.py。
 # 本文件的去重依赖主配置顺序，不宜单独移植。
+DOMAIN-REGEX,(?i)(^|\.)[^.]+\.pimg\.tw$
+DOMAIN-REGEX,(?i)(^|\.)[^.]+\.sf\.net$
+DOMAIN-REGEX,(?i)(^|\.)[^.]+\.tuzaijidi\.com$
+DOMAIN-REGEX,(?i)(^|\.)[^.]+\.wordpress\.com$
+DOMAIN-REGEX,(?i)(^|\.)[^.]*2\.bahamut\.com\.tw$
+DOMAIN-REGEX,(?i)(^|\.)boxun[^.]*\.azurewebsites\.net$
+DOMAIN-REGEX,(?i)(^|\.)cdn[^.]*\.i\-scmp\.com$
+DOMAIN-REGEX,(?i)(^|\.)cdn[^.]*\.search\.xxx$
+DOMAIN-REGEX,(?i)(^|\.)fbcdn[^.]*\.akamaihd\.net$
+DOMAIN-REGEX,(?i)(^|\.)hum[^.]*\.uchicago\.edu$
+DOMAIN-REGEX,(?i)(^|\.)img[^.]*\.picturedip\.com$
+DOMAIN-REGEX,(?i)(^|\.)ss[^.]*\.4sqi\.net$
 DOMAIN-SUFFIX,1password.com
 DOMAIN-SUFFIX,adguard.org
 DOMAIN-SUFFIX,bit.no.com

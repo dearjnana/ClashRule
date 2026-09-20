@@ -1,11 +1,7 @@
 # 用途：ProxyGFWlist 分流规则；策略由引用配置指定。
 # 来源：https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/ProxyGFWlist.list
 # 维护：本文件为规则源，按同一策略去重；注释不参与匹配。
-DOMAIN-REGEX,(?i)(^|\.)[^.]+\.pimg\.tw$
-DOMAIN-REGEX,(?i)(^|\.)[^.]+\.sf\.net$
-DOMAIN-REGEX,(?i)(^|\.)[^.]+\.tuzaijidi\.com$
-DOMAIN-REGEX,(?i)(^|\.)[^.]+\.wordpress\.com$
-DOMAIN-REGEX,(?i)(^|\.)[^.]*2\.bahamut\.com\.tw$
+# 分类：仅维护域名后缀，正则补充统一放在 ProxyLite.list。
 DOMAIN-SUFFIX,000webhost.com
 DOMAIN-SUFFIX,0rz.tw
 DOMAIN-SUFFIX,1-apple.com.tw
@@ -491,7 +487,6 @@ DOMAIN-SUFFIX,borgenmagazine.com
 DOMAIN-SUFFIX,botanwang.com
 DOMAIN-SUFFIX,bowenpress.com
 DOMAIN-SUFFIX,boxpn.com
-DOMAIN-REGEX,(?i)(^|\.)boxun[^.]*\.azurewebsites\.net$
 DOMAIN-SUFFIX,boxun.com
 DOMAIN-SUFFIX,boxun.tv
 DOMAIN-SUFFIX,boysmaster.com
@@ -608,8 +603,6 @@ DOMAIN-SUFFIX,cdbook.org
 DOMAIN-SUFFIX,cdef.org
 DOMAIN-SUFFIX,cdig.info
 DOMAIN-SUFFIX,cdjp.org
-DOMAIN-REGEX,(?i)(^|\.)cdn[^.]*\.i\-scmp\.com$
-DOMAIN-REGEX,(?i)(^|\.)cdn[^.]*\.search\.xxx$
 DOMAIN-SUFFIX,cdn-images.mailchimp.com
 DOMAIN-SUFFIX,cdn-telegram.org
 DOMAIN-SUFFIX,cdn.arstechnica.net
@@ -1182,7 +1175,6 @@ DOMAIN-SUFFIX,fb.com
 DOMAIN-SUFFIX,fb.me
 DOMAIN-SUFFIX,fb.watch
 DOMAIN-SUFFIX,fbaddins.com
-DOMAIN-REGEX,(?i)(^|\.)fbcdn[^.]*\.akamaihd\.net$
 DOMAIN-SUFFIX,fbcdn.net
 DOMAIN-SUFFIX,fbsbx.com
 DOMAIN-SUFFIX,fbworkmail.com
@@ -1908,7 +1900,6 @@ DOMAIN-SUFFIX,huhamhire.com
 DOMAIN-SUFFIX,huhangfei.com
 DOMAIN-SUFFIX,hulu.com
 DOMAIN-SUFFIX,huluim.com
-DOMAIN-REGEX,(?i)(^|\.)hum[^.]*\.uchicago\.edu$
 DOMAIN-SUFFIX,humanparty.me
 DOMAIN-SUFFIX,humanrightspressawards.org
 DOMAIN-SUFFIX,hung-ya.com
@@ -1976,7 +1967,6 @@ DOMAIN-SUFFIX,imagevenue.com
 DOMAIN-SUFFIX,imagezilla.net
 DOMAIN-SUFFIX,imago-images.com
 DOMAIN-SUFFIX,imb.org
-DOMAIN-REGEX,(?i)(^|\.)img[^.]*\.picturedip\.com$
 DOMAIN-SUFFIX,img.dlsite.jp
 DOMAIN-SUFFIX,img.ly
 DOMAIN-SUFFIX,img.picgo.net
@@ -3317,7 +3307,6 @@ DOMAIN-SUFFIX,springboardplatform.com
 DOMAIN-SUFFIX,springwood.me
 DOMAIN-SUFFIX,sproutcore.com
 DOMAIN-SUFFIX,squirrelvpn.com
-DOMAIN-REGEX,(?i)(^|\.)ss[^.]*\.4sqi\.net$
 DOMAIN-SUFFIX,ss-link.com
 DOMAIN-SUFFIX,ssglobal.co
 DOMAIN-SUFFIX,ssl.webpack.de

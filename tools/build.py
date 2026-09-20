@@ -68,7 +68,9 @@ def build(base=BASE):
     china_paths = ['rules/network/ChinaIp.list', 'rules/network/ChinaCompanyIp.list']
     china = list(ipaddress.collapse_addresses([ipaddress.ip_network(s.split(',')[1]) for p in china_paths for s in files[p]]))
     gfw_path = 'rules/network/ProxyGFWlist.list'
-    gfw = [s.split(',')[1] for s in files[gfw_path] if s.startswith('DOMAIN-SUFFIX,')]
+    if any(not s.startswith('DOMAIN-SUFFIX,') for s in files[gfw_path]):
+        raise ValueError('ProxyGFWlist 仅维护域名后缀，正则等补充条件请放入 ProxyLite.list')
+    gfw = [s.split(',')[1] for s in files[gfw_path]]
     write('providers/ChinaIP.txt', '\n'.join(map(str, china)))
     write('providers/ProxyGFW.txt', '\n'.join('+.' + s for s in gfw))
     template = yaml.safe_load(read('config/base.yaml'))
@@ -104,8 +106,6 @@ def build(base=BASE):
             else:
                 ref = base + generated(path)
             lines.append('ruleset=' + e['target'] + ',' + ref)
-            if not expanded and path == gfw_path:
-                lines += ['ruleset=' + e['target'] + ',[]' + s for s in files[path] if not s.startswith('DOMAIN-SUFFIX,')]
         lines += ['', '; 转换器兼容策略组；转换后整理为原生组。']
         for group in groups:
             parts = [group['name'], group['type']] + ['[]' + p for p in group.get('proxies', [])]

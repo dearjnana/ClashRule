@@ -1,10 +1,5 @@
 # 自动生成，请修改 rules/network/ProxyGFWlist.list 后运行 tools/build.py。
 # 本文件的去重依赖主配置顺序，不宜单独移植。
-DOMAIN-REGEX,(?i)(^|\.)[^.]+\.pimg\.tw$
-DOMAIN-REGEX,(?i)(^|\.)[^.]+\.sf\.net$
-DOMAIN-REGEX,(?i)(^|\.)[^.]+\.tuzaijidi\.com$
-DOMAIN-REGEX,(?i)(^|\.)[^.]+\.wordpress\.com$
-DOMAIN-REGEX,(?i)(^|\.)[^.]*2\.bahamut\.com\.tw$
 DOMAIN-SUFFIX,000webhost.com
 DOMAIN-SUFFIX,0rz.tw
 DOMAIN-SUFFIX,1-apple.com.tw
@@ -490,7 +485,6 @@ DOMAIN-SUFFIX,borgenmagazine.com
 DOMAIN-SUFFIX,botanwang.com
 DOMAIN-SUFFIX,bowenpress.com
 DOMAIN-SUFFIX,boxpn.com
-DOMAIN-REGEX,(?i)(^|\.)boxun[^.]*\.azurewebsites\.net$
 DOMAIN-SUFFIX,boxun.com
 DOMAIN-SUFFIX,boxun.tv
 DOMAIN-SUFFIX,boysmaster.com
@@ -607,8 +601,6 @@ DOMAIN-SUFFIX,cdbook.org
 DOMAIN-SUFFIX,cdef.org
 DOMAIN-SUFFIX,cdig.info
 DOMAIN-SUFFIX,cdjp.org
-DOMAIN-REGEX,(?i)(^|\.)cdn[^.]*\.i\-scmp\.com$
-DOMAIN-REGEX,(?i)(^|\.)cdn[^.]*\.search\.xxx$
 DOMAIN-SUFFIX,cdn-images.mailchimp.com
 DOMAIN-SUFFIX,cdn-telegram.org
 DOMAIN-SUFFIX,cdn.arstechnica.net
@@ -1181,7 +1173,6 @@ DOMAIN-SUFFIX,fb.com
 DOMAIN-SUFFIX,fb.me
 DOMAIN-SUFFIX,fb.watch
 DOMAIN-SUFFIX,fbaddins.com
-DOMAIN-REGEX,(?i)(^|\.)fbcdn[^.]*\.akamaihd\.net$
 DOMAIN-SUFFIX,fbcdn.net
 DOMAIN-SUFFIX,fbsbx.com
 DOMAIN-SUFFIX,fbworkmail.com
@@ -1907,7 +1898,6 @@ DOMAIN-SUFFIX,huhamhire.com
 DOMAIN-SUFFIX,huhangfei.com
 DOMAIN-SUFFIX,hulu.com
 DOMAIN-SUFFIX,huluim.com
-DOMAIN-REGEX,(?i)(^|\.)hum[^.]*\.uchicago\.edu$
 DOMAIN-SUFFIX,humanparty.me
 DOMAIN-SUFFIX,humanrightspressawards.org
 DOMAIN-SUFFIX,hung-ya.com
@@ -1975,7 +1965,6 @@ DOMAIN-SUFFIX,imagevenue.com
 DOMAIN-SUFFIX,imagezilla.net
 DOMAIN-SUFFIX,imago-images.com
 DOMAIN-SUFFIX,imb.org
-DOMAIN-REGEX,(?i)(^|\.)img[^.]*\.picturedip\.com$
 DOMAIN-SUFFIX,img.dlsite.jp
 DOMAIN-SUFFIX,img.ly
 DOMAIN-SUFFIX,img.picgo.net
@@ -3316,7 +3305,6 @@ DOMAIN-SUFFIX,springboardplatform.com
 DOMAIN-SUFFIX,springwood.me
 DOMAIN-SUFFIX,sproutcore.com
 DOMAIN-SUFFIX,squirrelvpn.com
-DOMAIN-REGEX,(?i)(^|\.)ss[^.]*\.4sqi\.net$
 DOMAIN-SUFFIX,ss-link.com
 DOMAIN-SUFFIX,ssglobal.co
 DOMAIN-SUFFIX,ssl.webpack.de

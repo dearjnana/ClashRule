@@ -60,6 +60,14 @@ try:
         (RUN/'conversion-summary.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2),encoding='utf-8')
         print(label,summary[label],flush=True)
         assert not differences, differences
+        # 验证远程列表中的正则经过转换后完整保留，且仍位于原生域名集合之后。
+        expected_regex=[r+',🥒 寡妇网' for r in (ROOT/'rules/network/ProxyLite.list').read_text(encoding='utf-8').splitlines() if r.startswith('DOMAIN-REGEX,')]
+        actual_regex=[r for r in parsed['rules'] if r.startswith('DOMAIN-REGEX,') and r.endswith(',🥒 寡妇网')]
+        assert actual_regex==expected_regex,(label,'转换后正则丢失、重复或被改写')
+        if label!='expanded':
+            anchor=parsed['rules'].index('RULE-SET,ProxyGFW,🥒 寡妇网')+1
+            assert parsed['rules'][anchor:anchor+len(expected_regex)]==expected_regex
+        summary[label]['proxy_regex_rules']=len(actual_regex)
         # 只检查规则和策略组，不打开代理端口。
         # 使用独立缓存中的规则集，避免依赖尚未发布的远程文件。
         corehome=RUN/label;corehome.mkdir(exist_ok=True)
