@@ -1,0 +1,7 @@
+# iwara.list — reviewed local copy, 2026-09-20
+# Source: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/iwara.list
+# Policy and priority: profiles/MyRuleClash_Plus_V1.optimized.ini
+# Cross-file deduplication is specific to this INI order.
+# Rules: 2
+DOMAIN-SUFFIX,iwara.tv
+DOMAIN-KEYWORD,iwara

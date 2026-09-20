@@ -1,85 +1,47 @@
-# 介绍
-我的Clash规则
+# ClashRule
 
-规则参考项目
+Clash / OpenClash 规则仓库。2026-09-20 新增完整的 V1 本地规则包：下载并审查原 INI 的全部 44 个依赖文件，按用途分类、去重、修正规则并补充 Gemini 网页与手机 App 分流。
 
-https://github.com/ACL4SSR/ACL4SSR/tree/master
+**旧入口保留，新版位于 `profiles/`。新版必须在订阅转换后执行 `tools/finalize.py`，不能直接把转换中间文件当作最终配置。** 使用、自动更新限制和回退方法见 [使用与回退](docs/使用与回退.md)。
 
-https://github.com/217heidai/adblockfilters
+## 从这里开始
 
-<details>
-  
-<summary>肥羊订阅转换</summary>
+- [优化版 INI](profiles/MyRuleClash_Plus_V1.optimized.ini)：主规则 2,842 条，另有两份原生规则集合。
+- [完全展开版 INI](profiles/MyRuleClash_Plus_V1.expanded.ini)：14,702 条，便于对照与排查规则集合下载问题。
+- [优化报告](docs/优化报告.md)：具体修改、每份文件前后数量和验证范围。
+- [Gemini 专用规则](rules/ai/Gemini.list)：24 条；由自己的仓库维护，不再依赖修改 ACL4SSR 上游文件。
+- [来源与维护](docs/来源与维护.md)、[仓库文件索引](docs/仓库文件索引.md)。
 
-1. 以[肥羊订阅转换](https://suburl.v1.mk/)为例，进入转换界面，填入订阅链接（机场或自建）
-2. 点击`自定义配置`![转换页面](imgs/image.png)
-3. 同时打开仓库里面的“.ini”结尾的文件[地址](https://raw.githubusercontent.com/deardeer7/custom-clash-rules/main/custom%20rules.ini)，复制**文件内容**，粘贴到`远程配置文件上传`页面中![远程配置文件上传](imgs/image-1.png)
-4. 检查`远程配置`，如图则成功![检查远程配置](imgs/image-2.png)
-5. 根据自己偏好配置其他选项，生成订阅链接（ps: 网站支持自定义短链接后缀）
-6. 导入clash即可~~
-7. 
-</details>
+## 目录
 
-<details>
+| 目录 | 内容 |
+|---|---|
+| `profiles/` | 新版转换入口 |
+| `rules/ai/` | Gemini、其他 AI |
+| `rules/block/` | Adobe 拦截 / 放行例外、应用广告 |
+| `rules/google/` | Google、FCM、国内 Google CDN、Google Earth |
+| `rules/media/` | 视频、音乐及其他媒体 |
+| `rules/games/` | 游戏平台、Steam 国内下载 |
+| `rules/services/` | GitHub / Cloudflare / Docker、Microsoft、Apple、Samsung 等 |
+| `rules/messaging/` | Telegram |
+| `rules/privacy/` | IP 归属地分流 |
+| `rules/network/` | 国内、代理、局域网、下载等通用规则 |
+| `providers/` | 优化版使用的原生 domain / ipcidr 集合 |
+| `templates/` | 基础模板和需要恢复的 Mihomo 原生分组字段 |
+| `tools/` | 可复现构建、离线验证、转换结果整理 |
+| `audit/` | 原始快照、下载清单、15,398 条逐条审计及验证结果 |
+| `docs/`、`licenses/` | 使用说明、分类索引、来源和许可证 |
 
-<summary>OpenClash使用方法</summary>
-  
-配合 subconverter_规则转换
+根目录原有规则、旧 INI、`ChinaConn/`、`clash-party/`、`docker-compose/` 等保留旧路径，避免仓库整理导致已有订阅和外部引用失效。原 README 保存在 [历史说明](docs/legacy/README-before-20260920.md)。
 
-项目地址
+## 本地复核
 
-https://github.com/tindy2013/subconverter
-
-docker-compose.yml
-```ini
-version: "3"
-services:
-  subconverter:
-    image: tindy2013/subconverter:latest
-    container_name: subconverter
-    restart: unless-stopped
-    ports:
-      - "25500:25500" # Web界面和API服务的默认端口
-    volumes:
-      - ./config:/app/config # 挂载本地配置文件到容器中
-    environment:
-      - TZ=Asia/Shanghai # 设置时区为上海
+```powershell
+python -m pip install -r tools/requirements.txt
+python tools/build.py
+python tools/verify.py
 ```
-docker-compose.yml 文件拖入目录后,SSH工具 cd 到 docker-compose.yml 所在目录.
-执行
 
-docker-compose up -d
+构建完全使用审计快照，不访问运行中的路由器。验证覆盖域名优先级、IP 边界、同策略去重、CIDR / no-resolve 覆盖、规则集合等价、Gemini / FCM / Adobe 等回归场景，以及分组引用和循环。
 
-容器运行后
-
-http://localhost:25500/sub
-
-就是本地规则转换服务地址
-
-`如图设置`![转换页面](imgs/image-3.png)
-  
-</details>
-
-<details>
-
-<summary>commit SHA</summary>
-使用 commit SHA 版本 URL
-
-`https://raw.githubusercontent.com/dearjnana/ClashRule/{commit SHA}/Samsung.list`
-
-使用 GitHub API 获取最新 commit SHA
-
-`https://api.github.com/repos/{用户名}/{仓库名}/commits/{分支名}`
-
-https://api.github.com/repos/dearjnana/ClashRule/commits/main
-
-返回 JSON 响应，其中 "sha" 字段就是最新的 commit SHA：
-
-![图片描述](imgs/sha-1.png)
-
-![图片描述](imgs/sha-2.png)
-
-</details>
-
-
-<!-- Trigger GitHub Pages Update -->
+已通过 SubConverter-Extended v1.9.6 → 本地整理 → Mihomo v1.19.31 的隔离集成测试。这不是生产环境吞吐量测试，也不代表 Gemini 已登录账号的网页及手机 App 全功能验收。

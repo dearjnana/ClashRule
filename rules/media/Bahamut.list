@@ -1,0 +1,10 @@
+# Bahamut.list — reviewed local copy, 2026-09-20
+# Source: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Bahamut.list
+# Policy and priority: profiles/MyRuleClash_Plus_V1.optimized.ini
+# Cross-file deduplication is specific to this INI order.
+# Rules: 5
+DOMAIN,bahamut.akamaized.net
+DOMAIN,gamer-cds.cdn.hinet.net
+DOMAIN,gamer2-cds.cdn.hinet.net
+DOMAIN-SUFFIX,bahamut.com.tw
+DOMAIN-SUFFIX,gamer.com.tw

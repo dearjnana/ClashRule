@@ -1,0 +1,14 @@
+# Samsung.list — reviewed local copy, 2026-09-20
+# Source: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/Samsung.list
+# Policy and priority: profiles/MyRuleClash_Plus_V1.optimized.ini
+# Cross-file deduplication is specific to this INI order.
+# Rules: 9
+DOMAIN-SUFFIX,galaxy-store.com
+DOMAIN-SUFFIX,samsungapps.com
+DOMAIN-SUFFIX,samsungknox.com
+DOMAIN-SUFFIX,samsungcloud.com
+DOMAIN-SUFFIX,samsung.com
+DOMAIN-SUFFIX,samsungd.com
+DOMAIN-SUFFIX,samsunghealth.com
+DOMAIN-SUFFIX,samsungpay.com
+DOMAIN-SUFFIX,samsungmembers.com

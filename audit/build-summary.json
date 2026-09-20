@@ -1,0 +1,22 @@
+{
+  "source_files": 44,
+  "source_rule_records": 15398,
+  "optimized_rule_records": 14699,
+  "expanded_rules": 14702,
+  "china_provider_prefixes": 7109,
+  "gfw_provider_domains": 4303,
+  "main_rule_estimate": 2842,
+  "groups": 80,
+  "native_filtered_groups": 43,
+  "status_counts": {
+    "retained": 14684,
+    "deduplicated-within-file": 101,
+    "deduplicated-cross-file": 601,
+    "removed-unsupported-or-corrected": 12
+  },
+  "base_url": "https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/",
+  "profile_rule_entries": {
+    "optimized": 56,
+    "expanded": 45
+  }
+}

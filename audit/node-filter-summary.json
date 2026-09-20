@@ -1,0 +1,135 @@
+{
+  "input_node_names": 802,
+  "source": "Local sanitized node-name snapshot; endpoints, credentials and node-name list are not included.",
+  "groups": {
+    "☁️🌏 良心云-最优": {
+      "matched": 54
+    },
+    "💰🌏 赚钱-最优": {
+      "matched": 69
+    },
+    "🦖🌏 宝可梦-最优": {
+      "matched": 27
+    },
+    "🛍️🌏 LD士多-最优": {
+      "matched": 480
+    },
+    "⚡🌏 MESL-最优": {
+      "matched": 172
+    },
+    "☁️🇭🇰 良心云-香港": {
+      "matched": 10
+    },
+    "💰🇭🇰 赚钱-香港": {
+      "matched": 1
+    },
+    "🦖🇭🇰 宝可梦-香港": {
+      "matched": 7
+    },
+    "🛍️🇭🇰 LD士多-香港": {
+      "matched": 28
+    },
+    "⚡🇭🇰 MESL-香港": {
+      "matched": 15
+    },
+    "☁️🇹🇼 良心云-台湾": {
+      "matched": 1
+    },
+    "💰🇹🇼 赚钱-台湾": {
+      "matched": 3
+    },
+    "🦖🇹🇼 宝可梦-台湾": {
+      "matched": 0
+    },
+    "🛍️🇹🇼 LD士多-台湾": {
+      "matched": 20
+    },
+    "⚡🇹🇼 MESL-台湾": {
+      "matched": 9
+    },
+    "☁️🇯🇵 良心云-日本": {
+      "matched": 15
+    },
+    "💰🇯🇵 赚钱-日本": {
+      "matched": 19
+    },
+    "🦖🇯🇵 宝可梦-日本": {
+      "matched": 5
+    },
+    "🛍️🇯🇵 LD士多-日本": {
+      "matched": 29
+    },
+    "⚡🇯🇵 MESL-日本": {
+      "matched": 12
+    },
+    "☁️🇰🇷 良心云-韩国": {
+      "matched": 0
+    },
+    "💰🇰🇷 赚钱-韩国": {
+      "matched": 0
+    },
+    "🦖🇰🇷 宝可梦-韩国": {
+      "matched": 0
+    },
+    "🛍️🇰🇷 LD士多-韩国": {
+      "matched": 7
+    },
+    "⚡🇰🇷 MESL-韩国": {
+      "matched": 5
+    },
+    "☁️🇸🇬 良心云-新加坡": {
+      "matched": 12
+    },
+    "💰🇸🇬 赚钱-新加坡": {
+      "matched": 17
+    },
+    "🦖🇸🇬 宝可梦-新加坡": {
+      "matched": 8
+    },
+    "🛍️🇸🇬 LD士多-新加坡": {
+      "matched": 52
+    },
+    "⚡🇸🇬 MESL-新加坡": {
+      "matched": 12
+    },
+    "☁️🇺🇸 良心云-美国": {
+      "matched": 12
+    },
+    "💰🇺🇸 赚钱-美国": {
+      "matched": 29
+    },
+    "🦖🇺🇸 宝可梦-美国": {
+      "matched": 6
+    },
+    "🛍️🇺🇸 LD士多-美国": {
+      "matched": 108
+    },
+    "⚡🇺🇸 MESL-美国": {
+      "matched": 14
+    },
+    "🇭🇰 香港节点": {
+      "matched": 61
+    },
+    "🇹🇼 台湾节点": {
+      "matched": 33
+    },
+    "🇯🇵 日本节点": {
+      "matched": 80
+    },
+    "🇰🇷 韩国节点": {
+      "matched": 12
+    },
+    "🇸🇬 新加坡节点": {
+      "matched": 101
+    },
+    "🇺🇸 美国节点": {
+      "matched": 169
+    },
+    "🌐 全部节点": {
+      "matched": 802
+    },
+    "🇺🇸 Gemini MESL美国": {
+      "matched": 14
+    }
+  }
+}

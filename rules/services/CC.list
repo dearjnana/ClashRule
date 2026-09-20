@@ -1,0 +1,21 @@
+# CC.list — reviewed local copy, 2026-09-20
+# Source: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/CC.list
+# Policy and priority: profiles/MyRuleClash_Plus_V1.optimized.ini
+# Cross-file deduplication is specific to this INI order.
+# Rules: 16
+DOMAIN-SUFFIX,prismio.net
+IP-CIDR,157.254.234.17/32
+DOMAIN-SUFFIX,pingcodes.cc
+DOMAIN-SUFFIX,z.ai
+DOMAIN-SUFFIX,tccxy.top
+DOMAIN-KEYWORD,meslcloud
+DOMAIN-SUFFIX,futunn.com
+DOMAIN-SUFFIX,yeka.ai
+DOMAIN-SUFFIX,mnapi.com
+DOMAIN-SUFFIX,poe.com
+DOMAIN-SUFFIX,rutracker.org
+DOMAIN-SUFFIX,stga.cn
+DOMAIN-SUFFIX,dmand5.com
+DOMAIN-SUFFIX,abrdns.com
+DOMAIN-SUFFIX,hotaruapi.com
+DOMAIN-SUFFIX,cun.ai

@@ -1,0 +1,12 @@
+# Adobe 屏蔽 (盗版验证/遥测)  —— V4.1 清理版
+# 说明: 原文件中的 ",DROP" 第三列会被 subconverter 原样保留进生成的第 4 列
+#       (mihomo 静默忽略, 但语义混乱且易误导排查), 已统一移除;
+#       实际拦截/放行由 INI 中 🛑 广告拦截 策略组决定, 放行白名单见 Adobe_DIRECT.list
+# 注意: Adobe_DIRECT.list (lcs-cops.adobe.io) 必须在 INI 中排在本文件之前
+DOMAIN-SUFFIX,adobe.io
+DOMAIN-SUFFIX,adobe.com
+DOMAIN-SUFFIX,adobestats.io
+DOMAIN-SUFFIX,adobeccstatic.com
+# CareUEyes 屏蔽 (已去重)
+DOMAIN-SUFFIX,careueyes.com
+DOMAIN-SUFFIX,care-eyes.com

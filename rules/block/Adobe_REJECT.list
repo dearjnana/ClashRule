@@ -1,0 +1,11 @@
+# Adobe_REJECT.list — reviewed local copy, 2026-09-20
+# Source: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/Adobe_REJECT.list
+# Policy and priority: profiles/MyRuleClash_Plus_V1.optimized.ini
+# Cross-file deduplication is specific to this INI order.
+# Rules: 6
+DOMAIN-SUFFIX,adobe.io
+DOMAIN-SUFFIX,adobe.com
+DOMAIN-SUFFIX,adobestats.io
+DOMAIN-SUFFIX,adobeccstatic.com
+DOMAIN-SUFFIX,careueyes.com
+DOMAIN-SUFFIX,care-eyes.com
