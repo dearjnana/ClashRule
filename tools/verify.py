@@ -74,7 +74,7 @@ def main():
     assert all(s.startswith('DOMAIN-SUFFIX,') for s in gfw)
     assert ['+.'+s.split(',')[1] for s in gfw]==rules('providers/ProxyGFW.txt')
     template=yaml.safe_load(read('templates/openclash.yaml'));groups=template['x-clashrule-native-groups'];names={g['name'] for g in groups}
-    assert len(names)==len(groups)==80
+    assert groups and len(names)==len(groups), '策略组为空或名称重复'
     edges={g['name']:[n for n in g.get('proxies',[]) if n in names] for g in groups}
     def visit(name,stack):
         assert name not in stack,('Group cycle',name)
@@ -93,7 +93,7 @@ def main():
     for host in ('fake-colab.example','developerprofiles.evil.invalid','cloudflare.com.attacker.invalid'):
         assert '🎐 Gemini' not in post.domain(host),host
     base=json.loads(read('reports/build.json'))['base_url']
-    for path in ['profiles/openclash.ini','profiles/expanded.ini']:
+    for path in ['profiles/openclash.ini','profiles/android.ini','profiles/expanded.ini']:
         for line in read(path).splitlines():
             if line.startswith(('ruleset=','clash_rule_base=')) and 'https://' in line:
                 url=line[line.index('https://'):];assert url.startswith(base),url

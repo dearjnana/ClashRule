@@ -57,13 +57,45 @@ def with_policy(rule, policy):
     a = rule.split(',')
     return ','.join(a + [policy]) if a[0] == 'MATCH' else ','.join(a[:2] + [policy] + a[2:])
 
+def build_index(entries):
+    """根据当前规则源生成文件索引，避免网页修改后数量过期。"""
+    active = {e['path'] for e in entries if 'path' in e}
+    directories = [
+        ('rules/', '唯一维护的规则源，按服务分类'),
+        ('config/', '规则顺序、策略组、基础设置和来源地址'),
+        ('generated/rules/', '按主配置顺序去重后的生成规则'),
+        ('providers/', '原生域名和 IP 规则集合'),
+        ('profiles/', 'OpenClash、Android 和完全展开配置'),
+        ('templates/', '生成的基础模板'),
+        ('clients/', 'Clash Party 等客户端覆写'),
+        ('scripts/', 'Sub-Store 节点脚本'),
+        ('deploy/', '容器部署示例和配置说明'),
+        ('tools/', '构建、检查和转换后整理工具'),
+        ('.github/workflows/', 'GitHub 自动构建与发布流程'),
+        ('docs/、licenses/', '中文说明和来源许可'),
+    ]
+    lines = ['# 仓库文件索引', '', '本页由构建工具自动更新，请修改规则源后等待自动构建。', '',
+             '| 目录 | 用途 |', '|---|---|']
+    lines += ['| `' + path + '` | ' + purpose + ' |' for path, purpose in directories]
+    lines += ['', '## 规则清单', '', '| 文件 | 有效条件数 | 主配置使用 |', '|---|---:|---|']
+    for path in sorted((ROOT / 'rules').rglob('*.list'), key=lambda p: p.relative_to(ROOT).as_posix()):
+        relative = path.relative_to(ROOT).as_posix()
+        lines.append(f'| [{relative}](../{relative}) | {len(rules(relative))} | '
+                     + ('是' if relative in active else '独立或可选') + ' |')
+    write('docs/仓库文件索引.md', '\n'.join(lines))
+
 def build(base=BASE):
     base = base.rstrip('/') + '/'
     entries = json.loads(read('config/routing.json'))
     groups = yaml.safe_load(read('config/groups.yaml'))
     files = optimize(entries)
+    # 删除不再被主配置引用的生成列表，防止规则改名后残留旧输出。
+    expected = {ROOT / generated(path) for path in files}
+    for path in (ROOT / 'generated/rules').rglob('*.list'):
+        if path not in expected:
+            path.unlink()
     for path, items in files.items():
-        write(generated(path), '# 自动生成，请修改 ' + path + ' 后运行 tools/build.py。\n'
+        write(generated(path), '# 自动生成，请修改 ' + path + ' 后等待自动构建。\n'
               '# 本文件的去重依赖主配置顺序，不宜单独移植。\n' + '\n'.join(items))
     china_paths = ['rules/network/ChinaIp.list', 'rules/network/ChinaCompanyIp.list']
     china = list(ipaddress.collapse_addresses([ipaddress.ip_network(s.split(',')[1]) for p in china_paths for s in files[p]]))
@@ -87,7 +119,7 @@ def build(base=BASE):
         write(name, '# 自动生成；转换后执行 tools/finalize.py 恢复原生策略组。\n' + yaml.safe_dump(value, allow_unicode=True, sort_keys=False, width=110))
 
     def make_ini(expanded=False):
-        lines = ['[custom]', '; 自动生成，请维护 config/ 和 rules/ 后运行构建工具。',
+        lines = ['[custom]', '; 自动生成，请维护 config/ 和 rules/ 后等待自动构建。',
                  '; 使用 expand=true 转换，再执行 tools/finalize.py，方可导入客户端。',
                  '; 原生策略组保存在基础模板的 x-clashrule-native-groups 字段中。', '']
         emitted_china = False
@@ -136,6 +168,7 @@ def build(base=BASE):
                'china_provider_prefixes': len(china), 'gfw_provider_domains': len(gfw),
                'main_rules': len(flattened) - sum(len(files[p]) for p in china_paths) - len(gfw) + 2, 'base_url': base}
     write('reports/build.json', json.dumps(summary, ensure_ascii=False, indent=2))
+    build_index(entries)
     return summary
 
 if __name__ == '__main__':
