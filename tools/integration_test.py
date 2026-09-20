@@ -43,11 +43,19 @@ pref=(SUB/'base/pref.example.ini').read_text(encoding='utf-8')
 for old,new in [('listen=0.0.0.0','listen=127.0.0.1'),('port=25500','port=25591'),('enable_cache=true','enable_cache=false'),('async_fetch_ruleset=true','async_fetch_ruleset=false'),('request_deadline_ms=15000','request_deadline_ms=60000')]:pref=pref.replace(old,new)
 (RUN/'pref.ini').write_text(pref,encoding='utf-8')
 env=os.environ.copy();env['PREF_PATH']=str(RUN/'pref.ini');env['SUBCONVERTER_SECURITY_PROFILE']='lan'
+env['SUBCONVERTER_SKIP_AUTO_UPDATE']='1'
+command=[str(SUB/('subconverter.exe' if os.name=='nt' else 'subconverter')),'-f',str(RUN/'pref.ini')]
+if os.name!='nt' and (SUB/'start.sh').is_file():
+    # 官方 Linux 便携包需要启动脚本加载随包提供的动态库；禁用测试中的自动升级。
+    command=[str(SUB/'start.sh')]
 log=(RUN/'subconverter.log').open('w',encoding='utf-8')
-proc=subprocess.Popen([str(SUB/('subconverter.exe' if os.name=='nt' else 'subconverter')),'-f',str(RUN/'pref.ini')],cwd=SUB,env=env,stdout=log,stderr=subprocess.STDOUT,creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))
+proc=subprocess.Popen(command,cwd=SUB,env=env,stdout=log,stderr=subprocess.STDOUT,creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))
 summary={}
 try:
-    wait_for('http://127.0.0.1:25591/version',proc)
+    try:wait_for('http://127.0.0.1:25591/version',proc)
+    except Exception:
+        print((RUN/'subconverter.log').read_text(encoding='utf-8',errors='replace')[-8000:],flush=True)
+        raise
     for label,config in [('main','profiles/openclash.ini'),('expanded','profiles/expanded.ini'),('android','profiles/android.ini')]:
         url='http://127.0.0.1:25591/sub?'+urllib.parse.urlencode({'target':'clash','url':LOCAL+'subscription.yaml','config':LOCAL+config,'new_name':'true','expand':'true'})
         data=fetch(url);(RUN/(label+'.yaml')).write_bytes(data)
