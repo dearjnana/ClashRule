@@ -69,6 +69,9 @@ jobs:
             --subconverter-dir .test-work/ci-tools/SubConverter-Extended \
             --mihomo .test-work/ci-tools/mihomo
 
+      - name: 验证 Clash Party 覆写与实际分流
+        run: python tools/verify_party.py --mihomo .test-work/ci-tools/mihomo
+
       - name: 自动提交生成结果
         # 内置令牌的提交不会再次触发推送工作流；不使用个人令牌。
         run: |
@@ -100,3 +103,4 @@ jobs:
             reports/*.json
             .test-work/integration/conversion-summary.json
             .test-work/integration/*.log
+            .test-work/party/*/*.log

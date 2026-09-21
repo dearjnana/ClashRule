@@ -1,6 +1,6 @@
 # ClashRule 使用与维护指南
 
-本仓库维护 OpenClash 和 Clash Meta for Android 共用的分流规则、各自的订阅转换配置，以及相关容器部署示例。**在 GitHub 网页修改规则源并提交到 `main` 后，GitHub Actions 会自动构建、验证并更新仓库中的生成文件。**
+本仓库维护 OpenClash 和 Clash Meta for Android 共用的分流规则、各自的订阅转换配置，另提供 Clash Party 桌面覆写及相关容器部署示例。**在 GitHub 网页修改规则源并提交到 `main` 后，GitHub Actions 会自动构建、验证并更新仓库中的生成文件。** Clash Party 覆写也会自动验证，并直接引用分类后的规则源。
 
 首次使用先看下面的入口和接入步骤；日常只改规则时，直接看[网页修改流程](#web-edit)。[自动构建状态](https://github.com/dearjnana/ClashRule/actions/workflows/build.yml)可以查看最近一次修改是否通过验证。
 
@@ -16,6 +16,8 @@
 8. [部署示例、脚本和说明文档](#extras)
 9. [常见问题与回退](#faq)
 10. [本地开发与验证](#local-build)
+
+**Clash Party 用户直接看：[桌面覆写入口](#party-entry)与[完整导入说明](clients/clash-party/README.md)。其使用方式不需要下面的 INI 转换和整理步骤。**
 
 <a id="entry-links"></a>
 
@@ -59,6 +61,26 @@ https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/profiles/e
 **本仓库没有公开的“含你个人节点的最终 YAML 订阅链接”。** 如果使用自己的订阅服务，该服务必须在每次更新时完成“订阅转换 → `finalize.py` 整理 → 返回完整 YAML”。仅把普通转换器的 `/sub` 地址填进客户端，不能替代整理步骤。当前仓库提供整理工具和转换配置，未提供自动整理服务。
 
 两端使用同一份规则源，但建议分别生成和保存最终 YAML。手机外出时，订阅服务还需要能从移动网络访问；家庭局域网地址只能在相应网络内使用。
+
+<a id="party-entry"></a>
+
+### 1.3 Clash Party 桌面端使用哪个链接
+
+Clash Party 使用 [clients/clash-party/override.yaml](clients/clash-party/override.yaml)。将下面的地址导入应用的**“覆写”页面**，再关联到已有节点订阅：
+
+```text
+https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/clients/clash-party/override.yaml
+```
+
+它直接保留订阅中的节点和节点集合，提供桌面专用策略组、DNS 和分流规则，**不需要 SubConverter 或 `finalize.py`**。带 `!` 的字段属于 Clash Party 对象替换语法，不能把原文件直接当成普通 Mihomo 完整配置。
+
+首次使用先为一个订阅关联覆写；要使用文件中的 DNS 和嗅探方案，关闭应用对应的 DNS、嗅探覆写，避免应用设置在后面覆盖文件内容。TUN、端口、系统代理和控制器口令由应用管理。详细导入、节点命名、MESL Gemini、更新与回退方法见 [Clash Party 使用说明](clients/clash-party/README.md)。
+
+| 客户端 | 输入的仓库链接 | 填写位置 | 是否需要转换和整理 |
+| --- | --- | --- | --- |
+| OpenClash | `profiles/openclash.ini` Raw 地址 | 转换器外部配置 | 需要，客户端导入最终 YAML |
+| Clash Meta for Android | `profiles/android.ini` Raw 地址 | 转换器外部配置 | 需要，客户端导入最终 YAML |
+| Clash Party | `clients/clash-party/override.yaml` Raw 地址 | 应用的“覆写”页面 | 不需要，绑定到已有节点订阅 |
 
 <a id="pipeline"></a>
 
@@ -221,6 +243,7 @@ Windows 下可使用 `mihomo.exe` 的实际路径。检查需要能读取或下�
 - 生成去重规则、原生规则集、两端 INI、展开配置、模板和文件索引。
 - 检查规则覆盖、服务分流、策略组引用、文件格式、仓库链接和中文注释。
 - 使用固定版本的真实转换器与 Mihomo，配合测试节点验证三种配置；不会使用个人机场订阅或登录你的设备。
+- 另行检查 Clash Party 覆写，实际加载全部规则集，验证节点列表、节点集合、缺少 MESL、首次下载及关键服务的规则命中。
 - 所有检查成功后才回写生成结果；无差异时不会制造空提交。已有更新提交时，不用旧构建覆盖新提交。
 - 失败时保留日志和短期诊断报告，生成文件不会由该任务发布。查看失败步骤，修正源文件后再次提交。
 
@@ -331,6 +354,7 @@ ruleset=🥒 寡妇网,https://raw.githubusercontent.com/dearjnana/ClashRule/ref
 | [verify.py](tools/verify.py) | 检查规则覆盖与生成前后行为、策略组关系及重点服务分流 | 构建后验证 |
 | [check_repository.py](tools/check_repository.py) | 检查规则语法、重复条件、UTF-8/LF、中文注释、文件引用及部分优先级 | 提交前和 Actions 验证 |
 | [integration_test.py](tools/integration_test.py) | 用测试节点启动隔离的转换器与 Mihomo，检查三个入口的实际转换和加载 | 更改构建逻辑后；Actions 自动运行 |
+| [verify_party.py](tools/verify_party.py) | 检查 Clash Party 覆写合并、策略组和规则集，使用隔离内核测试三种订阅场景与实际规则命中 | 修改覆写后；Actions 自动运行 |
 | [finalize.py](tools/finalize.py) | 恢复原生策略组，校验组名和成员，写入一个新的 YAML 文件 | 每次个人订阅转换之后 |
 | [requirements.txt](tools/requirements.txt) | 固定 Python 构建依赖 | 安装构建、整理和验证所需依赖 |
 
@@ -339,6 +363,8 @@ ruleset=🥒 寡妇网,https://raw.githubusercontent.com/dearjnana/ClashRule/ref
 ## 7. 全部规则文件说明
 
 以下逐项列出当前规则源。**“未接入”表示文件保留供独立使用或后续选择，但当前 OpenClash、Android 和展开入口都不会自动加载它。** 若需启用，在 `config/routing.json` 中指定位置和目标策略组后重新构建。
+
+本节“当前策略”列描述的是三个 INI 入口。Clash Party 使用独立的覆写规则顺序，另行启用了 `BanAD.list`、`PixivSDK.list`、`AdultCloud.list`、`DisneyFamily.list`、`ProxyCustom.list` 和 `CC_LS.list` 等列表；其目标策略查看覆写的 `rules` 段。
 
 “生成结果”与左侧源文件用途一致，但经过当前路由顺序下的去重。GFW 和国内 IP 在两个主入口中主要通过上面的原生规则集加载，对应生成 `.list` 也供展开配置使用。表中策略以 `config/routing.json` 为准；最新数量见[自动生成索引](docs/仓库文件索引.md)。
 
@@ -467,7 +493,8 @@ ruleset=🥒 寡妇网,https://raw.githubusercontent.com/dearjnana/ClashRule/ref
 | --- | --- |
 | [scripts/sub-store/rename.js](scripts/sub-store/rename.js) | 节点地区识别、重命名、编号、倍率及过滤处理；支持参数见脚本开头 |
 | [scripts/sub-store/README.md](scripts/sub-store/README.md) | 说明脚本默认行为与参数注意事项 |
-| [clients/clash-party/override.yaml](clients/clash-party/override.yaml) | Clash Party 独立覆写配置，有自己的组名与客户端用法；不由两个主入口自动生成，不要直接作为 OpenClash 或 Android 完整配置 |
+| [clients/clash-party/override.yaml](clients/clash-party/override.yaml) | Clash Party 桌面覆写，保留订阅节点、替换规则与策略组；修复旧路径、优先级和空组回退，并提供 MESL Gemini 与规则下载组。直接在“覆写”页面导入，不经转换器 |
+| [clients/clash-party/README.md](clients/clash-party/README.md) | Clash Party 专用导入、设置优先级、节点分组、规则维护、验证范围和回退说明 |
 
 Sub-Store 脚本 Raw 地址：
 
@@ -512,6 +539,9 @@ https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/scripts/su
 | 下载软件的进程规则不匹配 | 路由器通常看不到局域网终端上的进程名，Android 也不会匹配 Windows 的 `.exe` 名称；按客户端实际识别能力使用进程规则。 |
 | 上游列表更新后本仓库没有跟着变化 | 当前没有定时同步上游；需维护 `rules/` 的内容，来源记录不执行下载。 |
 | 旧根目录链接失效 | 文件已分类移动，按迁移文档替换外部服务中的旧地址；路径映射不提供 HTTP 重定向。 |
+| Clash Party 直接检查覆写文件提示规则集不存在 | `dns!`、`rule-providers!` 需要先由应用进行合并；它是覆写，不是独立的内核配置。通过应用的运行配置检查，或使用专用验证程序。 |
+| Clash Party 应用后 DNS 与文件内容不同 | 应用常用设置在 YAML 覆写之后生效；核对 DNS 覆写开关、其他覆写和最终运行配置。 |
+| Clash Party 首次下载规则失败 | 检查“规则下载”组中是否有可用节点；节点订阅需要事先可用，也可在该组选择适合当前网络的下载路径。 |
 
 出现实际连接问题时，先在设备上恢复之前保存的可用配置。仓库源文件改错时，在 GitHub 撤销或修正对应源文件提交，让 Actions 重新生成；不要只回退生成目录而保留错误源文件，否则下次构建仍会产生同样结果。回退后的仓库版本还需要经过个人配置生成和客户端更新才会生效。
 
@@ -534,5 +564,13 @@ git diff --check
 ```sh
 python tools/integration_test.py --subconverter-dir "转换器解压目录" --mihomo "Mihomo可执行文件路径"
 ```
+
+Clash Party 的独立验证无需转换器：
+
+```sh
+python tools/verify_party.py --mihomo "Mihomo可执行文件路径"
+```
+
+该测试读取本次工作树的自建列表，并下载上游原生二进制规则集进行加载验证；报告写入 `reports/party-validation.json`。只做静态结构检查时可省略 `--mihomo`。
 
 测试使用隔离的本地端口和合成节点，检查转换、规则加载和策略组行为，不证明真实机场质量或用户账号的可用性。`.test-work/` 保存临时文件，`reports/` 保存构建及验证报告，两者都不会提交到仓库。提交前检查差异，确认个人订阅、令牌和实际设备配置没有进入公开文件。

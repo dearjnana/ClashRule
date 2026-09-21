@@ -1,42 +1,31 @@
-# Clash Party 覆写；请在客户端设置控制器密码。
-# Adobe 与 Pixiv 放行例外优先，Gemini 和 FCM 先于通用 Google。
-port: 7890
-socks-port: 7891
-redir-port: 7892
-mixed-port: 7893
-tproxy-port: 7894
+# 用途：Clash Party 的 YAML 覆写，保留订阅节点并替换分流规则与策略组。
+# 导入：在应用的“覆写”页面添加本文件，再绑定到已有节点订阅；不需要订阅转换器或整理脚本。
+# 设置：端口、局域网访问、控制器口令和 TUN 开关由应用管理，本文件不强行启用它们。
+# 合并：带感叹号的对象是 Clash Party 的整段替换语法，不能直接交给 Mihomo 作为完整配置。
+# 更新：自建规则使用仓库 rules 源文件；独立覆写不引用按主配置顺序去重的 generated 列表。
+
+# 桌面通用设置；应用常用设置的优先级仍然高于本覆写。
+mode: rule
 ipv6: false
-allow-lan: true
 unified-delay: true
 tcp-concurrent: true
-geodata-mode: false
-geodata-loader: standard
-geo-auto-update: true
-geo-update-interval: 48
-geox-url:
-  geoip: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat
-  geosite: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat
-  mmdb: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb
-  asn: https://github.com/xishang0128/geoip/releases/download/latest/GeoLite2-ASN.mmdb
-external-controller: 127.0.0.1:9090
-secret: ''
-external-ui: ui
-external-ui-url: https://ghp.ci/https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip
 find-process-mode: strict
-global-client-fingerprint: chrome
 keep-alive-idle: 300
 keep-alive-interval: 30
 profile:
   store-selected: true
   store-fake-ip: true
-sniffer:
+
+# 嗅探用于识别域名，不修改连接目标；整段替换避免继承订阅中的冲突选项。
+sniffer!:
   enable: true
+  override-destination: false
   sniff:
     HTTP:
       ports:
       - 80
       - 8080-8880
-      override-destination: true
+      override-destination: false
     TLS:
       ports:
       - 443
@@ -52,31 +41,29 @@ sniffer:
   - dlg.io.mi.com
   - +.push.apple.com
   - +.apple.com
-tun:
+
+# 使用此 DNS 方案时关闭应用的“DNS 覆写”，避免应用设置覆盖下面的分流解析。
+# 节点域名由直连 DNS 引导解析，境外业务 DNS 明确经过节点选择，避免启动时的解析循环。
+dns!:
   enable: true
-  stack: mixed
-  mtu: 1500
-  dns-hijack:
-  - any:53
-  - tcp://any:53
-  auto-route: true
-  auto-redirect: true
-  auto-detect-interface: true
-dns:
-  enable: true
-  listen: 0.0.0.0:1053
+  listen: 127.0.0.1:1053
+  ipv6: false
   prefer-h3: false
   respect-rules: true
-  use-system-hosts: false
+  use-system-hosts: true
   cache-algorithm: arc
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
+  - rule-set:private_domain
   - +.lan
   - +.local
   - +.localhost
+  - +.home.arpa
+  - +.direct
   - +.msftconnecttest.com
   - +.msftncsi.com
+  - captive.apple.com
   - localhost.ptlogin2.qq.com
   - localhost.sec.qq.com
   - localhost.work.weixin.qq.com
@@ -104,9 +91,11 @@ dns:
   - wifi.vivo.com.cn
   - +.nflxvideo.net
   - '*.n.n.srv.nintendo.net'
+  - +.srv.nintendo.net
   - +.stun.playstation.net
   - xbox.*.microsoft.com
   - +.xboxlive.com
+  - +.battlenet.com.cn
   - '*.stun.*.*.*.stun.*.*'
   - stun.*.*
   - stun.*.*.*
@@ -124,420 +113,469 @@ dns:
   - 223.5.5.5
   - 119.29.29.29
   nameserver:
-  - https://8.8.8.8/dns-query
-  - https://1.1.1.1/dns-query
+  - https://8.8.8.8/dns-query#🚀 节点选择
+  - https://1.1.1.1/dns-query#🚀 节点选择
   proxy-server-nameserver:
-  - https://doh.pub/dns-query
-  - https://dns.alidns.com/dns-query
+  - https://223.5.5.5/dns-query#DIRECT
+  - https://doh.pub/dns-query#DIRECT
   direct-nameserver:
-  - https://223.5.5.5/dns-query
-  - https://doh.pub/dns-query
+  - https://223.5.5.5/dns-query#DIRECT
+  - https://doh.pub/dns-query#DIRECT
   direct-nameserver-follow-policy: false
   nameserver-policy:
-    geosite:cn:
-    - https://223.5.5.5/dns-query
-    - https://doh.pub/dns-query
-pr:
-  type: select
-  proxies: &id001
-  - 🚀 节点选择
-  - 🛡️ 全局智能容灾
-  - ☁️🌏 良心云-最优
-  - ☄️🌏 iKuuu-最优
-  - ⚡🌏 MESL-最优
-  - 🔮🌏 宝可梦-最优
-  - ♻️ 香港自动
-  - ♻️ 台湾自动
-  - ♻️ 日本自动
-  - ♻️ 韩国自动
-  - ♻️ 新加坡自动
-  - ♻️ 美国自动
-  - 🇭🇰 香港节点
-  - 🇹🇼 台湾节点
-  - 🇯🇵 日本节点
-  - 🇰🇷 韩国节点
-  - 🇸🇬 新加坡节点
-  - 🇺🇲 美国节点
-  - 🌐 全部节点
-  - DIRECT
-  - REJECT
+    rule-set:private_domain:
+    - system
+    rule-set:cn_domain:
+    - https://223.5.5.5/dns-query#DIRECT
+    - https://doh.pub/dns-query#DIRECT
+
+# 公共模板只用于 YAML 锚点；所有筛选组在没有节点时拒绝连接，不自动退回直连。
+x-clashrule-common:
+  exclude: &exclude "(?i)(失联|超时|官网|售后|客服|剩余|到期|过期|自助|主流|流量|重置|订阅|网址|群组|邀请|返利|电报|无效|套餐|expire|traffic|reset|renew|website|invite)"
+  test: &test
+    type: url-test
+    include-all: true
+    empty-fallback: REJECT
+    tolerance: 60
+    interval: 600
+    timeout: 5000
+    url: https://www.gstatic.com/generate_204
+    expected-status: '204'
+    lazy: true
+    exclude-filter: *exclude
+  fallback: &fallback
+    type: fallback
+    interval: 600
+    timeout: 5000
+    url: https://www.gstatic.com/generate_204
+    expected-status: '204'
+    lazy: true
+  menu: &menu
+    - "🚀 节点选择"
+    - "🛡️ 全局智能容灾-流量"
+    - "🛡️ 全局智能容灾-速度"
+    - "☁️🌏 良心云-最优"
+    - "☄️🌏 赚钱-最优"
+    - "🔮🌏 宝可梦-最优"
+    - "⚡🌏 MESL-最优"
+    - "♻️ 香港自动"
+    - "♻️ 台湾自动"
+    - "♻️ 日本自动"
+    - "♻️ 韩国自动"
+    - "♻️ 新加坡自动"
+    - "♻️ 美国自动"
+    - "☁️🇭🇰 良心云-香港"
+    - "☄️🇭🇰 赚钱-香港"
+    - "⚡🇭🇰 MESL-香港"
+    - "🔮🇭🇰 宝可梦-香港"
+    - "☁️🇹🇼 良心云-台湾"
+    - "☄️🇹🇼 赚钱-台湾"
+    - "⚡🇹🇼 MESL-台湾"
+    - "🔮🇹🇼 宝可梦-台湾"
+    - "☁️🇯🇵 良心云-日本"
+    - "☄️🇯🇵 赚钱-日本"
+    - "⚡🇯🇵 MESL-日本"
+    - "🔮🇯🇵 宝可梦-日本"
+    - "☁️🇰🇷 良心云-韩国"
+    - "☄️🇰🇷 赚钱-韩国"
+    - "⚡🇰🇷 MESL-韩国"
+    - "🔮🇰🇷 宝可梦-韩国"
+    - "☁️🇸🇬 良心云-新加坡"
+    - "☄️🇸🇬 赚钱-新加坡"
+    - "⚡🇸🇬 MESL-新加坡"
+    - "🔮🇸🇬 宝可梦-新加坡"
+    - "☁️🇺🇸 良心云-美国"
+    - "☄️🇺🇸 赚钱-美国"
+    - "⚡🇺🇸 MESL-美国"
+    - "🔮🇺🇸 宝可梦-美国"
+    - "🇭🇰 香港节点"
+    - "🇹🇼 台湾节点"
+    - "🇯🇵 日本节点"
+    - "🇰🇷 韩国节点"
+    - "🇸🇬 新加坡节点"
+    - "🇺🇸 美国节点"
+    - "🌐 全部节点"
+    - "DIRECT"
+    - "REJECT"
+
+# 保留四家机场和六个地区的分组；流量组按顺序回退，速度组比较延迟，不承诺实时带宽。
 proxy-groups:
-- name: 🚀 节点选择
-  type: select
-  proxies:
-  - 🛡️ 全局智能容灾
-  - ☁️🌏 良心云-最优
-  - ☄️🌏 iKuuu-最优
-  - ⚡🌏 MESL-最优
-  - 🔮🌏 宝可梦-最优
-  - ♻️ 香港自动
-  - ♻️ 日本自动
-  - ♻️ 新加坡自动
-  - ♻️ 美国自动
-  - 🇭🇰 香港节点
-  - 🇹🇼 台湾节点
-  - 🇯🇵 日本节点
-  - 🇰🇷 韩国节点
-  - 🇸🇬 新加坡节点
-  - 🇺🇲 美国节点
-  - 🌐 全部节点
-  - DIRECT
-  - REJECT
-- name: 🛸 IP归属地伪装
-  type: select
-  proxies:
-  - DIRECT
-  - 🚀 节点选择
-- type: select
-  proxies: *id001
-  name: 🎐 Gemini
-- type: select
-  proxies: *id001
-  name: 🍀 Google
-- type: select
-  proxies: *id001
-  name: 📹 YouTube
-- type: select
-  proxies: *id001
-  name: 🤖 ChatGPT
-- type: select
-  proxies: *id001
-  name: 🖥️ GitHub-Cloudflare-Docker
-- type: select
-  proxies: *id001
-  name: 🚀 摧城
-- type: select
-  proxies: *id001
-  name: 🚀 摧城低速
-- type: select
-  proxies: *id001
-  name: 🔞 18X
-- type: select
-  proxies: *id001
-  name: ✨ Samsung
-- type: select
-  proxies: *id001
-  name: 🎮 游戏平台
-- type: select
-  proxies: *id001
-  name: 🐬 OneDrive
-- type: select
-  proxies: *id001
-  name: 🪟 Microsoft
-- type: select
-  proxies: *id001
-  name: 🎵 TikTok
-- type: select
-  proxies: *id001
-  name: 📲 Telegram
-- type: select
-  proxies: *id001
-  name: 🎥 NETFLIX
-- type: select
-  proxies: *id001
-  name: 🧸 Disney
-- type: select
-  proxies: *id001
-  name: ✈️ Speedtest
-- type: select
-  proxies: *id001
-  name: 💶 PayPal
-- type: select
-  proxies: *id001
-  name: 🍎 Apple
-- name: 🎯 全球直连
-  type: select
-  proxies:
-  - DIRECT
-  - 🚀 节点选择
-- type: select
-  proxies: *id001
-  name: 🐟 漏网之鱼
-- name: 🚫 广告拦截
-  type: select
-  proxies:
-  - REJECT
-  - 🚀 节点选择
-- name: 🛡️ 全局智能容灾
-  type: fallback
-  proxies:
-  - ☁️🌏 良心云-最优
-  - ☄️🌏 iKuuu-最优
-  - ⚡🌏 MESL-最优
-  - 🔮🌏 宝可梦-最优
-  url: http://connectivitycheck.gstatic.com/generate_204
-  interval: 300
-- name: ☁️🌏 良心云-最优
-  type: url-test
-  include-all: true
-  tolerance: 50
-  interval: 300
-  filter: (?=.*良心云)^((?!(失联|超时|官网|售后|剩余|到期|自助开通|主流)).)*$
-- name: ☄️🌏 iKuuu-最优
-  type: url-test
-  include-all: true
-  tolerance: 50
-  interval: 300
-  filter: (?=.*(?i)ikuuu)^((?!(失联|超时|官网|售后|剩余|到期|自助开通|主流)).)*$
-- name: ⚡🌏 MESL-最优
-  type: url-test
-  include-all: true
-  tolerance: 50
-  interval: 300
-  filter: (?=.*(?i)MESL)^((?!(失联|超时|官网|售后|剩余|到期|自助开通|主流)).)*$
-- name: 🔮🌏 宝可梦-最优
-  type: url-test
-  include-all: true
-  tolerance: 50
-  interval: 300
-  filter: (?=.*(?i)宝可梦)^((?!(失联|超时|官网|售后|剩余|到期|自助开通|主流)).)*$
-- name: 🇭🇰 香港节点
-  type: select
-  include-all: true
-  filter: (?=.*(港|HK|(?i)Hong))^((?!(台|日|韩|新|深|美)).)*$
-- name: 🇹🇼 台湾节点
-  type: select
-  include-all: true
-  filter: (?i)台|台湾|TW|台北|Taipei|高雄|Kaohsiung|台中|Taichung|新北|New Taipei|桃园|Taoyuan
-- name: 🇯🇵 日本节点
-  type: select
-  include-all: true
-  filter: (?i)日|jp|japan
-- name: 🇰🇷 韩国节点
-  type: select
-  include-all: true
-  filter: (?i)韩|韩国|KR|Korea|首尔|Seoul|釜山|Busan|仁川|Incheon|大邱|Daegu|光州|Gwangju|大田|Daejeon|蔚山|Ulsan
-- name: 🇸🇬 新加坡节点
-  type: select
-  include-all: true
-  filter: (?i)新|新加坡|SG|Singapore|狮城
-- name: 🇺🇲 美国节点
-  type: select
-  include-all: true
-  filter: (?i)美|us|unitedstates|united states
-- name: ♻️ 香港自动
-  type: fallback
-  proxies:
-  - ☁️🇭🇰 良心云-香港
-  - ☄️🇭🇰 iKuuu-香港
-  - ⚡🇭🇰 MESL-香港
-  - 🔮🇭🇰 宝可梦-香港
-  url: http://connectivitycheck.gstatic.com/generate_204
-  interval: 300
-- name: ☁️🇭🇰 良心云-香港
-  type: url-test
-  include-all: true
-  tolerance: 50
-  interval: 300
-  filter: (?=.*良心云)(?=.*(港|HK|(?i)Hong))
-- name: ☄️🇭🇰 iKuuu-香港
-  type: url-test
-  include-all: true
-  tolerance: 50
-  interval: 300
-  filter: (?=.*(?i)iKuuu)(?=.*(港|HK|(?i)Hong))
-- name: ⚡🇭🇰 MESL-香港
-  type: url-test
-  include-all: true
-  tolerance: 50
-  interval: 300
-  filter: (?=.*(?i)MESL)(?=.*(港|HK|(?i)Hong))
-- name: 🔮🇭🇰 宝可梦-香港
-  type: url-test
-  include-all: true
-  tolerance: 50
-  interval: 300
-  filter: (?=.*(?i)宝可梦)(?=.*(港|HK|(?i)Hong))
-- name: ♻️ 台湾自动
-  type: fallback
-  proxies:
-  - ☁️🇹🇼 良心云-台湾
-  - ☄️🇹🇼 iKuuu-台湾
-  - ⚡🇹🇼 MESL-台湾
-  - 🔮🇹🇼 宝可梦-台湾
-  url: http://connectivitycheck.gstatic.com/generate_204
-  interval: 300
-- name: ☁️🇹🇼 良心云-台湾
-  type: url-test
-  include-all: true
-  tolerance: 50
-  interval: 300
-  filter: (?=.*良心云)(?=.*(台湾|TW|台|台北|(?i)Taipei|高雄|(?i)Kaohsiung|台中|(?i)Taichung|新北|(?i)New Taipei|桃园|(?i)Taoyuan))
-- name: ☄️🇹🇼 iKuuu-台湾
-  type: url-test
-  include-all: true
-  tolerance: 50
-  interval: 300
-  filter: (?=.*(?i)iKuuu)(?=.*(台湾|TW|台|台北|(?i)Taipei|高雄|(?i)Kaohsiung|台中|(?i)Taichung|新北|(?i)New Taipei|桃园|(?i)Taoyuan))
-- name: ⚡🇹🇼 MESL-台湾
-  type: url-test
-  include-all: true
-  tolerance: 50
-  interval: 300
-  filter: (?=.*(?i)MESL)(?=.*(台湾|TW|台|台北|(?i)Taipei|高雄|(?i)Kaohsiung|台中|(?i)Taichung|新北|(?i)New Taipei|桃园|(?i)Taoyuan))
-- name: 🔮🇹🇼 宝可梦-台湾
-  type: url-test
-  include-all: true
-  tolerance: 50
-  interval: 300
-  filter: (?=.*(?i)宝可梦)(?=.*(台湾|TW|台|台北|(?i)Taipei|高雄|(?i)Kaohsiung|台中|(?i)Taichung|新北|(?i)New Taipei|桃园|(?i)Taoyuan))
-- name: ♻️ 日本自动
-  type: fallback
-  proxies:
-  - ☁️🇯🇵 良心云-日本
-  - ☄️🇯🇵 iKuuu-日本
-  - ⚡🇯🇵 MESL-日本
-  - 🔮🇯🇵 宝可梦-日本
-  url: http://connectivitycheck.gstatic.com/generate_204
-  interval: 300
-- name: ☁️🇯🇵 良心云-日本
-  type: url-test
-  include-all: true
-  tolerance: 50
-  interval: 300
-  filter: (?=.*良心云)(?=.*(日|JP|(?i)Japan|川日|东京|(?i)Tokyo|大阪|(?i)Osaka|泉日|埼玉|沪日|深日|名古屋|(?i)Nagoya|福冈|(?i)Fukuoka|京都|(?i)Kyoto|神户|(?i)Kobe))
-- name: ☄️🇯🇵 iKuuu-日本
-  type: url-test
-  include-all: true
-  tolerance: 50
-  interval: 300
-  filter: (?=.*(?i)iKuuu)(?=.*(日|JP|(?i)Japan|川日|东京|(?i)Tokyo|大阪|(?i)Osaka|泉日|埼玉|沪日|深日|名古屋|(?i)Nagoya|福冈|(?i)Fukuoka|京都|(?i)Kyoto|神户|(?i)Kobe))
-- name: ⚡🇯🇵 MESL-日本
-  type: url-test
-  include-all: true
-  tolerance: 50
-  interval: 300
-  filter: (?=.*(?i)MESL)(?=.*(日|JP|(?i)Japan|川日|东京|(?i)Tokyo|大阪|(?i)Osaka|泉日|埼玉|沪日|深日|名古屋|(?i)Nagoya|福冈|(?i)Fukuoka|京都|(?i)Kyoto|神户|(?i)Kobe))
-- name: 🔮🇯🇵 宝可梦-日本
-  type: url-test
-  include-all: true
-  tolerance: 50
-  interval: 300
-  filter: (?=.*(?i)宝可梦)(?=.*(日|JP|(?i)Japan|川日|东京|(?i)Tokyo|大阪|(?i)Osaka|泉日|埼玉|沪日|深日|名古屋|(?i)Nagoya|福冈|(?i)Fukuoka|京都|(?i)Kyoto|神户|(?i)Kobe))
-- name: ♻️ 韩国自动
-  type: fallback
-  proxies:
-  - ☁️🇰🇷 良心云-韩国
-  - ☄️🇰🇷 iKuuu-韩国
-  - ⚡🇰🇷 MESL-韩国
-  - 🔮🇰🇷 宝可梦-韩国
-  url: http://connectivitycheck.gstatic.com/generate_204
-  interval: 300
-- name: ☁️🇰🇷 良心云-韩国
-  type: url-test
-  include-all: true
-  tolerance: 50
-  interval: 300
-  filter: (?=.*良心云)(?=.*(韩|韩国|KR|(?i)Korea|首尔|(?i)Seoul|釜山|(?i)Busan|仁川|(?i)Incheon|大邱|(?i)Daegu|光州|(?i)Gwangju|大田|(?i)Daejeon|蔚山|(?i)Ulsan))
-- name: ☄️🇰🇷 iKuuu-韩国
-  type: url-test
-  include-all: true
-  tolerance: 50
-  interval: 300
-  filter: (?=.*(?i)iKuuu)(?=.*(韩|韩国|KR|(?i)Korea|首尔|(?i)Seoul|釜山|(?i)Busan|仁川|(?i)Incheon|大邱|(?i)Daegu|光州|(?i)Gwangju|大田|(?i)Daejeon|蔚山|(?i)Ulsan))
-- name: ⚡🇰🇷 MESL-韩国
-  type: url-test
-  include-all: true
-  tolerance: 50
-  interval: 300
-  filter: (?=.*(?i)MESL)(?=.*(韩|韩国|KR|(?i)Korea|首尔|(?i)Seoul|釜山|(?i)Busan|仁川|(?i)Incheon|大邱|(?i)Daegu|光州|(?i)Gwangju|大田|(?i)Daejeon|蔚山|(?i)Ulsan))
-- name: 🔮🇰🇷 宝可梦-韩国
-  type: url-test
-  include-all: true
-  tolerance: 50
-  interval: 300
-  filter: (?=.*(?i)宝可梦)(?=.*(韩|韩国|KR|(?i)Korea|首尔|(?i)Seoul|釜山|(?i)Busan|仁川|(?i)Incheon|大邱|(?i)Daegu|光州|(?i)Gwangju|大田|(?i)Daejeon|蔚山|(?i)Ulsan))
-- name: ♻️ 新加坡自动
-  type: fallback
-  proxies:
-  - ☁️🇸🇬 良心云-新加坡
-  - ☄️🇸🇬 iKuuu-新加坡
-  - ⚡🇸🇬 MESL-新加坡
-  - 🔮🇸🇬 宝可梦-新加坡
-  url: http://connectivitycheck.gstatic.com/generate_204
-  interval: 300
-- name: ☁️🇸🇬 良心云-新加坡
-  type: url-test
-  include-all: true
-  tolerance: 50
-  interval: 300
-  filter: (?=.*良心云)(?=.*(新|新加坡|SG|(?i)Singapore|狮城))
-- name: ☄️🇸🇬 iKuuu-新加坡
-  type: url-test
-  include-all: true
-  tolerance: 50
-  interval: 300
-  filter: (?=.*(?i)iKuuu)(?=.*(新|新加坡|SG|(?i)Singapore|狮城))
-- name: ⚡🇸🇬 MESL-新加坡
-  type: url-test
-  include-all: true
-  tolerance: 50
-  interval: 300
-  filter: (?=.*(?i)MESL)(?=.*(新|新加坡|SG|(?i)Singapore|狮城))
-- name: 🔮🇸🇬 宝可梦-新加坡
-  type: url-test
-  include-all: true
-  tolerance: 50
-  interval: 300
-  filter: (?=.*(?i)宝可梦)(?=.*(新|新加坡|SG|(?i)Singapore|狮城))
-- name: ♻️ 美国自动
-  type: fallback
-  proxies:
-  - ☁️🇺🇸 良心云-美国
-  - ☄️🇺🇸 iKuuu-美国
-  - ⚡🇺🇸 MESL-美国
-  - 🔮🇺🇸 宝可梦-美国
-  url: http://connectivitycheck.gstatic.com/generate_204
-  interval: 300
-- name: ☁️🇺🇸 良心云-美国
-  type: url-test
-  include-all: true
-  tolerance: 50
-  interval: 300
-  filter: (?=.*良心云)(?=.*(美|US|(?i)States|(?i)America|纽约|洛杉矶|芝加哥|西雅图|硅谷|圣何塞|圣克拉拉|旧金山|华盛顿|波特兰|底特律|凤凰城|费城|迈阿密|波士顿))
-- name: ☄️🇺🇸 iKuuu-美国
-  type: url-test
-  include-all: true
-  tolerance: 50
-  interval: 300
-  filter: (?=.*(?i)iKuuu)(?=.*(美|US|(?i)States|(?i)America|纽约|洛杉矶|芝加哥|西雅图|硅谷|圣何塞|圣克拉拉|旧金山|华盛顿|波特兰|底特律|凤凰城|费城|迈阿密|波士顿))
-- name: ⚡🇺🇸 MESL-美国
-  type: url-test
-  include-all: true
-  tolerance: 50
-  interval: 300
-  filter: (?=.*(?i)MESL)(?=.*(美|US|(?i)States|(?i)America|纽约|洛杉矶|芝加哥|西雅图|硅谷|圣何塞|圣克拉拉|旧金山|华盛顿|波特兰|底特律|凤凰城|费城|迈阿密|波士顿))
-- name: 🔮🇺🇸 宝可梦-美国
-  type: url-test
-  include-all: true
-  tolerance: 50
-  interval: 300
-  filter: (?=.*(?i)宝可梦)(?=.*(美|US|(?i)States|(?i)America|纽约|洛杉矶|芝加哥|西雅图|硅谷|圣何塞|圣克拉拉|旧金山|华盛顿|波特兰|底特律|凤凰城|费城|迈阿密|波士顿))
-- name: 🌐 全部节点
-  type: select
-  include-all: true
-  filter: ^((?!失联|超时|官网|售后|剩余|到期|自助开通).)*$
+  - name: "🚀 节点选择"
+    type: select
+    proxies:
+    - 🛡️ 全局智能容灾-流量
+    - 🛡️ 全局智能容灾-速度
+    - ☁️🌏 良心云-最优
+    - ☄️🌏 赚钱-最优
+    - 🔮🌏 宝可梦-最优
+    - ⚡🌏 MESL-最优
+    - ♻️ 香港自动
+    - ♻️ 台湾自动
+    - ♻️ 日本自动
+    - ♻️ 韩国自动
+    - ♻️ 新加坡自动
+    - ♻️ 美国自动
+    - ☁️🇭🇰 良心云-香港
+    - ☄️🇭🇰 赚钱-香港
+    - ⚡🇭🇰 MESL-香港
+    - 🔮🇭🇰 宝可梦-香港
+    - ☁️🇹🇼 良心云-台湾
+    - ☄️🇹🇼 赚钱-台湾
+    - ⚡🇹🇼 MESL-台湾
+    - 🔮🇹🇼 宝可梦-台湾
+    - ☁️🇯🇵 良心云-日本
+    - ☄️🇯🇵 赚钱-日本
+    - ⚡🇯🇵 MESL-日本
+    - 🔮🇯🇵 宝可梦-日本
+    - ☁️🇰🇷 良心云-韩国
+    - ☄️🇰🇷 赚钱-韩国
+    - ⚡🇰🇷 MESL-韩国
+    - 🔮🇰🇷 宝可梦-韩国
+    - ☁️🇸🇬 良心云-新加坡
+    - ☄️🇸🇬 赚钱-新加坡
+    - ⚡🇸🇬 MESL-新加坡
+    - 🔮🇸🇬 宝可梦-新加坡
+    - ☁️🇺🇸 良心云-美国
+    - ☄️🇺🇸 赚钱-美国
+    - ⚡🇺🇸 MESL-美国
+    - 🔮🇺🇸 宝可梦-美国
+    - 🇭🇰 香港节点
+    - 🇹🇼 台湾节点
+    - 🇯🇵 日本节点
+    - 🇰🇷 韩国节点
+    - 🇸🇬 新加坡节点
+    - 🇺🇸 美国节点
+    - 🌐 全部节点
+    - DIRECT
+    - REJECT
+  - name: "🛸 IP归属地伪装"
+    type: select
+    proxies:
+    - DIRECT
+    - 🚀 节点选择
+  - name: "🎐 Gemini"
+    type: select
+    proxies:
+    - 🇺🇸 Gemini MESL美国
+    - ⚡🇺🇸 MESL-美国
+    - ♻️ 美国自动
+    - 🚀 节点选择
+    - 🌐 全部节点
+    - REJECT
+  - name: "🇺🇸 Gemini MESL美国"
+    exclude-filter: *exclude
+    type: select
+    include-all: true
+    filter: (?i)^(?=.*MESL)(?=.*(?:🇺🇸|🇺🇲|美国|美國|\busa?\b|united\s*states|\bamerica\b|纽约|紐約|new\s*york|洛杉矶|洛杉磯|los\s*angeles|芝加哥|chicago|西雅图|西雅圖|seattle|硅谷|圣何塞|san\s*jose|圣克拉拉|santa\s*clara|旧金山|san\s*francisco|华盛顿|華盛頓|washington|波特兰|portland|底特律|凤凰城|phoenix|费城|迈阿密|miami|波士顿|boston|达拉斯|dallas))(?!.*(?:亚美尼亚|亞美尼亞|armenia|russia|australia|belarus|cyprus|south\s*america|latin\s*america)).*$
+    empty-fallback: REJECT
+  - name: "📢 谷歌FCM"
+    type: select
+    proxies:
+    - 🍀 Google
+    - 🚀 节点选择
+    - DIRECT
+  - name: "🍀 Google"
+    proxies: *menu
+    type: select
+  - name: "📹 YouTube"
+    proxies: *menu
+    type: select
+  - name: "🤖 ChatGPT"
+    proxies: *menu
+    type: select
+  - name: "🖥️ GitHub-Cloudflare-Docker"
+    proxies: *menu
+    type: select
+  - name: "🚀 摧城"
+    proxies: *menu
+    type: select
+  - name: "🚀 摧城低速"
+    proxies: *menu
+    type: select
+  - name: "🔞 18X"
+    proxies: *menu
+    type: select
+  - name: "✨ Samsung"
+    proxies: *menu
+    type: select
+  - name: "🎮 游戏平台"
+    proxies: *menu
+    type: select
+  - name: "🐬 OneDrive"
+    proxies: *menu
+    type: select
+  - name: "🪟 Microsoft"
+    proxies: *menu
+    type: select
+  - name: "🎵 TikTok"
+    proxies: *menu
+    type: select
+  - name: "📲 Telegram"
+    proxies: *menu
+    type: select
+  - name: "🎥 NETFLIX"
+    proxies: *menu
+    type: select
+  - name: "🧸 Disney"
+    proxies: *menu
+    type: select
+  - name: "✈️ Speedtest"
+    proxies: *menu
+    type: select
+  - name: "💶 PayPal"
+    proxies: *menu
+    type: select
+  - name: "🍎 Apple"
+    proxies: *menu
+    type: select
+  - name: "🎯 全球直连"
+    type: select
+    proxies:
+    - DIRECT
+    - 🚀 节点选择
+  - name: "🐟 漏网之鱼"
+    proxies: *menu
+    type: select
+  - name: "🚫 广告拦截"
+    type: select
+    proxies:
+    - REJECT
+    - 🚀 节点选择
+  - name: "🛡️ 全局智能容灾-流量"
+    <<: *fallback
+    proxies:
+    - ☁️🌏 良心云-最优
+    - ☄️🌏 赚钱-最优
+    - 🔮🌏 宝可梦-最优
+    - ⚡🌏 MESL-最优
+  - name: "🛡️ 全局智能容灾-速度"
+    type: url-test
+    lazy: true
+    tolerance: 100
+    interval: 600
+    timeout: 5000
+    url: https://www.gstatic.com/generate_204
+    expected-status: '204'
+    proxies:
+    - ☁️🌏 良心云-最优
+    - ☄️🌏 赚钱-最优
+    - 🔮🌏 宝可梦-最优
+    - ⚡🌏 MESL-最优
+  - name: "☁️🌏 良心云-最优"
+    <<: *test
+    lazy: false
+    filter: (?i)^(?=.*良心云).*$
+  - name: "☄️🌏 赚钱-最优"
+    <<: *test
+    lazy: false
+    filter: (?i)^(?=.*赚钱).*$
+  - name: "⚡🌏 MESL-最优"
+    <<: *test
+    lazy: false
+    filter: (?i)^(?=.*MESL).*$
+  - name: "🔮🌏 宝可梦-最优"
+    <<: *test
+    lazy: false
+    filter: (?i)^(?=.*宝可梦).*$
+  - name: "🇭🇰 香港节点"
+    exclude-filter: *exclude
+    type: select
+    include-all: true
+    filter: (?i)^(?=.*(?:🇭🇰|香港|港|\bhk\b|hong\s*kong)).*$
+    empty-fallback: REJECT
+  - name: "🇹🇼 台湾节点"
+    exclude-filter: *exclude
+    type: select
+    include-all: true
+    filter: (?i)^(?=.*(?:🇹🇼|台湾|台灣|臺灣|台北|台中|新北|高雄|桃园|桃園|\btw\b|taiwan|taipei|taichung|kaohsiung|taoyuan)).*$
+    empty-fallback: REJECT
+  - name: "🇯🇵 日本节点"
+    exclude-filter: *exclude
+    type: select
+    include-all: true
+    filter: (?i)^(?=.*(?:🇯🇵|日本|东京|東京|大阪|名古屋|福冈|福岡|京都|神户|埼玉|川日|沪日|深日|泉日|\bjp\b|japan|tokyo|osaka|nagoya|fukuoka|kyoto|kobe)).*$
+    empty-fallback: REJECT
+  - name: "🇰🇷 韩国节点"
+    exclude-filter: *exclude
+    type: select
+    include-all: true
+    filter: (?i)^(?=.*(?:🇰🇷|韩国|韓國|首尔|首爾|釜山|仁川|大邱|光州|大田|蔚山|\bkr\b|\bkorea\b|seoul|busan|incheon|daegu|gwangju|daejeon|ulsan)).*$
+    empty-fallback: REJECT
+  - name: "🇸🇬 新加坡节点"
+    exclude-filter: *exclude
+    type: select
+    include-all: true
+    filter: (?i)^(?=.*(?:🇸🇬|新加坡|狮城|獅城|\bsg\b|singapore)).*$
+    empty-fallback: REJECT
+  - name: "🇺🇸 美国节点"
+    exclude-filter: *exclude
+    type: select
+    include-all: true
+    filter: (?i)^(?=.*(?:🇺🇸|🇺🇲|美国|美國|\busa?\b|united\s*states|\bamerica\b|纽约|紐約|new\s*york|洛杉矶|洛杉磯|los\s*angeles|芝加哥|chicago|西雅图|西雅圖|seattle|硅谷|圣何塞|san\s*jose|圣克拉拉|santa\s*clara|旧金山|san\s*francisco|华盛顿|華盛頓|washington|波特兰|portland|底特律|凤凰城|phoenix|费城|迈阿密|miami|波士顿|boston|达拉斯|dallas))(?!.*(?:亚美尼亚|亞美尼亞|armenia|russia|australia|belarus|cyprus|south\s*america|latin\s*america)).*$
+    empty-fallback: REJECT
+  - name: "♻️ 香港自动"
+    <<: *fallback
+    proxies:
+    - ☁️🇭🇰 良心云-香港
+    - ☄️🇭🇰 赚钱-香港
+    - 🔮🇭🇰 宝可梦-香港
+    - ⚡🇭🇰 MESL-香港
+  - name: "☁️🇭🇰 良心云-香港"
+    <<: *test
+    tolerance: 150
+    filter: (?i)^(?=.*良心云)(?=.*(?:🇭🇰|香港|港|\bhk\b|hong\s*kong)).*$
+  - name: "☄️🇭🇰 赚钱-香港"
+    <<: *test
+    tolerance: 150
+    filter: (?i)^(?=.*赚钱)(?=.*(?:🇭🇰|香港|港|\bhk\b|hong\s*kong)).*$
+  - name: "⚡🇭🇰 MESL-香港"
+    <<: *test
+    tolerance: 150
+    filter: (?i)^(?=.*MESL)(?=.*(?:🇭🇰|香港|港|\bhk\b|hong\s*kong)).*$
+  - name: "🔮🇭🇰 宝可梦-香港"
+    <<: *test
+    tolerance: 150
+    filter: (?i)^(?=.*宝可梦)(?=.*(?:🇭🇰|香港|港|\bhk\b|hong\s*kong)).*$
+  - name: "♻️ 台湾自动"
+    <<: *fallback
+    proxies:
+    - ☁️🇹🇼 良心云-台湾
+    - ☄️🇹🇼 赚钱-台湾
+    - 🔮🇹🇼 宝可梦-台湾
+    - ⚡🇹🇼 MESL-台湾
+  - name: "☁️🇹🇼 良心云-台湾"
+    <<: *test
+    filter: (?i)^(?=.*良心云)(?=.*(?:🇹🇼|台湾|台灣|臺灣|台北|台中|新北|高雄|桃园|桃園|\btw\b|taiwan|taipei|taichung|kaohsiung|taoyuan)).*$
+  - name: "☄️🇹🇼 赚钱-台湾"
+    <<: *test
+    filter: (?i)^(?=.*赚钱)(?=.*(?:🇹🇼|台湾|台灣|臺灣|台北|台中|新北|高雄|桃园|桃園|\btw\b|taiwan|taipei|taichung|kaohsiung|taoyuan)).*$
+  - name: "⚡🇹🇼 MESL-台湾"
+    <<: *test
+    filter: (?i)^(?=.*MESL)(?=.*(?:🇹🇼|台湾|台灣|臺灣|台北|台中|新北|高雄|桃园|桃園|\btw\b|taiwan|taipei|taichung|kaohsiung|taoyuan)).*$
+  - name: "🔮🇹🇼 宝可梦-台湾"
+    <<: *test
+    filter: (?i)^(?=.*宝可梦)(?=.*(?:🇹🇼|台湾|台灣|臺灣|台北|台中|新北|高雄|桃园|桃園|\btw\b|taiwan|taipei|taichung|kaohsiung|taoyuan)).*$
+  - name: "♻️ 日本自动"
+    <<: *fallback
+    proxies:
+    - ☁️🇯🇵 良心云-日本
+    - ☄️🇯🇵 赚钱-日本
+    - 🔮🇯🇵 宝可梦-日本
+    - ⚡🇯🇵 MESL-日本
+  - name: "☁️🇯🇵 良心云-日本"
+    <<: *test
+    filter: (?i)^(?=.*良心云)(?=.*(?:🇯🇵|日本|东京|東京|大阪|名古屋|福冈|福岡|京都|神户|埼玉|川日|沪日|深日|泉日|\bjp\b|japan|tokyo|osaka|nagoya|fukuoka|kyoto|kobe)).*$
+  - name: "☄️🇯🇵 赚钱-日本"
+    <<: *test
+    filter: (?i)^(?=.*赚钱)(?=.*(?:🇯🇵|日本|东京|東京|大阪|名古屋|福冈|福岡|京都|神户|埼玉|川日|沪日|深日|泉日|\bjp\b|japan|tokyo|osaka|nagoya|fukuoka|kyoto|kobe)).*$
+  - name: "⚡🇯🇵 MESL-日本"
+    <<: *test
+    filter: (?i)^(?=.*MESL)(?=.*(?:🇯🇵|日本|东京|東京|大阪|名古屋|福冈|福岡|京都|神户|埼玉|川日|沪日|深日|泉日|\bjp\b|japan|tokyo|osaka|nagoya|fukuoka|kyoto|kobe)).*$
+  - name: "🔮🇯🇵 宝可梦-日本"
+    <<: *test
+    filter: (?i)^(?=.*宝可梦)(?=.*(?:🇯🇵|日本|东京|東京|大阪|名古屋|福冈|福岡|京都|神户|埼玉|川日|沪日|深日|泉日|\bjp\b|japan|tokyo|osaka|nagoya|fukuoka|kyoto|kobe)).*$
+  - name: "♻️ 韩国自动"
+    <<: *fallback
+    proxies:
+    - ☁️🇰🇷 良心云-韩国
+    - ☄️🇰🇷 赚钱-韩国
+    - 🔮🇰🇷 宝可梦-韩国
+    - ⚡🇰🇷 MESL-韩国
+  - name: "☁️🇰🇷 良心云-韩国"
+    <<: *test
+    filter: (?i)^(?=.*良心云)(?=.*(?:🇰🇷|韩国|韓國|首尔|首爾|釜山|仁川|大邱|光州|大田|蔚山|\bkr\b|\bkorea\b|seoul|busan|incheon|daegu|gwangju|daejeon|ulsan)).*$
+  - name: "☄️🇰🇷 赚钱-韩国"
+    <<: *test
+    filter: (?i)^(?=.*赚钱)(?=.*(?:🇰🇷|韩国|韓國|首尔|首爾|釜山|仁川|大邱|光州|大田|蔚山|\bkr\b|\bkorea\b|seoul|busan|incheon|daegu|gwangju|daejeon|ulsan)).*$
+  - name: "⚡🇰🇷 MESL-韩国"
+    <<: *test
+    filter: (?i)^(?=.*MESL)(?=.*(?:🇰🇷|韩国|韓國|首尔|首爾|釜山|仁川|大邱|光州|大田|蔚山|\bkr\b|\bkorea\b|seoul|busan|incheon|daegu|gwangju|daejeon|ulsan)).*$
+  - name: "🔮🇰🇷 宝可梦-韩国"
+    <<: *test
+    filter: (?i)^(?=.*宝可梦)(?=.*(?:🇰🇷|韩国|韓國|首尔|首爾|釜山|仁川|大邱|光州|大田|蔚山|\bkr\b|\bkorea\b|seoul|busan|incheon|daegu|gwangju|daejeon|ulsan)).*$
+  - name: "♻️ 新加坡自动"
+    <<: *fallback
+    proxies:
+    - ☁️🇸🇬 良心云-新加坡
+    - ☄️🇸🇬 赚钱-新加坡
+    - 🔮🇸🇬 宝可梦-新加坡
+    - ⚡🇸🇬 MESL-新加坡
+  - name: "☁️🇸🇬 良心云-新加坡"
+    <<: *test
+    filter: (?i)^(?=.*良心云)(?=.*(?:🇸🇬|新加坡|狮城|獅城|\bsg\b|singapore)).*$
+  - name: "☄️🇸🇬 赚钱-新加坡"
+    <<: *test
+    filter: (?i)^(?=.*赚钱)(?=.*(?:🇸🇬|新加坡|狮城|獅城|\bsg\b|singapore)).*$
+  - name: "⚡🇸🇬 MESL-新加坡"
+    <<: *test
+    filter: (?i)^(?=.*MESL)(?=.*(?:🇸🇬|新加坡|狮城|獅城|\bsg\b|singapore)).*$
+  - name: "🔮🇸🇬 宝可梦-新加坡"
+    <<: *test
+    filter: (?i)^(?=.*宝可梦)(?=.*(?:🇸🇬|新加坡|狮城|獅城|\bsg\b|singapore)).*$
+  - name: "♻️ 美国自动"
+    <<: *fallback
+    proxies:
+    - ☁️🇺🇸 良心云-美国
+    - ☄️🇺🇸 赚钱-美国
+    - 🔮🇺🇸 宝可梦-美国
+    - ⚡🇺🇸 MESL-美国
+  - name: "☁️🇺🇸 良心云-美国"
+    <<: *test
+    filter: (?i)^(?=.*良心云)(?=.*(?:🇺🇸|🇺🇲|美国|美國|\busa?\b|united\s*states|\bamerica\b|纽约|紐約|new\s*york|洛杉矶|洛杉磯|los\s*angeles|芝加哥|chicago|西雅图|西雅圖|seattle|硅谷|圣何塞|san\s*jose|圣克拉拉|santa\s*clara|旧金山|san\s*francisco|华盛顿|華盛頓|washington|波特兰|portland|底特律|凤凰城|phoenix|费城|迈阿密|miami|波士顿|boston|达拉斯|dallas))(?!.*(?:亚美尼亚|亞美尼亞|armenia|russia|australia|belarus|cyprus|south\s*america|latin\s*america)).*$
+  - name: "☄️🇺🇸 赚钱-美国"
+    <<: *test
+    filter: (?i)^(?=.*赚钱)(?=.*(?:🇺🇸|🇺🇲|美国|美國|\busa?\b|united\s*states|\bamerica\b|纽约|紐約|new\s*york|洛杉矶|洛杉磯|los\s*angeles|芝加哥|chicago|西雅图|西雅圖|seattle|硅谷|圣何塞|san\s*jose|圣克拉拉|santa\s*clara|旧金山|san\s*francisco|华盛顿|華盛頓|washington|波特兰|portland|底特律|凤凰城|phoenix|费城|迈阿密|miami|波士顿|boston|达拉斯|dallas))(?!.*(?:亚美尼亚|亞美尼亞|armenia|russia|australia|belarus|cyprus|south\s*america|latin\s*america)).*$
+  - name: "⚡🇺🇸 MESL-美国"
+    <<: *test
+    filter: (?i)^(?=.*MESL)(?=.*(?:🇺🇸|🇺🇲|美国|美國|\busa?\b|united\s*states|\bamerica\b|纽约|紐約|new\s*york|洛杉矶|洛杉磯|los\s*angeles|芝加哥|chicago|西雅图|西雅圖|seattle|硅谷|圣何塞|san\s*jose|圣克拉拉|santa\s*clara|旧金山|san\s*francisco|华盛顿|華盛頓|washington|波特兰|portland|底特律|凤凰城|phoenix|费城|迈阿密|miami|波士顿|boston|达拉斯|dallas))(?!.*(?:亚美尼亚|亞美尼亞|armenia|russia|australia|belarus|cyprus|south\s*america|latin\s*america)).*$
+  - name: "🔮🇺🇸 宝可梦-美国"
+    <<: *test
+    filter: (?i)^(?=.*宝可梦)(?=.*(?:🇺🇸|🇺🇲|美国|美國|\busa?\b|united\s*states|\bamerica\b|纽约|紐約|new\s*york|洛杉矶|洛杉磯|los\s*angeles|芝加哥|chicago|西雅图|西雅圖|seattle|硅谷|圣何塞|san\s*jose|圣克拉拉|santa\s*clara|旧金山|san\s*francisco|华盛顿|華盛頓|washington|波特兰|portland|底特律|凤凰城|phoenix|费城|迈阿密|miami|波士顿|boston|达拉斯|dallas))(?!.*(?:亚美尼亚|亞美尼亞|armenia|russia|australia|belarus|cyprus|south\s*america|latin\s*america)).*$
+  - name: "🌐 全部节点"
+    exclude-filter: *exclude
+    type: select
+    include-all: true
+    empty-fallback: REJECT
+  - name: "📥 规则下载"
+    type: select
+    proxies:
+    - 🌐 全部节点
+    - 🚀 节点选择
+    - DIRECT
+
+# 本地网段优先；随后依次处理放行例外、专用服务、通用分类和兜底。
+# 删除按目标端口 9090 全局直连的旧条件，控制器本机流量已由本地网段覆盖。
 rules:
+- IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
+- IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
+- IP-CIDR,172.16.0.0/12,DIRECT,no-resolve
+- IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
+- IP-CIDR,100.64.0.0/10,DIRECT,no-resolve
+- IP-CIDR,169.254.0.0/16,DIRECT,no-resolve
+- IP-CIDR,224.0.0.0/4,DIRECT,no-resolve
+- IP-CIDR6,::1/128,DIRECT,no-resolve
+- IP-CIDR6,fc00::/7,DIRECT,no-resolve
+- IP-CIDR6,fe80::/10,DIRECT,no-resolve
+- IP-CIDR6,ff00::/8,DIRECT,no-resolve
+- RULE-SET,private_ip,DIRECT,no-resolve
+- RULE-SET,private_domain,DIRECT
 - RULE-SET,Adobe_direct,🎯 全球直连
 - RULE-SET,pixiv,🔞 18X
 - RULE-SET,Gemini,🎐 Gemini
-- RULE-SET,GoogleFCM,🍀 Google
+- RULE-SET,GoogleFCM,📢 谷歌FCM
 - RULE-SET,BanAD,🚫 广告拦截
 - RULE-SET,MyBanAD,🚫 广告拦截
 - RULE-SET,Adobe_reject,🚫 广告拦截
-- RULE-SET,private_domain,DIRECT
 - PROCESS-NAME,electerm.exe,DIRECT
 - PROCESS-NAME,WinSCP.exe,DIRECT
 - RULE-SET,IPweizhuang,🛸 IP归属地伪装
-- RULE-SET,Google,🍀 Google
-- RULE-SET,GoogleEarth,🍀 Google
 - RULE-SET,YouTube,📹 YouTube
-- RULE-SET,YouTubeMusic,📹 YouTube
-- RULE-SET,ai,🤖 ChatGPT
 - RULE-SET,GCD,🖥️ GitHub-Cloudflare-Docker
 - RULE-SET,github_domain,🖥️ GitHub-Cloudflare-Docker
+- RULE-SET,ai,🤖 ChatGPT
 - RULE-SET,cuicheng,🚀 摧城
 - RULE-SET,cuicheng_LS,🚀 摧城低速
+- RULE-SET,a18,🔞 18X
 - RULE-SET,iwara,🔞 18X
 - RULE-SET,Samsung,✨ Samsung
 - RULE-SET,onedrive_domain,🐬 OneDrive
@@ -549,284 +587,359 @@ rules:
 - RULE-SET,netflix_domain,🎥 NETFLIX
 - RULE-SET,Disney_domain,🧸 Disney
 - RULE-SET,paypal_domain,💶 PayPal
+- RULE-SET,SteamCN,🎯 全球直连
 - RULE-SET,Games1_domain,🎮 游戏平台
 - RULE-SET,Games2_domain,🎮 游戏平台
 - RULE-SET,Games3_domain,🎮 游戏平台
 - RULE-SET,Games4_domain,🎮 游戏平台
 - RULE-SET,Games5_domain,🎮 游戏平台
+- RULE-SET,Google,🍀 Google
+- RULE-SET,google_domain,🍀 Google
 - RULE-SET,proxylite,🚀 节点选择
 - RULE-SET,google_ip,🍀 Google,no-resolve
 - RULE-SET,netflix_ip,🎥 NETFLIX,no-resolve
 - RULE-SET,telegram_ip,📲 Telegram,no-resolve
-- RULE-SET,SteamCN,🎯 全球直连
 - RULE-SET,cn_domain,🎯 全球直连
-- RULE-SET,cn_ip,🎯 全球直连
+- RULE-SET,cn_ip,🎯 全球直连,no-resolve
 - MATCH,🐟 漏网之鱼
-rule-anchor:
-  ip:
-    type: http
-    interval: 86400
-    behavior: ipcidr
-    format: mrs
-  domain:
-    type: http
-    interval: 86400
-    behavior: domain
-    format: mrs
-  class:
-    type: http
-    interval: 86400
-    behavior: classical
-    format: text
-  class_yaml:
-    type: http
-    interval: 86400
-    behavior: classical
-    format: yaml
-rule-providers:
+
+# 规则集整段替换，避免残留旧订阅中的同名地址或无用下载；不改动 proxy-providers 节点集合。
+# 自建列表统一为 classical/text；上游原生二进制列表保持 domain 或 ipcidr/mrs。
+# 所有缓存位于应用工作目录内的独立子目录，统一每 86400 秒更新，可在客户端手动刷新。
+rule-providers!:
   BanAD:
     type: http
     interval: 86400
     behavior: classical
     format: text
+    proxy: 📥 规则下载
     url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/block/BanAD.list
+    path: ./rule_provider/clashrule-party/BanAD.text
   MyBanAD:
     type: http
     interval: 86400
     behavior: classical
     format: text
+    proxy: 📥 规则下载
     url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/block/PixivSDK.list
+    path: ./rule_provider/clashrule-party/MyBanAD.text
   Adobe_reject:
     type: http
     interval: 86400
     behavior: classical
     format: text
+    proxy: 📥 规则下载
     url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/block/Adobe_REJECT.list
+    path: ./rule_provider/clashrule-party/Adobe_reject.text
   Adobe_direct:
     type: http
     interval: 86400
     behavior: classical
     format: text
+    proxy: 📥 规则下载
     url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/block/Adobe_DIRECT.list
+    path: ./rule_provider/clashrule-party/Adobe_direct.text
   IPweizhuang:
     type: http
     interval: 86400
     behavior: classical
     format: text
+    proxy: 📥 规则下载
     url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/privacy/IPAttribution.list
+    path: ./rule_provider/clashrule-party/IPweizhuang.text
   Gemini:
     type: http
     interval: 86400
     behavior: classical
     format: text
+    proxy: 📥 规则下载
     url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/ai/Gemini.list
+    path: ./rule_provider/clashrule-party/Gemini.text
   ai:
     type: http
     interval: 86400
     behavior: classical
     format: text
+    proxy: 📥 规则下载
     url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/ai/AI.list
+    path: ./rule_provider/clashrule-party/ai.text
   GCD:
     type: http
     interval: 86400
     behavior: classical
     format: text
+    proxy: 📥 规则下载
     url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/services/GitHub_Cloudflare_Docker.list
+    path: ./rule_provider/clashrule-party/GCD.text
   cuicheng:
     type: http
     interval: 86400
     behavior: classical
     format: text
+    proxy: 📥 规则下载
     url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/services/CC.list
+    path: ./rule_provider/clashrule-party/cuicheng.text
   cuicheng_LS:
     type: http
     interval: 86400
     behavior: classical
     format: text
+    proxy: 📥 规则下载
     url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/services/CC_LS.list
+    path: ./rule_provider/clashrule-party/cuicheng_LS.text
+  a18:
+    type: http
+    interval: 86400
+    behavior: classical
+    format: text
+    proxy: 📥 规则下载
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/media/AdultCloud.list
+    path: ./rule_provider/clashrule-party/a18.text
   iwara:
     type: http
     interval: 86400
     behavior: classical
     format: text
+    proxy: 📥 规则下载
     url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/media/iwara.list
+    path: ./rule_provider/clashrule-party/iwara.text
   pixiv:
     type: http
     interval: 86400
     behavior: classical
     format: text
+    proxy: 📥 规则下载
     url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/media/pixiv.list
+    path: ./rule_provider/clashrule-party/pixiv.text
   Samsung:
     type: http
     interval: 86400
     behavior: classical
     format: text
+    proxy: 📥 规则下载
     url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/services/Samsung.list
-  Games1_domain:
-    type: http
-    interval: 86400
-    behavior: classical
-    format: text
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Epic.list
-  Games2_domain:
-    type: http
-    interval: 86400
-    behavior: classical
-    format: text
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Origin.list
-  Games3_domain:
-    type: http
-    interval: 86400
-    behavior: classical
-    format: text
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Sony.list
-  Games4_domain:
-    type: http
-    interval: 86400
-    behavior: classical
-    format: text
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Steam.list
-  Games5_domain:
-    type: http
-    interval: 86400
-    behavior: classical
-    format: text
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Nintendo.list
-  private_domain:
-    type: http
-    interval: 86400
-    behavior: domain
-    format: mrs
-    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs
+    path: ./rule_provider/clashrule-party/Samsung.text
   proxylite:
     type: http
     interval: 86400
     behavior: classical
     format: text
+    proxy: 📥 规则下载
     url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/network/ProxyCustom.list
+    path: ./rule_provider/clashrule-party/proxylite.text
+  Games1_domain:
+    type: http
+    interval: 86400
+    behavior: classical
+    format: text
+    proxy: 📥 规则下载
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/games/Epic.list
+    path: ./rule_provider/clashrule-party/Games1_domain.text
+  Games2_domain:
+    type: http
+    interval: 86400
+    behavior: classical
+    format: text
+    proxy: 📥 规则下载
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/games/Origin.list
+    path: ./rule_provider/clashrule-party/Games2_domain.text
+  Games3_domain:
+    type: http
+    interval: 86400
+    behavior: classical
+    format: text
+    proxy: 📥 规则下载
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/games/Sony.list
+    path: ./rule_provider/clashrule-party/Games3_domain.text
+  Games4_domain:
+    type: http
+    interval: 86400
+    behavior: classical
+    format: text
+    proxy: 📥 规则下载
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/games/Steam.list
+    path: ./rule_provider/clashrule-party/Games4_domain.text
+  Games5_domain:
+    type: http
+    interval: 86400
+    behavior: classical
+    format: text
+    proxy: 📥 规则下载
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/games/Nintendo.list
+    path: ./rule_provider/clashrule-party/Games5_domain.text
   YouTube:
     type: http
     interval: 86400
-    behavior: domain
-    format: mrs
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/YouTube.list
-  YouTubeMusic:
-    type: http
-    interval: 86400
-    behavior: domain
-    format: mrs
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/YouTubeMusic.list
+    behavior: classical
+    format: text
+    proxy: 📥 规则下载
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/media/YouTube.list
+    path: ./rule_provider/clashrule-party/YouTube.text
   Google:
     type: http
     interval: 86400
-    behavior: domain
-    format: mrs
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Google.list
-  GoogleEarth:
+    behavior: classical
+    format: text
+    proxy: 📥 规则下载
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/google/Google.list
+    path: ./rule_provider/clashrule-party/Google.text
+  SteamCN:
+    type: http
+    interval: 86400
+    behavior: classical
+    format: text
+    proxy: 📥 规则下载
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/games/SteamCN.list
+    path: ./rule_provider/clashrule-party/SteamCN.text
+  Disney_domain:
+    type: http
+    interval: 86400
+    behavior: classical
+    format: text
+    proxy: 📥 规则下载
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/media/DisneyFamily.list
+    path: ./rule_provider/clashrule-party/Disney_domain.text
+  private_domain:
     type: http
     interval: 86400
     behavior: domain
     format: mrs
-    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs
+    proxy: 📥 规则下载
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs
+    path: ./rule_provider/clashrule-party/private_domain.mrs
   github_domain:
     type: http
     interval: 86400
     behavior: domain
     format: mrs
+    proxy: 📥 规则下载
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs
+    path: ./rule_provider/clashrule-party/github_domain.mrs
   telegram_domain:
     type: http
     interval: 86400
     behavior: domain
     format: mrs
+    proxy: 📥 规则下载
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs
+    path: ./rule_provider/clashrule-party/telegram_domain.mrs
   netflix_domain:
     type: http
     interval: 86400
     behavior: domain
     format: mrs
+    proxy: 📥 规则下载
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.mrs
-  Disney_domain:
-    type: http
-    interval: 86400
-    behavior: classical
-    format: yaml
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Disney/Disney.list
+    path: ./rule_provider/clashrule-party/netflix_domain.mrs
   paypal_domain:
     type: http
     interval: 86400
     behavior: domain
     format: mrs
+    proxy: 📥 规则下载
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/paypal.mrs
+    path: ./rule_provider/clashrule-party/paypal_domain.mrs
   onedrive_domain:
     type: http
     interval: 86400
     behavior: domain
     format: mrs
+    proxy: 📥 规则下载
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/onedrive.mrs
+    path: ./rule_provider/clashrule-party/onedrive_domain.mrs
   microsoft_domain:
     type: http
     interval: 86400
     behavior: domain
     format: mrs
+    proxy: 📥 规则下载
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs
+    path: ./rule_provider/clashrule-party/microsoft_domain.mrs
   apple_domain:
     type: http
     interval: 86400
     behavior: domain
     format: mrs
+    proxy: 📥 规则下载
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs
+    path: ./rule_provider/clashrule-party/apple_domain.mrs
   speedtest_domain:
     type: http
     interval: 86400
     behavior: domain
     format: mrs
+    proxy: 📥 规则下载
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/ookla-speedtest.mrs
+    path: ./rule_provider/clashrule-party/speedtest_domain.mrs
   tiktok_domain:
     type: http
     interval: 86400
     behavior: domain
     format: mrs
+    proxy: 📥 规则下载
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.mrs
-  SteamCN:
-    type: http
-    interval: 86400
-    behavior: domain
-    format: mrs
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/SteamCN.list
+    path: ./rule_provider/clashrule-party/tiktok_domain.mrs
   cn_domain:
     type: http
     interval: 86400
     behavior: domain
     format: mrs
+    proxy: 📥 规则下载
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs
+    path: ./rule_provider/clashrule-party/cn_domain.mrs
+  private_ip:
+    type: http
+    interval: 86400
+    behavior: ipcidr
+    format: mrs
+    proxy: 📥 规则下载
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs
+    path: ./rule_provider/clashrule-party/private_ip.mrs
   cn_ip:
     type: http
     interval: 86400
     behavior: ipcidr
     format: mrs
+    proxy: 📥 规则下载
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs
+    path: ./rule_provider/clashrule-party/cn_ip.mrs
   google_ip:
     type: http
     interval: 86400
     behavior: ipcidr
     format: mrs
+    proxy: 📥 规则下载
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs
+    path: ./rule_provider/clashrule-party/google_ip.mrs
   telegram_ip:
     type: http
     interval: 86400
     behavior: ipcidr
     format: mrs
+    proxy: 📥 规则下载
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs
+    path: ./rule_provider/clashrule-party/telegram_ip.mrs
   netflix_ip:
     type: http
     interval: 86400
     behavior: ipcidr
     format: mrs
+    proxy: 📥 规则下载
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.mrs
-  GoogleFCM:
+    path: ./rule_provider/clashrule-party/netflix_ip.mrs
+  google_domain:
     type: http
     interval: 86400
+    behavior: domain
+    format: mrs
+    proxy: 📥 规则下载
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs
+    path: ./rule_provider/clashrule-party/google_domain.mrs
+  GoogleFCM:
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/google/GoogleFCM.list
     behavior: classical
     format: text
-    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/google/GoogleFCM.list
+    type: http
+    interval: 86400
+    proxy: 📥 规则下载
+    path: ./rule_provider/clashrule-party/GoogleFCM.text

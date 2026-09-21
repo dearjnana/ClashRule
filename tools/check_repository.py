@@ -4,6 +4,7 @@ import json, ipaddress, re, ast, tokenize
 from urllib.parse import unquote
 import yaml
 from build import ROOT, BASE, read
+from verify_party import validate_override
 
 def main():
     files=[p for p in ROOT.rglob('*') if p.is_file() and not any(x in p.parts for x in ('.git','.test-work','__pycache__','reports'))]
@@ -46,13 +47,7 @@ def main():
                     assert re.search(r'[\u4e00-\u9fff]',line),(p,'非中文注释',line)
                     comments+=1
     party=yaml.safe_load(read('clients/clash-party/override.yaml'))
-    groups={g['name'] for g in party['proxy-groups']}|{'DIRECT','REJECT'}
-    for rule in party['rules']:
-        a=rule.split(',');assert a[1 if a[0]=='MATCH' else 2] in groups,rule
-        if a[0]=='RULE-SET':assert a[1] in party['rule-providers'],rule
-    rs=party['rules']
-    assert rs.index('RULE-SET,Adobe_direct,🎯 全球直连')<rs.index('RULE-SET,Adobe_reject,🚫 广告拦截')
-    assert rs.index('RULE-SET,Gemini,🎐 Gemini')<rs.index('RULE-SET,Google,🍀 Google')
+    validate_override(party)
     for removed in ('audit','archive','snippets','custom','profiles/legacy','docs/legacy'):
         assert not (ROOT/removed).exists(),removed
     print(json.dumps({'files':len(files),'rule_conditions':rules_count,'links_checked':links,'chinese_comments':comments,'result':'PASS'},ensure_ascii=False))
