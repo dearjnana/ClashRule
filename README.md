@@ -80,7 +80,7 @@ https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/clients/cl
 
 它直接保留订阅中的节点和节点集合，提供桌面专用策略组、DNS 和分流规则，**不需要 SubConverter 或 `finalize.py`**。带 `!` 的字段属于 Clash Party 对象替换语法，不能把原文件直接当成普通 Mihomo 完整配置。
 
-首次使用先为一个订阅关联覆写；要使用文件中的 DNS 和嗅探方案，关闭应用对应的 DNS、嗅探覆写，避免应用设置在后面覆盖文件内容。TUN、端口、系统代理和控制器口令由应用管理。详细导入、节点命名、MESL Gemini、更新与回退方法见 [Clash Party 使用说明](clients/clash-party/README.md)。
+首次使用先为一个订阅关联覆写；要使用文件中的 DNS 和嗅探方案，关闭应用对应的 DNS、嗅探覆写，避免应用设置在后面覆盖文件内容。TUN、端口、系统代理和控制器口令由应用管理。详细导入、节点命名、Gemini 地区筛选、更新与回退方法见 [Clash Party 使用说明](clients/clash-party/README.md)。
 
 <a id="pipeline"></a>
 
@@ -115,7 +115,7 @@ GitHub 构建成功表示公开规则和配置验证通过，不会自动登录�
 1. 准备自己的机场订阅，或 Sub-Store 合并后导出的节点订阅。
 2. 使用支持本仓库配置的 SubConverter-Extended。仓库自动测试固定使用 **SubConverter-Extended v1.9.7、Mihomo v1.19.31**；安卓适配记录为 **Clash Meta for Android v2.11.34**。这些是验证基线，不表示以后发布的版本都已测试。
 3. 选择上面的 OpenClash 或 Android 外部配置链接。即使转换器已有默认配置，也要明确指定这里的 `config`：部署示例的默认外部配置不等于本仓库入口。
-4. 如果使用机场名称筛选策略组，保留节点名称中的机场和地区标记。例如 Gemini 默认组需要同时识别 `MESL` 和美国标记。仅导入一串没有机场标记的节点，可能导致对应组为空。
+4. 保留节点名称中的真实地区标记。Gemini 两个组按官方地区筛选全部机场的节点，无需 MESL 标记；其他机场专用组仍需要相应机场名称。没有地区名称、国旗或可识别代码的节点不会自动进入 Gemini 组。
 
 Sub-Store 可负责合并、过滤和重命名节点，相关脚本见[脚本说明](scripts/sub-store/README.md)。安装了 Sub-Store 并不代表已经完成本仓库的 `finalize.py` 整理。
 
@@ -193,6 +193,8 @@ Windows 下可使用 `mihomo.exe` 的实际路径。检查需要能读取或下�
 | 想做的修改 | 应编辑的位置 | 不应直接编辑的位置 |
 | --- | --- | --- |
 | 给 Gemini 增减域名 | [rules/ai/Gemini.list](rules/ai/Gemini.list) | `generated/rules/ai/Gemini.list` |
+| 给 AI Studio / Gemini API 增减专用域名 | [rules/ai/GeminiAPI.list](rules/ai/GeminiAPI.list) | `generated/rules/ai/GeminiAPI.list` |
+| 更新 Gemini 官方地区、服务范围或节点名称别名 | [config/gemini-regions.json](config/gemini-regions.json) | 两端模板及 Clash Party 中自动生成的 Gemini 筛选段 |
 | 给“寡妇网”补充通用代理条件或正则 | [rules/network/ProxyLite.list](rules/network/ProxyLite.list) | `profiles/*.ini` 中的生成规则段 |
 | 维护 GFW 纯域名后缀列表 | [rules/network/ProxyGFWlist.list](rules/network/ProxyGFWlist.list) | `providers/ProxyGFW.txt` |
 | 修改某份规则的策略组、优先级或接入新文件 | [config/routing.json](config/routing.json) | 自动生成的规则顺序 |
@@ -240,10 +242,10 @@ Windows 下可使用 `mihomo.exe` 的实际路径。检查需要能读取或下�
 ### 4.4 自动构建会做什么
 
 - 每次推送到 `main` 自动运行，也可在 Actions 页面使用 **Run workflow** 手动运行。
-- 生成去重规则、原生规则集、两端 INI、展开配置、模板和文件索引。
+- 生成去重规则、原生规则集、两端 INI、展开配置、模板和文件索引；统一生成三个客户端的 Gemini 地区筛选和地区对照文档。
 - 检查规则覆盖、服务分流、策略组引用、文件格式、仓库链接和中文注释。
 - 使用固定版本的真实转换器与 Mihomo，配合测试节点验证三种配置；不会使用个人机场订阅或登录你的设备。
-- 另行检查 Clash Party 覆写，实际加载全部规则集，验证节点列表、节点集合、缺少 MESL、首次下载及关键服务的规则命中。
+- 另行检查 Clash Party 覆写，实际加载全部规则集，验证节点列表、节点集合、缺少 MESL、没有可用地区、首次下载及关键服务的规则命中。
 - 所有检查成功后才回写生成结果；无差异时不会制造空提交。已有更新提交时，不用旧构建覆盖新提交。
 - 失败时保留日志和短期诊断报告，生成文件不会由该任务发布。查看失败步骤，修正源文件后再次提交。
 
@@ -272,11 +274,20 @@ Windows 下可使用 `mihomo.exe` 的实际路径。检查需要能读取或下�
 
 构建会根据当前路由顺序消除被前面同策略条件覆盖的重复项。因此 `generated/rules/` 是为当前整套配置生成的结果，不适合随意拆出后用于另一套路由顺序；需要独立引用时，优先使用 `rules/` 中的维护源，并自己指定目标策略。
 
-### 5.3 Gemini 网页与手机 App
+### 5.3 Gemini 网页、手机 App 与开发者 API
 
-[Gemini.list](rules/ai/Gemini.list) 集中维护 Gemini 网页、App 相关接口、AI Studio 等专用规则。默认选择路径是 `🎐 Gemini` → `🇺🇸 Gemini MESL美国`，专用组通过节点名称筛选 MESL 美国节点，并排除容易误匹配的地区名称；没有符合条件的节点时回退到 `REJECT`。
+OpenClash、Android 和 Clash Party 使用相同的官方地区源，已删除原先只用于测试的 MESL 美国 Gemini 组。现在两个服务组直接列出所有机场中地区匹配的节点：
 
-如果该组为空，先检查节点是否真的存在、名称是否保留机场和地区标记。不要只为了让组不为空而把不符合条件的节点改名。节点名称无法证明真实出口地区或 Gemini 可用性；规则命中正确后，还需要排查节点出口、账号、设备 DNS 和 App 自身条件。面板已经保存过的手动选择也可能覆盖首次导入时的默认选择。
+| 策略组 | 服务与筛选范围 |
+| --- | --- |
+| `🎐 Gemini` | 网页与 Android 应用；按网页、Play 商店、Assistant 清单的普通账号地区并集筛选，共 241 个地区 |
+| `🧪 Gemini API` | AI Studio 与 Gemini API；按开发者服务独立清单筛选，共 229 个地区 |
+
+清单核对日期为 **2026-09-21**。日本、韩国、新加坡、台湾、美国、加拿大、澳大利亚和多个欧洲地区均有覆盖，不限制机场。香港、澳门在网页或 Android 清单中，但不在当前 API 清单中；中国大陆仅列为 Workspace 网页例外，未自动纳入普通账号筛选。Android 的商店下载与 Assistant 范围也不同，完整逐地区对照、官方来源和维护方法见 [Gemini 地区说明](docs/Gemini地区说明.md)。
+
+[GeminiAPI.list](rules/ai/GeminiAPI.list) 放在 [Gemini.list](rules/ai/Gemini.list) 之前，开发者专用接口交给 API 组，应用及共享接口仍交给 Gemini 组。为兼容尚未更新整份配置的旧订阅，Gemini.list 保留已有 API 条件；新配置依靠前置匹配实现分流，这部分重叠是有意保留的。
+
+地区识别支持国旗、中英文名称、常用城市别名和大写独立地区代码；两个组均为手动选择，不额外增加定时测速，没有符合条件的节点时为 `REJECT`。如果组为空，检查订阅是否有官方支持地区节点及其真实名称，不要仅为通过筛选而虚改地区。节点名称不能证明实际出口、账号资格或功能可用性；更新后在面板分别选择两个组的可用节点，并通过连接记录验证网页、App 和 API。
 
 ### 5.4 为什么 OpenClash 和安卓有两个入口
 
@@ -322,6 +333,7 @@ ruleset=🥒 寡妇网,https://raw.githubusercontent.com/dearjnana/ClashRule/ref
 | --- | --- | --- |
 | [routing.json](config/routing.json) | 按顺序将规则文件或内联规则交给策略组 | 改变匹配优先级和流量去向；驱动规则去重 |
 | [groups.yaml](config/groups.yaml) | 原生策略组、成员、名称筛选、健康检查和空组回退 | 影响两端组结构及节点选择 |
+| [gemini-regions.json](config/gemini-regions.json) | Google 官方地区、各服务开放范围、中英文别名及核对日期 | 统一生成三个客户端的 Gemini 筛选和完整地区对照 |
 | [base.yaml](config/base.yaml) | 公共基础字段，也是路由器模板的基础设置 | 影响两端，手机覆盖项除外 |
 | [android.yaml](config/android.yaml) | Android 对公共基础配置的覆盖项 | 只影响手机模板 |
 | [sources.json](config/sources.json) | 规则源文件与上游来源的对应关系，部分文件有多个来源 | 记录出处，供维护核对；不会自行下载更新 |
@@ -341,6 +353,9 @@ ruleset=🥒 寡妇网,https://raw.githubusercontent.com/dearjnana/ClashRule/ref
 | [templates/android.yaml](templates/android.yaml) | 应用手机覆盖项、调整组检查周期后的模板 | Android INI 的 `clash_rule_base` |
 | [templates/expanded.yaml](templates/expanded.yaml) | 配合完整展开 INI 的路由器模板 | 展开 INI 的 `clash_rule_base` |
 | [docs/仓库文件索引.md](docs/仓库文件索引.md) | 当前规则文件、接入情况、统计及目录索引 | 阅读和审查构建结果 |
+| [docs/Gemini地区说明.md](docs/Gemini地区说明.md) | 网页、Android、Assistant、API 的完整官方地区对照 | 查地区、节点识别与维护方式 |
+
+Clash Party 的 `override.yaml` 仅 Gemini 两个组的标记区段由构建更新，其余配置继续作为手动维护源。
 
 这些文件应通过修改源文件再构建来更新。`generated/rules/` 中某文件只有说明、没有条件时，通常表示其条件已被前面同策略规则覆盖，例如 GoogleEarth 的条件可能由通用 Google 规则覆盖；构建器会跳过空列表的 INI 引用。
 
@@ -351,10 +366,11 @@ ruleset=🥒 寡妇网,https://raw.githubusercontent.com/dearjnana/ClashRule/ref
 | 文件 | 作用 | 什么时候使用 |
 | --- | --- | --- |
 | [build.py](tools/build.py) | 读取源配置、去重、生成规则集、INI、模板和文件索引，清理失去来源的生成列表 | Actions 自动运行；本地开发时可手动运行 |
+| [gemini_regions.py](tools/gemini_regions.py) | 读取官方地区数据，生成并验证三个客户端的 Gemini 筛选及中文地区表 | 由构建和验证工具调用；地区与别名维护在 JSON 源中 |
 | [verify.py](tools/verify.py) | 检查规则覆盖与生成前后行为、策略组关系及重点服务分流 | 构建后验证 |
 | [check_repository.py](tools/check_repository.py) | 检查规则语法、重复条件、UTF-8/LF、中文注释、文件引用及部分优先级 | 提交前和 Actions 验证 |
 | [integration_test.py](tools/integration_test.py) | 用测试节点启动隔离的转换器与 Mihomo，检查三个入口的实际转换和加载 | 更改构建逻辑后；Actions 自动运行 |
-| [verify_party.py](tools/verify_party.py) | 检查 Clash Party 覆写合并、策略组和规则集，使用隔离内核测试三种订阅场景与实际规则命中 | 修改覆写后；Actions 自动运行 |
+| [verify_party.py](tools/verify_party.py) | 检查 Clash Party 覆写合并、策略组和规则集，使用隔离内核测试四种订阅场景、全部地区旗帜与实际规则命中 | 修改覆写后；Actions 自动运行 |
 | [finalize.py](tools/finalize.py) | 恢复原生策略组，校验组名和成员，写入一个新的 YAML 文件 | 每次个人订阅转换之后 |
 | [requirements.txt](tools/requirements.txt) | 固定 Python 构建依赖 | 安装构建、整理和验证所需依赖 |
 
@@ -373,7 +389,8 @@ ruleset=🥒 寡妇网,https://raw.githubusercontent.com/dearjnana/ClashRule/ref
 | 维护源文件 | 用途 | 当前策略 | 生成结果 |
 | --- | --- | --- | --- |
 | [AI.list](rules/ai/AI.list) | 通用 AI 服务集合，包含 OpenAI、Claude 等；组名为 OpenAi，但内容不限于单一厂商。 | 💬 OpenAi | [对应列表](generated/rules/ai/AI.list) |
-| [Gemini.list](rules/ai/Gemini.list) | Gemini 网页、手机 App 相关接口，以及 AI Studio 等 Google AI 服务的专用条件。 | 🎐 Gemini | [对应列表](generated/rules/ai/Gemini.list) |
+| [Gemini.list](rules/ai/Gemini.list) | Gemini 网页、手机 App 与共享接口；保留已有 API 条件兼容旧订阅，新配置先匹配 API 专用列表。 | 🎐 Gemini | [对应列表](generated/rules/ai/Gemini.list) |
+| [GeminiAPI.list](rules/ai/GeminiAPI.list) | AI Studio 与 Gemini API 专用条件，采用独立地区清单，优先于 Gemini 通用列表。 | 🧪 Gemini API | [对应列表](generated/rules/ai/GeminiAPI.list) |
 
 ### 7.2 `block/`：拦截、净化与放行例外
 
@@ -493,7 +510,7 @@ ruleset=🥒 寡妇网,https://raw.githubusercontent.com/dearjnana/ClashRule/ref
 | --- | --- |
 | [scripts/sub-store/rename.js](scripts/sub-store/rename.js) | 节点地区识别、重命名、编号、倍率及过滤处理；支持参数见脚本开头 |
 | [scripts/sub-store/README.md](scripts/sub-store/README.md) | 说明脚本默认行为与参数注意事项 |
-| [clients/clash-party/override.yaml](clients/clash-party/override.yaml) | Clash Party 桌面覆写，保留订阅节点、替换规则与策略组；修复旧路径、优先级和空组回退，并提供 MESL Gemini 与规则下载组。直接在“覆写”页面导入，不经转换器 |
+| [clients/clash-party/override.yaml](clients/clash-party/override.yaml) | Clash Party 桌面覆写，保留订阅节点、替换规则与策略组；提供按官方地区筛选的 Gemini / API 组与规则下载组。直接在“覆写”页面导入，不经转换器 |
 | [clients/clash-party/README.md](clients/clash-party/README.md) | Clash Party 专用导入、设置优先级、节点分组、规则维护、验证范围和回退说明 |
 
 Sub-Store 脚本 Raw 地址：
@@ -511,6 +528,7 @@ https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/scripts/su
 | [网页维护与自动构建.md](docs/网页维护与自动构建.md) | GitHub 编辑、自动发布范围、Actions 日志及失败处理 |
 | [使用与回退.md](docs/使用与回退.md) | 转换与整理的简明操作、手机适配依据、Gemini 和回退说明 |
 | [仓库文件索引.md](docs/仓库文件索引.md) | 构建时自动更新的规则数量和文件索引，不应手改 |
+| [Gemini地区说明.md](docs/Gemini地区说明.md) | 自动生成的完整地区表、官方来源、不同服务的开放差异和节点筛选维护 |
 | [根目录迁移链接.md](docs/根目录迁移链接.md) | 旧根目录链接迁移到新目录的对照与 Raw 地址 |
 | [来源与维护.md](docs/来源与维护.md) | 上游规则来源、维护约定和许可证说明 |
 | [优化报告.md](docs/优化报告.md) | 整理与优化时的变更和验证记录，历史统计不一定等于当前数量 |
@@ -533,8 +551,9 @@ https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/scripts/su
 | GitHub 已更新，客户端仍走旧规则 | 检查转换器缓存、个人 YAML 是否重新生成、客户端是否成功更新并启用；原生规则集的刷新与完整订阅刷新不同。 |
 | 整理提示缺少原生策略组字段 | 检查是否选对本仓库 INI、使用 `expand=true`，以及转换结果是否保留 `x-clashrule-native-groups`；不要把已经整理过的文件再次作为输入。 |
 | 整理提示输出文件已存在 | 换一个新的输出文件名；不要把正在使用的配置直接当作输出覆盖。 |
-| Gemini 专用组只剩 REJECT | 检查订阅中的 MESL 美国节点及名称筛选；确认没有被重命名、过滤掉。 |
+| Gemini 专用组只剩 REJECT | 检查订阅是否包含该服务官方支持地区的节点，名称是否保留真实地区标记；不限 MESL，也不限美国。 |
 | Gemini 网页能用但 App 不能用 | 分别查两者连接记录、设备 DNS、实际节点出口与账号条件；规则匹配成功不等于应用和账号一定可用。 |
+| Gemini 网页能用但 AI Studio / API 不可用 | 两者官方地区清单不同，例如香港、澳门未列入当前 API 清单；在 API 组另选支持地区节点，并检查账号与实际出口。 |
 | 手机在家能更新，外出不能更新 | 检查是否用了仅在家庭局域网可访问的转换或订阅地址。 |
 | 下载软件的进程规则不匹配 | 路由器通常看不到局域网终端上的进程名，Android 也不会匹配 Windows 的 `.exe` 名称；按客户端实际识别能力使用进程规则。 |
 | 上游列表更新后本仓库没有跟着变化 | 当前没有定时同步上游；需维护 `rules/` 的内容，来源记录不执行下载。 |

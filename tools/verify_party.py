@@ -20,6 +20,7 @@ import threading
 import time
 
 import yaml
+from gemini_regions import API_GROUP, WEB_GROUP, flag, load_regions, supported, validate_gemini_groups
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = 'https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/'
@@ -35,6 +36,9 @@ NODES = [
     '[MESL]🇯🇵 日本 01', '[MESL]🇸🇬 新加坡 01', '[OTHER] network relay',
     '[OTHER] JapanTest JP-01', '[良心云]🇭🇰 香港 01',
 ]
+REGIONS = load_regions()['regions']
+REGION_NODES = {'[地区测试]' + flag(item['code']) + ' 01': item for item in REGIONS}
+NODES += list(REGION_NODES)
 
 
 def load_override():
@@ -127,7 +131,8 @@ def validate_override(config):
             assert providers[name]['behavior'] == 'domain'
             referenced.add(name)
     assert referenced == set(providers), '存在未使用的规则集'
-    assert byname['🎐 Gemini']['proxies'][0] == '🇺🇸 Gemini MESL美国'
+    validate_gemini_groups(groups)
+    assert rules.index('RULE-SET,GeminiAPI,🧪 Gemini API') < rules.index('RULE-SET,Gemini,🎐 Gemini')
     return {'groups': len(groups), 'providers': len(providers), 'rules': len(rules)}
 
 
@@ -270,9 +275,11 @@ def run_tests(core, override, payloads):
     proxy_port = server.server_address[1]
     outcomes = {}
     try:
-        for scenario in ['节点列表', '节点集合', '缺少MESL']:
-            home = RUN / {'节点列表': 'nodes', '节点集合': 'provider', '缺少MESL': 'no-mesl'}[scenario]
+        for scenario in ['节点列表', '节点集合', '缺少MESL', '没有可用地区']:
+            home = RUN / {'节点列表': 'nodes', '节点集合': 'provider', '缺少MESL': 'no-mesl', '没有可用地区': 'no-region'}[scenario]
             names = NODES if scenario != '缺少MESL' else [n for n in NODES if '[MESL]' not in n]
+            if scenario == '没有可用地区':
+                names = ['[OTHER]🇷🇺 Russia', '[OTHER]🇨🇳 中国大陆', '[OTHER]unknown relay']
             nodes = [{'name': name, 'type': 'http', 'server': '127.0.0.1', 'port': proxy_port} for name in names]
             base = {'proxies': nodes, 'proxy-providers': {}, 'proxy-groups': [{'name': '旧策略', 'type': 'select', 'proxies': ['DIRECT']}],
                     'rules': ['MATCH,DIRECT'], 'dns': {'fallback': ['127.0.0.1'], 'nameserver-policy': {'rule-set:旧规则': '127.0.0.1'}},
@@ -328,14 +335,23 @@ def run_tests(core, override, payloads):
                 try:
                     wait_for(controller, process, lambda: api(controller, '/version'))
                     counts = wait_for(controller, process, lambda: provider_counts(controller, len(payloads)))
-                    group = api(controller, '/proxies/' + quote('🇺🇸 Gemini MESL美国', safe=''))
-                    expected = NODES[:2] if scenario != '缺少MESL' else ['REJECT']
-                    assert sorted(group['all']) == sorted(expected), group
-                    for name in ['🇰🇷 韩国节点', '⚡🇰🇷 MESL-韩国']:
-                        assert api(controller, '/proxies/' + quote(name, safe=''))['all'] == ['REJECT'], name
+                    gemini_members = {}
+                    for group_name in [WEB_GROUP, API_GROUP]:
+                        group = api(controller, '/proxies/' + quote(group_name, safe=''))
+                        base_allowed = {n for i,n in enumerate(NODES[:17]) if i not in {5,8,9,14}}
+                        if group_name == API_GROUP:
+                            base_allowed.discard('[MESL]🇭🇰 香港 01')
+                            base_allowed.discard('[良心云]🇭🇰 香港 01')
+                        expected = {n for n,item in REGION_NODES.items() if supported(item, group_name)} | base_allowed
+                        expected &= set(names)
+                        assert set(group['all']) == (expected or {'REJECT'}), (group_name, set(group['all']) ^ expected)
+                        gemini_members[group_name] = len(expected)
+                    korean = api(controller, '/proxies/' + quote('🇰🇷 韩国节点', safe=''))['all']
+                    assert not any('Ukraine' in n for n in korean)
+                    assert api(controller, '/proxies/' + quote('⚡🇰🇷 MESL-韩国', safe=''))['all'] == ['REJECT']
                     all_nodes = api(controller, '/proxies/' + quote('🌐 全部节点', safe=''))['all']
                     assert not any('剩余流量' in n for n in all_nodes)
-                    outcomes[scenario] = {'syntax': 'PASS', 'providers': counts, 'gemini_members': group['all'], 'korea_false_match_excluded': True}
+                    outcomes[scenario] = {'syntax': 'PASS', 'providers': counts, 'gemini_members': gemini_members, 'all_official_regions_checked': True, 'korea_false_match_excluded': True}
                     if scenario == '节点列表':
                         assert server.downloads == set(payloads), sorted(set(payloads) - server.downloads)
                         outcomes[scenario]['cold_downloads'] = len(server.downloads)
@@ -365,7 +381,8 @@ def route_tests(controller, listener, fixture_port):
     cases = [
         ('gemini.google.com', 443, 'RuleSet', 'Gemini', '🎐 Gemini'),
         ('robinfrontend-pa.googleapis.com', 443, 'RuleSet', 'Gemini', '🎐 Gemini'),
-        ('generativelanguage.googleapis.com', 443, 'RuleSet', 'Gemini', '🎐 Gemini'),
+        ('generativelanguage.googleapis.com', 443, 'RuleSet', 'GeminiAPI', '🧪 Gemini API'),
+        ('aistudio.google.com', 443, 'RuleSet', 'GeminiAPI', '🧪 Gemini API'),
         ('mtalk.google.com', 443, 'RuleSet', 'GoogleFCM', '📢 谷歌FCM'),
         ('music.youtube.com', 443, 'RuleSet', 'YouTube', '📹 YouTube'),
         ('youtubei.googleapis.com', 443, 'RuleSet', 'YouTube', '📹 YouTube'),

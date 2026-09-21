@@ -3,6 +3,7 @@ from pathlib import Path
 from collections import defaultdict
 import argparse, copy, ipaddress, json
 import yaml
+from gemini_regions import resolve_groups, update_party_groups, write_region_doc
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = 'https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/'
@@ -87,7 +88,9 @@ def build_index(entries):
 def build(base=BASE):
     base = base.rstrip('/') + '/'
     entries = json.loads(read('config/routing.json'))
-    groups = yaml.safe_load(read('config/groups.yaml'))
+    groups = resolve_groups(yaml.safe_load(read('config/groups.yaml')))
+    update_party_groups()
+    write_region_doc()
     files = optimize(entries)
     # 删除不再被主配置引用的生成列表，防止规则改名后残留旧输出。
     expected = {ROOT / generated(path) for path in files}

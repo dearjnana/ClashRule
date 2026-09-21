@@ -80,7 +80,7 @@ jobs:
             echo '已有更新提交，本次不发布旧构建；由新任务处理。' >> "$GITHUB_STEP_SUMMARY"
             exit 0
           fi
-          git add -- generated/rules providers profiles templates docs/仓库文件索引.md
+          git add -- generated/rules providers profiles templates docs/仓库文件索引.md docs/Gemini地区说明.md clients/clash-party/override.yaml
           if git diff --cached --quiet; then
             echo '验证通过，生成文件已是最新，无需新增提交。' >> "$GITHUB_STEP_SUMMARY"
             exit 0

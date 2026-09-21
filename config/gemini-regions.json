@@ -1,0 +1,3930 @@
+{
+  "checked_on": "2026-09-21",
+  "description_zh": "官方可用地区与节点名称别名；地区名称只用于筛选，不能证明节点真实出口或账号资格。",
+  "sources": {
+    "web": "https://support.google.com/gemini/answer/13575153?hl=en",
+    "android": "https://support.google.com/gemini/answer/14579026?hl=en&co=GENIE.Platform%3DAndroid",
+    "api": "https://ai.google.dev/gemini-api/docs/available-regions?hl=en",
+    "names": "https://github.com/unicode-org/cldr-json/tree/main/cldr-json/cldr-localenames-full/main"
+  },
+  "service_notes_zh": {
+    "web": "Gemini 网页版；不包括仅面向 Workspace 的中国大陆条目。",
+    "android": "可从 Google Play 下载 Gemini Android 应用；官方重复的 Andorra 已去重。",
+    "assistant": "可通过 Google Assistant 切换到 Gemini，仍需满足官方邀请等条件。",
+    "api": "Google AI Studio 与 Gemini API，使用独立官方地区清单。"
+  },
+  "exclude_filter": "(?i)(失联|超时|官网|售后|客服|剩余|到期|过期|自助|主流|流量|重置|订阅|网址|群组|邀请|返利|电报|无效|套餐|expire|traffic|reset|renew|website|invite)",
+  "regions": [
+    {
+      "code": "AD",
+      "name_zh": "安道尔",
+      "name_en": "Andorra",
+      "services": [
+        "web",
+        "android",
+        "api"
+      ],
+      "aliases": [
+        "Andorra",
+        "安道尔",
+        "安道爾"
+      ]
+    },
+    {
+      "code": "AE",
+      "name_zh": "阿拉伯联合酋长国",
+      "name_en": "United Arab Emirates",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Dubai",
+        "UAE",
+        "United Arab Emirates",
+        "杜拜",
+        "迪拜",
+        "阿拉伯联合酋长国",
+        "阿拉伯聯合大公國",
+        "阿联酋",
+        "阿聯酋"
+      ]
+    },
+    {
+      "code": "AG",
+      "name_zh": "安提瓜和巴布达",
+      "name_en": "Antigua & Barbuda",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Antigua & Barbuda",
+        "Antigua and Barbuda",
+        "安地卡及巴布達",
+        "安提瓜和巴布达"
+      ]
+    },
+    {
+      "code": "AI",
+      "name_zh": "安圭拉",
+      "name_en": "Anguilla",
+      "services": [
+        "web",
+        "android",
+        "api"
+      ],
+      "aliases": [
+        "Anguilla",
+        "安圭拉",
+        "安奎拉"
+      ]
+    },
+    {
+      "code": "AL",
+      "name_zh": "阿尔巴尼亚",
+      "name_en": "Albania",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Albania",
+        "阿尔巴尼亚",
+        "阿爾巴尼亞"
+      ]
+    },
+    {
+      "code": "AM",
+      "name_zh": "亚美尼亚",
+      "name_en": "Armenia",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Armenia",
+        "亚美尼亚",
+        "亞美尼亞"
+      ]
+    },
+    {
+      "code": "AO",
+      "name_zh": "安哥拉",
+      "name_en": "Angola",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Angola",
+        "安哥拉"
+      ]
+    },
+    {
+      "code": "AQ",
+      "name_zh": "南极洲",
+      "name_en": "Antarctica",
+      "services": [
+        "web",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Antarctica",
+        "南极洲",
+        "南極洲"
+      ]
+    },
+    {
+      "code": "AR",
+      "name_zh": "阿根廷",
+      "name_en": "Argentina",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Argentina",
+        "阿根廷"
+      ]
+    },
+    {
+      "code": "AS",
+      "name_zh": "美属萨摩亚",
+      "name_en": "American Samoa",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "American Samoa",
+        "美属萨摩亚",
+        "美屬薩摩亞"
+      ]
+    },
+    {
+      "code": "AT",
+      "name_zh": "奥地利",
+      "name_en": "Austria",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Austria",
+        "奥地利",
+        "奧地利"
+      ]
+    },
+    {
+      "code": "AU",
+      "name_zh": "澳大利亚",
+      "name_en": "Australia",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Australia",
+        "Melbourne",
+        "Sydney",
+        "墨尔本",
+        "墨爾本",
+        "悉尼",
+        "澳大利亚",
+        "澳大利亞",
+        "澳洲",
+        "雪梨"
+      ]
+    },
+    {
+      "code": "AW",
+      "name_zh": "阿鲁巴",
+      "name_en": "Aruba",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Aruba",
+        "荷屬阿魯巴",
+        "阿鲁巴"
+      ]
+    },
+    {
+      "code": "AX",
+      "name_zh": "奥兰群岛",
+      "name_en": "Åland Islands",
+      "services": [
+        "web",
+        "android",
+        "assistant"
+      ],
+      "aliases": [
+        "Åland Islands",
+        "奥兰群岛",
+        "奧蘭群島"
+      ]
+    },
+    {
+      "code": "AZ",
+      "name_zh": "阿塞拜疆",
+      "name_en": "Azerbaijan",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Azerbaijan",
+        "亞塞拜然",
+        "阿塞拜疆"
+      ]
+    },
+    {
+      "code": "BA",
+      "name_zh": "波斯尼亚和黑塞哥维那",
+      "name_en": "Bosnia & Herzegovina",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Bosnia",
+        "Bosnia & Herzegovina",
+        "Bosnia and Herzegovina",
+        "波士尼亞與赫塞哥維納",
+        "波斯尼亚和黑塞哥维那"
+      ]
+    },
+    {
+      "code": "BB",
+      "name_zh": "巴巴多斯",
+      "name_en": "Barbados",
+      "services": [
+        "web",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Barbados",
+        "巴巴多斯",
+        "巴貝多"
+      ]
+    },
+    {
+      "code": "BD",
+      "name_zh": "孟加拉国",
+      "name_en": "Bangladesh",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Bangladesh",
+        "孟加拉",
+        "孟加拉国"
+      ]
+    },
+    {
+      "code": "BE",
+      "name_zh": "比利时",
+      "name_en": "Belgium",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Belgium",
+        "比利时",
+        "比利時"
+      ]
+    },
+    {
+      "code": "BF",
+      "name_zh": "布基纳法索",
+      "name_en": "Burkina Faso",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Burkina Faso",
+        "布吉納法索",
+        "布基纳法索"
+      ]
+    },
+    {
+      "code": "BG",
+      "name_zh": "保加利亚",
+      "name_en": "Bulgaria",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Bulgaria",
+        "保加利亚",
+        "保加利亞"
+      ]
+    },
+    {
+      "code": "BH",
+      "name_zh": "巴林",
+      "name_en": "Bahrain",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Bahrain",
+        "巴林"
+      ]
+    },
+    {
+      "code": "BI",
+      "name_zh": "布隆迪",
+      "name_en": "Burundi",
+      "services": [
+        "web",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Burundi",
+        "布隆迪",
+        "蒲隆地"
+      ]
+    },
+    {
+      "code": "BJ",
+      "name_zh": "贝宁",
+      "name_en": "Benin",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Benin",
+        "貝南",
+        "贝宁"
+      ]
+    },
+    {
+      "code": "BL",
+      "name_zh": "圣巴泰勒米",
+      "name_en": "St. Barthélemy",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Saint Barthélemy",
+        "St. Barthélemy",
+        "圣巴泰勒米",
+        "聖巴瑟米"
+      ]
+    },
+    {
+      "code": "BM",
+      "name_zh": "百慕大",
+      "name_en": "Bermuda",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Bermuda",
+        "百慕大",
+        "百慕達"
+      ]
+    },
+    {
+      "code": "BN",
+      "name_zh": "文莱",
+      "name_en": "Brunei",
+      "services": [
+        "web",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Brunei",
+        "文莱",
+        "汶萊"
+      ]
+    },
+    {
+      "code": "BO",
+      "name_zh": "玻利维亚",
+      "name_en": "Bolivia",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Bolivia",
+        "玻利維亞",
+        "玻利维亚"
+      ]
+    },
+    {
+      "code": "BQ",
+      "name_zh": "荷属加勒比区",
+      "name_en": "Caribbean Netherlands",
+      "services": [
+        "web",
+        "android",
+        "api"
+      ],
+      "aliases": [
+        "Caribbean Netherlands",
+        "荷属加勒比区",
+        "荷蘭加勒比區"
+      ]
+    },
+    {
+      "code": "BR",
+      "name_zh": "巴西",
+      "name_en": "Brazil",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Brazil",
+        "巴西"
+      ]
+    },
+    {
+      "code": "BS",
+      "name_zh": "巴哈马",
+      "name_en": "Bahamas",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Bahamas",
+        "The Bahamas",
+        "巴哈馬",
+        "巴哈马"
+      ]
+    },
+    {
+      "code": "BT",
+      "name_zh": "不丹",
+      "name_en": "Bhutan",
+      "services": [
+        "web",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Bhutan",
+        "不丹"
+      ]
+    },
+    {
+      "code": "BW",
+      "name_zh": "博茨瓦纳",
+      "name_en": "Botswana",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Botswana",
+        "博茨瓦纳",
+        "波札那"
+      ]
+    },
+    {
+      "code": "BZ",
+      "name_zh": "伯利兹",
+      "name_en": "Belize",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Belize",
+        "伯利兹",
+        "貝里斯"
+      ]
+    },
+    {
+      "code": "CA",
+      "name_zh": "加拿大",
+      "name_en": "Canada",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Canada",
+        "Toronto",
+        "Vancouver",
+        "加拿大",
+        "多伦多",
+        "多倫多",
+        "温哥华",
+        "溫哥華"
+      ]
+    },
+    {
+      "code": "CC",
+      "name_zh": "科科斯（基林）群岛",
+      "name_en": "Cocos (Keeling) Islands",
+      "services": [
+        "web",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Cocos (Keeling) Islands",
+        "Cocos Islands",
+        "科克斯（基靈）群島",
+        "科科斯（基林）群岛"
+      ]
+    },
+    {
+      "code": "CD",
+      "name_zh": "刚果（金）",
+      "name_en": "Congo - Kinshasa",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Congo (DRC)",
+        "Congo - Kinshasa",
+        "Democratic Republic of Congo",
+        "Democratic Republic of the Congo",
+        "刚果民主共和国",
+        "刚果（金）",
+        "剛果民主共和國",
+        "剛果（金夏沙）"
+      ]
+    },
+    {
+      "code": "CF",
+      "name_zh": "中非共和国",
+      "name_en": "Central African Republic",
+      "services": [
+        "web",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Central African Republic",
+        "中非共和国",
+        "中非共和國"
+      ]
+    },
+    {
+      "code": "CG",
+      "name_zh": "刚果（布）",
+      "name_en": "Congo - Brazzaville",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Congo (Republic)",
+        "Congo - Brazzaville",
+        "Republic of the Congo",
+        "刚果共和国",
+        "刚果（布）",
+        "剛果共和國",
+        "剛果（布拉薩）"
+      ]
+    },
+    {
+      "code": "CH",
+      "name_zh": "瑞士",
+      "name_en": "Switzerland",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Switzerland",
+        "瑞士"
+      ]
+    },
+    {
+      "code": "CI",
+      "name_zh": "科特迪瓦",
+      "name_en": "Côte d’Ivoire",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Côte d'Ivoire",
+        "Côte d’Ivoire",
+        "Ivory Coast",
+        "科特迪瓦",
+        "象牙海岸"
+      ]
+    },
+    {
+      "code": "CK",
+      "name_zh": "库克群岛",
+      "name_en": "Cook Islands",
+      "services": [
+        "web",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Cook Islands",
+        "库克群岛",
+        "庫克群島"
+      ]
+    },
+    {
+      "code": "CL",
+      "name_zh": "智利",
+      "name_en": "Chile",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Chile",
+        "智利"
+      ]
+    },
+    {
+      "code": "CM",
+      "name_zh": "喀麦隆",
+      "name_en": "Cameroon",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Cameroon",
+        "喀麥隆",
+        "喀麦隆"
+      ]
+    },
+    {
+      "code": "CN",
+      "name_zh": "中国",
+      "name_en": "China",
+      "services": [
+        "workspace_web_only"
+      ],
+      "aliases": [
+        "China",
+        "Mainland China (Workspace only)",
+        "中国",
+        "中國"
+      ],
+      "note_zh": "官方网页条目只面向 Workspace，不纳入普通账号的自动地区筛选。"
+    },
+    {
+      "code": "CO",
+      "name_zh": "哥伦比亚",
+      "name_en": "Colombia",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Colombia",
+        "哥伦比亚",
+        "哥倫比亞"
+      ]
+    },
+    {
+      "code": "CR",
+      "name_zh": "哥斯达黎加",
+      "name_en": "Costa Rica",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Costa Rica",
+        "哥斯大黎加",
+        "哥斯达黎加"
+      ]
+    },
+    {
+      "code": "CV",
+      "name_zh": "佛得角",
+      "name_en": "Cape Verde",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Cabo Verde",
+        "Cape Verde",
+        "佛得角",
+        "維德角"
+      ]
+    },
+    {
+      "code": "CW",
+      "name_zh": "库拉索",
+      "name_en": "Curaçao",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Curaçao",
+        "库拉索",
+        "庫拉索"
+      ]
+    },
+    {
+      "code": "CX",
+      "name_zh": "圣诞岛",
+      "name_en": "Christmas Island",
+      "services": [
+        "web",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Christmas Island",
+        "圣诞岛",
+        "聖誕島"
+      ]
+    },
+    {
+      "code": "CY",
+      "name_zh": "塞浦路斯",
+      "name_en": "Cyprus",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Cyprus",
+        "Republic of Cyprus",
+        "塞浦路斯",
+        "賽普勒斯"
+      ]
+    },
+    {
+      "code": "CZ",
+      "name_zh": "捷克",
+      "name_en": "Czechia",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Czech Republic",
+        "Czechia",
+        "捷克",
+        "捷克共和国",
+        "捷克共和國"
+      ]
+    },
+    {
+      "code": "DE",
+      "name_zh": "德国",
+      "name_en": "Germany",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Frankfurt",
+        "Germany",
+        "德国",
+        "德國",
+        "法兰克福",
+        "法蘭克福"
+      ]
+    },
+    {
+      "code": "DJ",
+      "name_zh": "吉布提",
+      "name_en": "Djibouti",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Djibouti",
+        "吉布地",
+        "吉布提"
+      ]
+    },
+    {
+      "code": "DK",
+      "name_zh": "丹麦",
+      "name_en": "Denmark",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Denmark",
+        "丹麥",
+        "丹麦"
+      ]
+    },
+    {
+      "code": "DM",
+      "name_zh": "多米尼克",
+      "name_en": "Dominica",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Dominica",
+        "多米尼克"
+      ]
+    },
+    {
+      "code": "DO",
+      "name_zh": "多米尼加共和国",
+      "name_en": "Dominican Republic",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Dominican Republic",
+        "多明尼加共和國",
+        "多米尼加共和国"
+      ]
+    },
+    {
+      "code": "DZ",
+      "name_zh": "阿尔及利亚",
+      "name_en": "Algeria",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Algeria",
+        "阿尔及利亚",
+        "阿爾及利亞"
+      ]
+    },
+    {
+      "code": "EC",
+      "name_zh": "厄瓜多尔",
+      "name_en": "Ecuador",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Ecuador",
+        "厄瓜多",
+        "厄瓜多尔"
+      ]
+    },
+    {
+      "code": "EE",
+      "name_zh": "爱沙尼亚",
+      "name_en": "Estonia",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Estonia",
+        "愛沙尼亞",
+        "爱沙尼亚"
+      ]
+    },
+    {
+      "code": "EG",
+      "name_zh": "埃及",
+      "name_en": "Egypt",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Egypt",
+        "埃及"
+      ]
+    },
+    {
+      "code": "EH",
+      "name_zh": "西撒哈拉",
+      "name_en": "Western Sahara",
+      "services": [
+        "web",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Western Sahara",
+        "西撒哈拉"
+      ]
+    },
+    {
+      "code": "ER",
+      "name_zh": "厄立特里亚",
+      "name_en": "Eritrea",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Eritrea",
+        "厄利垂亞",
+        "厄立特里亚"
+      ]
+    },
+    {
+      "code": "ES",
+      "name_zh": "西班牙",
+      "name_en": "Spain",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Spain",
+        "西班牙"
+      ]
+    },
+    {
+      "code": "ET",
+      "name_zh": "埃塞俄比亚",
+      "name_en": "Ethiopia",
+      "services": [
+        "web",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Ethiopia",
+        "埃塞俄比亚",
+        "衣索比亞"
+      ]
+    },
+    {
+      "code": "FI",
+      "name_zh": "芬兰",
+      "name_en": "Finland",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Finland",
+        "芬兰",
+        "芬蘭"
+      ]
+    },
+    {
+      "code": "FJ",
+      "name_zh": "斐济",
+      "name_en": "Fiji",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Fiji",
+        "斐济",
+        "斐濟"
+      ]
+    },
+    {
+      "code": "FK",
+      "name_zh": "福克兰群岛",
+      "name_en": "Falkland Islands",
+      "services": [
+        "web",
+        "android",
+        "api"
+      ],
+      "aliases": [
+        "Falkland Islands",
+        "Falkland Islands (Islas Malvinas)",
+        "福克兰群岛",
+        "福克兰群岛（马尔维纳斯群岛）",
+        "福克蘭群島",
+        "福克蘭群島（馬爾維納斯群島）"
+      ]
+    },
+    {
+      "code": "FM",
+      "name_zh": "密克罗尼西亚",
+      "name_en": "Micronesia",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Micronesia",
+        "密克罗尼西亚",
+        "密克羅尼西亞"
+      ]
+    },
+    {
+      "code": "FO",
+      "name_zh": "法罗群岛",
+      "name_en": "Faroe Islands",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Faroe Islands",
+        "法罗群岛",
+        "法羅群島"
+      ]
+    },
+    {
+      "code": "FR",
+      "name_zh": "法国",
+      "name_en": "France",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "France",
+        "Paris",
+        "巴黎",
+        "法国",
+        "法國"
+      ]
+    },
+    {
+      "code": "GA",
+      "name_zh": "加蓬",
+      "name_en": "Gabon",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Gabon",
+        "加彭",
+        "加蓬"
+      ]
+    },
+    {
+      "code": "GB",
+      "name_zh": "英国",
+      "name_en": "United Kingdom",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "London",
+        "UK",
+        "United Kingdom",
+        "伦敦",
+        "倫敦",
+        "英国",
+        "英國"
+      ]
+    },
+    {
+      "code": "GD",
+      "name_zh": "格林纳达",
+      "name_en": "Grenada",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Grenada",
+        "格林纳达",
+        "格瑞那達"
+      ]
+    },
+    {
+      "code": "GE",
+      "name_zh": "格鲁吉亚",
+      "name_en": "Georgia",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Georgia",
+        "喬治亞",
+        "格鲁吉亚"
+      ]
+    },
+    {
+      "code": "GF",
+      "name_zh": "法属圭亚那",
+      "name_en": "French Guiana",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "French Guiana",
+        "法属圭亚那",
+        "法屬圭亞那"
+      ]
+    },
+    {
+      "code": "GG",
+      "name_zh": "根西岛",
+      "name_en": "Guernsey",
+      "services": [
+        "web",
+        "android",
+        "api"
+      ],
+      "aliases": [
+        "Guernsey",
+        "根息",
+        "根西岛"
+      ]
+    },
+    {
+      "code": "GH",
+      "name_zh": "加纳",
+      "name_en": "Ghana",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Ghana",
+        "加纳",
+        "迦納"
+      ]
+    },
+    {
+      "code": "GI",
+      "name_zh": "直布罗陀",
+      "name_en": "Gibraltar",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Gibraltar",
+        "直布罗陀",
+        "直布羅陀"
+      ]
+    },
+    {
+      "code": "GL",
+      "name_zh": "格陵兰",
+      "name_en": "Greenland",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Greenland",
+        "格陵兰",
+        "格陵蘭"
+      ]
+    },
+    {
+      "code": "GM",
+      "name_zh": "冈比亚",
+      "name_en": "Gambia",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Gambia",
+        "The Gambia",
+        "冈比亚",
+        "甘比亞"
+      ]
+    },
+    {
+      "code": "GN",
+      "name_zh": "几内亚",
+      "name_en": "Guinea",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Guinea",
+        "几内亚",
+        "幾內亞"
+      ]
+    },
+    {
+      "code": "GP",
+      "name_zh": "瓜德罗普",
+      "name_en": "Guadeloupe",
+      "services": [
+        "web",
+        "android",
+        "assistant"
+      ],
+      "aliases": [
+        "Guadeloupe",
+        "瓜地洛普",
+        "瓜德罗普"
+      ]
+    },
+    {
+      "code": "GQ",
+      "name_zh": "赤道几内亚",
+      "name_en": "Equatorial Guinea",
+      "services": [
+        "web",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Equatorial Guinea",
+        "赤道几内亚",
+        "赤道幾內亞"
+      ]
+    },
+    {
+      "code": "GR",
+      "name_zh": "希腊",
+      "name_en": "Greece",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Greece",
+        "希腊",
+        "希臘"
+      ]
+    },
+    {
+      "code": "GS",
+      "name_zh": "南乔治亚和南桑威奇群岛",
+      "name_en": "South Georgia & South Sandwich Islands",
+      "services": [
+        "web",
+        "api"
+      ],
+      "aliases": [
+        "South Georgia & South Sandwich Islands",
+        "South Georgia and the South Sandwich Islands",
+        "南乔治亚和南桑威奇群岛",
+        "南喬治亞與南三明治群島"
+      ]
+    },
+    {
+      "code": "GT",
+      "name_zh": "危地马拉",
+      "name_en": "Guatemala",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Guatemala",
+        "危地马拉",
+        "瓜地馬拉"
+      ]
+    },
+    {
+      "code": "GU",
+      "name_zh": "关岛",
+      "name_en": "Guam",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Guam",
+        "关岛",
+        "關島"
+      ]
+    },
+    {
+      "code": "GW",
+      "name_zh": "几内亚比绍",
+      "name_en": "Guinea-Bissau",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Guinea-Bissau",
+        "几内亚比绍",
+        "幾內亞比索"
+      ]
+    },
+    {
+      "code": "GY",
+      "name_zh": "圭亚那",
+      "name_en": "Guyana",
+      "services": [
+        "web",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Guyana",
+        "圭亚那",
+        "蓋亞那"
+      ]
+    },
+    {
+      "code": "HK",
+      "name_zh": "中国香港特别行政区",
+      "name_en": "Hong Kong SAR China",
+      "services": [
+        "web",
+        "android"
+      ],
+      "aliases": [
+        "Hong Kong",
+        "Hong Kong SAR China",
+        "HongKong",
+        "中国香港特别行政区",
+        "中國香港特別行政區",
+        "香港"
+      ]
+    },
+    {
+      "code": "HM",
+      "name_zh": "赫德岛和麦克唐纳群岛",
+      "name_en": "Heard & McDonald Islands",
+      "services": [
+        "web",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Heard & McDonald Islands",
+        "Heard Island and McDonald Islands",
+        "赫德岛和麦克唐纳群岛",
+        "赫德島及麥唐納群島"
+      ]
+    },
+    {
+      "code": "HN",
+      "name_zh": "洪都拉斯",
+      "name_en": "Honduras",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Honduras",
+        "宏都拉斯",
+        "洪都拉斯"
+      ]
+    },
+    {
+      "code": "HR",
+      "name_zh": "克罗地亚",
+      "name_en": "Croatia",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Croatia",
+        "克罗地亚",
+        "克羅埃西亞"
+      ]
+    },
+    {
+      "code": "HT",
+      "name_zh": "海地",
+      "name_en": "Haiti",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Haiti",
+        "海地"
+      ]
+    },
+    {
+      "code": "HU",
+      "name_zh": "匈牙利",
+      "name_en": "Hungary",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Hungary",
+        "匈牙利"
+      ]
+    },
+    {
+      "code": "ID",
+      "name_zh": "印度尼西亚",
+      "name_en": "Indonesia",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Indonesia",
+        "印尼",
+        "印度尼西亚"
+      ]
+    },
+    {
+      "code": "IE",
+      "name_zh": "爱尔兰",
+      "name_en": "Ireland",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Ireland",
+        "愛爾蘭",
+        "爱尔兰"
+      ]
+    },
+    {
+      "code": "IL",
+      "name_zh": "以色列",
+      "name_en": "Israel",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Israel",
+        "以色列"
+      ]
+    },
+    {
+      "code": "IM",
+      "name_zh": "马恩岛",
+      "name_en": "Isle of Man",
+      "services": [
+        "web",
+        "android",
+        "api"
+      ],
+      "aliases": [
+        "Isle of Man",
+        "曼島",
+        "马恩岛"
+      ]
+    },
+    {
+      "code": "IN",
+      "name_zh": "印度",
+      "name_en": "India",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "India",
+        "Mumbai",
+        "印度",
+        "孟买",
+        "孟買"
+      ]
+    },
+    {
+      "code": "IO",
+      "name_zh": "英属印度洋领地",
+      "name_en": "British Indian Ocean Territory",
+      "services": [
+        "web",
+        "android",
+        "api"
+      ],
+      "aliases": [
+        "British Indian Ocean Territory",
+        "Chagos Archipelago",
+        "查哥斯群島",
+        "查戈斯群岛",
+        "英属印度洋领地",
+        "英屬印度洋領地"
+      ]
+    },
+    {
+      "code": "IQ",
+      "name_zh": "伊拉克",
+      "name_en": "Iraq",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Iraq",
+        "伊拉克"
+      ]
+    },
+    {
+      "code": "IS",
+      "name_zh": "冰岛",
+      "name_en": "Iceland",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Iceland",
+        "冰岛",
+        "冰島"
+      ]
+    },
+    {
+      "code": "IT",
+      "name_zh": "意大利",
+      "name_en": "Italy",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Italy",
+        "意大利",
+        "義大利"
+      ]
+    },
+    {
+      "code": "JE",
+      "name_zh": "泽西岛",
+      "name_en": "Jersey",
+      "services": [
+        "web",
+        "android",
+        "api"
+      ],
+      "aliases": [
+        "Jersey",
+        "泽西岛",
+        "澤西島"
+      ]
+    },
+    {
+      "code": "JM",
+      "name_zh": "牙买加",
+      "name_en": "Jamaica",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Jamaica",
+        "牙买加",
+        "牙買加"
+      ]
+    },
+    {
+      "code": "JO",
+      "name_zh": "约旦",
+      "name_en": "Jordan",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Jordan",
+        "約旦",
+        "约旦"
+      ]
+    },
+    {
+      "code": "JP",
+      "name_zh": "日本",
+      "name_en": "Japan",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Fukuoka",
+        "Japan",
+        "Nagoya",
+        "Osaka",
+        "Tokyo",
+        "东京",
+        "名古屋",
+        "大阪",
+        "日本",
+        "東京",
+        "福冈",
+        "福岡"
+      ]
+    },
+    {
+      "code": "KE",
+      "name_zh": "肯尼亚",
+      "name_en": "Kenya",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Kenya",
+        "肯亞",
+        "肯尼亚"
+      ]
+    },
+    {
+      "code": "KG",
+      "name_zh": "吉尔吉斯斯坦",
+      "name_en": "Kyrgyzstan",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Kyrgyzstan",
+        "吉尔吉斯斯坦",
+        "吉爾吉斯"
+      ]
+    },
+    {
+      "code": "KH",
+      "name_zh": "柬埔寨",
+      "name_en": "Cambodia",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Cambodia",
+        "柬埔寨"
+      ]
+    },
+    {
+      "code": "KI",
+      "name_zh": "基里巴斯",
+      "name_en": "Kiribati",
+      "services": [
+        "web",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Kiribati",
+        "吉里巴斯",
+        "基里巴斯"
+      ]
+    },
+    {
+      "code": "KM",
+      "name_zh": "科摩罗",
+      "name_en": "Comoros",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Comoros",
+        "科摩罗",
+        "葛摩"
+      ]
+    },
+    {
+      "code": "KN",
+      "name_zh": "圣基茨和尼维斯",
+      "name_en": "St. Kitts & Nevis",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Saint Kitts and Nevis",
+        "St. Kitts & Nevis",
+        "圣基茨和尼维斯",
+        "聖克里斯多福及尼維斯"
+      ]
+    },
+    {
+      "code": "KR",
+      "name_zh": "韩国",
+      "name_en": "South Korea",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Busan",
+        "Seoul",
+        "South Korea",
+        "南韓",
+        "釜山",
+        "韓國",
+        "韩国",
+        "首尔",
+        "首爾"
+      ]
+    },
+    {
+      "code": "KW",
+      "name_zh": "科威特",
+      "name_en": "Kuwait",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Kuwait",
+        "科威特"
+      ]
+    },
+    {
+      "code": "KY",
+      "name_zh": "开曼群岛",
+      "name_en": "Cayman Islands",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Cayman Islands",
+        "开曼群岛",
+        "開曼群島"
+      ]
+    },
+    {
+      "code": "KZ",
+      "name_zh": "哈萨克斯坦",
+      "name_en": "Kazakhstan",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Kazakhstan",
+        "哈萨克斯坦",
+        "哈薩克"
+      ]
+    },
+    {
+      "code": "LA",
+      "name_zh": "老挝",
+      "name_en": "Laos",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Laos",
+        "寮國",
+        "老挝"
+      ]
+    },
+    {
+      "code": "LB",
+      "name_zh": "黎巴嫩",
+      "name_en": "Lebanon",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Lebanon",
+        "黎巴嫩"
+      ]
+    },
+    {
+      "code": "LC",
+      "name_zh": "圣卢西亚",
+      "name_en": "St. Lucia",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Saint Lucia",
+        "St. Lucia",
+        "圣卢西亚",
+        "聖露西亞"
+      ]
+    },
+    {
+      "code": "LI",
+      "name_zh": "列支敦士登",
+      "name_en": "Liechtenstein",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Liechtenstein",
+        "列支敦士登",
+        "列支敦斯登"
+      ]
+    },
+    {
+      "code": "LK",
+      "name_zh": "斯里兰卡",
+      "name_en": "Sri Lanka",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Sri Lanka",
+        "斯里兰卡",
+        "斯里蘭卡"
+      ]
+    },
+    {
+      "code": "LR",
+      "name_zh": "利比里亚",
+      "name_en": "Liberia",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Liberia",
+        "利比里亚",
+        "賴比瑞亞"
+      ]
+    },
+    {
+      "code": "LS",
+      "name_zh": "莱索托",
+      "name_en": "Lesotho",
+      "services": [
+        "web",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Lesotho",
+        "莱索托",
+        "賴索托"
+      ]
+    },
+    {
+      "code": "LT",
+      "name_zh": "立陶宛",
+      "name_en": "Lithuania",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Lithuania",
+        "立陶宛"
+      ]
+    },
+    {
+      "code": "LU",
+      "name_zh": "卢森堡",
+      "name_en": "Luxembourg",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Luxembourg",
+        "卢森堡",
+        "盧森堡"
+      ]
+    },
+    {
+      "code": "LV",
+      "name_zh": "拉脱维亚",
+      "name_en": "Latvia",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Latvia",
+        "拉脫維亞",
+        "拉脱维亚"
+      ]
+    },
+    {
+      "code": "LY",
+      "name_zh": "利比亚",
+      "name_en": "Libya",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Libya",
+        "利比亚",
+        "利比亞"
+      ]
+    },
+    {
+      "code": "MA",
+      "name_zh": "摩洛哥",
+      "name_en": "Morocco",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Morocco",
+        "摩洛哥"
+      ]
+    },
+    {
+      "code": "MC",
+      "name_zh": "摩纳哥",
+      "name_en": "Monaco",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Monaco",
+        "摩納哥",
+        "摩纳哥"
+      ]
+    },
+    {
+      "code": "MD",
+      "name_zh": "摩尔多瓦",
+      "name_en": "Moldova",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Moldova",
+        "摩尔多瓦",
+        "摩爾多瓦"
+      ]
+    },
+    {
+      "code": "ME",
+      "name_zh": "黑山",
+      "name_en": "Montenegro",
+      "services": [
+        "web",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Montenegro",
+        "蒙特內哥羅",
+        "黑山"
+      ]
+    },
+    {
+      "code": "MF",
+      "name_zh": "法属圣马丁",
+      "name_en": "St. Martin",
+      "services": [
+        "web",
+        "android",
+        "assistant"
+      ],
+      "aliases": [
+        "Saint Martin",
+        "St. Martin",
+        "法属圣马丁",
+        "法屬聖馬丁"
+      ]
+    },
+    {
+      "code": "MG",
+      "name_zh": "马达加斯加",
+      "name_en": "Madagascar",
+      "services": [
+        "web",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Madagascar",
+        "馬達加斯加",
+        "马达加斯加"
+      ]
+    },
+    {
+      "code": "MH",
+      "name_zh": "马绍尔群岛",
+      "name_en": "Marshall Islands",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Marshall Islands",
+        "馬紹爾群島",
+        "马绍尔群岛"
+      ]
+    },
+    {
+      "code": "MK",
+      "name_zh": "北马其顿",
+      "name_en": "North Macedonia",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "North Macedonia",
+        "北馬其頓",
+        "北马其顿"
+      ]
+    },
+    {
+      "code": "ML",
+      "name_zh": "马里",
+      "name_en": "Mali",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Mali",
+        "馬利",
+        "马里"
+      ]
+    },
+    {
+      "code": "MM",
+      "name_zh": "缅甸",
+      "name_en": "Myanmar (Burma)",
+      "services": [
+        "web",
+        "android",
+        "assistant"
+      ],
+      "aliases": [
+        "Myanmar",
+        "Myanmar (Burma)",
+        "緬甸",
+        "缅甸"
+      ]
+    },
+    {
+      "code": "MN",
+      "name_zh": "蒙古",
+      "name_en": "Mongolia",
+      "services": [
+        "web",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Mongolia",
+        "蒙古"
+      ]
+    },
+    {
+      "code": "MO",
+      "name_zh": "中国澳门特别行政区",
+      "name_en": "Macao SAR China",
+      "services": [
+        "web",
+        "android"
+      ],
+      "aliases": [
+        "Macao",
+        "Macao SAR China",
+        "Macau",
+        "中国澳门特别行政区",
+        "中國澳門特別行政區",
+        "澳門",
+        "澳门"
+      ]
+    },
+    {
+      "code": "MP",
+      "name_zh": "北马里亚纳群岛",
+      "name_en": "Northern Mariana Islands",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Northern Mariana Islands",
+        "北馬利安納群島",
+        "北马里亚纳群岛"
+      ]
+    },
+    {
+      "code": "MQ",
+      "name_zh": "马提尼克",
+      "name_en": "Martinique",
+      "services": [
+        "web",
+        "android",
+        "assistant"
+      ],
+      "aliases": [
+        "Martinique",
+        "馬丁尼克",
+        "马提尼克"
+      ]
+    },
+    {
+      "code": "MR",
+      "name_zh": "毛里塔尼亚",
+      "name_en": "Mauritania",
+      "services": [
+        "web",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Mauritania",
+        "毛里塔尼亚",
+        "茅利塔尼亞"
+      ]
+    },
+    {
+      "code": "MS",
+      "name_zh": "蒙特塞拉特",
+      "name_en": "Montserrat",
+      "services": [
+        "web",
+        "android",
+        "api"
+      ],
+      "aliases": [
+        "Montserrat",
+        "蒙哲臘",
+        "蒙特塞拉特"
+      ]
+    },
+    {
+      "code": "MT",
+      "name_zh": "马耳他",
+      "name_en": "Malta",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Malta",
+        "馬爾他",
+        "马耳他"
+      ]
+    },
+    {
+      "code": "MU",
+      "name_zh": "毛里求斯",
+      "name_en": "Mauritius",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Mauritius",
+        "模里西斯",
+        "毛里求斯"
+      ]
+    },
+    {
+      "code": "MV",
+      "name_zh": "马尔代夫",
+      "name_en": "Maldives",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Maldives",
+        "馬爾地夫",
+        "马尔代夫"
+      ]
+    },
+    {
+      "code": "MW",
+      "name_zh": "马拉维",
+      "name_en": "Malawi",
+      "services": [
+        "web",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Malawi",
+        "馬拉威",
+        "马拉维"
+      ]
+    },
+    {
+      "code": "MX",
+      "name_zh": "墨西哥",
+      "name_en": "Mexico",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Mexico",
+        "墨西哥"
+      ]
+    },
+    {
+      "code": "MY",
+      "name_zh": "马来西亚",
+      "name_en": "Malaysia",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Malaysia",
+        "馬來西亞",
+        "马来西亚"
+      ]
+    },
+    {
+      "code": "MZ",
+      "name_zh": "莫桑比克",
+      "name_en": "Mozambique",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Mozambique",
+        "莫三比克",
+        "莫桑比克"
+      ]
+    },
+    {
+      "code": "NA",
+      "name_zh": "纳米比亚",
+      "name_en": "Namibia",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Namibia",
+        "納米比亞",
+        "纳米比亚"
+      ]
+    },
+    {
+      "code": "NC",
+      "name_zh": "新喀里多尼亚",
+      "name_en": "New Caledonia",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "New Caledonia",
+        "新喀里多尼亚",
+        "新喀里多尼亞"
+      ]
+    },
+    {
+      "code": "NE",
+      "name_zh": "尼日尔",
+      "name_en": "Niger",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Niger",
+        "尼日",
+        "尼日尔"
+      ]
+    },
+    {
+      "code": "NF",
+      "name_zh": "诺福克岛",
+      "name_en": "Norfolk Island",
+      "services": [
+        "web",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Norfolk Island",
+        "諾福克島",
+        "诺福克岛"
+      ]
+    },
+    {
+      "code": "NG",
+      "name_zh": "尼日利亚",
+      "name_en": "Nigeria",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Nigeria",
+        "奈及利亞",
+        "尼日利亚"
+      ]
+    },
+    {
+      "code": "NI",
+      "name_zh": "尼加拉瓜",
+      "name_en": "Nicaragua",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Nicaragua",
+        "尼加拉瓜"
+      ]
+    },
+    {
+      "code": "NL",
+      "name_zh": "荷兰",
+      "name_en": "Netherlands",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Amsterdam",
+        "Netherlands",
+        "荷兰",
+        "荷蘭",
+        "阿姆斯特丹"
+      ]
+    },
+    {
+      "code": "NO",
+      "name_zh": "挪威",
+      "name_en": "Norway",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Norway",
+        "挪威"
+      ]
+    },
+    {
+      "code": "NP",
+      "name_zh": "尼泊尔",
+      "name_en": "Nepal",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Nepal",
+        "尼泊尔",
+        "尼泊爾"
+      ]
+    },
+    {
+      "code": "NR",
+      "name_zh": "瑙鲁",
+      "name_en": "Nauru",
+      "services": [
+        "web",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Nauru",
+        "瑙鲁",
+        "諾魯"
+      ]
+    },
+    {
+      "code": "NU",
+      "name_zh": "纽埃",
+      "name_en": "Niue",
+      "services": [
+        "web",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Niue",
+        "紐埃島",
+        "纽埃"
+      ]
+    },
+    {
+      "code": "NZ",
+      "name_zh": "新西兰",
+      "name_en": "New Zealand",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Aotearoa New Zealand",
+        "New Zealand",
+        "新西兰",
+        "紐西蘭"
+      ]
+    },
+    {
+      "code": "OM",
+      "name_zh": "阿曼",
+      "name_en": "Oman",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Oman",
+        "阿曼"
+      ]
+    },
+    {
+      "code": "PA",
+      "name_zh": "巴拿马",
+      "name_en": "Panama",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Panama",
+        "巴拿馬",
+        "巴拿马"
+      ]
+    },
+    {
+      "code": "PE",
+      "name_zh": "秘鲁",
+      "name_en": "Peru",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Peru",
+        "秘魯",
+        "秘鲁"
+      ]
+    },
+    {
+      "code": "PF",
+      "name_zh": "法属波利尼西亚",
+      "name_en": "French Polynesia",
+      "services": [
+        "web",
+        "android",
+        "assistant"
+      ],
+      "aliases": [
+        "French Polynesia",
+        "法属波利尼西亚",
+        "法屬玻里尼西亞"
+      ]
+    },
+    {
+      "code": "PG",
+      "name_zh": "巴布亚新几内亚",
+      "name_en": "Papua New Guinea",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Papua New Guinea",
+        "巴布亚新几内亚",
+        "巴布亞紐幾內亞"
+      ]
+    },
+    {
+      "code": "PH",
+      "name_zh": "菲律宾",
+      "name_en": "Philippines",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Philippines",
+        "菲律宾",
+        "菲律賓"
+      ]
+    },
+    {
+      "code": "PK",
+      "name_zh": "巴基斯坦",
+      "name_en": "Pakistan",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Pakistan",
+        "巴基斯坦"
+      ]
+    },
+    {
+      "code": "PL",
+      "name_zh": "波兰",
+      "name_en": "Poland",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Poland",
+        "波兰",
+        "波蘭"
+      ]
+    },
+    {
+      "code": "PM",
+      "name_zh": "圣皮埃尔和密克隆群岛",
+      "name_en": "St. Pierre & Miquelon",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Saint Pierre and Miquelon",
+        "St. Pierre & Miquelon",
+        "圣皮埃尔和密克隆群岛",
+        "聖皮埃與密克隆群島"
+      ]
+    },
+    {
+      "code": "PN",
+      "name_zh": "皮特凯恩群岛",
+      "name_en": "Pitcairn Islands",
+      "services": [
+        "web",
+        "android",
+        "api"
+      ],
+      "aliases": [
+        "Pitcairn",
+        "Pitcairn Islands",
+        "皮特凯恩群岛",
+        "皮特肯群島"
+      ]
+    },
+    {
+      "code": "PR",
+      "name_zh": "波多黎各",
+      "name_en": "Puerto Rico",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Puerto Rico",
+        "波多黎各"
+      ]
+    },
+    {
+      "code": "PS",
+      "name_zh": "巴勒斯坦领土",
+      "name_en": "Palestinian Territories",
+      "services": [
+        "web",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Palestine",
+        "Palestinian Territories",
+        "巴勒斯坦",
+        "巴勒斯坦自治區",
+        "巴勒斯坦领土"
+      ]
+    },
+    {
+      "code": "PT",
+      "name_zh": "葡萄牙",
+      "name_en": "Portugal",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Portugal",
+        "葡萄牙"
+      ]
+    },
+    {
+      "code": "PW",
+      "name_zh": "帕劳",
+      "name_en": "Palau",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Palau",
+        "帕劳",
+        "帛琉"
+      ]
+    },
+    {
+      "code": "PY",
+      "name_zh": "巴拉圭",
+      "name_en": "Paraguay",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Paraguay",
+        "巴拉圭"
+      ]
+    },
+    {
+      "code": "QA",
+      "name_zh": "卡塔尔",
+      "name_en": "Qatar",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Qatar",
+        "卡塔尔",
+        "卡達"
+      ]
+    },
+    {
+      "code": "RE",
+      "name_zh": "留尼汪",
+      "name_en": "Réunion",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Réunion",
+        "留尼旺",
+        "留尼汪"
+      ]
+    },
+    {
+      "code": "RO",
+      "name_zh": "罗马尼亚",
+      "name_en": "Romania",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Romania",
+        "罗马尼亚",
+        "羅馬尼亞"
+      ]
+    },
+    {
+      "code": "RS",
+      "name_zh": "塞尔维亚",
+      "name_en": "Serbia",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Serbia",
+        "塞尔维亚",
+        "塞爾維亞"
+      ]
+    },
+    {
+      "code": "RW",
+      "name_zh": "卢旺达",
+      "name_en": "Rwanda",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Rwanda",
+        "卢旺达",
+        "盧安達"
+      ]
+    },
+    {
+      "code": "SA",
+      "name_zh": "沙特阿拉伯",
+      "name_en": "Saudi Arabia",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Saudi Arabia",
+        "沙烏地阿拉伯",
+        "沙特阿拉伯"
+      ]
+    },
+    {
+      "code": "SB",
+      "name_zh": "所罗门群岛",
+      "name_en": "Solomon Islands",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Solomon Islands",
+        "所罗门群岛",
+        "索羅門群島"
+      ]
+    },
+    {
+      "code": "SC",
+      "name_zh": "塞舌尔",
+      "name_en": "Seychelles",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Seychelles",
+        "塞席爾",
+        "塞舌尔"
+      ]
+    },
+    {
+      "code": "SD",
+      "name_zh": "苏丹",
+      "name_en": "Sudan",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Sudan",
+        "苏丹",
+        "蘇丹"
+      ]
+    },
+    {
+      "code": "SE",
+      "name_zh": "瑞典",
+      "name_en": "Sweden",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Sweden",
+        "瑞典"
+      ]
+    },
+    {
+      "code": "SG",
+      "name_zh": "新加坡",
+      "name_en": "Singapore",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Singapore",
+        "新加坡",
+        "狮城",
+        "獅城"
+      ]
+    },
+    {
+      "code": "SH",
+      "name_zh": "圣赫勒拿",
+      "name_en": "St. Helena",
+      "services": [
+        "web",
+        "api"
+      ],
+      "aliases": [
+        "Saint Helena, Ascension and Tristan da Cunha",
+        "St. Helena",
+        "圣赫勒拿",
+        "聖赫勒拿島"
+      ]
+    },
+    {
+      "code": "SI",
+      "name_zh": "斯洛文尼亚",
+      "name_en": "Slovenia",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Slovenia",
+        "斯洛文尼亚",
+        "斯洛維尼亞"
+      ]
+    },
+    {
+      "code": "SJ",
+      "name_zh": "斯瓦尔巴和扬马延",
+      "name_en": "Svalbard & Jan Mayen",
+      "services": [
+        "web",
+        "android",
+        "assistant"
+      ],
+      "aliases": [
+        "Svalbard & Jan Mayen",
+        "Svalbard and Jan Mayen",
+        "挪威屬斯瓦巴及尖棉",
+        "斯瓦尔巴和扬马延"
+      ]
+    },
+    {
+      "code": "SK",
+      "name_zh": "斯洛伐克",
+      "name_en": "Slovakia",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Slovakia",
+        "斯洛伐克"
+      ]
+    },
+    {
+      "code": "SL",
+      "name_zh": "塞拉利昂",
+      "name_en": "Sierra Leone",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Sierra Leone",
+        "塞拉利昂",
+        "獅子山"
+      ]
+    },
+    {
+      "code": "SM",
+      "name_zh": "圣马力诺",
+      "name_en": "San Marino",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "San Marino",
+        "圣马力诺",
+        "聖馬利諾"
+      ]
+    },
+    {
+      "code": "SN",
+      "name_zh": "塞内加尔",
+      "name_en": "Senegal",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Senegal",
+        "塞內加爾",
+        "塞内加尔"
+      ]
+    },
+    {
+      "code": "SO",
+      "name_zh": "索马里",
+      "name_en": "Somalia",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Somalia",
+        "索馬利亞",
+        "索马里"
+      ]
+    },
+    {
+      "code": "SR",
+      "name_zh": "苏里南",
+      "name_en": "Suriname",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Suriname",
+        "苏里南",
+        "蘇利南"
+      ]
+    },
+    {
+      "code": "SS",
+      "name_zh": "南苏丹",
+      "name_en": "South Sudan",
+      "services": [
+        "web",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "South Sudan",
+        "南苏丹",
+        "南蘇丹"
+      ]
+    },
+    {
+      "code": "ST",
+      "name_zh": "圣多美和普林西比",
+      "name_en": "São Tomé & Príncipe",
+      "services": [
+        "web",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "São Tomé & Príncipe",
+        "São Tomé and Príncipe",
+        "圣多美和普林西比",
+        "聖多美普林西比"
+      ]
+    },
+    {
+      "code": "SV",
+      "name_zh": "萨尔瓦多",
+      "name_en": "El Salvador",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "El Salvador",
+        "萨尔瓦多",
+        "薩爾瓦多"
+      ]
+    },
+    {
+      "code": "SX",
+      "name_zh": "荷属圣马丁",
+      "name_en": "Sint Maarten",
+      "services": [
+        "web"
+      ],
+      "aliases": [
+        "Sint Maarten",
+        "荷属圣马丁",
+        "荷屬聖馬丁"
+      ]
+    },
+    {
+      "code": "SZ",
+      "name_zh": "斯威士兰",
+      "name_en": "Eswatini",
+      "services": [
+        "web",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Eswatini",
+        "Swaziland",
+        "史瓦帝尼",
+        "史瓦濟蘭",
+        "斯威士兰"
+      ]
+    },
+    {
+      "code": "TC",
+      "name_zh": "特克斯和凯科斯群岛",
+      "name_en": "Turks & Caicos Islands",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Turks & Caicos Islands",
+        "Turks and Caicos",
+        "Turks and Caicos Islands",
+        "土克斯及開科斯群島",
+        "特克斯和凯科斯群岛"
+      ]
+    },
+    {
+      "code": "TD",
+      "name_zh": "乍得",
+      "name_en": "Chad",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Chad",
+        "乍得",
+        "查德"
+      ]
+    },
+    {
+      "code": "TF",
+      "name_zh": "法属南部领地",
+      "name_en": "French Southern Territories",
+      "services": [
+        "web",
+        "android"
+      ],
+      "aliases": [
+        "French Southern Territories",
+        "French Southern and Antarctic Lands",
+        "法属南部领地",
+        "法屬南部屬地"
+      ]
+    },
+    {
+      "code": "TG",
+      "name_zh": "多哥",
+      "name_en": "Togo",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Togo",
+        "多哥"
+      ]
+    },
+    {
+      "code": "TH",
+      "name_zh": "泰国",
+      "name_en": "Thailand",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Thailand",
+        "泰国",
+        "泰國"
+      ]
+    },
+    {
+      "code": "TJ",
+      "name_zh": "塔吉克斯坦",
+      "name_en": "Tajikistan",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Tajikistan",
+        "塔吉克",
+        "塔吉克斯坦"
+      ]
+    },
+    {
+      "code": "TK",
+      "name_zh": "托克劳",
+      "name_en": "Tokelau",
+      "services": [
+        "web",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Tokelau",
+        "托克劳",
+        "托克勞群島"
+      ]
+    },
+    {
+      "code": "TL",
+      "name_zh": "东帝汶",
+      "name_en": "Timor-Leste",
+      "services": [
+        "web",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "East Timor",
+        "Timor-Leste",
+        "东帝汶",
+        "東帝汶"
+      ]
+    },
+    {
+      "code": "TM",
+      "name_zh": "土库曼斯坦",
+      "name_en": "Turkmenistan",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Turkmenistan",
+        "土库曼斯坦",
+        "土庫曼"
+      ]
+    },
+    {
+      "code": "TN",
+      "name_zh": "突尼斯",
+      "name_en": "Tunisia",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Tunisia",
+        "突尼斯",
+        "突尼西亞"
+      ]
+    },
+    {
+      "code": "TO",
+      "name_zh": "汤加",
+      "name_en": "Tonga",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Tonga",
+        "東加",
+        "汤加"
+      ]
+    },
+    {
+      "code": "TR",
+      "name_zh": "土耳其",
+      "name_en": "Türkiye",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Turkey",
+        "Türkiye",
+        "土耳其"
+      ]
+    },
+    {
+      "code": "TT",
+      "name_zh": "特立尼达和多巴哥",
+      "name_en": "Trinidad & Tobago",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Trinidad & Tobago",
+        "Trinidad and Tobago",
+        "千里達及托巴哥",
+        "特立尼达和多巴哥"
+      ]
+    },
+    {
+      "code": "TV",
+      "name_zh": "图瓦卢",
+      "name_en": "Tuvalu",
+      "services": [
+        "web",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Tuvalu",
+        "吐瓦魯",
+        "图瓦卢"
+      ]
+    },
+    {
+      "code": "TW",
+      "name_zh": "台湾",
+      "name_en": "Taiwan",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Taipei",
+        "Taiwan",
+        "台中",
+        "台北",
+        "台湾",
+        "台灣",
+        "臺北",
+        "臺灣",
+        "高雄"
+      ]
+    },
+    {
+      "code": "TZ",
+      "name_zh": "坦桑尼亚",
+      "name_en": "Tanzania",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Tanzania",
+        "坦尚尼亞",
+        "坦桑尼亚"
+      ]
+    },
+    {
+      "code": "UA",
+      "name_zh": "乌克兰",
+      "name_en": "Ukraine",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Ukraine",
+        "乌克兰",
+        "烏克蘭"
+      ]
+    },
+    {
+      "code": "UG",
+      "name_zh": "乌干达",
+      "name_en": "Uganda",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Uganda",
+        "乌干达",
+        "烏干達"
+      ]
+    },
+    {
+      "code": "UM",
+      "name_zh": "美国本土外小岛屿",
+      "name_en": "U.S. Outlying Islands",
+      "services": [
+        "web",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "U.S. Outlying Islands",
+        "United States Minor Outlying Islands",
+        "美国本土外小岛屿",
+        "美國本土外小島嶼"
+      ]
+    },
+    {
+      "code": "US",
+      "name_zh": "美国",
+      "name_en": "United States",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Chicago",
+        "Dallas",
+        "Los Angeles",
+        "New York",
+        "San Francisco",
+        "San Jose",
+        "Seattle",
+        "Silicon Valley",
+        "US",
+        "USA",
+        "United States",
+        "Washington",
+        "华盛顿",
+        "圣何塞",
+        "旧金山",
+        "洛杉矶",
+        "洛杉磯",
+        "矽谷",
+        "硅谷",
+        "紐約",
+        "纽约",
+        "美国",
+        "美國",
+        "聖荷西",
+        "舊金山",
+        "芝加哥",
+        "華盛頓",
+        "西雅图",
+        "西雅圖",
+        "达拉斯",
+        "達拉斯"
+      ]
+    },
+    {
+      "code": "UY",
+      "name_zh": "乌拉圭",
+      "name_en": "Uruguay",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Uruguay",
+        "乌拉圭",
+        "烏拉圭"
+      ]
+    },
+    {
+      "code": "UZ",
+      "name_zh": "乌兹别克斯坦",
+      "name_en": "Uzbekistan",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Uzbekistan",
+        "乌兹别克斯坦",
+        "烏茲別克"
+      ]
+    },
+    {
+      "code": "VA",
+      "name_zh": "梵蒂冈",
+      "name_en": "Vatican City",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Vatican City",
+        "梵蒂冈",
+        "梵蒂岡"
+      ]
+    },
+    {
+      "code": "VC",
+      "name_zh": "圣文森特和格林纳丁斯",
+      "name_en": "St. Vincent & Grenadines",
+      "services": [
+        "web",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Saint Vincent and the Grenadines",
+        "St. Vincent & Grenadines",
+        "圣文森特和格林纳丁斯",
+        "聖文森及格瑞那丁"
+      ]
+    },
+    {
+      "code": "VE",
+      "name_zh": "委内瑞拉",
+      "name_en": "Venezuela",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Venezuela",
+        "委內瑞拉",
+        "委内瑞拉"
+      ]
+    },
+    {
+      "code": "VG",
+      "name_zh": "英属维尔京群岛",
+      "name_en": "British Virgin Islands",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "British Virgin Islands",
+        "英属维尔京群岛",
+        "英屬維京群島"
+      ]
+    },
+    {
+      "code": "VI",
+      "name_zh": "美属维尔京群岛",
+      "name_en": "U.S. Virgin Islands",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "U.S. Virgin Islands",
+        "美属维尔京群岛",
+        "美屬維京群島"
+      ]
+    },
+    {
+      "code": "VN",
+      "name_zh": "越南",
+      "name_en": "Vietnam",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Vietnam",
+        "越南"
+      ]
+    },
+    {
+      "code": "VU",
+      "name_zh": "瓦努阿图",
+      "name_en": "Vanuatu",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Vanuatu",
+        "瓦努阿图",
+        "萬那杜"
+      ]
+    },
+    {
+      "code": "WF",
+      "name_zh": "瓦利斯和富图纳",
+      "name_en": "Wallis & Futuna",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Wallis & Futuna",
+        "Wallis and Futuna",
+        "瓦利斯和富图纳",
+        "瓦利斯群島和富圖那群島"
+      ]
+    },
+    {
+      "code": "WS",
+      "name_zh": "萨摩亚",
+      "name_en": "Samoa",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Samoa",
+        "萨摩亚",
+        "薩摩亞"
+      ]
+    },
+    {
+      "code": "XK",
+      "name_zh": "科索沃",
+      "name_en": "Kosovo",
+      "services": [
+        "web",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Kosovo",
+        "科索沃"
+      ]
+    },
+    {
+      "code": "YE",
+      "name_zh": "也门",
+      "name_en": "Yemen",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Yemen",
+        "也门",
+        "葉門"
+      ]
+    },
+    {
+      "code": "YT",
+      "name_zh": "马约特",
+      "name_en": "Mayotte",
+      "services": [
+        "web",
+        "android",
+        "assistant"
+      ],
+      "aliases": [
+        "Mayotte",
+        "馬約特島",
+        "马约特"
+      ]
+    },
+    {
+      "code": "ZA",
+      "name_zh": "南非",
+      "name_en": "South Africa",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "South Africa",
+        "南非"
+      ]
+    },
+    {
+      "code": "ZM",
+      "name_zh": "赞比亚",
+      "name_en": "Zambia",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Zambia",
+        "尚比亞",
+        "赞比亚"
+      ]
+    },
+    {
+      "code": "ZW",
+      "name_zh": "津巴布韦",
+      "name_en": "Zimbabwe",
+      "services": [
+        "web",
+        "android",
+        "assistant",
+        "api"
+      ],
+      "aliases": [
+        "Zimbabwe",
+        "津巴布韦",
+        "辛巴威"
+      ]
+    }
+  ]
+}

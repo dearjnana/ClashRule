@@ -4,6 +4,7 @@ from collections import defaultdict
 import hashlib, ipaddress, json, re
 import yaml
 from build import BASE, generated
+from gemini_regions import validate_gemini_groups
 
 ROOT=Path(__file__).resolve().parents[1]
 def read(path):return (ROOT/path).read_text(encoding='utf-8-sig')
@@ -85,10 +86,8 @@ def main():
         if 'filter' in g:
             re.compile(g['filter']);assert g['empty-fallback']=='REJECT'
             assert 'REJECT' not in g.get('proxies',[])
-    mesl=next(g for g in groups if g['name']=='🇺🇸 Gemini MESL美国')
-    for good in ('[MESL]🇺🇸 美国 01','[MESL]US-Los Angeles','[MESL]USA 02'):assert re.search(mesl['filter'],good),good
-    for bad in ('[MESL]🇦🇲 亚美尼亚 01','[MESL]Australia','[MESL]Russia','[MESL]Cyprus','[OTHER]🇺🇸 美国','[MESL]剩余流量 美国'):assert not re.search(mesl['filter'],bad),bad
-    fixtures={'gemini.google.com':'🎐 Gemini','gemini.google':'🎐 Gemini','gemini.gstatic.com':'🎐 Gemini','aistudio.google.com':'🎐 Gemini','alkalicore-pa.clients6.google.com':'🎐 Gemini','robinfrontend-pa.googleapis.com':'🎐 Gemini','webchannel-robinfrontend-pa.googleapis.com':'🎐 Gemini','generativelanguage.googleapis.com':'🎐 Gemini','mtalk.google.com':'📢 谷歌FCM','apis.google.com':'✨ Google生态','oaistatic.com':'💬 OpenAi','cdn.oaistatic.com':'💬 OpenAi','cloudflare.com':'👨‍💻 GitHub','lcs-cops.adobe.io':'🎯 全球直连','other.adobe.io':'🛑 广告拦截'}
+    validate_gemini_groups(groups)
+    fixtures={'gemini.google.com':'🎐 Gemini','gemini.google':'🎐 Gemini','gemini.gstatic.com':'🎐 Gemini','aistudio.google.com':'🧪 Gemini API','alkalicore-pa.clients6.google.com':'🎐 Gemini','robinfrontend-pa.googleapis.com':'🎐 Gemini','webchannel-robinfrontend-pa.googleapis.com':'🎐 Gemini','generativelanguage.googleapis.com':'🧪 Gemini API','mtalk.google.com':'📢 谷歌FCM','apis.google.com':'✨ Google生态','oaistatic.com':'💬 OpenAi','cdn.oaistatic.com':'💬 OpenAi','cloudflare.com':'👨‍💻 GitHub','lcs-cops.adobe.io':'🎯 全球直连','other.adobe.io':'🛑 广告拦截'}
     for host,policy in fixtures.items():assert post.domain(host)[0]==policy,(host,post.domain(host))
     for host in ('fake-colab.example','developerprofiles.evil.invalid','cloudflare.com.attacker.invalid'):
         assert '🎐 Gemini' not in post.domain(host),host

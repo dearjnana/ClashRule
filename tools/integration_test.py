@@ -4,6 +4,7 @@ import os, sys, json, subprocess, threading, time, urllib.request, urllib.parse,
 import yaml
 
 from finalize import finalize
+from gemini_regions import WEB_GROUP, API_GROUP, validate_gemini_groups
 import argparse
 parser=argparse.ArgumentParser(description='隔离测试转换器和 Mihomo，需要提供官方二进制路径。')
 parser.add_argument('--subconverter-dir',required=True,type=Path)
@@ -68,6 +69,7 @@ try:
         (RUN/'conversion-summary.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2),encoding='utf-8')
         print(label,summary[label],flush=True)
         assert not differences, differences
+        validate_gemini_groups(groups)
         # 验证远程列表中的正则经过转换后完整保留，且仍位于原生域名集合之后。
         expected_regex=[r+',🥒 寡妇网' for r in (ROOT/'rules/network/ProxyLite.list').read_text(encoding='utf-8').splitlines() if r.startswith('DOMAIN-REGEX,')]
         actual_regex=[r for r in parsed['rules'] if r.startswith('DOMAIN-REGEX,') and r.endswith(',🥒 寡妇网')]
@@ -89,31 +91,35 @@ try:
         assert test.returncode==0
         if label=='expanded':
             assert parsed['rules']==(ROOT/'reports/rules-expanded.txt').read_text(encoding='utf-8').splitlines()
-        if label=='main':
+        if label in ('main','android'):
             runtime=copy.deepcopy(parsed)
             runtime.update({'mixed-port':0,'socks-port':0,'port':0,'allow-lan':False,'external-controller':'127.0.0.1:25593','dns':{'enable':False},'tun':{'enable':False}})
             for g in runtime['proxy-groups']:
                 if 'url' in g:g['url']=LOCAL+'health';g['interval']=0
             for p in runtime.get('proxy-providers',{}).values():p['health-check']['enable']=False
-            runtimepath=RUN/'runtime.yaml';runtimepath.write_text(yaml.safe_dump(runtime,allow_unicode=True),encoding='utf-8')
-            corelog=(RUN/'runtime.log').open('w',encoding='utf-8')
+            runtimepath=RUN/(label+'-runtime.yaml');runtimepath.write_text(yaml.safe_dump(runtime,allow_unicode=True),encoding='utf-8')
+            corelog=(RUN/(label+'-runtime.log')).open('w',encoding='utf-8')
             running=subprocess.Popen([str(CORE),'-d',str(corehome),'-f',str(runtimepath)],stdout=corelog,stderr=subprocess.STDOUT,creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))
             try:
                 wait_for('http://127.0.0.1:25593/version',running)
-                groupurl='http://127.0.0.1:25593/proxies/'+urllib.parse.quote('🇺🇸 Gemini MESL美国',safe='')
-                end=time.monotonic()+15
-                while time.monotonic()<end:
-                    selected=json.loads(fetch(groupurl))
-                    if selected.get('all')==SYNTHETIC[:2]:break
-                    time.sleep(.1)
-                assert selected['all']==SYNTHETIC[:2],selected
-                assert selected['now']==SYNTHETIC[0],selected
+                selected_groups={}
+                for name,excluded in [(WEB_GROUP,{6,8}),(API_GROUP,{3,6,8})]:
+                    expected={node for i,node in enumerate(SYNTHETIC) if i not in excluded}
+                    groupurl='http://127.0.0.1:25593/proxies/'+urllib.parse.quote(name,safe='')
+                    end=time.monotonic()+15
+                    while time.monotonic()<end:
+                        selected=json.loads(fetch(groupurl))
+                        if set(selected.get('all',[]))==expected:break
+                        time.sleep(.1)
+                    assert set(selected['all'])==expected,(name,selected)
+                    assert selected['now'] in expected,selected
+                    selected_groups[name]=len(selected['all'])
                 empty=json.loads(fetch('http://127.0.0.1:25593/proxies/'+urllib.parse.quote('⚡🇰🇷 MESL-韩国',safe='')))
                 assert empty['all']==['REJECT'],empty
                 rp=json.loads(fetch('http://127.0.0.1:25593/providers/rules'))['providers']
                 assert all(v['ruleCount']>0 for v in rp.values()),rp
                 assert rp['ProxyGFW']['ruleCount']==len((ROOT/'providers/ProxyGFW.txt').read_text().splitlines())
-                summary[label]['runtime']={'gemini_members':len(selected['all']),'gemini_default':'MESL US 01','armenia_excluded':True,'empty_group':'REJECT','rule_provider_counts':{k:v['ruleCount'] for k,v in rp.items()},'listeners':'loopback controller only; proxy ports and TUN disabled'}
+                summary[label]['runtime']={'gemini_members':selected_groups,'all_airports':True,'armenia_and_australia_allowed':True,'hong_kong_excluded_from_api':True,'empty_group':'REJECT','rule_provider_counts':{k:v['ruleCount'] for k,v in rp.items()},'listeners':'loopback controller only; proxy ports and TUN disabled'}
                 print(summary[label]['runtime'],flush=True)
             finally:running.terminate();running.wait(timeout=10);corelog.close()
     (RUN/'conversion-summary.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2),encoding='utf-8')

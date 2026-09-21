@@ -1,5 +1,9 @@
 [
   {
+    "target": "🧪 Gemini API",
+    "path": "rules/ai/GeminiAPI.list"
+  },
+  {
     "target": "🎐 Gemini",
     "path": "rules/ai/Gemini.list"
   },

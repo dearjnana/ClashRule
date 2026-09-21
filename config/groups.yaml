@@ -1,56 +1,13 @@
 # 策略组源配置；由构建工具写入基础模板。
+# Gemini 两个服务组的筛选由 config/gemini-regions.json 统一生成，不在此手写地区正则。
 - name: 🎐 Gemini
   type: select
-  proxies:
-  - 🇺🇸 Gemini MESL美国
-  - ♻️ 美国自动
-  - ♻️ 香港自动
-  - 🚀 节点选择
-  - 🛡️ 全局智能容灾-流量
-  - 🛡️ 全局智能容灾-速度
-  - ☁️🌏 良心云-最优
-  - 💰🌏 赚钱-最优
-  - 🦖🌏 宝可梦-最优
-  - 🛍️🌏 LD士多-最优
-  - ⚡🌏 MESL-最优
-  - ☁️🇭🇰 良心云-香港
-  - 💰🇭🇰 赚钱-香港
-  - 🦖🇭🇰 宝可梦-香港
-  - 🛍️🇭🇰 LD士多-香港
-  - ⚡🇭🇰 MESL-香港
-  - ☁️🇹🇼 良心云-台湾
-  - 💰🇹🇼 赚钱-台湾
-  - 🦖🇹🇼 宝可梦-台湾
-  - 🛍️🇹🇼 LD士多-台湾
-  - ⚡🇹🇼 MESL-台湾
-  - ☁️🇯🇵 良心云-日本
-  - 💰🇯🇵 赚钱-日本
-  - 🦖🇯🇵 宝可梦-日本
-  - 🛍️🇯🇵 LD士多-日本
-  - ⚡🇯🇵 MESL-日本
-  - ☁️🇰🇷 良心云-韩国
-  - 💰🇰🇷 赚钱-韩国
-  - 🦖🇰🇷 宝可梦-韩国
-  - 🛍️🇰🇷 LD士多-韩国
-  - ⚡🇰🇷 MESL-韩国
-  - ☁️🇸🇬 良心云-新加坡
-  - 💰🇸🇬 赚钱-新加坡
-  - 🦖🇸🇬 宝可梦-新加坡
-  - 🛍️🇸🇬 LD士多-新加坡
-  - ⚡🇸🇬 MESL-新加坡
-  - ☁️🇺🇸 良心云-美国
-  - 💰🇺🇸 赚钱-美国
-  - 🦖🇺🇸 宝可梦-美国
-  - 🛍️🇺🇸 LD士多-美国
-  - ⚡🇺🇸 MESL-美国
-  - ♻️ 台湾自动
-  - ♻️ 日本自动
-  - 🇭🇰 香港节点
-  - 🇹🇼 台湾节点
-  - 🇯🇵 日本节点
-  - 🇺🇸 美国节点
-  - 🌐 全部节点
-  - DIRECT
+  include-all: true
+  empty-fallback: REJECT
+- name: 🧪 Gemini API
+  type: select
+  include-all: true
+  empty-fallback: REJECT
 - name: 💬 OpenAi
   type: select
   proxies:
@@ -1644,9 +1601,3 @@
   proxies:
   - REJECT
   - DIRECT
-- name: 🇺🇸 Gemini MESL美国
-  type: select
-  include-all: true
-  filter: (?i)^(?=.*MESL)(?=.*(?:🇺🇸|美国|美國|united\s*states|\busa?\b|洛杉矶|洛杉磯|纽约|紐約|西雅图|西雅圖|圣何塞|硅谷|旧金山|華盛頓|华盛顿))(?!.*(?:失联|超时|官网|售后|剩余|到期|自助|主流|套餐|过期))(?!.*(?:亚美尼亚|亞美尼亞|armenia|russia|australia|belarus|cyprus)).*$
-  empty-fallback: REJECT
-  default-selected: '[MESL]🇺🇸 美国 01'

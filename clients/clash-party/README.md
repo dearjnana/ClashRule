@@ -24,7 +24,7 @@ https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/clients/cl
 
 ## 节点如何分组
 
-保留原文件的四家机场：**良心云、赚钱、宝可梦、MESL**，以及香港、台湾、日本、韩国、新加坡、美国六个地区。
+常规机场与地区组保留原文件的四家机场：**良心云、赚钱、宝可梦、MESL**，以及香港、台湾、日本、韩国、新加坡、美国六个地区。**Gemini 两个组另按完整官方地区清单筛选全部机场，不受这四家机场和六个地区限制。**
 
 | 策略组 | 行为 |
 | --- | --- |
@@ -34,13 +34,16 @@ https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/clients/cl
 | 机场全区“最优”组 | 筛选机场名称并进行延迟测试，四组保留后台探测 |
 | 机场与地区组合组 | 同时匹配机场、地区，按需探测 |
 | 地区手动组、`🌐 全部节点` | 手动选择匹配节点，排除公告、到期、剩余流量等条目 |
-| `🎐 Gemini` | 首选 `🇺🇸 Gemini MESL美国`，可手动切换到其他列出的策略 |
+| `🎐 Gemini` | 直接选择官方网页或 Android 清单覆盖的节点，共 241 个普通账号地区，不限制机场 |
+| `🧪 Gemini API` | 直接选择 AI Studio / Gemini API 官方 229 个地区的节点，不限制机场 |
 | `📢 谷歌FCM` | 单独管理 Google 推送，默认交给 Google 组 |
 | `📥 规则下载` | 专供远程规则下载，默认通过“全部节点”中的节点下载；可手动选择其他路径 |
 
 筛选依赖**节点名称**，不是订阅显示名称。机场未在节点名中标明、订阅只包含其他机场或重命名脚本删除了标记时，机场专用组可能为空。此时可先在“全部节点”选择实际可用节点，并让“节点选择”使用该组；需要自动按机场分组时，再在自己的节点订阅中保留正确标记。
 
-所有筛选组都设置 `empty-fallback: REJECT`：没有匹配节点时不会悄悄变成直连。Gemini 没有 MESL 美国节点时同样如此；请核对节点名称、实际出口和账号可用性。已有的策略选择会被缓存，更新覆写后应手动确认 Gemini 当前仍选择预期路径。
+所有筛选组都设置 `empty-fallback: REJECT`：没有匹配节点时不会悄悄变成直连。没有 MESL 节点不影响 Gemini 使用其他机场。原先的 MESL 美国 Gemini 测试组已删除；更新覆写后分别检查两个服务组的实际选择，必要时重新选中可用节点。
+
+Gemini 筛选支持地区国旗、中英文名称、常用城市别名和大写独立地区代码。地区数据核对于 **2026-09-21**：香港、澳门在网页或 Android 清单中，但不在 API 清单中；Android 商店下载和 Assistant 切换的支持范围也有区别。完整地区表与官方依据见 [Gemini 地区说明](../../docs/Gemini地区说明.md)。节点名称只用于筛选，不能证明实际出口或账号资格。
 
 ## 规则、DNS 和缓存
 
@@ -58,6 +61,8 @@ https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/clients/cl
 | 私有域名解析 | 由 `private_domain` 匹配后使用系统 DNS，保留本地网络解析能力 |
 
 原文件的电报、媒体、游戏、Adobe、自定义“摧城/摧城低速”和 18X 分类继续保留。自建规则的目标策略以本覆写的 `rules` 为准，不由主配置的 `config/routing.json` 控制。比如 `CC_LS.list`、`AdultCloud.list`、`PixivSDK.list` 在这里启用，不代表两个 INI 主入口也启用了它们。
+
+`GeminiAPI` 位于 `Gemini` 规则集之前，AI Studio 和专用 API 接口进入 `🧪 Gemini API`；应用及共享接口继续进入 `🎐 Gemini`。Gemini.list 保留已有 API 条件供旧版覆写使用，新版依靠前置规则区分两个服务组。
 
 独立覆写的规则顺序与主配置不同，所以引用完整的 `rules/` 维护源，不引用已经按主配置优先级删去重复条件的 `generated/rules/`。以后在 GitHub 修改这些源文件，经 Actions 检查通过后，Clash Party 刷新对应规则集即可获取内容。
 
@@ -78,10 +83,10 @@ https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/clients/cl
 本次核对 Clash Party **v2.0.3** 的官方 YAML 合并实现及其 `yaml 2.9.1` 解析依赖，并使用 **Mihomo v1.19.31** 进行测试。这是已验证基线，不代表其他版本或所有个人订阅都已实测。
 
 1. 原生 YAML 锚点经官方解析器正确展开，官方合并函数与测试合并结果一致；节点、节点集合、TUN 和设备口令保留，待替换对象没有旧内容残留。
-2. 70 个策略组无重名、无缺失引用、无循环；42 个规则集全部使用真实内容加载，且条目数非零。
-3. 分别验证节点列表、节点集合、没有 MESL 三种场景；没有 MESL 时 Gemini 为 REJECT，韩国组不会错误包含 Ukraine 节点，公告条目被排除。
-4. 在全新缓存目录中，通过配置指定的代理下载全部 42 个规则集。下载内容由本地测试代理返回，因此不会依赖真实机场或修改系统网络。
-5. 通过实际代理入口建立连接并读取内核连接记录，验证 16 个用例：Gemini 网页和接口、FCM、YouTube Music/API、Adobe 放行/拦截、Pixiv、Copilot、Steam 国内下载、Google、IP 归属地分类、国内网站、9090 端口兜底和回环直连。
+2. 70 个策略组无重名、无缺失引用、无循环；43 个规则集全部使用真实内容加载，且条目数非零。
+3. 分别验证节点列表、节点集合、没有 MESL、没有可用地区四种场景；没有 MESL 时 Gemini 仍可使用其他机场，没有支持地区时为 REJECT。全部地区旗帜经真实内核检查，全部地区代码及名称别名经静态回归检查；韩国组不会错误包含 Ukraine，公告条目被排除。
+4. 在全新缓存目录中，通过配置指定的代理下载全部 43 个规则集。下载内容由本地测试代理返回，因此不会依赖真实机场或修改系统网络。
+5. 通过实际代理入口建立连接并读取内核连接记录，验证 17 个用例：Gemini 网页、AI Studio 和 API、FCM、YouTube Music/API、Adobe 放行/拦截、Pixiv、Copilot、Steam 国内下载、Google、IP 归属地分类、国内网站、9090 端口兜底和回环直连。
 6. 测试关闭 TUN 和系统 DNS 接管，仅使用临时回环端口。它验证配置加载和路由行为，不代表真实节点的速度、解锁能力或用户账号一定可用。
 
 [自动构建工作流](../../.github/workflows/build.yml) 已加入此覆写的结构检查和真实内核测试。验证程序为 [tools/verify_party.py](../../tools/verify_party.py)，报告位于忽略入库的 `reports/party-validation.json`，失败日志可在 Actions 的诊断报告中查看。
@@ -89,10 +94,11 @@ https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/clients/cl
 ## 修改与回退
 
 - 改分流条件：编辑对应 `rules/` 文件。
-- 改覆写的规则顺序、策略组、DNS、筛选方式：编辑本目录 `override.yaml`，其中带 `&` 的公共模板会被后面的 `*` 引用。
+- 改 Gemini 的官方地区或名称别名：编辑 [config/gemini-regions.json](../../config/gemini-regions.json)，三个客户端和地区对照表会自动生成；不要手改覆写中的 Gemini 长正则。
+- 改覆写的规则顺序、其他策略组、DNS、筛选方式：编辑本目录 `override.yaml`，其中带 `&` 的公共模板会被后面的 `*` 引用。
 - 改设备端口、TUN、系统代理或控制器认证：在 Clash Party 应用设置中操作。
 - 出现问题：先取消该订阅的覆写关联或恢复原覆写，再检查日志和运行配置。无需删除节点订阅，也无需清空整个应用数据目录。
 
-本文件是手动维护的客户端覆写源，不由 `tools/build.py` 自动重建；提交后 Actions 会自动验证。仓库不额外保存旧覆写副本，历史版本通过 Git 提交查看。
+本文件只有“自动生成的 Gemini 地区组开始/结束”之间的两个组由 `tools/build.py` 更新，其余部分手动维护；提交后 Actions 自动构建并验证。仓库不额外保存旧覆写副本，历史版本通过 Git 提交查看。
 
 参考：[官方覆写导入说明](https://clashparty.org/docs/guide/override)、[YAML 合并规则](https://clashparty.org/docs/guide/override/yaml)、[v2.0.3 合并实现](https://github.com/mihomo-party-org/clash-party/blob/v2.0.3/src/main/utils/merge.ts)、[应用设置合并顺序](https://github.com/mihomo-party-org/clash-party/blob/v2.0.3/src/main/core/factory.ts)、[Mihomo 规则集格式](https://wiki.metacubex.one/config/rule-providers/)、[Mihomo 策略组字段](https://wiki.metacubex.one/config/proxy-groups/)。

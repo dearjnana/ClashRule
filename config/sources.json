@@ -52,5 +52,6 @@
   "rules/network/DirectCustom.list": "https://github.com/dearjnana/ClashRule",
   "rules/network/ProxyCustom.list": "https://github.com/dearjnana/ClashRule",
   "rules/services/CC_LS.list": "https://github.com/dearjnana/ClashRule",
-  "rules/network/ChinaCustom.list": "https://github.com/dearjnana/ClashRule"
+  "rules/network/ChinaCustom.list": "https://github.com/dearjnana/ClashRule",
+  "rules/ai/GeminiAPI.list": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Gemini.list"
 }
