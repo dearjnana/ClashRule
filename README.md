@@ -6,7 +6,7 @@
 
 ## 目录
 
-1. [OpenClash 与安卓分别使用哪个链接](#entry-links)
+1. [OpenClash、安卓与 Clash Party 分别使用哪个链接](#entry-links)
 2. [从规则源到客户端的完整流程](#pipeline)
 3. [首次接入与客户端使用](#client-setup)
 4. [在 GitHub 修改规则并自动发布](#web-edit)
@@ -17,13 +17,19 @@
 9. [常见问题与回退](#faq)
 10. [本地开发与验证](#local-build)
 
-**Clash Party 用户直接看：[桌面覆写入口](#party-entry)与[完整导入说明](clients/clash-party/README.md)。其使用方式不需要下面的 INI 转换和整理步骤。**
-
 <a id="entry-links"></a>
 
-## 1. OpenClash 与安卓分别使用哪个链接
+## 1. OpenClash、安卓与 Clash Party 分别使用哪个链接
 
-### 1.1 两个平台的转换配置入口
+先按客户端选择入口。OpenClash 与安卓使用 INI 转换配置；Clash Party 使用[桌面覆写入口](#party-entry)，操作见[完整导入说明](clients/clash-party/README.md)，无需 INI 转换和整理。
+
+| 客户端 | 输入的仓库链接 | 填写位置 | 是否需要转换和整理 |
+| --- | --- | --- | --- |
+| OpenClash | `profiles/openclash.ini` Raw 地址 | 转换器外部配置 | 需要，客户端导入最终 YAML |
+| Clash Meta for Android | `profiles/android.ini` Raw 地址 | 转换器外部配置 | 需要，客户端导入最终 YAML |
+| Clash Party | `clients/clash-party/override.yaml` Raw 地址 | 应用的“覆写”页面 | 不需要，绑定到已有节点订阅 |
+
+### 1.1 OpenClash 与安卓的转换配置入口
 
 | 使用场景 | 应选择的文件 | 链接填在哪里 | 最后导入客户端的内容 |
 | --- | --- | --- | --- |
@@ -49,7 +55,7 @@ https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/profiles/a
 https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/profiles/expanded.ini
 ```
 
-### 1.2 客户端最终导入哪个链接或文件
+### 1.2 OpenClash 与安卓最终导入哪个链接或文件
 
 上面三个 `.ini` 是**转换配置入口**，不包含个人机场节点。GitHub 的文件浏览页面、`.list` 规则、`templates/*.yaml` 模板也都不能直接当成完整的个人订阅。
 
@@ -75,12 +81,6 @@ https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/clients/cl
 它直接保留订阅中的节点和节点集合，提供桌面专用策略组、DNS 和分流规则，**不需要 SubConverter 或 `finalize.py`**。带 `!` 的字段属于 Clash Party 对象替换语法，不能把原文件直接当成普通 Mihomo 完整配置。
 
 首次使用先为一个订阅关联覆写；要使用文件中的 DNS 和嗅探方案，关闭应用对应的 DNS、嗅探覆写，避免应用设置在后面覆盖文件内容。TUN、端口、系统代理和控制器口令由应用管理。详细导入、节点命名、MESL Gemini、更新与回退方法见 [Clash Party 使用说明](clients/clash-party/README.md)。
-
-| 客户端 | 输入的仓库链接 | 填写位置 | 是否需要转换和整理 |
-| --- | --- | --- | --- |
-| OpenClash | `profiles/openclash.ini` Raw 地址 | 转换器外部配置 | 需要，客户端导入最终 YAML |
-| Clash Meta for Android | `profiles/android.ini` Raw 地址 | 转换器外部配置 | 需要，客户端导入最终 YAML |
-| Clash Party | `clients/clash-party/override.yaml` Raw 地址 | 应用的“覆写”页面 | 不需要，绑定到已有节点订阅 |
 
 <a id="pipeline"></a>
 
