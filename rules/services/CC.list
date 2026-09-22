@@ -3,6 +3,7 @@
 # 维护：本文件为规则源，按同一策略去重；注释不参与匹配。
 DOMAIN-SUFFIX,prismio.net
 IP-CIDR,157.254.234.17/32
+IP-CIDR,163.192.47.59/32
 DOMAIN-SUFFIX,pingcodes.cc
 DOMAIN-SUFFIX,z.ai
 DOMAIN-SUFFIX,tccxy.top
