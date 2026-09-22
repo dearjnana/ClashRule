@@ -58,15 +58,6 @@ https://你的转换器地址/sub?target=clash&url=编码后的订阅地址&conf
 └─ licenses/            # 上游规则许可证
 ```
 
-## 旧地址对照
-
-| 旧路径 | 新路径 |
-| --- | --- |
-| `profiles/openclash.ini` | `openclash.ini` |
-| `profiles/android.ini` | `android.ini` |
-| `clients/clash-party/override.yaml` | `clash-party.yaml` |
-| `generated/rules/...` | `rules/...` |
-
 ## 来源与许可
 
 部分规则源自 [ACL4SSR](https://github.com/ACL4SSR/ACL4SSR),Clash Party 覆写另引用 MetaCubeX meta-rules-dat 的规则集;许可证见 [licenses/](licenses/ACL4SSR-LICENSE.txt)。历史版本通过 Git 提交查看。
