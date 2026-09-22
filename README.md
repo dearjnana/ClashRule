@@ -67,7 +67,7 @@ Clash Party 不需要转换器,但没有节点订阅时覆写无法生效。
 - 机场分组:良心云、赚钱、宝可梦、LD士多、MESL 五家,各含"最优"全区组 + 港/台/日/韩/新/美地区组(url-test 自动测速)。
 - `🛡️ 全局智能容灾-流量/速度`:机场间可用性回退与延迟比较。
 - `🥒 寡妇网`:通用代理列表(ProxyGFWlist + ProxyLite),个人叫法,不代表某类网站。
-- Gemini 两个组按 **Google 官方支持地区** 筛选全部机场的节点(网页/App 组 241 地区,AI Studio/API 组 229 地区),筛选正则按 2026-09-21 的官方清单生成、直接写死在文件里;想调整筛选范围就改那一条 `custom_proxy_group` 行(或覆写里的 `filter` 字段)。没有匹配节点时为 REJECT,不会悄悄直连。
+- Gemini 两个组按 **Google 官方支持地区** 筛选,组内再分子组、每组 url-test 自动选最优:`♻️ Gemini 最优` 在全部支持地区里自动挑最快节点;香港、台湾、日本、韩国、新加坡、美国单独成组;冷门国家按相邻大洲归入欧洲、美洲其他、大洋洲、中东、非洲、亚洲其他(俄罗斯不在官方清单,不纳入)。API 组比网页组少香港、澳门、缅甸三个地区。筛选正则按 2026-09-21 的官方清单整理后直接写在文件里,想调整就改对应的 `custom_proxy_group` 行(或覆写里的 `filter` 字段)。子组没有匹配节点时为 REJECT,不会悄悄直连。
 
 基础配置(端口、DNS 等)使用 [ACL4SSR 公共 base](https://github.com/ACL4SSR/ACL4SSR/blob/master/Clash/GeneralClashConfig.yml);要改就换 INI 末尾的 `clash_rule_base` 地址。
 
