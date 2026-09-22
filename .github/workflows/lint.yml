@@ -115,7 +115,11 @@ jobs:
                           errors.append(f'{ini}: 策略组引用未定义: {ref}')
 
           # ===== 3. clash-party.yaml:YAML 语法、筛选正则、规则集与文件引用 =====
-          cp = yaml.safe_load(pathlib.Path('clash-party.yaml').read_text(encoding='utf-8'))
+          cp_text = pathlib.Path('clash-party.yaml').read_text(encoding='utf-8')
+          cp = yaml.safe_load(cp_text)
+          alias_hits = re.findall(r'<<:\s*\*[A-Za-z_]|:\s*\*[A-Za-z_]', cp_text)
+          if alias_hits:
+              errors.append(f'clash-party.yaml 含 {len(alias_hits)} 处 YAML 别名引用;Clash Party 的解析器有别名数量上限,超出会拒绝导入(Excessive alias count),请展开为普通写法')
           providers = cp.get('rule-providers!') or {}
           # proxy-groups / rules 在覆写里不带感叹号,对象类键带;两种写法都兼容
           groups = cp.get('proxy-groups!') or cp.get('proxy-groups') or []
@@ -142,7 +146,7 @@ jobs:
               url = p.get('url', '')
               if url.startswith(RAW) and not (ROOT / url[len(RAW):].split('?')[0]).is_file():
                   errors.append(f'clash-party.yaml: 规则集 {name} 引用的文件不存在: {url}')
-          for m in re.finditer(r'^\s+- (♻️ Gemini .+)$', pathlib.Path('clash-party.yaml').read_text(encoding='utf-8'), re.M):
+          for m in re.finditer(r'^\s+- (♻️ Gemini .+)$', cp_text, re.M):
               if m.group(1).strip() not in gnames:
                   errors.append(f'clash-party.yaml: Gemini 主组引用的子组未定义: {m.group(1).strip()}')
 
