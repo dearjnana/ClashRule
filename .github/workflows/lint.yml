@@ -93,8 +93,9 @@ jobs:
                   if target not in defined and target not in BUILTIN:
                       errors.append(f'{ini}: ruleset 目标组未定义: {target}')
                   if rule.startswith(RAW):
-                      if not (ROOT / rule[len(RAW):]).is_file():
-                          errors.append(f'{ini}: 引用的文件不存在: {rule[len(RAW):]}')
+                      p = ROOT / rule[len(RAW):].split('?')[0]
+                      if not p.is_file():
+                          errors.append(f'{ini}: 引用的文件不存在: {p}')
                   elif not rule.startswith(('[]', 'http')):
                       errors.append(f'{ini}: 无法识别的规则来源: {rule[:60]}')
               for line in lines:
@@ -135,7 +136,7 @@ jobs:
                   errors.append(f'clash-party.yaml: 规则引用了未定义的规则集: {parts[1].strip()}')
           for name, p in providers.items():
               url = p.get('url', '')
-              if url.startswith(RAW) and not (ROOT / url[len(RAW):]).is_file():
+              if url.startswith(RAW) and not (ROOT / url[len(RAW):].split('?')[0]).is_file():
                   errors.append(f'clash-party.yaml: 规则集 {name} 引用的文件不存在: {url}')
           for m in re.finditer(r'^\s+- (♻️ Gemini .+)$', pathlib.Path('clash-party.yaml').read_text(encoding='utf-8'), re.M):
               if m.group(1).strip() not in gnames:

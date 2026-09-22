@@ -34,6 +34,7 @@ https://你的转换器地址/sub?target=clash&url=编码后的订阅地址&conf
 - **换策略组 / 调优先级**:改 INI 里的 `ruleset=组名,规则地址` 行,从上到下就是匹配顺序,`MATCH` 兜底必须在最后。两个 INI 内容保持一致,同步修改。
 - **新增规则文件**:在 `rules/` 建文件,然后在两个 INI 里各加一行 `ruleset=组名,https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/分类/文件.list`,组名用已有的。
 - **Clash Party**:改 `clash-party.yaml`。只改了规则源的话在应用里刷新规则集即可;改了覆写本身要更新覆写并重新应用。
+- **链接缓存**:三个文件里指向本仓库的链接都带 `?timestamp=` 参数,用来绕过 GitHub Raw 的各级缓存。改完规则如果客户端/转换器还在用旧内容,把文件里的时间戳全局替换成一个新数字即可强制刷新(当前为 `1790042073`)。
 - 提交后看徽章,绿了再去设备上更新配置。
 
 部分列表(如 `BanAD.list`、`AdultCloud.list`、`CC_LS.list` 等)未被两个 INI 引用,是备用列表;Clash Party 覆写启用了其中一部分,以它的 `rules!` 段为准。
