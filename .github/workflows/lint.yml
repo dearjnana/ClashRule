@@ -127,6 +127,13 @@ jobs:
           if not groups or not rules_list or not providers:
               errors.append('clash-party.yaml: 缺少 proxy-groups / rules / rule-providers! 配置段')
           gnames = {g.get('name') for g in groups if isinstance(g, dict)}
+          BUILTIN_PROXIES = {'DIRECT', 'REJECT', 'REJECT-DROP', 'PASS', 'COMPATIBLE', 'GLOBAL'}
+          for g in groups:
+              if not isinstance(g, dict):
+                  continue
+              for p in g.get('proxies') or []:
+                  if p not in gnames and p not in BUILTIN_PROXIES:
+                      errors.append(f'clash-party.yaml: 组 {g.get("name")} 引用了未定义的策略组: {p}')
           for g in groups:
               if not isinstance(g, dict) or not g.get('name'):
                   errors.append('clash-party.yaml: 存在没有名称的策略组')
