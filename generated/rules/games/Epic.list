@@ -1,7 +1,0 @@
-# 自动生成，请修改 rules/games/Epic.list 后等待自动构建。
-# 本文件的去重依赖主配置顺序，不宜单独移植。
-DOMAIN-SUFFIX,epicgames.com
-DOMAIN-SUFFIX,epicgames.dev
-DOMAIN-SUFFIX,helpshift.com
-DOMAIN-SUFFIX,paragon.com
-DOMAIN-SUFFIX,unrealengine.com

@@ -1,7 +1,4 @@
-# 本地缓存、验证输出与私密配置不入库。
-__pycache__/
-.venv/
-.test-work/
+# 私密与本地临时文件不入库
 .env
 *.private.*
-reports/
+.test-work/
