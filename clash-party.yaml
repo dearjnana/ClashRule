@@ -170,12 +170,7 @@ proxy-groups:
     - ♻️ Gemini 韩国
     - ♻️ Gemini 新加坡
     - ♻️ Gemini 美国
-    - ♻️ Gemini 欧洲
-    - ♻️ Gemini 美洲其他
-    - ♻️ Gemini 大洋洲
-    - ♻️ Gemini 中东
-    - ♻️ Gemini 非洲
-    - ♻️ Gemini 亚洲其他
+    - ♻️ Gemini 其他地区
     - REJECT
   - name: 🧪 Gemini API
     type: select
@@ -186,12 +181,7 @@ proxy-groups:
     - ♻️ Gemini API 韩国
     - ♻️ Gemini API 新加坡
     - ♻️ Gemini API 美国
-    - ♻️ Gemini API 欧洲
-    - ♻️ Gemini API 美洲其他
-    - ♻️ Gemini API 大洋洲
-    - ♻️ Gemini API 中东
-    - ♻️ Gemini API 非洲
-    - ♻️ Gemini API 亚洲其他
+    - ♻️ Gemini API 其他地区
     - REJECT
   - name: ♻️ Gemini 最优
     type: "url-test"
@@ -277,7 +267,7 @@ proxy-groups:
     expected-status: '204'
     exclude-filter: "(?i)(失联|超时|官网|售后|客服|剩余|到期|过期|自助|主流|流量|重置|订阅|网址|群组|邀请|返利|电报|无效|套餐|expire|traffic|reset|renew|website|invite)"
     filter: (?i)^(?=.*(?:🇺🇸|美国|美國|united\s*states|\busa?\b|洛杉矶|洛杉磯|纽约|紐約|西雅图|西雅圖|圣何塞|硅谷|旧金山|華盛頓|华盛顿)).*$
-  - name: ♻️ Gemini 欧洲
+  - name: ♻️ Gemini 其他地区
     type: "url-test"
     hidden: true
     include-all: true
@@ -288,67 +278,7 @@ proxy-groups:
     url: "https://www.gstatic.com/generate_204"
     expected-status: '204'
     exclude-filter: "(?i)(失联|超时|官网|售后|客服|剩余|到期|过期|自助|主流|流量|重置|订阅|网址|群组|邀请|返利|电报|无效|套餐|expire|traffic|reset|renew|website|invite)"
-    filter: (?i)^(?=.*(?:🇦🇱|🇦🇩|🇦🇹|🇧🇪|🇧🇬|🇭🇷|🇨🇾|🇨🇿|🇩🇰|🇪🇪|🇫🇮|🇫🇷|🇬🇧|🇬🇷|🇭🇺|🇮🇪|🇮🇸|🇮🇹|🇱🇻|🇱🇹|🇱🇺|🇲🇨|🇲🇪|🇲🇰|🇳🇱|🇳🇴|🇵🇱|🇵🇹|🇷🇴|🇷🇸|🇸🇲|🇸🇰|🇸🇮|🇪🇸|🇸🇪|🇨🇭|🇺🇦|🇻🇦|英国|德国|法国|荷兰|波兰|西班牙|葡萄牙|意大利|瑞士|奥地利|比利时|瑞典|挪威|丹麦|芬兰|爱尔兰|冰岛|捷克|匈牙利|罗马尼亚|希腊|乌克兰|卢森堡|法兰克福|伦敦|巴黎|阿姆斯特丹|united\s*kingdom|\buk\b|britain|england|germany|france)).*$
-  - name: ♻️ Gemini 美洲其他
-    type: "url-test"
-    hidden: true
-    include-all: true
-    empty-fallback: "REJECT"
-    tolerance: 60
-    interval: 600
-    timeout: 5000
-    url: "https://www.gstatic.com/generate_204"
-    expected-status: '204'
-    exclude-filter: "(?i)(失联|超时|官网|售后|客服|剩余|到期|过期|自助|主流|流量|重置|订阅|网址|群组|邀请|返利|电报|无效|套餐|expire|traffic|reset|renew|website|invite)"
-    filter: (?i)^(?=.*(?:🇨🇦|🇲🇽|🇧🇷|🇦🇷|🇨🇱|🇨🇴|🇵🇪|🇺🇾|🇵🇾|🇧🇴|🇪🇨|🇻🇪|🇵🇦|🇨🇷|加拿大|墨西哥|巴西|阿根廷|智利|哥伦比亚|秘鲁|多伦多|温哥华|圣保罗|canada|toronto|vancouver|brazil|argentina)).*$
-  - name: ♻️ Gemini 大洋洲
-    type: "url-test"
-    hidden: true
-    include-all: true
-    empty-fallback: "REJECT"
-    tolerance: 60
-    interval: 600
-    timeout: 5000
-    url: "https://www.gstatic.com/generate_204"
-    expected-status: '204'
-    exclude-filter: "(?i)(失联|超时|官网|售后|客服|剩余|到期|过期|自助|主流|流量|重置|订阅|网址|群组|邀请|返利|电报|无效|套餐|expire|traffic|reset|renew|website|invite)"
-    filter: (?i)^(?=.*(?:🇦🇺|🇳🇿|🇫🇯|🇵🇬|澳大利亚|澳洲|悉尼|墨尔本|新西兰|奥克兰|斐济|australia|sydney|melbourne|auckland|new\s*zealand)).*$
-  - name: ♻️ Gemini 中东
-    type: "url-test"
-    hidden: true
-    include-all: true
-    empty-fallback: "REJECT"
-    tolerance: 60
-    interval: 600
-    timeout: 5000
-    url: "https://www.gstatic.com/generate_204"
-    expected-status: '204'
-    exclude-filter: "(?i)(失联|超时|官网|售后|客服|剩余|到期|过期|自助|主流|流量|重置|订阅|网址|群组|邀请|返利|电报|无效|套餐|expire|traffic|reset|renew|website|invite)"
-    filter: (?i)^(?=.*(?:🇦🇪|🇸🇦|🇮🇱|🇹🇷|🇶🇦|🇰🇼|🇴🇲|🇧🇭|🇯🇴|🇱🇧|🇮🇶|阿联酋|迪拜|沙特|以色列|土耳其|伊斯坦布尔|卡塔尔|科威特|阿曼|巴林|约旦|黎巴嫩|伊拉克|dubai|abu\s*dhabi|turkey|istanbul)).*$
-  - name: ♻️ Gemini 非洲
-    type: "url-test"
-    hidden: true
-    include-all: true
-    empty-fallback: "REJECT"
-    tolerance: 60
-    interval: 600
-    timeout: 5000
-    url: "https://www.gstatic.com/generate_204"
-    expected-status: '204'
-    exclude-filter: "(?i)(失联|超时|官网|售后|客服|剩余|到期|过期|自助|主流|流量|重置|订阅|网址|群组|邀请|返利|电报|无效|套餐|expire|traffic|reset|renew|website|invite)"
-    filter: (?i)^(?=.*(?:🇿🇦|🇳🇬|🇪🇬|🇰🇪|🇲🇦|🇬🇭|🇹🇿|南非|埃及|尼日利亚|肯尼亚|摩洛哥|加纳|坦桑尼亚|约翰内斯堡|johannesburg|egypt|nigeria|kenya)).*$
-  - name: ♻️ Gemini 亚洲其他
-    type: "url-test"
-    hidden: true
-    include-all: true
-    empty-fallback: "REJECT"
-    tolerance: 60
-    interval: 600
-    timeout: 5000
-    url: "https://www.gstatic.com/generate_204"
-    expected-status: '204'
-    exclude-filter: "(?i)(失联|超时|官网|售后|客服|剩余|到期|过期|自助|主流|流量|重置|订阅|网址|群组|邀请|返利|电报|无效|套餐|expire|traffic|reset|renew|website|invite)"
-    filter: (?i)^(?=.*(?:🇹🇭|🇻🇳|🇵🇭|🇮🇩|🇲🇾|🇰🇭|🇱🇰|🇧🇩|🇳🇵|🇮🇳|🇲🇳|🇧🇹|🇲🇻|🇰🇿|🇰🇬|🇹🇯|泰国|越南|菲律宾|印尼|印度|马来西亚|柬埔寨|斯里兰卡|孟加拉|尼泊尔|蒙古|文莱|马尔代夫|哈萨克斯坦|乌兹别克斯坦|吉尔吉斯斯坦|塔吉克斯坦|thailand|vietnam|india|indonesia|philippines|malaysia)|🇲🇲|🇲🇴|缅甸|澳门).*$
+    filter: (?i)^(?=(?:🇦🇱|🇦🇩|🇦🇹|🇧🇪|🇧🇬|🇭🇷|🇨🇾|🇨🇿|🇩🇰|🇪🇪|🇫🇮|🇫🇷|🇬🇧|🇬🇷|🇭🇺|🇮🇪|🇮🇸|🇮🇹|🇱🇻|🇱🇹|🇱🇺|🇲🇨|🇲🇪|🇲🇰|🇳🇱|🇳🇴|🇵🇱|🇵🇹|🇷🇴|🇷🇸|🇸🇲|🇸🇰|🇸🇮|🇪🇸|🇸🇪|🇨🇭|🇺🇦|🇻🇦|英国|德国|法国|荷兰|波兰|西班牙|葡萄牙|意大利|瑞士|奥地利|比利时|瑞典|挪威|丹麦|芬兰|爱尔兰|冰岛|捷克|匈牙利|罗马尼亚|希腊|乌克兰|卢森堡|法兰克福|伦敦|巴黎|阿姆斯特丹|united\s*kingdom|\buk\b|britain|england|germany|france)|(?:🇨🇦|🇲🇽|🇧🇷|🇦🇷|🇨🇱|🇨🇴|🇵🇪|🇺🇾|🇵🇾|🇧🇴|🇪🇨|🇻🇪|🇵🇦|🇨🇷|加拿大|墨西哥|巴西|阿根廷|智利|哥伦比亚|秘鲁|多伦多|温哥华|圣保罗|canada|toronto|vancouver|brazil|argentina)|(?:🇦🇺|🇳🇿|🇫🇯|🇵🇬|澳大利亚|澳洲|悉尼|墨尔本|新西兰|奥克兰|斐济|australia|sydney|melbourne|auckland|new\s*zealand)|(?:🇦🇪|🇸🇦|🇮🇱|🇹🇷|🇶🇦|🇰🇼|🇴🇲|🇧🇭|🇯🇴|🇱🇧|🇮🇶|阿联酋|迪拜|沙特|以色列|土耳其|伊斯坦布尔|卡塔尔|科威特|阿曼|巴林|约旦|黎巴嫩|伊拉克|dubai|abu\s*dhabi|turkey|istanbul)|(?:🇿🇦|🇳🇬|🇪🇬|🇰🇪|🇲🇦|🇬🇭|🇹🇿|南非|埃及|尼日利亚|肯尼亚|摩洛哥|加纳|坦桑尼亚|约翰内斯堡|johannesburg|egypt|nigeria|kenya)|(?:🇹🇭|🇻🇳|🇵🇭|🇮🇩|🇲🇾|🇰🇭|🇱🇰|🇧🇩|🇳🇵|🇮🇳|🇲🇳|🇧🇹|🇲🇻|🇰🇿|🇰🇬|🇹🇯|泰国|越南|菲律宾|印尼|印度|马来西亚|柬埔寨|斯里兰卡|孟加拉|尼泊尔|蒙古|文莱|马尔代夫|哈萨克斯坦|乌兹别克斯坦|吉尔吉斯斯坦|塔吉克斯坦|thailand|vietnam|india|indonesia|philippines|malaysia)|🇲🇲|🇲🇴|缅甸|澳门).*$
   - name: ♻️ Gemini API 最优
     type: "url-test"
     hidden: true
@@ -421,7 +351,7 @@ proxy-groups:
     expected-status: '204'
     exclude-filter: "(?i)(失联|超时|官网|售后|客服|剩余|到期|过期|自助|主流|流量|重置|订阅|网址|群组|邀请|返利|电报|无效|套餐|expire|traffic|reset|renew|website|invite)"
     filter: (?i)^(?=.*(?:🇺🇸|美国|美國|united\s*states|\busa?\b|洛杉矶|洛杉磯|纽约|紐約|西雅图|西雅圖|圣何塞|硅谷|旧金山|華盛頓|华盛顿)).*$
-  - name: ♻️ Gemini API 欧洲
+  - name: ♻️ Gemini API 其他地区
     type: "url-test"
     hidden: true
     include-all: true
@@ -432,67 +362,7 @@ proxy-groups:
     url: "https://www.gstatic.com/generate_204"
     expected-status: '204'
     exclude-filter: "(?i)(失联|超时|官网|售后|客服|剩余|到期|过期|自助|主流|流量|重置|订阅|网址|群组|邀请|返利|电报|无效|套餐|expire|traffic|reset|renew|website|invite)"
-    filter: (?i)^(?=.*(?:🇦🇱|🇦🇩|🇦🇹|🇧🇪|🇧🇬|🇭🇷|🇨🇾|🇨🇿|🇩🇰|🇪🇪|🇫🇮|🇫🇷|🇬🇧|🇬🇷|🇭🇺|🇮🇪|🇮🇸|🇮🇹|🇱🇻|🇱🇹|🇱🇺|🇲🇨|🇲🇪|🇲🇰|🇳🇱|🇳🇴|🇵🇱|🇵🇹|🇷🇴|🇷🇸|🇸🇲|🇸🇰|🇸🇮|🇪🇸|🇸🇪|🇨🇭|🇺🇦|🇻🇦|英国|德国|法国|荷兰|波兰|西班牙|葡萄牙|意大利|瑞士|奥地利|比利时|瑞典|挪威|丹麦|芬兰|爱尔兰|冰岛|捷克|匈牙利|罗马尼亚|希腊|乌克兰|卢森堡|法兰克福|伦敦|巴黎|阿姆斯特丹|united\s*kingdom|\buk\b|britain|england|germany|france)).*$
-  - name: ♻️ Gemini API 美洲其他
-    type: "url-test"
-    hidden: true
-    include-all: true
-    empty-fallback: "REJECT"
-    tolerance: 60
-    interval: 600
-    timeout: 5000
-    url: "https://www.gstatic.com/generate_204"
-    expected-status: '204'
-    exclude-filter: "(?i)(失联|超时|官网|售后|客服|剩余|到期|过期|自助|主流|流量|重置|订阅|网址|群组|邀请|返利|电报|无效|套餐|expire|traffic|reset|renew|website|invite)"
-    filter: (?i)^(?=.*(?:🇨🇦|🇲🇽|🇧🇷|🇦🇷|🇨🇱|🇨🇴|🇵🇪|🇺🇾|🇵🇾|🇧🇴|🇪🇨|🇻🇪|🇵🇦|🇨🇷|加拿大|墨西哥|巴西|阿根廷|智利|哥伦比亚|秘鲁|多伦多|温哥华|圣保罗|canada|toronto|vancouver|brazil|argentina)).*$
-  - name: ♻️ Gemini API 大洋洲
-    type: "url-test"
-    hidden: true
-    include-all: true
-    empty-fallback: "REJECT"
-    tolerance: 60
-    interval: 600
-    timeout: 5000
-    url: "https://www.gstatic.com/generate_204"
-    expected-status: '204'
-    exclude-filter: "(?i)(失联|超时|官网|售后|客服|剩余|到期|过期|自助|主流|流量|重置|订阅|网址|群组|邀请|返利|电报|无效|套餐|expire|traffic|reset|renew|website|invite)"
-    filter: (?i)^(?=.*(?:🇦🇺|🇳🇿|🇫🇯|🇵🇬|澳大利亚|澳洲|悉尼|墨尔本|新西兰|奥克兰|斐济|australia|sydney|melbourne|auckland|new\s*zealand)).*$
-  - name: ♻️ Gemini API 中东
-    type: "url-test"
-    hidden: true
-    include-all: true
-    empty-fallback: "REJECT"
-    tolerance: 60
-    interval: 600
-    timeout: 5000
-    url: "https://www.gstatic.com/generate_204"
-    expected-status: '204'
-    exclude-filter: "(?i)(失联|超时|官网|售后|客服|剩余|到期|过期|自助|主流|流量|重置|订阅|网址|群组|邀请|返利|电报|无效|套餐|expire|traffic|reset|renew|website|invite)"
-    filter: (?i)^(?=.*(?:🇦🇪|🇸🇦|🇮🇱|🇹🇷|🇶🇦|🇰🇼|🇴🇲|🇧🇭|🇯🇴|🇱🇧|🇮🇶|阿联酋|迪拜|沙特|以色列|土耳其|伊斯坦布尔|卡塔尔|科威特|阿曼|巴林|约旦|黎巴嫩|伊拉克|dubai|abu\s*dhabi|turkey|istanbul)).*$
-  - name: ♻️ Gemini API 非洲
-    type: "url-test"
-    hidden: true
-    include-all: true
-    empty-fallback: "REJECT"
-    tolerance: 60
-    interval: 600
-    timeout: 5000
-    url: "https://www.gstatic.com/generate_204"
-    expected-status: '204'
-    exclude-filter: "(?i)(失联|超时|官网|售后|客服|剩余|到期|过期|自助|主流|流量|重置|订阅|网址|群组|邀请|返利|电报|无效|套餐|expire|traffic|reset|renew|website|invite)"
-    filter: (?i)^(?=.*(?:🇿🇦|🇳🇬|🇪🇬|🇰🇪|🇲🇦|🇬🇭|🇹🇿|南非|埃及|尼日利亚|肯尼亚|摩洛哥|加纳|坦桑尼亚|约翰内斯堡|johannesburg|egypt|nigeria|kenya)).*$
-  - name: ♻️ Gemini API 亚洲其他
-    type: "url-test"
-    hidden: true
-    include-all: true
-    empty-fallback: "REJECT"
-    tolerance: 60
-    interval: 600
-    timeout: 5000
-    url: "https://www.gstatic.com/generate_204"
-    expected-status: '204'
-    exclude-filter: "(?i)(失联|超时|官网|售后|客服|剩余|到期|过期|自助|主流|流量|重置|订阅|网址|群组|邀请|返利|电报|无效|套餐|expire|traffic|reset|renew|website|invite)"
-    filter: (?i)^(?=.*(?:🇹🇭|🇻🇳|🇵🇭|🇮🇩|🇲🇾|🇰🇭|🇱🇰|🇧🇩|🇳🇵|🇮🇳|🇲🇳|🇧🇹|🇲🇻|🇰🇿|🇰🇬|🇹🇯|泰国|越南|菲律宾|印尼|印度|马来西亚|柬埔寨|斯里兰卡|孟加拉|尼泊尔|蒙古|文莱|马尔代夫|哈萨克斯坦|乌兹别克斯坦|吉尔吉斯斯坦|塔吉克斯坦|thailand|vietnam|india|indonesia|philippines|malaysia)).*$
+    filter: (?i)^(?=(?:🇦🇱|🇦🇩|🇦🇹|🇧🇪|🇧🇬|🇭🇷|🇨🇾|🇨🇿|🇩🇰|🇪🇪|🇫🇮|🇫🇷|🇬🇧|🇬🇷|🇭🇺|🇮🇪|🇮🇸|🇮🇹|🇱🇻|🇱🇹|🇱🇺|🇲🇨|🇲🇪|🇲🇰|🇳🇱|🇳🇴|🇵🇱|🇵🇹|🇷🇴|🇷🇸|🇸🇲|🇸🇰|🇸🇮|🇪🇸|🇸🇪|🇨🇭|🇺🇦|🇻🇦|英国|德国|法国|荷兰|波兰|西班牙|葡萄牙|意大利|瑞士|奥地利|比利时|瑞典|挪威|丹麦|芬兰|爱尔兰|冰岛|捷克|匈牙利|罗马尼亚|希腊|乌克兰|卢森堡|法兰克福|伦敦|巴黎|阿姆斯特丹|united\s*kingdom|\buk\b|britain|england|germany|france)|(?:🇨🇦|🇲🇽|🇧🇷|🇦🇷|🇨🇱|🇨🇴|🇵🇪|🇺🇾|🇵🇾|🇧🇴|🇪🇨|🇻🇪|🇵🇦|🇨🇷|加拿大|墨西哥|巴西|阿根廷|智利|哥伦比亚|秘鲁|多伦多|温哥华|圣保罗|canada|toronto|vancouver|brazil|argentina)|(?:🇦🇺|🇳🇿|🇫🇯|🇵🇬|澳大利亚|澳洲|悉尼|墨尔本|新西兰|奥克兰|斐济|australia|sydney|melbourne|auckland|new\s*zealand)|(?:🇦🇪|🇸🇦|🇮🇱|🇹🇷|🇶🇦|🇰🇼|🇴🇲|🇧🇭|🇯🇴|🇱🇧|🇮🇶|阿联酋|迪拜|沙特|以色列|土耳其|伊斯坦布尔|卡塔尔|科威特|阿曼|巴林|约旦|黎巴嫩|伊拉克|dubai|abu\s*dhabi|turkey|istanbul)|(?:🇿🇦|🇳🇬|🇪🇬|🇰🇪|🇲🇦|🇬🇭|🇹🇿|南非|埃及|尼日利亚|肯尼亚|摩洛哥|加纳|坦桑尼亚|约翰内斯堡|johannesburg|egypt|nigeria|kenya)|(?:🇹🇭|🇻🇳|🇵🇭|🇮🇩|🇲🇾|🇰🇭|🇱🇰|🇧🇩|🇳🇵|🇮🇳|🇲🇳|🇧🇹|🇲🇻|🇰🇿|🇰🇬|🇹🇯|泰国|越南|菲律宾|印尼|印度|马来西亚|柬埔寨|斯里兰卡|孟加拉|尼泊尔|蒙古|文莱|马尔代夫|哈萨克斯坦|乌兹别克斯坦|吉尔吉斯斯坦|塔吉克斯坦|thailand|vietnam|india|indonesia|philippines|malaysia)).*$
   - name: "📢 谷歌FCM"
     type: select
     proxies:
