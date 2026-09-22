@@ -112,7 +112,11 @@ jobs:
           # ===== 3. clash-party.yaml:YAML 语法、筛选正则、规则集与文件引用 =====
           cp = yaml.safe_load(pathlib.Path('clash-party.yaml').read_text(encoding='utf-8'))
           providers = cp.get('rule-providers!') or {}
-          groups = cp.get('proxy-groups!') or []
+          # proxy-groups / rules 在覆写里不带感叹号,对象类键带;两种写法都兼容
+          groups = cp.get('proxy-groups!') or cp.get('proxy-groups') or []
+          rules_list = cp.get('rules!') or cp.get('rules') or []
+          if not groups or not rules_list or not providers:
+              errors.append('clash-party.yaml: 缺少 proxy-groups / rules / rule-providers! 配置段')
           gnames = {g.get('name') for g in groups if isinstance(g, dict)}
           for g in groups:
               if not isinstance(g, dict) or not g.get('name'):
@@ -125,7 +129,7 @@ jobs:
                           re.compile(v)
                       except re.error as e:
                           errors.append(f'clash-party.yaml: 组 {g["name"]} 的 {key} 正则无法编译: {e}')
-          for r in cp.get('rules!') or []:
+          for r in rules_list:
               parts = r.split(',')
               if parts[0].strip() == 'RULE-SET' and parts[1].strip() not in providers:
                   errors.append(f'clash-party.yaml: 规则引用了未定义的规则集: {parts[1].strip()}')
