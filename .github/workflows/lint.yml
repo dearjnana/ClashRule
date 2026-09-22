@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   lint:
-    name: 规则语法与引用检查
+    name: 自动审核
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -26,17 +26,19 @@ jobs:
       - name: 安装 YAML 解析依赖
         run: python -m pip install --quiet pyyaml
 
-      - name: 检查规则列表与配置引用
+      - name: 校验规则、INI 与覆写文件
         run: |
           python - <<'PYEOF'
           import re, sys, pathlib
           import yaml
 
           ROOT = pathlib.Path('.')
-          REPO_URL = 'https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/'
+          RAW = 'https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/'
+          BUILTIN = {'DIRECT', 'REJECT', 'REJECT-DROP', 'PASS', 'COMPATIBLE', 'GLOBAL', 'no-resolve'}
+          RULE_PREFIX = ('GEOIP', 'MATCH', 'DST-PORT', 'SRC-PORT', 'IP-CIDR', 'IP-CIDR6', 'IP-ASN', 'RULE-SET')
           errors = []
 
-          # 1. rules/ 语法检查：每行是已知的规则类型，同文件内不允许重复行
+          # ===== 1. rules/ 规则列表:语法 + 同文件重复行 =====
           TYPES = {'DOMAIN', 'DOMAIN-SUFFIX', 'DOMAIN-KEYWORD', 'DOMAIN-REGEX',
                    'IP-CIDR', 'IP-CIDR6', 'GEOIP', 'IP-ASN', 'SRC-IP-CIDR',
                    'SRC-PORT', 'DST-PORT', 'PROCESS-NAME', 'PROCESS-PATH', 'MATCH'}
@@ -54,26 +56,48 @@ jobs:
                   else:
                       seen[s] = n
 
-          # 2. INI 检查：引用的仓库文件存在，目标组和被引用组都有定义
-          BUILTIN = {'DIRECT', 'REJECT', 'REJECT-DROP', 'PASS', 'COMPATIBLE', 'GLOBAL', 'no-resolve'}
-          RULE_PREFIX = ('GEOIP', 'MATCH', 'DST-PORT', 'SRC-PORT', 'IP-CIDR', 'IP-CIDR6', 'IP-ASN', 'RULE-SET')
+          # ===== 2. 两个 INI:结构语法、正则可编译、组引用、文件引用 =====
+          GROUP_TYPES = {'select', 'url-test', 'fallback', 'load-balance', 'relay'}
+          KNOWN_KEYS = ('[custom]', 'ruleset=', 'custom_proxy_group=', 'clash_rule_base=',
+                        'enable_rule_generator=', 'overwrite_original_rules=')
           for ini in ['openclash.ini', 'android.ini']:
-              text = pathlib.Path(ini).read_text(encoding='utf-8')
               defined = set()
-              for line in text.splitlines():
-                  if line.startswith('custom_proxy_group='):
-                      defined.add(line.split('`')[0][len('custom_proxy_group='):])
-              for m in re.finditer(r'^ruleset=([^,]+),(.+)$', text, re.M):
+              lines = pathlib.Path(ini).read_text(encoding='utf-8').splitlines()
+              for n, line in enumerate(lines, 1):
+                  s = line.strip()
+                  if not s or s.startswith((';', '#')):
+                      continue
+                  if not s.startswith(KNOWN_KEYS):
+                      errors.append(f'{ini}:{n} 无法识别的行: {s[:60]}')
+                  elif s.startswith('custom_proxy_group='):
+                      fields = line.split('`')
+                      name = fields[0][len('custom_proxy_group='):]
+                      if not name:
+                          errors.append(f'{ini}:{n} 策略组缺少名称')
+                      if len(fields) < 4:
+                          errors.append(f'{ini}:{n} 策略组 {name} 字段不完整')
+                          continue
+                      if fields[1] not in GROUP_TYPES:
+                          errors.append(f'{ini}:{n} 策略组 {name} 类型异常: {fields[1]}')
+                      if name in defined:
+                          errors.append(f'{ini}:{n} 策略组重名: {name}')
+                      defined.add(name)
+                      pattern = fields[2]
+                      if not pattern.startswith('[]'):
+                          try:
+                              re.compile(pattern)
+                          except re.error as e:
+                              errors.append(f'{ini}:{n} 策略组 {name} 正则无法编译: {e}')
+              for m in re.finditer(r'^ruleset=([^,]+),(.+)$', '\n'.join(lines), re.M):
                   target, rule = m.group(1).strip(), m.group(2).strip()
                   if target not in defined and target not in BUILTIN:
                       errors.append(f'{ini}: ruleset 目标组未定义: {target}')
-                  if rule.startswith(REPO_URL):
-                      p = ROOT / rule[len(REPO_URL):]
-                      if not p.is_file():
-                          errors.append(f'{ini}: 引用的文件不存在: {p}')
+                  if rule.startswith(RAW):
+                      if not (ROOT / rule[len(RAW):]).is_file():
+                          errors.append(f'{ini}: 引用的文件不存在: {rule[len(RAW):]}')
                   elif not rule.startswith(('[]', 'http')):
                       errors.append(f'{ini}: 无法识别的规则来源: {rule[:60]}')
-              for line in text.splitlines():
+              for line in lines:
                   if not line.startswith('custom_proxy_group='):
                       continue
                   for field in line.split('`')[2:]:
@@ -85,28 +109,44 @@ jobs:
                       if ref not in defined:
                           errors.append(f'{ini}: 策略组引用未定义: {ref}')
 
-          # 3. clash-party.yaml 检查：RULE-SET 引用的规则集有定义，仓库内 URL 指向存在的文件
+          # ===== 3. clash-party.yaml:YAML 语法、筛选正则、规则集与文件引用 =====
           cp = yaml.safe_load(pathlib.Path('clash-party.yaml').read_text(encoding='utf-8'))
           providers = cp.get('rule-providers!') or {}
+          groups = cp.get('proxy-groups!') or []
+          gnames = {g.get('name') for g in groups if isinstance(g, dict)}
+          for g in groups:
+              if not isinstance(g, dict) or not g.get('name'):
+                  errors.append('clash-party.yaml: 存在没有名称的策略组')
+                  continue
+              for key in ('filter', 'exclude-filter'):
+                  v = g.get(key)
+                  if isinstance(v, str):
+                      try:
+                          re.compile(v)
+                      except re.error as e:
+                          errors.append(f'clash-party.yaml: 组 {g["name"]} 的 {key} 正则无法编译: {e}')
           for r in cp.get('rules!') or []:
               parts = r.split(',')
               if parts[0].strip() == 'RULE-SET' and parts[1].strip() not in providers:
                   errors.append(f'clash-party.yaml: 规则引用了未定义的规则集: {parts[1].strip()}')
           for name, p in providers.items():
               url = p.get('url', '')
-              if url.startswith(REPO_URL) and not (ROOT / url[len(REPO_URL):]).is_file():
+              if url.startswith(RAW) and not (ROOT / url[len(RAW):]).is_file():
                   errors.append(f'clash-party.yaml: 规则集 {name} 引用的文件不存在: {url}')
+          for m in re.finditer(r'^\s+- (♻️ Gemini .+)$', pathlib.Path('clash-party.yaml').read_text(encoding='utf-8'), re.M):
+              if m.group(1).strip() not in gnames:
+                  errors.append(f'clash-party.yaml: Gemini 主组引用的子组未定义: {m.group(1).strip()}')
 
           if errors:
               print('\n'.join(errors))
               print(f'\n共 {len(errors)} 个问题')
               sys.exit(1)
-          print('检查通过：规则语法、文件引用和策略组引用均正常。')
+          print('自动审核通过:规则语法、INI 结构与引用、覆写文件解析全部正常。')
           PYEOF
 
       - name: 检查换行与空白
         run: |
           git diff --check
           if git grep -qI $'\r' -- 'rules/*.list' '*.ini' 'clash-party.yaml'; then
-            echo '发现 CRLF 换行，请使用 LF。' && exit 1
+            echo '发现 CRLF 换行,请使用 LF。' && exit 1
           fi
