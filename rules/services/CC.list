@@ -8,6 +8,7 @@ IP-CIDR,157.254.234.17/32
 IP-CIDR,163.192.47.59/32
 DOMAIN-SUFFIX,ai.b1ank.top
 DOMAIN-SUFFIX,pingcodes.cc
+DOMAIN-SUFFIX,anyrouter.top
 
 #其他
 DOMAIN-SUFFIX,z.ai
