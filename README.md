@@ -4,7 +4,7 @@
 
 个人 Clash 分流规则仓库。三个客户端入口都在根目录,规则源在 `rules/`,在 GitHub 网页上直接编辑、提交即生效,没有本地构建步骤。
 
-**顶部的徽章就是自动审核状态。** 每次提交都会对 `openclash.ini`、`android.ini`、`clash-party.yaml` 做语法与引用校验(策略组结构、正则能否编译、引用的规则文件是否存在、同文件重复行),绿色即通过;变红说明配置有错,点徽章进 Actions 可以看到具体是哪一行出了问题。
+**顶部的徽章就是自动审核状态。** 每次提交分三步:先对 `openclash.ini`、`android.ini`、`clash-party.yaml` 做语法与引用校验(策略组结构、正则能否编译、引用的规则文件是否存在、同文件重复行);再在与线上一致(同镜像摘要)的 SubConverter-Extended + Sub-Store 容器里按本文档配方做**真实转换**,校验策略组一个不丢、无悬空引用、订阅源对任意 User-Agent 都返回 Clash YAML,并用 mihomo 内核 `-t` 实际加载;全部通过才在下方盖章并提交。绿色即全链路可用;变红点徽章进 Actions 看具体问题。
 
 <!-- audit-start -->**最后审核通过:2026-09-25 21:12:57.150(北京时间)**<!-- audit-end -->
 
@@ -42,6 +42,7 @@ http://Sub-Store地址/后台路径/download/collection/聚合/ClashMeta
 
 - **改分流条件**:编辑 `rules/` 里对应的 `.list`,每行一条(`DOMAIN,api.example.com`、`DOMAIN-SUFFIX,example.net`),注释用 `#`。
 - **换策略组 / 调优先级**:改 INI 里的 `ruleset=组名,规则地址` 行,从上到下就是匹配顺序,`MATCH` 兜底必须在最后。两个 INI 内容保持一致,同步修改。
+- **url-test 组必须带测速 URL 字段**:`custom_proxy_group` 的 url-test 组第 5 个字段要写测速地址(如 `https://cp.cloudflare.com/generate_204`),否则 SubConverter-Extended 会**静默丢弃该组**,引用它的主组悬空,内核直接拒绝整个配置(2026-09 的 Gemini 子组丢组事故即由此而来,端到端审核的"组数一致"检查就是防它复发)。
 - **新增规则文件**:在 `rules/` 建文件,然后在两个 INI 里各加一行 `ruleset=组名,https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/分类/文件.list`,组名用已有的。
 - **Clash Party**:改 `clash-party.yaml`。只改了规则源的话在应用里刷新规则集即可;改了覆写本身要更新覆写并重新应用。
 - **链接缓存**:三个文件里指向本仓库的链接都带 `?timestamp=` 参数,用来绕过 GitHub Raw 的各级缓存。改完规则如果客户端/转换器还在用旧内容,把文件里的时间戳全局替换成一个新数字即可强制刷新(当前为 `1790042073`)。
@@ -63,6 +64,7 @@ http://Sub-Store地址/后台路径/download/collection/聚合/ClashMeta
 ├─ rules/               # 规则源(ai/ games/ google/ media/ network/ services/ ...)
 ├─ deploy/              # SubConverter、Sub-Store 等自建服务 compose 示例
 ├─ scripts/sub-store/   # 节点地区识别与重命名脚本
+├─ scripts/ci/          # 端到端审核用的 compose 与验证脚本
 └─ licenses/            # 上游规则许可证
 ```
 

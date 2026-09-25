@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   lint:
-    name: 自动审核
+    name: 静态检查
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -161,7 +161,7 @@ jobs:
               print('\n'.join(errors))
               print(f'\n共 {len(errors)} 个问题')
               sys.exit(1)
-          print('自动审核通过:规则语法、INI 结构与引用、覆写文件解析全部正常。')
+          print('静态检查通过:规则语法、INI 结构与引用、覆写文件解析全部正常。')
           PYEOF
 
       - name: 检查换行与空白
@@ -170,6 +170,49 @@ jobs:
           if git grep -qI $'\r' -- 'rules/*.list' '*.ini' 'clash-party.yaml'; then
             echo '发现 CRLF 换行,请使用 LF。' && exit 1
           fi
+
+  e2e:
+    name: 端到端转换审核
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: lint
+    steps:
+      - name: 读取本次提交
+        uses: actions/checkout@v4
+
+      - name: 启动与线上一致的转换器与 Sub-Store
+        run: |
+          docker compose -f scripts/ci/e2e-compose.yaml up -d
+          for i in $(seq 1 60); do
+            ok=1
+            curl -sf http://127.0.0.1:25500/version >/dev/null || ok=0
+            curl -sf http://127.0.0.1:3001/e2e-ci/api/utils/env >/dev/null || ok=0
+            [ "$ok" = 1 ] && break
+            sleep 2
+          done
+          [ "$ok" = 1 ] || { echo '服务未能就绪'; docker ps; docker logs e2e-subconverter --tail 50; docker logs e2e-sub-store --tail 50; exit 1; }
+
+      - name: 真实转换并校验(组完整性 / provider 多 UA / mihomo 加载)
+        run: |
+          docker run --rm --network clashrule-e2e_default \
+            -v "${{ github.workspace }}:/work:ro" -w /work \
+            -e E2E_INI_URLS="https://raw.githubusercontent.com/dearjnana/ClashRule/${{ github.sha }}/openclash.ini
+          https://raw.githubusercontent.com/dearjnana/ClashRule/${{ github.sha }}/android.ini" \
+            python:3.12-slim sh -c 'pip install --quiet --disable-pip-version-check pyyaml && python scripts/ci/validate.py'
+
+      - name: 收尾
+        if: always()
+        run: docker compose -f scripts/ci/e2e-compose.yaml down -v
+
+  seal:
+    name: 写入审核时间
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: [lint, e2e]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+      - name: 读取本次提交
+        uses: actions/checkout@v4
 
       - name: 写入审核时间并提交
         run: |
