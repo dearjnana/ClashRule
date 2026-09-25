@@ -21,16 +21,18 @@ import urllib.request
 import yaml
 
 CONVERTER = os.environ.get('E2E_CONVERTER', 'http://subconverter:25500')
-# 经 gateway 访问 Sub-Store:网关对无后缀的下载请求自动追加 /ClashMeta,
-# 与生产拓扑一致,验证的正是"客户端链接不带后缀也能拿到 Clash YAML"。
-SUBSTORE_BASE = os.environ.get('E2E_SUBSTORE', 'http://gateway:3001/e2e-ci')
+SUBSTORE_BASE = os.environ.get('E2E_SUBSTORE', 'http://sub-store:3001/e2e-ci')
 SUB_NAME = 'ci-seed-sub'
 COL_NAME = 'ci-seed-col'
-# 覆盖三类真实请求方:新版 mihomo 内核、旧版 clash.meta、陌生客户端
+# 文件对象(mihomoConfig):生成内容时平台硬编码为 mihomo,与请求方 UA 无关。
+# 生产订阅源就用它,/api/file/<名称> 不带任何格式后缀。
+FILE_NAME = 'ci-seed-clash'
+# 覆盖真实请求方:新版 mihomo 内核、旧版 clash.meta、陌生客户端、无 UA 倾向的工具
 PROBE_UAS = [
     'mihomo/v1.19.13',
     'clash.meta/v1.19.0',
     'curl/8.5.0',
+    'UnknownClient/9.9',
 ]
 BUILTIN = {'DIRECT', 'REJECT', 'REJECT-DROP', 'PASS', 'COMPATIBLE', 'GLOBAL', 'no-resolve'}
 TEST_NODES = (
@@ -60,12 +62,19 @@ def seed():
     sub = json.dumps({'name': SUB_NAME, 'source': 'local',
                       'content': TEST_NODES}).encode()
     col = json.dumps({'name': COL_NAME, 'subscriptions': [SUB_NAME]}).encode()
+    # 订阅源用 mihomoConfig 文件对象,内容取自上面的测试聚合
+    seed_file = json.dumps({'name': FILE_NAME, 'type': 'mihomoConfig',
+                            'sourceType': 'collection',
+                            'sourceName': COL_NAME}).encode()
     http(f'{SUBSTORE_BASE}/api/subs', method='POST', body=sub)
     http(f'{SUBSTORE_BASE}/api/collections', method='POST', body=col)
+    http(f'{SUBSTORE_BASE}/api/files', method='POST', body=seed_file)
 
 
 def cleanup():
-    for path in (f'/api/sub/{SUB_NAME}', f'/api/collection/{COL_NAME}'):
+    for path in (f'/api/file/{FILE_NAME}',
+                 f'/api/sub/{SUB_NAME}',
+                 f'/api/collection/{COL_NAME}'):
         try:
             http(f'{SUBSTORE_BASE}{path}', method='DELETE')
         except Exception:
@@ -73,8 +82,8 @@ def cleanup():
 
 
 def convert(ini_url):
-    # 订阅地址不带任何后缀 —— 网关负责强制格式,这正是被验证的行为。
-    sub_url = f'{SUBSTORE_BASE}/download/collection/{COL_NAME}'
+    # 订阅地址不带任何格式后缀 —— 文件对象保证输出与 UA 无关,这正是被验证的行为。
+    sub_url = f'{SUBSTORE_BASE}/api/file/{FILE_NAME}'
     params = (
         'target=clash'
         f'&url={urllib.request.quote(sub_url, safe="")}'
@@ -167,10 +176,11 @@ def fetch_mihomo(workdir):
 
 
 def check_mihomo(binary, cfg, label, workdir):
-    cfg_path = os.path.join(workdir, f'{label}.yaml')
+    safe = re.sub(r'[^A-Za-z0-9._-]', '_', label)
+    cfg_path = os.path.join(workdir, f'{safe}.yaml')
     with open(cfg_path, 'w', encoding='utf-8') as f:
         yaml.safe_dump(cfg, f, allow_unicode=True)
-    home = os.path.join(workdir, f'{label}-home')
+    home = os.path.join(workdir, f'{safe}-home')
     os.makedirs(home, exist_ok=True)
     result = subprocess.run(
         [binary, '-t', '-d', home, '-f', cfg_path],

@@ -1,8 +1,4 @@
 # 数据持久化；后台路径从私密环境文件读取，日志自动轮转。
-# gateway 是 Sub-Store 前的下载网关：对无后缀的订阅/聚合下载请求自动追加
-# /ClashMeta 强制 Clash 输出（Sub-Store 按请求方 UA 决定格式，mihomo 内核等
-# UA 不被识别会拿到 base64，proxy-provider 无法解析）。对外端口 3001 由
-# gateway 持有；Sub-Store 本体仅内网可达，另映射 127.0.0.1:3002 备急。
 services:
   sub-store:
     image: xream/sub-store@sha256:7e63f05cbbf50f64bff14def6d5758fc4a896397c4c9168ab39e0d079513276e
@@ -12,7 +8,7 @@ services:
     env_file:
     - ./.env
     ports:
-    - 127.0.0.1:3002:3001
+    - 3001:3001
     volumes:
     - ./data:/opt/app/data
     healthcheck:
@@ -44,33 +40,3 @@ services:
     cap_drop:
     - ALL
     stop_grace_period: 30s
-
-  gateway:
-    image: nginx@sha256:65645c7bb6a0661892a8b03b89d0743208a18dd2f3f17a54ef4b76fb8e2f2a10
-    container_name: substore-gateway
-    restart: unless-stopped
-    init: true
-    depends_on:
-    - sub-store
-    ports:
-    - 3001:3001
-    volumes:
-    - ./gateway.conf:/etc/nginx/conf.d/default.conf:ro
-    logging:
-      driver: json-file
-      options:
-        max-size: 5m
-        max-file: '2'
-    mem_limit: 96m
-    mem_reservation: 32m
-    cpus: 0.5
-    pids_limit: 64
-    security_opt:
-    - no-new-privileges:true
-    cap_drop:
-    - ALL
-    cap_add:
-    - CHOWN
-    - SETGID
-    - SETUID
-    stop_grace_period: 15s
