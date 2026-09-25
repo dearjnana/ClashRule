@@ -30,15 +30,15 @@ https://你的转换器地址/sub?target=clash&url=编码后的订阅地址&conf
 
 转换结果就是完整配置,直接导入,不需要任何整理脚本。
 
-**订阅源要用 Sub-Store 的"文件"对象,地址不带任何后缀。** SubConverter-Extended 对 `target=clash` 会把订阅原样透传成 `proxy-providers`,由客户端内核自己拉取订阅(这是该转换器的设计行为,策略组筛选以组内 `filter` 正则下发,不受影响)。但 Sub-Store 对**订阅/聚合的下载地址**按"请求方 User-Agent"决定返回格式:mihomo 内核刷新 provider 时的 UA(如 `mihomo/v…`)不在其识别清单里,会拿到 base64 的 v2ray 订阅,内核按 YAML 解析即报 `cannot unmarshal !!str 'dmxlc3M…' into provider.ProxySchema`。
+**订阅地址必须带 `?platform=ClashMeta`。** SubConverter-Extended 对 `target=clash` 会把订阅原样透传成 `proxy-providers`,由客户端内核自己拉取订阅(这是该转换器的设计行为,策略组筛选以组内 `filter` 正则下发,不受影响)。它还会把**发起转换请求那一方(浏览器/网页转换器)的 User-Agent 原样写进 provider 的 `header.User-Agent`**,而 Sub-Store 只按 User-Agent 决定返回格式:UA 里不含 `clash` 字样(例如 `mihomo/v…`、`Shadowrocket/…`)时会返回 base64 的 v2ray 订阅,内核按 YAML 解析即报 `cannot unmarshal !!str 'dmxlc3M…' into provider.ProxySchema`——内核自带的正确 UA 会被这个 header 覆盖掉,所以问题在转换环节就已埋下。
 
-解决办法:在 Sub-Store 里建一个**类型为 `mihomoConfig` 的文件对象**(来源选你的聚合订阅),用它做订阅源:
+解决办法:在**订阅地址**末尾加查询参数 `?platform=ClashMeta`(Sub-Store 会依此强制输出 Clash YAML,优先级高于 UA,实测对任意 UA 都生效):
 
 ```text
-http://Sub-Store地址/后台路径/api/file/文件名称
+http://Sub-Store地址/后台路径/download/collection/聚合?platform=ClashMeta
 ```
 
-该类型在生成内容时把平台固定为 mihomo,与请求方 UA 无关,任何客户端来拉都是 Clash YAML,地址里也不需要任何格式后缀(`/ClashMeta`、`?platform=` 都不必写)。在 Sub-Store 网页端"文件"页新建即可:`类型` 选 mihomo 配置,`来源类型` 选组合订阅,`来源名称` 填你的聚合名称。
+转换器会把该参数一并写进生成的 provider URL,内核再去拉取时任何 UA 都能拿到 YAML。Sub-Store 也接受 `/ClashMeta` 路径后缀,但它对订阅地址里有中文、转换器会二次编码的场景容易出错,推荐用查询参数形式。
 
 另外,`list=true` 让后端代取并展开节点,在 v1.9.7 对该聚合订阅无论 base64 还是 YAML 均解析失败(预处理层会把 base64 中的 `+` 还原成空格),不能作为替代方案,维持 provider 透传即可。
 

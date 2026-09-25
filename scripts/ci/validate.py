@@ -24,10 +24,12 @@ CONVERTER = os.environ.get('E2E_CONVERTER', 'http://subconverter:25500')
 SUBSTORE_BASE = os.environ.get('E2E_SUBSTORE', 'http://sub-store:3001/e2e-ci')
 SUB_NAME = 'ci-seed-sub'
 COL_NAME = 'ci-seed-col'
-# 文件对象(mihomoConfig):生成内容时平台硬编码为 mihomo,与请求方 UA 无关。
-# 生产订阅源就用它,/api/file/<名称> 不带任何格式后缀。
-FILE_NAME = 'ci-seed-clash'
-# 覆盖真实请求方:新版 mihomo 内核、旧版 clash.meta、陌生客户端、无 UA 倾向的工具
+# 订阅地址带 ?platform=ClashMeta:Sub-Store 依此强制输出 Clash YAML,
+# 优先级高于 User-Agent。这正是被验证的生产写法。
+SUB_PLATFORM_PARAM = 'platform=ClashMeta'
+# 转换请求方 UA:用不含 clash 字样的 UA,复现"转换器把坏 UA 写进 provider header"的场景
+CONVERT_REQUEST_UA = 'ci-runner/1.0'
+# 覆盖真实拉取 provider 的请求方
 PROBE_UAS = [
     'mihomo/v1.19.13',
     'clash.meta/v1.19.0',
@@ -62,19 +64,12 @@ def seed():
     sub = json.dumps({'name': SUB_NAME, 'source': 'local',
                       'content': TEST_NODES}).encode()
     col = json.dumps({'name': COL_NAME, 'subscriptions': [SUB_NAME]}).encode()
-    # 订阅源用 mihomoConfig 文件对象,内容取自上面的测试聚合
-    seed_file = json.dumps({'name': FILE_NAME, 'type': 'mihomoConfig',
-                            'sourceType': 'collection',
-                            'sourceName': COL_NAME}).encode()
     http(f'{SUBSTORE_BASE}/api/subs', method='POST', body=sub)
     http(f'{SUBSTORE_BASE}/api/collections', method='POST', body=col)
-    http(f'{SUBSTORE_BASE}/api/files', method='POST', body=seed_file)
 
 
 def cleanup():
-    for path in (f'/api/file/{FILE_NAME}',
-                 f'/api/sub/{SUB_NAME}',
-                 f'/api/collection/{COL_NAME}'):
+    for path in (f'/api/sub/{SUB_NAME}', f'/api/collection/{COL_NAME}'):
         try:
             http(f'{SUBSTORE_BASE}{path}', method='DELETE')
         except Exception:
@@ -82,8 +77,8 @@ def cleanup():
 
 
 def convert(ini_url):
-    # 订阅地址不带任何格式后缀 —— 文件对象保证输出与 UA 无关,这正是被验证的行为。
-    sub_url = f'{SUBSTORE_BASE}/api/file/{FILE_NAME}'
+    # 订阅地址带 ?platform=ClashMeta —— 强制格式由该参数保证,与 UA 无关。
+    sub_url = f'{SUBSTORE_BASE}/download/collection/{COL_NAME}?{SUB_PLATFORM_PARAM}'
     params = (
         'target=clash'
         f'&url={urllib.request.quote(sub_url, safe="")}'
@@ -91,7 +86,8 @@ def convert(ini_url):
         '&insert=false&emoji=true&xudp=false&udp=false&tfo=false'
         '&expand=true&scv=false&fdn=false&new_name=true'
     )
-    status, data = http(f'{CONVERTER}/sub?{params}', timeout=180)
+    status, data = http(f'{CONVERTER}/sub?{params}', timeout=180,
+                        ua=CONVERT_REQUEST_UA)
     if status != 200:
         raise RuntimeError(f'conversion HTTP {status}: {data[:200]!r}')
     try:
@@ -142,7 +138,18 @@ def check_providers(cfg, label):
         return
     for name, p in providers.items():
         url = p.get('url', '')
-        for ua in PROBE_UAS:
+        # 订阅源必须带 ?platform=ClashMeta,且转换器要把它写进 provider URL;
+        # 否则内核拉取时会因 UA 不被 Sub-Store 识别而拿到 base64。
+        if SUB_PLATFORM_PARAM not in url:
+            fail(f'{label}: provider [{name}] 的 URL 未携带 {SUB_PLATFORM_PARAM},'
+                 ' 客户端内核拉取时会拿到 base64(订阅地址需加 ?platform=ClashMeta)')
+        # 按内核的取数路径模拟:若 provider 写了 header.User-Agent,内核用它拉;
+        # 否则内核用自己的 UA(clash.meta/...)。两种情况都必须拿到 Clash YAML。
+        injected = p.get('header', {}).get('User-Agent') if isinstance(p.get('header'), dict) else None
+        probe_uas = list(PROBE_UAS)
+        if injected:
+            probe_uas.append(injected[0] if isinstance(injected, list) and injected else str(injected))
+        for ua in probe_uas:
             status, data = http(url, ua=ua)
             if status != 200:
                 fail(f'{label}: provider [{name}] 以 UA [{ua}] 拉取返回 HTTP {status}')
@@ -151,7 +158,7 @@ def check_providers(cfg, label):
             proxies = doc.get('proxies') if isinstance(doc, dict) else None
             if not isinstance(proxies, list) or not proxies:
                 fail(f'{label}: provider [{name}] 以 UA [{ua}] 拉取的不是含 proxies 列表的'
-                     ' Clash YAML(疑似 base64/UA 识别问题;线上应确认 gateway 网关在位)')
+                     ' Clash YAML —— 内核会报 cannot unmarshal !!str into provider.ProxySchema')
             else:
                 for proxy in proxies:
                     if not isinstance(proxy, dict) or not proxy.get('name') \

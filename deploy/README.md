@@ -19,7 +19,7 @@ docker compose up -d
 ## 已验证的三容器示例
 
 - `subconverter/compose.yaml`：公网与局域网实例各自使用 `public/pref.toml`、`lan/pref.toml`；先在本机 `.env` 设置 `LAN_BIND_IP`，并修改托管前缀为实际服务地址。
-- `sub-store/compose.yaml`：将 `.env.example` 复制为 `.env`，填写现有后台路径与 CORS 白名单。数据目录保持 `./data`。订阅源建议用 Sub-Store 的"文件"对象（类型 `mihomoConfig`），其 `/api/file/<名称>` 输出与请求方 UA 无关，可避免 mihomo 内核刷新 proxy-provider 时拿到 base64。
+- `sub-store/compose.yaml`：将 `.env.example` 复制为 `.env`，填写现有后台路径与 CORS 白名单。数据目录保持 `./data`。
 - 镜像固定至本次验证的摘要。后续升级先拉取新稳定版、验证，再替换摘要。
 - 配置示例启用健康检查、日志轮转、有限内存 / CPU / 进程数，关闭详细调试日志。没有使用需要压力标定的 `force_max` 模式。
 
