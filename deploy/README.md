@@ -19,7 +19,7 @@ docker compose up -d
 ## 已验证的三容器示例
 
 - `subconverter/compose.yaml`：公网与局域网实例各自使用 `public/pref.toml`、`lan/pref.toml`；先在本机 `.env` 设置 `LAN_BIND_IP`，并修改托管前缀为实际服务地址。
-- `sub-store/compose.yaml`：将 `.env.example` 复制为 `.env`，填写现有后台路径与 CORS 白名单。数据目录保持 `./data`。
+- `sub-store/compose.yaml`：将 `.env.example` 复制为 `.env`，填写现有后台路径与 CORS 白名单。数据目录保持 `./data`。包含 `gateway` nginx 网关：持有对外 3001 端口，对无后缀的订阅下载请求自动追加 `/ClashMeta` 强制 Clash 输出（Sub-Store 按请求方 UA 决定格式，mihomo 内核等 UA 会拿到 base64）；Sub-Store 本体另映射 `127.0.0.1:3002` 备急。
 - 镜像固定至本次验证的摘要。后续升级先拉取新稳定版、验证，再替换摘要。
 - 配置示例启用健康检查、日志轮转、有限内存 / CPU / 进程数，关闭详细调试日志。没有使用需要压力标定的 `force_max` 模式。
 

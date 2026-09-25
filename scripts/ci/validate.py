@@ -21,7 +21,9 @@ import urllib.request
 import yaml
 
 CONVERTER = os.environ.get('E2E_CONVERTER', 'http://subconverter:25500')
-SUBSTORE_BASE = os.environ.get('E2E_SUBSTORE', 'http://sub-store:3001/e2e-ci')
+# 经 gateway 访问 Sub-Store:网关对无后缀的下载请求自动追加 /ClashMeta,
+# 与生产拓扑一致,验证的正是"客户端链接不带后缀也能拿到 Clash YAML"。
+SUBSTORE_BASE = os.environ.get('E2E_SUBSTORE', 'http://gateway:3001/e2e-ci')
 SUB_NAME = 'ci-seed-sub'
 COL_NAME = 'ci-seed-col'
 # 覆盖三类真实请求方:新版 mihomo 内核、旧版 clash.meta、陌生客户端
@@ -71,7 +73,8 @@ def cleanup():
 
 
 def convert(ini_url):
-    sub_url = f'{SUBSTORE_BASE}/download/collection/{COL_NAME}/ClashMeta'
+    # 订阅地址不带任何后缀 —— 网关负责强制格式,这正是被验证的行为。
+    sub_url = f'{SUBSTORE_BASE}/download/collection/{COL_NAME}'
     params = (
         'target=clash'
         f'&url={urllib.request.quote(sub_url, safe="")}'
@@ -139,7 +142,7 @@ def check_providers(cfg, label):
             proxies = doc.get('proxies') if isinstance(doc, dict) else None
             if not isinstance(proxies, list) or not proxies:
                 fail(f'{label}: provider [{name}] 以 UA [{ua}] 拉取的不是含 proxies 列表的'
-                     ' Clash YAML(疑似 base64/UA 识别问题,应使用 /ClashMeta 强制输出)')
+                     ' Clash YAML(疑似 base64/UA 识别问题;线上应确认 gateway 网关在位)')
             else:
                 for proxy in proxies:
                     if not isinstance(proxy, dict) or not proxy.get('name') \

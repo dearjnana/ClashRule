@@ -30,11 +30,7 @@ https://你的转换器地址/sub?target=clash&url=编码后的订阅地址&conf
 
 转换结果就是完整配置,直接导入,不需要任何整理脚本。
 
-**Sub-Store 订阅源必须强制 Clash 输出格式。** SubConverter-Extended 对 `target=clash` 会把订阅原样透传成 `proxy-providers`,由客户端内核直接拉取订阅(这是该转换器的设计行为,策略组筛选以组内 `filter` 正则下发,不受影响)。但 Sub-Store 按"请求方 User-Agent"决定返回格式:mihomo 内核刷新 provider 时的 UA(如 `mihomo/v…`)不在其识别清单里,会拿到 base64 的 v2ray 订阅,内核按 YAML 解析即报 `yaml: unmarshal errors … cannot unmarshal !!str 'dmxlc3M…' into provider.ProxySchema`。解决办法是给订阅地址加路径后缀 `/ClashMeta`(或查询参数 `?platform=ClashMeta`),输出强制为 Clash YAML、与 UA 无关:
-
-```text
-http://Sub-Store地址/后台路径/download/collection/聚合/ClashMeta
-```
+**订阅地址保持无后缀,格式强制由 gateway 网关完成。** SubConverter-Extended 对 `target=clash` 会把订阅原样透传成 `proxy-providers`,由客户端内核直接拉取订阅(这是该转换器的设计行为,策略组筛选以组内 `filter` 正则下发,不受影响)。但 Sub-Store 按"请求方 User-Agent"决定返回格式:mihomo 内核刷新 provider 时的 UA(如 `mihomo/v…`)不在其识别清单里,会拿到 base64 的 v2ray 订阅,内核按 YAML 解析即报 `cannot unmarshal !!str 'dmxlc3M…' into provider.ProxySchema`。因此 `deploy/sub-store/` 的 compose 在 Sub-Store 前部署了一个 nginx 网关(`gateway.conf`):对不带目标后缀的订阅/聚合下载请求自动追加 `/ClashMeta` 强制输出 Clash YAML,其余路径(前端、API)原样透传。**客户端与转换请求里的订阅地址一律写原始无后缀形式**(如 `http://Sub-Store地址/后台路径/download/collection/聚合`),不要手工添加格式后缀。
 
 另外,`list=true` 让后端代取并展开节点,在 v1.9.7 对该聚合订阅无论 base64 还是 YAML 均解析失败(预处理层会把 base64 中的 `+` 还原成空格),不能作为替代方案,维持 provider 透传即可。
 
