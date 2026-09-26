@@ -41,7 +41,7 @@ services:
     - ALL
     stop_grace_period: 30s
   download-gateway:
-    image: node:22-alpine
+    image: node:24-slim@sha256:3638d9a6fe4030bd716be989438248074489337ba3275657f93595428be4fc03
     container_name: substore-download-gateway
     restart: unless-stopped
     init: true

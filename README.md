@@ -4,7 +4,7 @@
 
 个人 Clash 分流规则仓库。三个客户端入口都在根目录,规则源在 `rules/`,在 GitHub 网页上直接编辑、提交即生效,没有本地构建步骤。
 
-**顶部的徽章就是自动审核状态。** 每次提交分三步:先对 `openclash.ini`、`android.ini`、`clash-party.yaml` 做语法与引用校验(策略组结构、正则能否编译、引用的规则文件是否存在、同文件重复行);再在与线上一致(同镜像摘要)的 SubConverter-Extended + Sub-Store 容器里按本文档配方做**真实转换**,校验策略组一个不丢、无悬空引用、通用订阅不带格式参数,且 mihomo 等认不出的 UA 经下载网关也能拿到 Clash YAML,并用 mihomo 内核 `-t` 实际加载;全部通过才在下方盖章并提交。绿色即全链路可用;变红点徽章进 Actions 看具体问题。
+**顶部的徽章就是自动审核状态。** 每次提交先检查规则、INI、覆写文件与回归用例，再在固定镜像的隔离容器中进行真实转换，检查策略组、引用、不同客户端 UA 的 provider YAML，并用内核校验配置及实际加载 provider。全部通过才更新下方审核时间。绿色证明 CI 测试拓扑通过；生产服务器必须部署同一网关，并另行运行 [真实链接校验](scripts/ci/README.md)，不能仅凭徽章判断线上已经修好。
 
 <!-- audit-start -->**最后审核通过:2026-09-26 13:53:18.374(北京时间)**<!-- audit-end -->
 
@@ -41,6 +41,10 @@ http://Sub-Store地址/后台路径/download/collection/聚合
 ```
 
 改完要在跑 Sub-Store 的机器上重新部署 `deploy/sub-store`。只推这个仓库、不重新部署 3001,现有链接还会报同样的错。
+
+排障时要检查两次请求：客户端先从转换后端下载配置，再按配置中的 `proxy-providers` 地址与 `header` 下载节点。只看转换请求 HTTP 200，或只运行 `mihomo -t`，无法证明远程 provider 已成功装载。`scripts/ci/validate.py --live --mihomo` 用真实转换链接检查这两步；链接从 `E2E_LIVE_URL` 环境变量读取，日志不打印订阅内容。测试文件保留在 `temp/`，不会自动删除。
+
+客户端验收以 OpenClash、Clash Party、Clash Meta for Android 等 Meta 内核为准。CFW 0.11.0 的 2020 年内核既不支持 VLESS，也不支持本仓库的 `PROCESS-NAME` 等规则；给地址追加 `target=ClashMeta` 不能补上旧内核缺失的能力。本仓库不会为它过滤节点或删减规则。
 
 另外,`list=true` 让后端代取并展开节点,在 v1.9.7 对该聚合订阅无论 base64 还是 YAML 均解析失败(预处理层会把 base64 中的 `+` 还原成空格),不能作为替代方案,维持 provider 透传即可。
 

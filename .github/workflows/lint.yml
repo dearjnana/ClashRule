@@ -30,6 +30,16 @@ jobs:
       - name: 安装 YAML 解析依赖
         run: python -m pip install --quiet pyyaml
 
+      - name: 准备 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: 校验下载网关和校验脚本回归用例
+        run: |
+          node --test scripts/sub-store/clash-download-gateway.test.js
+          python -B scripts/ci/test_validate.py
+
       - name: 校验规则、INI 与覆写文件
         run: |
           python - <<'PYEOF'
@@ -194,15 +204,17 @@ jobs:
 
       - name: 真实转换并校验(组完整性 / provider 多 UA / mihomo 加载)
         run: |
-          docker run --rm --network clashrule-e2e_default \
+          mkdir -p temp
+          docker run --name e2e-validator --network clashrule-e2e_default \
             -v "${{ github.workspace }}:/work:ro" -w /work \
+            -v "${{ github.workspace }}/temp:/work/temp" \
             -e E2E_INI_URLS="https://raw.githubusercontent.com/dearjnana/ClashRule/${{ github.sha }}/openclash.ini
           https://raw.githubusercontent.com/dearjnana/ClashRule/${{ github.sha }}/android.ini" \
-            python:3.12-slim sh -c 'pip install --quiet --disable-pip-version-check pyyaml && python scripts/ci/validate.py'
+            python:3.12-slim sh -c 'pip install --quiet --disable-pip-version-check pyyaml && python -B scripts/ci/validate.py'
 
-      - name: 收尾
+      - name: 停止服务并保留容器与数据
         if: always()
-        run: docker compose -f scripts/ci/e2e-compose.yaml down -v
+        run: docker compose -f scripts/ci/e2e-compose.yaml stop
 
   seal:
     name: 写入审核时间

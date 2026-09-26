@@ -6,18 +6,16 @@
  * 的原样字符串 ShadowRocket 会落到 V2Ray，返回 base64（开头 dmxlc3M = vless）。
  * 内核再解析 proxy-provider 即报 cannot unmarshal !!str into provider.ProxySchema。
  *
- * 只在「没有显式格式参数，且 UA 会被当成 V2Ray」时，把转发给 Sub-Store 的
- * User-Agent 换成 clash-meta，让内核拿到可解析的 YAML。已识别的客户端和
- * 显式 platform/target 保持原样。
+ * 没有显式格式参数时，把未知 UA 和被误判为普通 Clash 的 Party 客户端 UA
+ * 换成 clash-meta，让 Meta/mihomo 内核拿到完整节点 YAML。
+ * 其他已识别的客户端和显式 platform/target 保持原样。
  */
 'use strict';
 
 const http = require('http');
+const https = require('https');
 const { URL } = require('url');
 
-const upstream = new URL(process.env.UPSTREAM || 'http://127.0.0.1:3002');
-const port = Number(process.env.PORT || 3001);
-const FORCE_UA = 'clash-meta';
 const HOP = new Set([
   'connection', 'keep-alive', 'proxy-authenticate', 'proxy-authorization',
   'te', 'trailers', 'transfer-encoding', 'upgrade', 'host', 'content-length',
@@ -41,7 +39,7 @@ function platformFromUA(ua) {
   if (lower.indexOf('clash') !== -1) return 'Clash';
   if (lower.indexOf('v2ray') !== -1) return 'V2Ray';
   if (lower.indexOf('sing-box') !== -1 || lower.indexOf('singbox') !== -1) return 'sing-box';
-  return 'V2Ray';
+  return null;
 }
 
 function explicitTarget(pathname, searchParams) {
@@ -56,9 +54,11 @@ function explicitTarget(pathname, searchParams) {
 
 function shouldForce(reqUrl, ua) {
   const u = new URL(reqUrl, 'http://gateway.local');
-  if (!/\/download(?:\/collection)?\/[^/]+/.test(u.pathname)) return false;
+  if (!/\/download(?:\/collection)?\/[^/]+\/?$/.test(u.pathname)) return false;
   if (explicitTarget(u.pathname, u.searchParams)) return false;
-  return platformFromUA(ua) === 'V2Ray';
+  // ClashParty/2.0.3 会被上游当作普通 Clash，丢失 AnyTLS/Hysteria2 等节点。
+  if (/^(?:clash[ -]?party|mihomo[ -]?party)(?:\/|$)/i.test(ua || '')) return true;
+  return platformFromUA(ua) === null;
 }
 
 function headerValue(req, name) {
@@ -66,40 +66,75 @@ function headerValue(req, name) {
   return Array.isArray(v) ? v[0] : (v || '');
 }
 
-const server = http.createServer((req, res) => {
-  const ua = headerValue(req, 'user-agent');
-  const force = shouldForce(req.url || '/', ua);
-  const headers = {};
-  for (const [key, value] of Object.entries(req.headers)) {
-    if (!HOP.has(key.toLowerCase())) headers[key] = value;
+function createGateway({ upstream = 'http://127.0.0.1:3002', timeoutMs = 30000 } = {}) {
+  upstream = new URL(upstream);
+  if (!['http:', 'https:'].includes(upstream.protocol)) {
+    throw new Error('UPSTREAM must use http or https');
   }
-  if (force) headers['user-agent'] = FORCE_UA;
-  headers.host = upstream.host;
-
-  const out = http.request({
-    protocol: upstream.protocol,
-    hostname: upstream.hostname,
-    port: upstream.port || 80,
-    method: req.method,
-    path: req.url,
-    headers,
-  }, (up) => {
-    const outHeaders = {};
-    for (const [key, value] of Object.entries(up.headers)) {
-      if (!HOP.has(key.toLowerCase())) outHeaders[key] = value;
+  const transport = upstream.protocol === 'https:' ? https : http;
+  return http.createServer((req, res) => {
+    const ua = headerValue(req, 'user-agent');
+    let force;
+    try {
+      force = ['GET', 'HEAD'].includes(req.method) && shouldForce(req.url || '/', ua);
+    } catch {
+      res.writeHead(400, { 'content-type': 'text/plain; charset=utf-8' });
+      res.end('invalid download URL\n');
+      return;
     }
-    res.writeHead(up.statusCode || 502, outHeaders);
-    up.pipe(res);
-  });
-  out.on('error', (err) => {
-    if (!res.headersSent) {
-      res.writeHead(502, { 'content-type': 'text/plain; charset=utf-8' });
+    const headers = {};
+    for (const [key, value] of Object.entries(req.headers)) {
+      if (!HOP.has(key.toLowerCase())) headers[key] = value;
     }
-    res.end(`download gateway upstream error: ${err.message}\n`);
-  });
-  req.pipe(out);
-});
+    if (force) headers['user-agent'] = 'clash-meta';
+    headers.host = upstream.host;
 
-server.listen(port, '0.0.0.0', () => {
-  process.stdout.write(`clash-download-gateway :${port} -> ${upstream.href}\n`);
-});
+    const out = transport.request({
+      protocol: upstream.protocol,
+      hostname: upstream.hostname,
+      port: upstream.port || (upstream.protocol === 'https:' ? 443 : 80),
+      method: req.method,
+      path: req.url,
+      headers,
+    }, (up) => {
+      const outHeaders = {};
+      for (const [key, value] of Object.entries(up.headers)) {
+        if (!HOP.has(key.toLowerCase())) outHeaders[key] = value;
+      }
+      res.writeHead(up.statusCode || 502, outHeaders);
+      up.on('error', (err) => res.destroy(err));
+      up.on('aborted', () => res.destroy());
+      up.pipe(res);
+    });
+    let timedOut = false;
+    out.setTimeout(timeoutMs, () => {
+      timedOut = true;
+      out.destroy(new Error('upstream timeout'));
+    });
+    out.on('error', (err) => {
+      if (res.destroyed) return;
+      if (res.headersSent) {
+        res.destroy(err);
+        return;
+      }
+      res.writeHead(timedOut ? 504 : 502, { 'content-type': 'text/plain; charset=utf-8' });
+      res.end(`download gateway upstream error: ${err.message}\n`);
+    });
+    req.on('aborted', () => out.destroy());
+    req.on('error', (err) => out.destroy(err));
+    res.on('close', () => {
+      if (!res.writableEnded) out.destroy();
+    });
+    req.pipe(out);
+  });
+}
+
+if (require.main === module) {
+  const upstream = process.env.UPSTREAM || 'http://127.0.0.1:3002';
+  const port = Number(process.env.PORT || 3001);
+  createGateway({ upstream }).listen(port, '0.0.0.0', () => {
+    process.stdout.write(`clash-download-gateway :${port} -> ${upstream}\n`);
+  });
+}
+
+module.exports = { createGateway, shouldForce };

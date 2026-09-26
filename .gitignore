@@ -3,3 +3,4 @@
 *.private.*
 .test-work/
 __pycache__/
+/temp/
