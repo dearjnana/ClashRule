@@ -92,14 +92,14 @@ def http(url, ua='ci-validator/1.0', method='GET', body=None, timeout=60,
         return resp.status, resp.read()
 
 
-def request(url, **kwargs):
+def request(url, expected_status=(200,), **kwargs):
     try:
         status, data = http(url, **kwargs)
     except urllib.error.HTTPError as exc:
         raise ValidationError(f'HTTP {exc.code}') from None
     except Exception as exc:
         raise ValidationError(f'请求失败 ({type(exc).__name__})') from None
-    if status != 200:
+    if status not in expected_status:
         raise ValidationError(f'HTTP {status}')
     return data
 
@@ -120,8 +120,8 @@ def seed():
     sub = json.dumps({'name': SUB_NAME, 'source': 'local',
                       'content': TEST_NODES}).encode()
     col = json.dumps({'name': COL_NAME, 'subscriptions': [SUB_NAME]}).encode()
-    request(f'{SUBSTORE_BASE}/api/subs', method='POST', body=sub)
-    request(f'{SUBSTORE_BASE}/api/collections', method='POST', body=col)
+    request(f'{SUBSTORE_BASE}/api/subs', method='POST', body=sub, expected_status=(200, 201))
+    request(f'{SUBSTORE_BASE}/api/collections', method='POST', body=col, expected_status=(200, 201))
 
 
 def convert(ini_url, request_ua):

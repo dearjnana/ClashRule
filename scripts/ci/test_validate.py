@@ -112,6 +112,14 @@ class ProviderValidationTests(unittest.TestCase):
         self.assertIn('HTTP 403', self.output.getvalue())
         self.assert_private_values_absent()
 
+    def test_seed_accepts_created_but_get_stays_strict(self):
+        with patch.object(validator, 'http', return_value=(201, b'{"status":"success"}')) as client:
+            validator.seed()
+            self.assertEqual(2, client.call_count)
+            self.assertTrue(all(call.kwargs['method'] == 'POST' for call in client.call_args_list))
+            with self.assertRaisesRegex(validator.ValidationError, '^HTTP 201$'):
+                validator.request(SECRET_URL)
+
     def test_configured_header_is_probed_but_not_printed(self):
         cfg = config()
         cfg['proxy-providers']['private-provider-name']['header'] = {
