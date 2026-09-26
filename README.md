@@ -64,7 +64,7 @@ http://Sub-Store地址/后台路径/download/collection/聚合
 
 - 业务组(YouTube、奈飞、GitHub、摧城等)默认走 `🚀 节点选择`,可手动切换到机场组、地区组或直连。
 - 机场分组:INI 入口保留五家机场的"最优"全区组 + 港/台/日/韩/新/美地区组;Clash Party 覆写已精简为四家"机场最优"+ 六个"地区自动"组(跨全部机场按地区筛选、自动测速),业务组切换菜单约 21 项;另有全局容灾组做机场间回退。
-- **Gemini** 两个组按 Google 官方支持地区筛选,组内再分子组、每组自动选最快:`♻️ Gemini 最优` 在全部支持地区里自动挑;常用地区(港/台/日/韩/新/美)单独成组;冷门国家按相邻大洲归入欧洲、美洲其他、大洋洲、中东、非洲、亚洲其他。俄罗斯不在官方清单,不纳入;API 组不含香港/澳门/缅甸。想调整筛选就改对应的 `custom_proxy_group` 行(或覆写里的 `filter` 字段)。子组没有匹配节点时为 REJECT,不会悄悄直连。
+- **Gemini**：三个入口统一只有 `🎐 Gemini` 一个 `url-test` 自动优选组，Web、应用与 API / AI Studio 的规则都指向它。节点按原 Web/API 地区筛选的交集入池（即原 API 最优筛选，不纳入香港、澳门等仅 Web 池支持的地区），允许机场名前缀；每轮从可用候选中按探测延迟自动选择，切换容差用于减少频繁跳转。没有候选时以 REJECT 兜底，不会自动直连。测速检查网络连通性与延迟，不代表 Gemini 账号、出口 IP 一定通过地区或风控检查。调整候选池须同步修改两个 INI 的 `custom_proxy_group` 和覆写的 `filter`。
 - 基础配置(端口、DNS 等)使用 [ACL4SSR 公共 base](https://github.com/ACL4SSR/ACL4SSR/blob/master/Clash/GeneralClashConfig.yml),要换就改 INI 末尾的 `clash_rule_base` 地址。
 
 ## 目录

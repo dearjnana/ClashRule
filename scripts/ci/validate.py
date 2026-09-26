@@ -54,6 +54,7 @@ PROBE_UAS = [
 ]
 DEFAULT_CORE_UA = 'clash.meta'
 BUILTIN = {'DIRECT', 'REJECT', 'REJECT-DROP', 'PASS', 'COMPATIBLE', 'GLOBAL', 'no-resolve'}
+GEMINI_GROUP = '🎐 Gemini'
 TEST_NODES = (
     'vless://e0fe7670-0aba-42d1-8959-9ba1892bb13d@hk.example.com:443?security=tls'
     '&type=ws&host=hk.example.com&path=%2Fws#CI 香港 01\n'
@@ -165,6 +166,7 @@ def check_groups(cfg, ini_names, label):
         fail(f'{label}: 策略组名称缺失、重复或条目无效')
     if ini_names is not None and defined != set(ini_names):
         fail(f'{label}: 策略组与 INI 不一致 (声明 {len(ini_names)}，输出 {len(defined)})')
+    check_gemini_group(groups, label)
     providers = cfg.get('proxy-providers') or {}
     providers = set(providers) if isinstance(providers, dict) else set()
     inline = cfg.get('proxies') or []
@@ -193,6 +195,26 @@ def check_groups(cfg, ini_names, label):
         target = parts[-2].strip() if parts[-1].strip() == 'no-resolve' and len(parts) > 1 else parts[-1].strip()
         if target and target not in defined | BUILTIN | inline_names:
             fail(f'{label}: 规则 #{index} 的目标未定义')
+
+
+def check_gemini_group(groups, label):
+    """仓库契约：Web 与 API/AI Studio 共用一个可见的自动优选组。"""
+    gemini = [g for g in groups if isinstance(g, dict)
+              and isinstance(g.get('name'), str) and 'gemini' in g['name'].lower()]
+    if len(gemini) != 1 or gemini[0]['name'] != GEMINI_GROUP:
+        fail(f'{label}: 必须且只能存在一个 🎐 Gemini 组，不能保留旧 Gemini 子组')
+        return
+    group = gemini[0]
+    if group.get('type') != 'url-test':
+        fail(f'{label}: 🎐 Gemini 必须为 url-test 自动优选组')
+    if group.get('hidden') not in (None, False):
+        fail(f'{label}: 🎐 Gemini 必须在客户端界面可见')
+    defined = {g.get('name') for g in groups if isinstance(g, dict)
+               and isinstance(g.get('name'), str)}
+    members = group.get('proxies') or []
+    if isinstance(members, list) and any(isinstance(member, str) and member in defined
+                                         for member in members):
+        fail(f'{label}: 🎐 Gemini 应直接优选节点，不能继续引用策略子组')
 
 
 def check_providers(cfg, label):
@@ -327,6 +349,22 @@ def runtime_providers_ready(document, expected_names):
     return True
 
 
+def runtime_gemini_ready(document, expected_names, cfg):
+    proxies = document.get('proxies') if isinstance(document, dict) else None
+    group = proxies.get(GEMINI_GROUP) if isinstance(proxies, dict) else None
+    if not isinstance(group, dict) or group.get('type') not in {'URLTest', 'url-test'} \
+            or group.get('hidden') not in (None, False):
+        return False
+    candidates = group.get('all')
+    if not isinstance(candidates, list):
+        return False
+    actual_nodes = set().union(*expected_names.values()) if expected_names else set()
+    actual_nodes.update(p['name'] for p in cfg.get('proxies') or []
+                        if isinstance(p, dict) and isinstance(p.get('name'), str))
+    actual_nodes.difference_update(BUILTIN)
+    return any(isinstance(candidate, str) and candidate in actual_nodes for candidate in candidates)
+
+
 def check_runtime(binary, cfg, label, workdir, expected_names):
     safe = re.sub(r'[^A-Za-z0-9._-]', '_', label)
     home = Path(workdir) / f'{safe}-runtime'
@@ -345,7 +383,10 @@ def check_runtime(binary, cfg, label, workdir, expected_names):
     opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
     request_info = urllib.request.Request(f'http://127.0.0.1:{controller_port}/providers/proxies',
                                          headers={'Authorization': f'Bearer {secret}'})
+    groups_request = urllib.request.Request(f'http://127.0.0.1:{controller_port}/proxies',
+                                           headers={'Authorization': f'Bearer {secret}'})
     process = None
+    providers_loaded = False
     with (home / 'core.private.log').open('x', encoding='utf-8') as log:
         try:
             process = subprocess.Popen([binary, '-d', str(home), '-f', str(config_path)],
@@ -356,14 +397,23 @@ def check_runtime(binary, cfg, label, workdir, expected_names):
                 try:
                     with opener.open(request_info, timeout=1) as response:
                         document = json.load(response)
-                    if runtime_providers_ready(document, expected_names):
-                        print(f'PASS: {label} 内核实际加载 {len(expected_names)} 个 provider', flush=True)
-                        return True
+                    providers_loaded = runtime_providers_ready(document, expected_names)
+                    if providers_loaded:
+                        with opener.open(groups_request, timeout=1) as response:
+                            groups_document = json.load(response)
+                        if runtime_gemini_ready(groups_document, expected_names, cfg):
+                            print(f'PASS: {label} 内核实际加载 {len(expected_names)} 个 provider，'
+                                  '🎐 Gemini 自动组包含真实候选节点', flush=True)
+                            return True
                 except Exception:
                     # 控制器尚未就绪或 provider 尚在下载，且下游异常可能带秘密。
                     pass
                 time.sleep(0.25)
-            fail(f'{label}: 内核运行时未在 30 秒内加载全部 provider（仅 -t 通过不足以证明成功）')
+            if providers_loaded:
+                fail(f'{label}: 🎐 Gemini 自动组未在 30 秒内提供真实候选节点，'
+                     'REJECT/COMPATIBLE 等占位不算成功')
+            else:
+                fail(f'{label}: 内核运行时未在 30 秒内加载全部 provider（仅 -t 通过不足以证明成功）')
             return False
         finally:
             if process is not None and process.poll() is None:

@@ -1,6 +1,6 @@
 # 用途：Gemini 应用与兼容规则；新配置先匹配 GeminiAPI.list，再匹配本文件。
 # 来源：https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Gemini.list
-# 维护：保留已有 API 条件供旧订阅继续使用；新入口通过前置规则分离 API 策略。
+# 维护：保留已有 API 条件供旧订阅继续使用；三个入口将本文件与 GeminiAPI.list 统一指向 Gemini 自动优选组。
 DOMAIN-SUFFIX,colab.research.google.com
 DOMAIN-SUFFIX,colab.google
 DOMAIN-SUFFIX,colab.googleusercontent.com

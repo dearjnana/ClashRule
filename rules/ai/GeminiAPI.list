@@ -1,4 +1,4 @@
-# 用途：AI Studio 与 Gemini API 专用接口，使用独立官方地区清单。
+# 用途：AI Studio 与 Gemini API 专用接口；与 Gemini.list 共用 Gemini 自动优选组。
 # 来源：从本仓库 Gemini 规则源拆分，保留开发者服务专用条件。
 # 维护：共享应用接口仍由 Gemini.list 处理，避免将整段 googleapis.com 都归入开发者服务。
 DOMAIN-SUFFIX,generativelanguage.googleapis.com
