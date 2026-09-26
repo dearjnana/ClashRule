@@ -7,8 +7,8 @@ services:
     init: true
     env_file:
     - ./.env
-    ports:
-    - 3001:3001
+    expose:
+    - '3001'
     volumes:
     - ./data:/opt/app/data
     healthcheck:
@@ -40,3 +40,34 @@ services:
     cap_drop:
     - ALL
     stop_grace_period: 30s
+  download-gateway:
+    image: node:22-alpine
+    container_name: substore-download-gateway
+    restart: unless-stopped
+    init: true
+    depends_on:
+    - sub-store
+    environment:
+      UPSTREAM: http://sub-store:3001
+      PORT: '3001'
+      TZ: Asia/Shanghai
+    ports:
+    - 3001:3001
+    volumes:
+    - ../../scripts/sub-store/clash-download-gateway.js:/app/gateway.js:ro
+    command:
+    - node
+    - /app/gateway.js
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
+    mem_limit: 128m
+    cpus: 0.5
+    pids_limit: 64
+    security_opt:
+    - no-new-privileges:true
+    cap_drop:
+    - ALL
+    stop_grace_period: 10s

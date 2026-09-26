@@ -4,7 +4,7 @@
 
 个人 Clash 分流规则仓库。三个客户端入口都在根目录,规则源在 `rules/`,在 GitHub 网页上直接编辑、提交即生效,没有本地构建步骤。
 
-**顶部的徽章就是自动审核状态。** 每次提交分三步:先对 `openclash.ini`、`android.ini`、`clash-party.yaml` 做语法与引用校验(策略组结构、正则能否编译、引用的规则文件是否存在、同文件重复行);再在与线上一致(同镜像摘要)的 SubConverter-Extended + Sub-Store 容器里按本文档配方做**真实转换**,校验策略组一个不丢、无悬空引用、通用订阅不带格式参数且按 Clash for Windows 的 UA 返回 Clash YAML,并用 mihomo 内核 `-t` 实际加载;全部通过才在下方盖章并提交。绿色即全链路可用;变红点徽章进 Actions 看具体问题。
+**顶部的徽章就是自动审核状态。** 每次提交分三步:先对 `openclash.ini`、`android.ini`、`clash-party.yaml` 做语法与引用校验(策略组结构、正则能否编译、引用的规则文件是否存在、同文件重复行);再在与线上一致(同镜像摘要)的 SubConverter-Extended + Sub-Store 容器里按本文档配方做**真实转换**,校验策略组一个不丢、无悬空引用、通用订阅不带格式参数,且 mihomo 等认不出的 UA 经下载网关也能拿到 Clash YAML,并用 mihomo 内核 `-t` 实际加载;全部通过才在下方盖章并提交。绿色即全链路可用;变红点徽章进 Actions 看具体问题。
 
 <!-- audit-start -->**最后审核通过:2026-09-26 13:46:05.179(北京时间)**<!-- audit-end -->
 
@@ -30,13 +30,17 @@ https://你的转换器地址/sub?target=clash&url=编码后的订阅地址&conf
 
 转换结果就是完整配置,直接导入,不需要任何整理脚本。
 
-**订阅地址用通用订阅,不要加 `?platform=ClashMeta` 或 `?target=ClashMeta`。** 转换器已经是 `target=clash`,再让 Sub-Store 按 ClashMeta 出一份,格式就对不上。SubConverter-Extended 会把订阅透传成 `proxy-providers`,由客户端自己拉取,并把**发起转换请求那一方的 User-Agent**写进 provider 的 `header.User-Agent`。网页转换器附带的 `diyua=ShadowRocket` 后端不读,不能当成格式开关。
+**订阅地址用通用订阅,不要加 `?platform=ClashMeta` 或 `?target=ClashMeta`。** 转换器保持 `target=clash`。它会把订阅透传成 `proxy-providers`,内核再去拉这个地址,并把下载转换链接时的 User-Agent 写进 provider header。网页上的 `diyua=ShadowRocket` 后端不读。
 
-Clash for Windows 导入这条链接时,自己的 UA 含 `clash`。Sub-Store 据此返回 Clash YAML,和 `target=clash` 一致,订阅地址保持原样:
+Sub-Store 认不出 `mihomo/…`、`Go-http-client/1.1`、原样 `ShadowRocket` 时会返回 base64,开头是 `dmxlc3M`(vless)。内核就报 `cannot unmarshal !!str into provider.ProxySchema`。这和 INI 无关,只改 GitHub 上的规则也不会消失。
+
+`deploy/sub-store/` 把 3001 交给下载网关 [`scripts/sub-store/clash-download-gateway.js`](scripts/sub-store/clash-download-gateway.js)。订阅地址仍是下面这种无参数形式;网关只在 UA 会被当成 V2Ray 时,改写转发给 Sub-Store 的 User-Agent,让内核拿到 YAML。已识别的客户端和显式格式参数不动。
 
 ```text
 http://Sub-Store地址/后台路径/download/collection/聚合
 ```
+
+改完要在跑 Sub-Store 的机器上重新部署 `deploy/sub-store`。只推这个仓库、不重新部署 3001,现有链接还会报同样的错。
 
 另外,`list=true` 让后端代取并展开节点,在 v1.9.7 对该聚合订阅无论 base64 还是 YAML 均解析失败(预处理层会把 base64 中的 `+` 还原成空格),不能作为替代方案,维持 provider 透传即可。
 

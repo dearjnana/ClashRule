@@ -5,8 +5,8 @@
 1. 向 Sub-Store 种入测试订阅与聚合(用后即删,不碰真实数据);
 2. 对每个入口 INI 按 README 转换请求结构调用 SubConverter;
 3. 校验输出:组数与 INI 声明一致、无悬空引用。订阅地址不带
-   platform/target;转换请求使用 Clash for Windows 的 UA,provider
-   按这个 UA 返回 Clash YAML,mihomo -t 通过。
+   platform/target。mihomo / Go-http-client / ShadowRocket 经下载网关
+   也必须拿到 Clash YAML,再用 mihomo -t 加载。
 """
 
 import gzip
@@ -25,14 +25,20 @@ CONVERTER = os.environ.get('E2E_CONVERTER', 'http://subconverter:25500')
 SUBSTORE_BASE = os.environ.get('E2E_SUBSTORE', 'http://sub-store:3001/e2e-ci')
 SUB_NAME = 'ci-seed-sub'
 COL_NAME = 'ci-seed-col'
-# 生产写法:通用订阅,不带 platform/target。转换器 target=clash,
-# 由 Clash for Windows 自己拉取;它的 UA 含 clash,Sub-Store 因此返回 Clash YAML。
-CONVERT_REQUEST_UA = 'ClashforWindows/0.20.39'
-# 网页转换器会把这个参数写进链接,后端不读。带上是为了确认它不会改格式。
+# 生产写法:通用订阅,不带 platform/target。转换器 target=clash。
+# 网页转换器会把 diyua 写进链接,后端不读。
 DIY_UA_PARAM = 'diyua=ShadowRocket'
-# 只探测和 target=clash 一致的客户端。mihomo、空 UA、原样 ShadowRocket
-# 会拿到 base64,那不是这条链路的生产请求方。
+# 客户端下载转换链接时的 UA。mihomo 会把这个 UA 写进 provider header,
+# 内核再拿它去拉订阅;不经网关时 Sub-Store 返回 base64。
+CONVERT_REQUEST_UAS = [
+    'mihomo/v1.19.13',
+    'ClashforWindows/0.20.39',
+]
+# 这些 UA 直连 Sub-Store 会拿到 dmxlc3M 开头的 base64。网关必须改成 YAML。
 PROBE_UAS = [
+    'mihomo/v1.19.13',
+    'Go-http-client/1.1',
+    'ShadowRocket',
     'ClashforWindows/0.20.39',
     'clash',
 ]
@@ -76,7 +82,7 @@ def cleanup():
             pass
 
 
-def convert(ini_url):
+def convert(ini_url, request_ua):
     # 通用订阅,不附加 platform/target。
     sub_url = f'{SUBSTORE_BASE}/download/collection/{COL_NAME}'
     params = (
@@ -88,7 +94,7 @@ def convert(ini_url):
         f'&{DIY_UA_PARAM}'
     )
     status, data = http(f'{CONVERTER}/sub?{params}', timeout=180,
-                        ua=CONVERT_REQUEST_UA)
+                        ua=request_ua)
     if status != 200:
         raise RuntimeError(f'conversion HTTP {status}: {data[:200]!r}')
     try:
@@ -147,10 +153,6 @@ def check_providers(cfg, label):
             injected_ua = str(injected[0])
         elif injected:
             injected_ua = str(injected)
-        if 'clash' not in injected_ua.lower():
-            fail(f'{label}: provider [{name}] 的 header.User-Agent 不含 clash'
-                 f'(实际为 {injected_ua or "空"}),Sub-Store 不会按 Clash 返回')
-        # 内核若采用配置里的 header,就用这个 UA 拉;生产请求方是 Clash for Windows。
         probe_uas = list(PROBE_UAS)
         if injected_ua and injected_ua not in probe_uas:
             probe_uas.append(injected_ua)
@@ -219,15 +221,17 @@ def main():
                 except Exception as e:
                     fail(f'{label}: 拉取 INI 失败: {e}')
                     continue
-                try:
-                    cfg = convert(ini_url)
-                except Exception as e:
-                    fail(f'{label}: 转换失败: {e}')
-                    continue
-                check_groups(cfg, ini_group_names(ini_text), label)
-                check_providers(cfg, label)
-                check_mihomo(mihomo, cfg, label, workdir)
-                print(f'checked: {label}', flush=True)
+                for request_ua in CONVERT_REQUEST_UAS:
+                    case = f'{label} ua={request_ua}'
+                    try:
+                        cfg = convert(ini_url, request_ua)
+                    except Exception as e:
+                        fail(f'{case}: 转换失败: {e}')
+                        continue
+                    check_groups(cfg, ini_group_names(ini_text), case)
+                    check_providers(cfg, case)
+                    check_mihomo(mihomo, cfg, case, workdir)
+                    print(f'checked: {case}', flush=True)
     finally:
         cleanup()
     finish()
@@ -237,7 +241,7 @@ def finish():
     if errors:
         print(f'\n共 {len(errors)} 个问题', flush=True)
         sys.exit(1)
-    print('端到端审核通过:通用订阅、Clash for Windows UA 与 mihomo 加载全部正常。', flush=True)
+    print('端到端审核通过:通用订阅经网关后,mihomo/ShadowRocket 也返回 YAML。', flush=True)
 
 
 if __name__ == '__main__':

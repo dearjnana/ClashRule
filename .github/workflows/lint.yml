@@ -190,7 +190,7 @@ jobs:
             [ "$ok" = 1 ] && break
             sleep 2
           done
-          [ "$ok" = 1 ] || { echo '服务未能就绪'; docker ps; docker logs e2e-subconverter --tail 50; docker logs e2e-sub-store --tail 50; exit 1; }
+          [ "$ok" = 1 ] || { echo '服务未能就绪'; docker ps; docker logs e2e-subconverter --tail 50; docker logs e2e-download-gateway --tail 50; docker logs e2e-sub-store --tail 50; exit 1; }
 
       - name: 真实转换并校验(组完整性 / provider 多 UA / mihomo 加载)
         run: |
