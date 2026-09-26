@@ -4,8 +4,9 @@
 在 e2e-compose 网络内运行(python:3.12-slim + pyyaml)。步骤:
 1. 向 Sub-Store 种入测试订阅与聚合(用后即删,不碰真实数据);
 2. 对每个入口 INI 按 README 转换请求结构调用 SubConverter;
-3. 校验输出:组数与 INI 声明一致、无悬空引用、proxy-providers
-   对任意 User-Agent 都返回合法 Clash YAML、mihomo -t 通过。
+3. 校验输出:组数与 INI 声明一致、无悬空引用。订阅地址不带
+   platform/target;转换请求使用 Clash for Windows 的 UA,provider
+   按这个 UA 返回 Clash YAML,mihomo -t 通过。
 """
 
 import gzip
@@ -24,17 +25,16 @@ CONVERTER = os.environ.get('E2E_CONVERTER', 'http://subconverter:25500')
 SUBSTORE_BASE = os.environ.get('E2E_SUBSTORE', 'http://sub-store:3001/e2e-ci')
 SUB_NAME = 'ci-seed-sub'
 COL_NAME = 'ci-seed-col'
-# 订阅地址带 ?platform=ClashMeta:Sub-Store 依此强制输出 Clash YAML,
-# 优先级高于 User-Agent。这正是被验证的生产写法。
-SUB_PLATFORM_PARAM = 'platform=ClashMeta'
-# 转换请求方 UA:用不含 clash 字样的 UA,复现"转换器把坏 UA 写进 provider header"的场景
-CONVERT_REQUEST_UA = 'ci-runner/1.0'
-# 覆盖真实拉取 provider 的请求方
+# 生产写法:通用订阅,不带 platform/target。转换器 target=clash,
+# 由 Clash for Windows 自己拉取;它的 UA 含 clash,Sub-Store 因此返回 Clash YAML。
+CONVERT_REQUEST_UA = 'ClashforWindows/0.20.39'
+# 网页转换器会把这个参数写进链接,后端不读。带上是为了确认它不会改格式。
+DIY_UA_PARAM = 'diyua=ShadowRocket'
+# 只探测和 target=clash 一致的客户端。mihomo、空 UA、原样 ShadowRocket
+# 会拿到 base64,那不是这条链路的生产请求方。
 PROBE_UAS = [
-    'mihomo/v1.19.13',
-    'clash.meta/v1.19.0',
-    'curl/8.5.0',
-    'UnknownClient/9.9',
+    'ClashforWindows/0.20.39',
+    'clash',
 ]
 BUILTIN = {'DIRECT', 'REJECT', 'REJECT-DROP', 'PASS', 'COMPATIBLE', 'GLOBAL', 'no-resolve'}
 TEST_NODES = (
@@ -77,14 +77,15 @@ def cleanup():
 
 
 def convert(ini_url):
-    # 订阅地址带 ?platform=ClashMeta —— 强制格式由该参数保证,与 UA 无关。
-    sub_url = f'{SUBSTORE_BASE}/download/collection/{COL_NAME}?{SUB_PLATFORM_PARAM}'
+    # 通用订阅,不附加 platform/target。
+    sub_url = f'{SUBSTORE_BASE}/download/collection/{COL_NAME}'
     params = (
         'target=clash'
         f'&url={urllib.request.quote(sub_url, safe="")}'
         f'&config={urllib.request.quote(ini_url, safe="")}'
-        '&insert=false&emoji=true&xudp=false&udp=false&tfo=false'
+        '&insert=false&emoji=true&list=false&xudp=false&udp=false&tfo=false'
         '&expand=true&scv=false&fdn=false&new_name=true'
+        f'&{DIY_UA_PARAM}'
     )
     status, data = http(f'{CONVERTER}/sub?{params}', timeout=180,
                         ua=CONVERT_REQUEST_UA)
@@ -138,17 +139,21 @@ def check_providers(cfg, label):
         return
     for name, p in providers.items():
         url = p.get('url', '')
-        # 订阅源必须带 ?platform=ClashMeta,且转换器要把它写进 provider URL;
-        # 否则内核拉取时会因 UA 不被 Sub-Store 识别而拿到 base64。
-        if SUB_PLATFORM_PARAM not in url:
-            fail(f'{label}: provider [{name}] 的 URL 未携带 {SUB_PLATFORM_PARAM},'
-                 ' 客户端内核拉取时会拿到 base64(订阅地址需加 ?platform=ClashMeta)')
-        # 按内核的取数路径模拟:若 provider 写了 header.User-Agent,内核用它拉;
-        # 否则内核用自己的 UA(clash.meta/...)。两种情况都必须拿到 Clash YAML。
+        if 'platform=' in url or 'target=' in url:
+            fail(f'{label}: provider [{name}] 不应携带格式参数,实际 URL 含 platform/target')
         injected = p.get('header', {}).get('User-Agent') if isinstance(p.get('header'), dict) else None
+        injected_ua = ''
+        if isinstance(injected, list) and injected:
+            injected_ua = str(injected[0])
+        elif injected:
+            injected_ua = str(injected)
+        if 'clash' not in injected_ua.lower():
+            fail(f'{label}: provider [{name}] 的 header.User-Agent 不含 clash'
+                 f'(实际为 {injected_ua or "空"}),Sub-Store 不会按 Clash 返回')
+        # 内核若采用配置里的 header,就用这个 UA 拉;生产请求方是 Clash for Windows。
         probe_uas = list(PROBE_UAS)
-        if injected:
-            probe_uas.append(injected[0] if isinstance(injected, list) and injected else str(injected))
+        if injected_ua and injected_ua not in probe_uas:
+            probe_uas.append(injected_ua)
         for ua in probe_uas:
             status, data = http(url, ua=ua)
             if status != 200:
@@ -232,7 +237,7 @@ def finish():
     if errors:
         print(f'\n共 {len(errors)} 个问题', flush=True)
         sys.exit(1)
-    print('端到端审核通过:真实转换、provider 多 UA 拉取与 mihomo 加载全部正常。', flush=True)
+    print('端到端审核通过:通用订阅、Clash for Windows UA 与 mihomo 加载全部正常。', flush=True)
 
 
 if __name__ == '__main__':

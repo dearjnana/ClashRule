@@ -4,7 +4,7 @@
 
 个人 Clash 分流规则仓库。三个客户端入口都在根目录,规则源在 `rules/`,在 GitHub 网页上直接编辑、提交即生效,没有本地构建步骤。
 
-**顶部的徽章就是自动审核状态。** 每次提交分三步:先对 `openclash.ini`、`android.ini`、`clash-party.yaml` 做语法与引用校验(策略组结构、正则能否编译、引用的规则文件是否存在、同文件重复行);再在与线上一致(同镜像摘要)的 SubConverter-Extended + Sub-Store 容器里按本文档配方做**真实转换**,校验策略组一个不丢、无悬空引用、订阅源对任意 User-Agent 都返回 Clash YAML,并用 mihomo 内核 `-t` 实际加载;全部通过才在下方盖章并提交。绿色即全链路可用;变红点徽章进 Actions 看具体问题。
+**顶部的徽章就是自动审核状态。** 每次提交分三步:先对 `openclash.ini`、`android.ini`、`clash-party.yaml` 做语法与引用校验(策略组结构、正则能否编译、引用的规则文件是否存在、同文件重复行);再在与线上一致(同镜像摘要)的 SubConverter-Extended + Sub-Store 容器里按本文档配方做**真实转换**,校验策略组一个不丢、无悬空引用、通用订阅不带格式参数且按 Clash for Windows 的 UA 返回 Clash YAML,并用 mihomo 内核 `-t` 实际加载;全部通过才在下方盖章并提交。绿色即全链路可用;变红点徽章进 Actions 看具体问题。
 
 <!-- audit-start -->**最后审核通过:2026-09-25 23:40:58.975(北京时间)**<!-- audit-end -->
 
@@ -30,15 +30,13 @@ https://你的转换器地址/sub?target=clash&url=编码后的订阅地址&conf
 
 转换结果就是完整配置,直接导入,不需要任何整理脚本。
 
-**订阅地址必须带 `?platform=ClashMeta`。** SubConverter-Extended 对 `target=clash` 会把订阅原样透传成 `proxy-providers`,由客户端内核自己拉取订阅(这是该转换器的设计行为,策略组筛选以组内 `filter` 正则下发,不受影响)。它还会把**发起转换请求那一方(浏览器/网页转换器)的 User-Agent 原样写进 provider 的 `header.User-Agent`**,而 Sub-Store 只按 User-Agent 决定返回格式:UA 里不含 `clash` 字样(例如 `mihomo/v…`、`Shadowrocket/…`)时会返回 base64 的 v2ray 订阅,内核按 YAML 解析即报 `cannot unmarshal !!str 'dmxlc3M…' into provider.ProxySchema`——内核自带的正确 UA 会被这个 header 覆盖掉,所以问题在转换环节就已埋下。
+**订阅地址用通用订阅,不要加 `?platform=ClashMeta` 或 `?target=ClashMeta`。** 转换器已经是 `target=clash`,再让 Sub-Store 按 ClashMeta 出一份,格式就对不上。SubConverter-Extended 会把订阅透传成 `proxy-providers`,由客户端自己拉取,并把**发起转换请求那一方的 User-Agent**写进 provider 的 `header.User-Agent`。网页转换器附带的 `diyua=ShadowRocket` 后端不读,不能当成格式开关。
 
-解决办法:在**订阅地址**末尾加查询参数 `?platform=ClashMeta`(Sub-Store 会依此强制输出 Clash YAML,优先级高于 UA,实测对任意 UA 都生效):
+Clash for Windows 导入这条链接时,自己的 UA 含 `clash`。Sub-Store 据此返回 Clash YAML,和 `target=clash` 一致,订阅地址保持原样:
 
 ```text
-http://Sub-Store地址/后台路径/download/collection/聚合?platform=ClashMeta
+http://Sub-Store地址/后台路径/download/collection/聚合
 ```
-
-转换器会把该参数一并写进生成的 provider URL,内核再去拉取时任何 UA 都能拿到 YAML。Sub-Store 也接受 `/ClashMeta` 路径后缀,但它对订阅地址里有中文、转换器会二次编码的场景容易出错,推荐用查询参数形式。
 
 另外,`list=true` 让后端代取并展开节点,在 v1.9.7 对该聚合订阅无论 base64 还是 YAML 均解析失败(预处理层会把 base64 中的 `+` 还原成空格),不能作为替代方案,维持 provider 透传即可。
 
