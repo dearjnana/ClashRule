@@ -1,12 +1,14 @@
 """Offline regressions: provider strings must fail without leaking subscription data."""
 
 import contextlib
+from http.server import BaseHTTPRequestHandler, HTTPServer
 import importlib.util
 import io
 import os
 from pathlib import Path
 import re
 import tempfile
+import threading
 import unittest
 from unittest.mock import MagicMock, mock_open, patch
 import urllib.error
@@ -124,6 +126,87 @@ class ProviderValidationTests(unittest.TestCase):
             self.assertTrue(all(call.kwargs['method'] == 'POST' for call in client.call_args_list))
             with self.assertRaisesRegex(validator.ValidationError, '^HTTP 201$'):
                 validator.request(SECRET_URL)
+
+    def test_release_token_is_used_only_for_fixed_metadata_api(self):
+        metadata_url = 'https://api.github.com/repos/MetaCubeX/mihomo/releases/latest'
+        archive = validator.gzip.compress(b'fixture executable')
+
+        def fake_http(url, **kwargs):
+            if url == metadata_url:
+                self.assertEqual({'Authorization': 'Bearer test-action-token'}, kwargs['headers'])
+                self.assertFalse(kwargs['allow_redirects'])
+                return 200, b'{"tag_name":"v1.19.31"}'
+            self.assertFalse(kwargs.get('headers'))
+            return 200, archive if url.startswith('https://github.com/MetaCubeX/mihomo/') else VALID_PROVIDER
+
+        with patch.dict(os.environ, {'E2E_MIHOMO_BIN': '', 'E2E_GITHUB_TOKEN': 'test-action-token'}), \
+                patch.object(validator, 'http', side_effect=fake_http) as client, \
+                patch('builtins.open', mock_open()), patch.object(validator.os, 'chmod'):
+            validator.fetch_mihomo('unused-mocked-workdir')
+            validator.request(SECRET_URL)
+        self.assertEqual(3, client.call_count)
+        self.assertEqual(metadata_url, client.call_args_list[0].args[0])
+        self.assertEqual('https://github.com/MetaCubeX/mihomo/releases/download/v1.19.31/'
+                         'mihomo-linux-amd64-v1.19.31.gz', client.call_args_list[1].args[0])
+        self.assertNotIn('test-action-token', self.output.getvalue())
+        self.assert_private_values_absent()
+
+    def test_provided_core_skips_metadata_api_and_token(self):
+        with patch.dict(os.environ, {'E2E_MIHOMO_BIN': 'provided-core',
+                                     'E2E_GITHUB_TOKEN': 'test-action-token'}), \
+                patch.object(validator, 'request') as client:
+            self.assertEqual('provided-core', validator.fetch_mihomo('unused'))
+        client.assert_not_called()
+
+    def test_release_and_seed_errors_have_safe_stage_labels(self):
+        failure = urllib.error.HTTPError(SECRET_URL, 403, 'test-action-token', {}, None)
+        stages = [
+            ([failure], '查询 mihomo 官方版本失败'),
+            ([(200, b'{"tag_name":"v1.19.31"}'), failure], '下载 mihomo 二进制失败'),
+        ]
+        for responses, stage in stages:
+            with self.subTest(stage=stage), \
+                    patch.dict(os.environ, {'E2E_MIHOMO_BIN': '', 'E2E_GITHUB_TOKEN': 'test-action-token'}), \
+                    patch.object(validator, 'http', side_effect=responses):
+                with self.assertRaises(validator.ValidationError) as caught:
+                    validator.fetch_mihomo('unused')
+                self.assertEqual(f'{stage}：HTTP 403', str(caught.exception))
+                self.assertNotIn('test-action-token', str(caught.exception))
+                self.assertNotIn(SECRET_URL, str(caught.exception))
+        with patch.object(validator, 'http', side_effect=failure):
+            with self.assertRaisesRegex(validator.ValidationError, '^创建 CI 测试数据失败：HTTP 403$'):
+                validator.seed()
+
+    def test_metadata_redirect_is_rejected_without_forwarding_token(self):
+        observed = []
+
+        class Handler(BaseHTTPRequestHandler):
+            def do_GET(self):
+                observed.append((self.path, self.headers.get('Authorization')))
+                if self.path == '/release':
+                    self.send_response(302)
+                    self.send_header('Location', f'http://localhost:{self.server.server_port}/target')
+                else:
+                    self.send_response(200)
+                self.end_headers()
+
+            def log_message(self, *args):
+                pass
+
+        server = HTTPServer(('127.0.0.1', 0), Handler)
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        try:
+            with self.assertRaisesRegex(validator.ValidationError, '^HTTP 302$'):
+                validator.request(f'http://127.0.0.1:{server.server_port}/release',
+                                  headers={'Authorization': 'Bearer test-action-token'},
+                                  allow_redirects=False)
+            self.assertEqual([('/release', 'Bearer test-action-token')], observed)
+        finally:
+            server.shutdown()
+            server.server_close()
+            thread.join(timeout=5)
+        self.assertNotIn('test-action-token', self.output.getvalue())
 
     def test_configured_header_is_probed_but_not_printed(self):
         cfg = config()

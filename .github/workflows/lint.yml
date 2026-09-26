@@ -184,6 +184,8 @@ jobs:
   e2e:
     name: 端到端转换审核
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     timeout-minutes: 10
     needs: lint
     steps:
@@ -203,11 +205,14 @@ jobs:
           [ "$ok" = 1 ] || { echo '服务未能就绪'; docker ps; docker logs e2e-subconverter --tail 50; docker logs e2e-download-gateway --tail 50; docker logs e2e-sub-store --tail 50; exit 1; }
 
       - name: 真实转换并校验(组完整性 / provider 多 UA / mihomo 加载)
+        env:
+          E2E_GITHUB_TOKEN: ${{ github.token }}
         run: |
           mkdir -p temp
           docker run --name e2e-validator --network clashrule-e2e_default \
             -v "${{ github.workspace }}:/work:ro" -w /work \
             -v "${{ github.workspace }}/temp:/work/temp" \
+            -e E2E_GITHUB_TOKEN \
             -e E2E_INI_URLS="https://raw.githubusercontent.com/dearjnana/ClashRule/${{ github.sha }}/openclash.ini
           https://raw.githubusercontent.com/dearjnana/ClashRule/${{ github.sha }}/android.ini" \
             python:3.12-slim sh -c 'pip install --quiet --disable-pip-version-check pyyaml && python -B scripts/ci/validate.py'

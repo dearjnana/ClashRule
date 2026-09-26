@@ -46,6 +46,8 @@ python3 -B scripts/ci/validate.py --live --mihomo
 
 不加 `--live` 时保持原 CI 接口：`E2E_INI_URLS` 为换行分隔的 INI 地址，`E2E_CONVERTER`、`E2E_SUBSTORE` 可覆盖隔离服务地址。CI 会创建唯一名称的测试订阅和中文聚合，不覆盖已有对象，也不执行 DELETE。该模式始终运行 mihomo 校验。
 
+CI 使用 GitHub Actions 自动提供的只读 token，经 `E2E_GITHUB_TOKEN` 环境变量传入验证容器，避免共享 runner 的匿名 GitHub API 限流。该 token 仅用于固定的官方 mihomo 版本查询 API，且此请求禁止重定向；二进制、规则和订阅下载均不携带它。指定 `E2E_MIHOMO_BIN` 时完全跳过版本查询。日志分别标明版本查询、二进制下载和测试数据创建阶段，错误信息不包含 token 或私人 URL。
+
 所有运行工件保留于仓库根目录的 `temp/subscription-validation-*`，使用唯一目录且不自动清理。可用 `E2E_WORK_ROOT` 指定另一个工作区根目录，工件仍置于其 `temp/` 下。容器运行时需允许该目录写入。`summary.json` 只包含模式、通过状态、错误数及是否请求内核验证。
 
 启用内核验证时，保留的 YAML 配置可能包含订阅地址、节点和请求头；`temp/` 必须排除 Git 提交，勿公开上传这些配置。脚本不自动清空 `temp/`。

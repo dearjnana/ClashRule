@@ -68,13 +68,20 @@ class ValidationError(Exception):
     """只含可公开诊断信息；禁止附带 URL、正文或下游异常原文。"""
 
 
+class NoRedirectHandler(urllib.request.HTTPRedirectHandler):
+    """版本 API 不需要重定向，禁止将其认证头转发到其他地址。"""
+
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        return None
+
+
 def fail(msg):
     errors.append(msg)
     print(f'FAIL: {msg}', flush=True)
 
 
 def http(url, ua='ci-validator/1.0', method='GET', body=None, timeout=60,
-         headers=None):
+         headers=None, allow_redirects=True):
     # 转换器可能把已编码的中文聚合路径恢复为字面中文。urllib 不像浏览器
     # 自动处理 IRI；保留已有百分号转义及查询分隔符，避免二次编码 %E8 -> %25E8。
     parts = urllib.parse.urlsplit(url)
@@ -89,7 +96,9 @@ def http(url, ua='ci-validator/1.0', method='GET', body=None, timeout=60,
     req.add_header('User-Agent', ua)
     if body is not None:
         req.add_header('Content-Type', 'application/json')
-    with urllib.request.urlopen(req, timeout=timeout) as resp:
+    open_request = urllib.request.urlopen if allow_redirects else \
+        urllib.request.build_opener(NoRedirectHandler()).open
+    with open_request(req, timeout=timeout) as resp:
         return resp.status, resp.read()
 
 
@@ -121,8 +130,11 @@ def seed():
     sub = json.dumps({'name': SUB_NAME, 'source': 'local',
                       'content': TEST_NODES}).encode()
     col = json.dumps({'name': COL_NAME, 'subscriptions': [SUB_NAME]}).encode()
-    request(f'{SUBSTORE_BASE}/api/subs', method='POST', body=sub, expected_status=(200, 201))
-    request(f'{SUBSTORE_BASE}/api/collections', method='POST', body=col, expected_status=(200, 201))
+    try:
+        request(f'{SUBSTORE_BASE}/api/subs', method='POST', body=sub, expected_status=(200, 201))
+        request(f'{SUBSTORE_BASE}/api/collections', method='POST', body=col, expected_status=(200, 201))
+    except ValidationError as exc:
+        raise ValidationError(f'创建 CI 测试数据失败：{exc}') from None
 
 
 def convert(ini_url, request_ua):
@@ -277,11 +289,23 @@ def fetch_mihomo(workdir):
     provided = os.environ.get('E2E_MIHOMO_BIN')
     if provided:
         return provided
-    data = request('https://api.github.com/repos/MetaCubeX/mihomo/releases/latest')
+    headers = {}
+    token = os.environ.get('E2E_GITHUB_TOKEN', '').strip()
+    if token:
+        headers['Authorization'] = f'Bearer {token}'
+    try:
+        # 认证仅用于此固定官方 API；不跟随跳转，也不传给二进制或订阅下载。
+        data = request('https://api.github.com/repos/MetaCubeX/mihomo/releases/latest',
+                       headers=headers, allow_redirects=False)
+    except ValidationError as exc:
+        raise ValidationError(f'查询 mihomo 官方版本失败：{exc}') from None
     tag = json.loads(data)['tag_name']  # e.g. v1.19.31
     asset = f'mihomo-linux-amd64-{tag}.gz'
     url = f'https://github.com/MetaCubeX/mihomo/releases/download/{tag}/{asset}'
-    blob = request(url, timeout=300)
+    try:
+        blob = request(url, timeout=300)
+    except ValidationError as exc:
+        raise ValidationError(f'下载 mihomo 二进制失败：{exc}') from None
     binary = os.path.join(workdir, 'mihomo')
     with gzip.open(io.BytesIO(blob), 'rb') as gz, open(binary, 'xb') as out:
         out.write(gz.read())
