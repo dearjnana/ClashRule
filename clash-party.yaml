@@ -252,6 +252,16 @@ proxy-groups:
     - "DIRECT"
     - "REJECT"
     type: select
+  - name: "✴️ Claude"
+    type: select
+    proxies:
+    - "♻️ 台湾自动"
+    - "♻️ 日本自动"
+    - "♻️ 美国自动"
+    - "♻️ 韩国自动"
+    - "♻️ 新加坡自动"
+    - "♻️ 英国自动"
+    - "♻️ 其他欧洲自动"
   - name: "🖥️ GitHub-Cloudflare-Docker"
     proxies:
     - "🚀 节点选择"
@@ -835,6 +845,28 @@ proxy-groups:
     expected-status: '204'
     exclude-filter: "(?i)(失联|超时|官网|售后|客服|剩余|到期|过期|自助|主流|流量|重置|订阅|网址|群组|邀请|返利|电报|无效|套餐|expire|traffic|reset|renew|website|invite)"
     filter: (?i)^(?=.*(?:🇺🇸|美国|美國|united\s*states|\busa?\b|洛杉矶|洛杉磯|纽约|紐約|西雅图|西雅圖|圣何塞|硅谷|旧金山|華盛頓|华盛顿)).*$
+  - name: "♻️ 英国自动"
+    type: "url-test"
+    include-all: true
+    empty-fallback: "REJECT"
+    tolerance: 60
+    interval: 600
+    timeout: 5000
+    url: "https://www.gstatic.com/generate_204"
+    expected-status: '204'
+    exclude-filter: "(?i)(失联|超时|官网|售后|客服|剩余|到期|过期|自助|主流|流量|重置|订阅|网址|群组|邀请|返利|电报|无效|套餐|expire|traffic|reset|renew|website|invite)"
+    filter: (?i)^(?=.*(?:🇬🇧|英国|英國|united\s*kingdom|\buk\b|\bgb\b|england|london|伦敦|倫敦|manchester|曼彻斯特|伯明翰|birmingham)).*$
+  - name: "♻️ 其他欧洲自动"
+    type: "url-test"
+    include-all: true
+    empty-fallback: "REJECT"
+    tolerance: 60
+    interval: 600
+    timeout: 5000
+    url: "https://www.gstatic.com/generate_204"
+    expected-status: '204'
+    exclude-filter: "(?i)(失联|超时|官网|售后|客服|剩余|到期|过期|自助|主流|流量|重置|订阅|网址|群组|邀请|返利|电报|无效|套餐|expire|traffic|reset|renew|website|invite)"
+    filter: (?i)^(?=.*(?:🇪🇺|欧洲|歐洲|\beurope\b|法国|法國|巴黎|paris|\bfr\b|france|德国|德國|法兰克福|法蘭克福|frankfurt|\bde\b|germany|荷兰|荷蘭|阿姆斯特丹|amsterdam|\bnl\b|netherlands|意大利|義大利|米兰|米蘭|罗马|羅馬|rome|milan|\bit\b|italy|西班牙|马德里|馬德里|madrid|barcelona|巴塞罗那|\bes\b|spain|瑞士|苏黎世|蘇黎世|zurich|geneva|日内瓦|日內瓦|\bch\b|switzerland|瑞典|斯德哥尔摩|stockholm|\bse\b|sweden|挪威|奥斯陆|奧斯陸|oslo|norway|丹麦|丹麥|哥本哈根|copenhagen|\bdk\b|denmark|芬兰|芬蘭|赫尔辛基|赫爾辛基|helsinki|\bfi\b|finland|爱尔兰|愛爾蘭|都柏林|dublin|\bie\b|ireland|比利时|比利時|布鲁塞尔|布魯塞爾|brussels|\bbe\b|belgium|奥地利|奧地利|维也纳|維也納|vienna|\bat\b|austria|波兰|波蘭|华沙|華沙|warsaw|\bpl\b|poland|葡萄牙|里斯本|lisbon|\bpt\b|portugal|希腊|希臘|雅典|athens|\bgr\b|greece|捷克|布拉格|prague|\bcz\b|czechia|匈牙利|布达佩斯|budapest|\bhu\b|hungary|罗马尼亚|羅馬尼亞|布加勒斯特|\bro\b|romania|保加利亚|保加利亞|\bbg\b|bulgaria|克罗地亚|克羅埃西亞|\bhr\b|croatia|爱沙尼亚|愛沙尼亞|\bee\b|estonia|拉脱维亚|拉脫維亞|\blv\b|latvia|立陶宛|\blt\b|lithuania|卢森堡|盧森堡|\blu\b|luxembourg|冰岛|冰島|iceland|斯洛伐克|\bsk\b|slovakia|斯洛文尼亚|斯洛維尼亞|\bsi\b|slovenia|塞尔维亚|塞爾維亞|\brs\b|serbia|乌克兰|烏克蘭|基辅|基輔|\bua\b|ukraine|土耳其|伊斯坦布尔|turkey|türkiye|摩纳哥|摩納哥|monaco|马耳他|馬爾他|malta|塞浦路斯|賽普勒斯|cyprus|列支敦士登|liechtenstein|圣马力诺|聖馬利諾|梵蒂冈|梵蒂岡|vatican))(?!.*(?:🇬🇧|英国|英國|united\s*kingdom|\buk\b|\bgb\b|london|伦敦|倫敦|俄罗斯|俄羅斯|白俄罗斯|白俄羅斯|\brussia\b|belarus|中国|中國|香港|澳门|澳門|亚美尼亚|亞美尼亞|armenia)).*$
   - name: "🌐 全部节点"
     exclude-filter: "(?i)(失联|超时|官网|售后|客服|剩余|到期|过期|自助|主流|流量|重置|订阅|网址|群组|邀请|返利|电报|无效|套餐|expire|traffic|reset|renew|website|invite)"
     type: select
@@ -877,6 +909,7 @@ rules:
 - RULE-SET,YouTube,📹 YouTube
 - RULE-SET,GCD,🖥️ GitHub-Cloudflare-Docker
 - RULE-SET,github_domain,🖥️ GitHub-Cloudflare-Docker
+- RULE-SET,Claude,✴️ Claude
 - RULE-SET,ai,🤖 ChatGPT
 - RULE-SET,cuicheng,🚀 摧城
 - RULE-SET,cuicheng_LS,🚀 摧城低速
@@ -918,7 +951,7 @@ rule-providers!:
     behavior: classical
     format: text
     proxy: 📥 规则下载
-    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/block/BanAD.list?timestamp=1790042073
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/block/BanAD.list?timestamp=1790607507
     path: ./rule_provider/clashrule-party/BanAD.text
   MyBanAD:
     type: http
@@ -926,7 +959,7 @@ rule-providers!:
     behavior: classical
     format: text
     proxy: 📥 规则下载
-    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/block/PixivSDK.list?timestamp=1790042073
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/block/PixivSDK.list?timestamp=1790607507
     path: ./rule_provider/clashrule-party/MyBanAD.text
   Adobe_reject:
     type: http
@@ -934,7 +967,7 @@ rule-providers!:
     behavior: classical
     format: text
     proxy: 📥 规则下载
-    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/block/Adobe_REJECT.list?timestamp=1790042073
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/block/Adobe_REJECT.list?timestamp=1790607507
     path: ./rule_provider/clashrule-party/Adobe_reject.text
   Adobe_direct:
     type: http
@@ -942,7 +975,7 @@ rule-providers!:
     behavior: classical
     format: text
     proxy: 📥 规则下载
-    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/block/Adobe_DIRECT.list?timestamp=1790042073
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/block/Adobe_DIRECT.list?timestamp=1790607507
     path: ./rule_provider/clashrule-party/Adobe_direct.text
   IPweizhuang:
     type: http
@@ -950,7 +983,7 @@ rule-providers!:
     behavior: classical
     format: text
     proxy: 📥 规则下载
-    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/privacy/IPAttribution.list?timestamp=1790042073
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/privacy/IPAttribution.list?timestamp=1790607507
     path: ./rule_provider/clashrule-party/IPweizhuang.text
   Gemini:
     type: http
@@ -958,15 +991,23 @@ rule-providers!:
     behavior: classical
     format: text
     proxy: 📥 规则下载
-    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/ai/Gemini.list?timestamp=1790042073
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/ai/Gemini.list?timestamp=1790607507
     path: ./rule_provider/clashrule-party/Gemini.text
+  Claude:
+    type: http
+    interval: 86400
+    behavior: classical
+    format: text
+    proxy: 📥 规则下载
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/ai/Claude.list?timestamp=1790042073
+    path: ./rule_provider/clashrule-party/Claude.text
   ai:
     type: http
     interval: 86400
     behavior: classical
     format: text
     proxy: 📥 规则下载
-    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/ai/AI.list?timestamp=1790042073
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/ai/AI.list?timestamp=1790607507
     path: ./rule_provider/clashrule-party/ai.text
   GCD:
     type: http
@@ -974,7 +1015,7 @@ rule-providers!:
     behavior: classical
     format: text
     proxy: 📥 规则下载
-    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/services/GitHub_Cloudflare_Docker.list?timestamp=1790042073
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/services/GitHub_Cloudflare_Docker.list?timestamp=1790607507
     path: ./rule_provider/clashrule-party/GCD.text
   cuicheng:
     type: http
@@ -982,7 +1023,7 @@ rule-providers!:
     behavior: classical
     format: text
     proxy: 📥 规则下载
-    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/services/CC.list?timestamp=1790042073
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/services/CC.list?timestamp=1790607507
     path: ./rule_provider/clashrule-party/cuicheng.text
   cuicheng_LS:
     type: http
@@ -990,7 +1031,7 @@ rule-providers!:
     behavior: classical
     format: text
     proxy: 📥 规则下载
-    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/services/CC_LS.list?timestamp=1790042073
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/services/CC_LS.list?timestamp=1790607507
     path: ./rule_provider/clashrule-party/cuicheng_LS.text
   a18:
     type: http
@@ -998,7 +1039,7 @@ rule-providers!:
     behavior: classical
     format: text
     proxy: 📥 规则下载
-    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/media/AdultCloud.list?timestamp=1790042073
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/media/AdultCloud.list?timestamp=1790607507
     path: ./rule_provider/clashrule-party/a18.text
   iwara:
     type: http
@@ -1006,7 +1047,7 @@ rule-providers!:
     behavior: classical
     format: text
     proxy: 📥 规则下载
-    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/media/iwara.list?timestamp=1790042073
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/media/iwara.list?timestamp=1790607507
     path: ./rule_provider/clashrule-party/iwara.text
   pixiv:
     type: http
@@ -1014,7 +1055,7 @@ rule-providers!:
     behavior: classical
     format: text
     proxy: 📥 规则下载
-    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/media/pixiv.list?timestamp=1790042073
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/media/pixiv.list?timestamp=1790607507
     path: ./rule_provider/clashrule-party/pixiv.text
   Samsung:
     type: http
@@ -1022,7 +1063,7 @@ rule-providers!:
     behavior: classical
     format: text
     proxy: 📥 规则下载
-    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/services/Samsung.list?timestamp=1790042073
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/services/Samsung.list?timestamp=1790607507
     path: ./rule_provider/clashrule-party/Samsung.text
   proxylite:
     type: http
@@ -1030,7 +1071,7 @@ rule-providers!:
     behavior: classical
     format: text
     proxy: 📥 规则下载
-    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/network/ProxyCustom.list?timestamp=1790042073
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/network/ProxyCustom.list?timestamp=1790607507
     path: ./rule_provider/clashrule-party/proxylite.text
   Games1_domain:
     type: http
@@ -1038,7 +1079,7 @@ rule-providers!:
     behavior: classical
     format: text
     proxy: 📥 规则下载
-    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/games/Epic.list?timestamp=1790042073
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/games/Epic.list?timestamp=1790607507
     path: ./rule_provider/clashrule-party/Games1_domain.text
   Games2_domain:
     type: http
@@ -1046,7 +1087,7 @@ rule-providers!:
     behavior: classical
     format: text
     proxy: 📥 规则下载
-    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/games/Origin.list?timestamp=1790042073
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/games/Origin.list?timestamp=1790607507
     path: ./rule_provider/clashrule-party/Games2_domain.text
   Games3_domain:
     type: http
@@ -1054,7 +1095,7 @@ rule-providers!:
     behavior: classical
     format: text
     proxy: 📥 规则下载
-    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/games/Sony.list?timestamp=1790042073
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/games/Sony.list?timestamp=1790607507
     path: ./rule_provider/clashrule-party/Games3_domain.text
   Games4_domain:
     type: http
@@ -1062,7 +1103,7 @@ rule-providers!:
     behavior: classical
     format: text
     proxy: 📥 规则下载
-    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/games/Steam.list?timestamp=1790042073
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/games/Steam.list?timestamp=1790607507
     path: ./rule_provider/clashrule-party/Games4_domain.text
   Games5_domain:
     type: http
@@ -1070,7 +1111,7 @@ rule-providers!:
     behavior: classical
     format: text
     proxy: 📥 规则下载
-    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/games/Nintendo.list?timestamp=1790042073
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/games/Nintendo.list?timestamp=1790607507
     path: ./rule_provider/clashrule-party/Games5_domain.text
   YouTube:
     type: http
@@ -1078,7 +1119,7 @@ rule-providers!:
     behavior: classical
     format: text
     proxy: 📥 规则下载
-    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/media/YouTube.list?timestamp=1790042073
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/media/YouTube.list?timestamp=1790607507
     path: ./rule_provider/clashrule-party/YouTube.text
   Google:
     type: http
@@ -1086,7 +1127,7 @@ rule-providers!:
     behavior: classical
     format: text
     proxy: 📥 规则下载
-    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/google/Google.list?timestamp=1790042073
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/google/Google.list?timestamp=1790607507
     path: ./rule_provider/clashrule-party/Google.text
   SteamCN:
     type: http
@@ -1094,7 +1135,7 @@ rule-providers!:
     behavior: classical
     format: text
     proxy: 📥 规则下载
-    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/games/SteamCN.list?timestamp=1790042073
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/games/SteamCN.list?timestamp=1790607507
     path: ./rule_provider/clashrule-party/SteamCN.text
   Disney_domain:
     type: http
@@ -1102,7 +1143,7 @@ rule-providers!:
     behavior: classical
     format: text
     proxy: 📥 规则下载
-    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/media/DisneyFamily.list?timestamp=1790042073
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/media/DisneyFamily.list?timestamp=1790607507
     path: ./rule_provider/clashrule-party/Disney_domain.text
   private_domain:
     type: http
@@ -1241,7 +1282,7 @@ rule-providers!:
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs
     path: ./rule_provider/clashrule-party/google_domain.mrs
   GoogleFCM:
-    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/google/GoogleFCM.list?timestamp=1790042073
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/google/GoogleFCM.list?timestamp=1790607507
     behavior: classical
     format: text
     type: http
@@ -1253,6 +1294,6 @@ rule-providers!:
     interval: 86400
     behavior: classical
     format: text
-    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/ai/GeminiAPI.list?timestamp=1790042073
+    url: https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/ai/GeminiAPI.list?timestamp=1790607507
     proxy: 📥 规则下载
     path: ./rule_provider/clashrule-party/GeminiAPI.text

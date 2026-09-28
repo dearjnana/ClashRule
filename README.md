@@ -6,7 +6,7 @@
 
 **顶部的徽章就是自动审核状态。** 每次提交先检查规则、INI、覆写文件与回归用例，再在固定镜像的隔离容器中进行真实转换，检查策略组、引用、不同客户端 UA 的 provider YAML，并用内核校验配置及实际加载 provider。全部通过才更新下方审核时间。绿色证明 CI 测试拓扑通过；生产服务器必须部署同一网关，并另行运行 [真实链接校验](scripts/ci/README.md)，不能仅凭徽章判断线上已经修好。
 
-<!-- audit-start -->**最后审核通过:2026-09-28 23:04:31.171(北京时间)**<!-- audit-end -->
+<!-- audit-start -->**最后审核通过:2026-09-26 16:11:14.965(北京时间)**<!-- audit-end -->
 
 ## 三个入口
 
@@ -55,7 +55,7 @@ http://Sub-Store地址/后台路径/download/collection/聚合
 - **url-test 组必须带测速 URL 字段**:`custom_proxy_group` 的 url-test 组要按 `` `url-test`正则`[]REJECT`http://www.gstatic.com/generate_204`300,,50 `` 的老格式写全测速地址与间隔字段,否则 SubConverter-Extended 会**静默丢弃该组**,引用它的主组悬空,内核直接拒绝整个配置(2026-09 的 Gemini 子组丢组事故即由此而来,端到端审核的"组数一致"检查就是防它复发)。
 - **新增规则文件**:在 `rules/` 建文件,然后在两个 INI 里各加一行 `ruleset=组名,https://raw.githubusercontent.com/dearjnana/ClashRule/refs/heads/main/rules/分类/文件.list`,组名用已有的。
 - **Clash Party**:改 `clash-party.yaml`。只改了规则源的话在应用里刷新规则集即可;改了覆写本身要更新覆写并重新应用。
-- **链接缓存**:三个文件里指向本仓库的链接都带 `?timestamp=` 参数,用来绕过 GitHub Raw 的各级缓存。改完规则如果客户端/转换器还在用旧内容,把文件里的时间戳全局替换成一个新数字即可强制刷新(当前为 `1790042073`)。
+- **链接缓存**:三个文件里指向本仓库的链接都带 `?timestamp=` 参数,用来绕过 GitHub Raw 的各级缓存。改完规则如果客户端/转换器还在用旧内容,把文件里的时间戳全局替换成一个新数字即可强制刷新(当前为 `1790607507`)。
 - 提交后看徽章,绿了再去设备上更新配置。
 
 部分列表(如 `BanAD.list`、`AdultCloud.list`、`CC_LS.list` 等)未被两个 INI 引用,是备用列表;Clash Party 覆写启用了其中一部分,以它的 `rules!` 段为准。
@@ -64,6 +64,7 @@ http://Sub-Store地址/后台路径/download/collection/聚合
 
 - 业务组(YouTube、奈飞、GitHub、摧城等)默认走 `🚀 节点选择`,可手动切换到机场组、地区组或直连。
 - 机场分组:INI 入口保留五家机场的"最优"全区组 + 港/台/日/韩/新/美地区组;Clash Party 覆写已精简为四家"机场最优"+ 六个"地区自动"组(跨全部机场按地区筛选、自动测速),业务组切换菜单约 21 项;另有全局容灾组做机场间回退。
+- **Claude**：`✴️ Claude` 是手动选择组，不在地区之间自动切换。成员按台湾、日本、美国、韩国、新加坡、英国、其他欧洲排列，前五个复用已有的 `♻️` 自动组；英国和其他欧洲加在 `♻️ 美国自动` 下面。每个自动组只在自己的节点里测速。规则仍先匹配 `rules/ai/Claude.list`。
 - **Gemini**：三个入口统一只有 `🎐 Gemini` 一个 `url-test` 自动优选组，Web、应用与 API / AI Studio 的规则都指向它。节点按原 Web/API 地区筛选的交集入池（即原 API 最优筛选，不纳入香港、澳门等仅 Web 池支持的地区），允许机场名前缀；每轮从可用候选中按探测延迟自动选择，切换容差用于减少频繁跳转。没有候选时以 REJECT 兜底，不会自动直连。测速检查网络连通性与延迟，不代表 Gemini 账号、出口 IP 一定通过地区或风控检查。调整候选池须同步修改两个 INI 的 `custom_proxy_group` 和覆写的 `filter`。
 - 基础配置(端口、DNS 等)使用 [ACL4SSR 公共 base](https://github.com/ACL4SSR/ACL4SSR/blob/master/Clash/GeneralClashConfig.yml),要换就改 INI 末尾的 `clash_rule_base` 地址。
 
