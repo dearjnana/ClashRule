@@ -1,0 +1,59 @@
+# 用途：Claude Web、Claude Desktop / Cowork 与 Claude API；策略由引用配置指定。
+# 核对：2026-09-28。官方入站/出站地址见
+# https://platform.claude.com/docs/en/api/ip-addresses
+# Desktop 防火墙域名见
+# https://claude.com/docs/third-party/claude-desktop/telemetry
+# 域名并集还对照了本机 Claude Desktop 2.9939.2.0 的 app.asar、
+# v2fly domain-list-community 的 anthropic，以及证书日志中的在用后缀。
+# 维护：后缀已覆盖其子域，不再逐条展开。注释不参与匹配。
+# 不收录：已停用的 34.162.46.92/32 等；downloads / a-cdn / BunnyCDN 当前解析到的
+# Google、Cloudflare、Bunny 共享地址（会变，且会误伤其他服务）。这些主机靠下面的域名，
+# Desktop 进程则靠 PROCESS-NAME。sentry、Datadog、Stripe、Intercom、googleapis、
+# storage.googleapis.com 是共用基础设施，不全局占用；Desktop 自身流量仍由进程名带走。
+
+# 第一方后缀。当前主站与 API 解析到 160.79.104.10，落在下方官方入站段内。
+DOMAIN-SUFFIX,anthropic.com
+DOMAIN-SUFFIX,claude.ai
+DOMAIN-SUFFIX,claude.com
+DOMAIN-SUFFIX,claude.app
+DOMAIN-SUFFIX,claude.site
+DOMAIN-SUFFIX,claudestudio.com
+DOMAIN-SUFFIX,clau.de
+DOMAIN-SUFFIX,claudeusercontent.com
+DOMAIN-SUFFIX,claudemcpcontent.com
+DOMAIN-SUFFIX,claudemcpclient.com
+# Anthropic 官网在 BunnyCDN 上的专用主机，不在 anthropic.com 后缀下。
+DOMAIN,servd-anthropic-website.b-cdn.net
+# Claude for Government。只匹配这个主机，不匹配整个 fedstart.com。
+DOMAIN,claude.fedstart.com
+# 非官方 Claude 前端，原先写在 AI.list 里，随 Claude 分组迁出。
+DOMAIN-SUFFIX,fuclaude.com
+
+# 兜底：尚未单独列出、但域名中含这些词的主机。
+DOMAIN-KEYWORD,anthropic
+DOMAIN-KEYWORD,claude
+
+# 官方固定地址。入站 /23 是客户端连 API / Console / Web 的段；/21 是公布的出站段，包含 /23。
+# IPv6 入站为 2607:6bc0::/48。地址变更前 Anthropic 会另行通知。
+IP-CIDR,160.79.104.0/21,no-resolve
+IP-CIDR6,2607:6bc0::/48,no-resolve
+
+# Desktop 进程。域名规则覆盖不到的更新、遥测和导入流量由进程名兜住。
+# Windows 名称来自已安装的 Claude Desktop 2.9939.2.0。
+PROCESS-NAME,claude.exe
+PROCESS-NAME,Claude.exe
+PROCESS-NAME,claude-desktop.exe
+PROCESS-NAME,cowork-svc.exe
+PROCESS-NAME,claude-ssh-askpass.exe
+PROCESS-NAME,claude-ssh-proxy.exe
+PROCESS-NAME,claude-ssh-broker.exe
+PROCESS-NAME,chrome-native-host.exe
+# macOS / Linux
+PROCESS-NAME,Claude
+PROCESS-NAME,Claude Helper
+PROCESS-NAME,Claude Helper (Renderer)
+PROCESS-NAME,Claude Helper (GPU)
+PROCESS-NAME,Claude Helper (Plugin)
+PROCESS-NAME,claude
+PROCESS-NAME,claude-desktop
+PROCESS-NAME,cowork-svc
