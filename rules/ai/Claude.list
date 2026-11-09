@@ -11,6 +11,10 @@
 # Desktop 进程则靠 PROCESS-NAME。sentry、Datadog、Stripe、Intercom、googleapis、
 # storage.googleapis.com 是共用基础设施，不全局占用；Desktop 自身流量仍由进程名带走。
 
+# 中转
+DOMAIN-SUFFIX,fuckcc.icu
+
+
 # 第一方后缀。当前主站与 API 解析到 160.79.104.10，落在下方官方入站段内。
 DOMAIN-SUFFIX,anthropic.com
 DOMAIN-SUFFIX,claude.ai
